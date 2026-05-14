@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/deancourse/agent-skill-lecture-builder#readme",
   "devDependencies": {
-    "puppeteer": "^24.39.1"
+    "puppeteer": "^24.43.1"
   }
 }

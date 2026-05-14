@@ -1,0 +1,20 @@
+page:
+  title: "生成式 AI 資訊安全"
+  badge: "資安實戰 · 生成式 AI · 企業防護"
+  hero_title: "生成式 AI 時代<br>你的資安防線在哪裡？"
+  subtitle: "從真實攻擊案例出發，掌握 Prompt Injection、資料外洩、模型濫用等核心威脅，建立企業 AI 安全策略。"
+
+seo:
+  title: "生成式 AI 資訊安全｜Prompt Injection、資料外洩、模型防護實戰"
+  description: "以真實攻擊案例解析生成式 AI 的資安風險，涵蓋 Prompt Injection、RAG 資料外洩、供應鏈攻擊、LLM 濫用防護，協助企業建立 AI 治理框架。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/gen-ai-security/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/gen-ai-security/"
+
+quotes:
+  opening:
+    text: "AI 讓每個人都能快速創造，<br>但沒有安全基礎的 AI，只是把風險放大了一千倍。"
+  closing:
+    text: >
+      資安不是 AI 的阻礙，而是讓 AI 走得更遠的地基。<br><br>
+      每一個你今天設下的防護，<br>
+      都是企業在 AI 時代安心前進的底氣。
