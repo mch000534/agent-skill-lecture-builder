@@ -53,7 +53,7 @@ Markdown 語法 → HTML 元件的完整對照。產生 HTML 時依此規則轉�
 
 **Markdown：**
 ```markdown
-### 🔧 為什麼需要 OpenSpec？
+### 為什麼需要 OpenSpec？
 - AI 寫程式越來越快，但專案越改越亂
 - 關鍵人物離職，沒有文件，系統知識直接斷層
 - 解法：白話文對話 → AI 自動建立規格文件
@@ -62,7 +62,7 @@ Markdown 語法 → HTML 元件的完整對照。產生 HTML 時依此規則轉�
 **HTML：**
 ```html
 <div class="card">
-  <h3><span class="icon">🔧</span> 為什麼需要 OpenSpec？</h3>
+  <h3>為什麼需要 OpenSpec？</h3>
   <ul>
     <li>AI 寫程式越來越快，但專案越改越亂</li>
     <li>關鍵人物離職，沒有文件，系統知識直接斷層</li>
@@ -72,7 +72,7 @@ Markdown 語法 → HTML 元件的完整對照。產生 HTML 時依此規則轉�
 ```
 
 規則：
-- `###` 標題帶 emoji → card 的 `h3`，emoji 放在 `.icon` span 中
+- `###` 標題 → card 的 `h3`（不使用 emoji）
 - 底下的 bullet list → card 內的 `<ul>`
 - 底下的段落 → card 內的 `<p>`
 - 整個 card 包在 `<div class="reveal">` 中
@@ -118,7 +118,7 @@ openspec init</div>
 **HTML：**
 ```html
 <div class="insight">
-  <div class="insight-title">⏳ AI 正在改變企業決策</div>
+  <div class="insight-title">AI 正在改變企業決策</div>
   <p>過去 Dashboard 這類系統，企業通常找廠商購買、支付年費維護。</p>
   <p style="margin-top:.5rem">但 Vibe Coding 的出現正讓企業做出不同的選擇。</p>
 </div>
@@ -126,7 +126,7 @@ openspec init</div>
 
 規則：
 - blockquote 第一行以 `**粗體**` 開頭 → insight box
-- 粗體文字成為 `.insight-title`（自動加 ⏳ emoji 前綴）
+- 粗體文字成為 `.insight-title`
 - 後續段落（以空行分隔）分別成為 `<p>` 元素
 - 若 blockquote 不以粗體開頭，則判斷為普通引言或 lead 文字
 
@@ -220,9 +220,9 @@ openspec init</div>
 ```markdown
 # 總結
 [summary]
-- 🏗️ **新專案 — SDD** | OpenSpec + Spec-Driven Development，讓 AI 根據規格建立 Dashboard
-- ⚙️ **舊專案 — Skills** | 設計 Commit / PR / Worktree Skills，讓 AI 有規範可循
-- 🧪 **導入測試 — CI/CD** | 用 Workflow 驅動 AI 撰寫測試，搭配 GitHub Action 守住品質
+- **新專案 — SDD** | OpenSpec + Spec-Driven Development，讓 AI 根據規格建立 Dashboard
+- **舊專案 — Skills** | 設計 Commit / PR / Worktree Skills，讓 AI 有規範可循
+- **導入測試 — CI/CD** | 用 Workflow 驅動 AI 撰寫測試，搭配 GitHub Action 守住品質
 [/summary]
 ```
 
@@ -230,7 +230,6 @@ openspec init</div>
 ```html
 <div class="summary-grid">
   <div class="summary-card">
-    <div class="sc-icon">🏗️</div>
     <h4>新專案 — SDD</h4>
     <p>OpenSpec + Spec-Driven Development，讓 AI 根據規格建立 Dashboard</p>
   </div>
@@ -240,8 +239,8 @@ openspec init</div>
 
 規則：
 - `[summary]...[/summary]` 包裹的 list
-- 每項格式：`emoji **標題** | 描述`
-- emoji → `.sc-icon`，粗體 → `<h4>`，`|` 後面 → `<p>`
+- 每項格式：`**標題** | 描述`（不使用 emoji）
+- 粗體 → `<h4>`，`|` 後面 → `<p>`
 
 ## 10. Image（獨立圖片）
 

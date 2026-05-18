@@ -476,9 +476,12 @@ function parseContent(md) {
       const items = [];
       i++;
       while (i < lines.length && !/^\[\/summary\]/.test(lines[i].trim())) {
-        const sumMatch = lines[i].trim().match(/^-\s+(\S+)\s+\*\*(.+?)\*\*\s*\|\s*(.*)/);
-        if (sumMatch) {
-          items.push({ icon: sumMatch[1], title: sumMatch[2], desc: sumMatch[3].trim() });
+        const sumWithIcon = lines[i].trim().match(/^-\s+(\S+)\s+\*\*(.+?)\*\*\s*\|\s*(.*)/);
+        const sumNoIcon = lines[i].trim().match(/^-\s+\*\*(.+?)\*\*\s*\|\s*(.*)/);
+        if (sumWithIcon) {
+          items.push({ icon: sumWithIcon[1], title: sumWithIcon[2], desc: sumWithIcon[3].trim() });
+        } else if (sumNoIcon) {
+          items.push({ icon: '', title: sumNoIcon[1], desc: sumNoIcon[2].trim() });
         }
         i++;
       }
@@ -661,7 +664,7 @@ function buildTocItems(sections) {
   let html = '';
   html += `<li class="toc-group" data-section="instructor">
       <a href="#instructor" class="toc-group-title">
-        <span class="toc-num">\u{1F464}</span> 講師簡介
+        <span class="toc-num"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> 講師簡介
       </a>
       <ul class="toc-sub"></ul>
     </li>\n`;
@@ -685,7 +688,7 @@ function buildTocItems(sections) {
 
 function buildInstructor(cfg) {
   const inst = cfg.instructor || {};
-  const placeholderHtml = '<div class="instructor-avatar-placeholder">\u{1F464}</div>';
+  const placeholderHtml = '<div class="instructor-avatar-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
   const onerrorHtml = placeholderHtml.replace(/"/g, '&quot;').replace(/'/g, "\\'");
   const avatar = inst.avatar
     ? `<img class="instructor-avatar" src="${esc(inst.avatar)}" alt="${esc(inst.name)}" onerror="this.outerHTML='${onerrorHtml}';">`
@@ -704,7 +707,7 @@ function buildInstructor(cfg) {
 
   return `<section class="section">
   <div class="reveal">
-    <span class="section-label" id="instructor"><span class="num">\u{1F464}</span> 講師簡介</span>
+    <span class="section-label" id="instructor"><span class="num"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> 講師簡介</span>
     <h2>關於講師</h2>
   </div>
   <div class="reveal">
@@ -866,8 +869,7 @@ ${childrenHtml}
       let s = `<div class="summary-grid">\n`;
       for (const item of block.items) {
         s += `      <div class="summary-card">
-        <div class="sc-icon">${item.icon}</div>
-        <h4>${esc(item.title)}</h4>
+        ${item.icon ? `<div class="sc-icon">${item.icon}</div>\n        ` : ''}<h4>${esc(item.title)}</h4>
         <p>${inlineFormat(item.desc)}</p>
       </div>\n`;
       }

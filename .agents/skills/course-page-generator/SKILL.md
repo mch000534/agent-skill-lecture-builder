@@ -5,6 +5,8 @@ description: 將講稿或非結構化筆記轉換為約定的 Markdown 格式，
 
 # Course Page Generator
 
+> **禁止使用 Emoji**：所有生成的課程內容（卡片標題、總結項目、群組標頭、設定檔等）一律不得使用 emoji 字符。
+
 原始講稿 → 結構化 Markdown → `node .agents/skills/course-page-generator/scripts/build.mjs <dir>` → `index.html` → `node .agents/skills/course-page-generator/scripts/generate-og.mjs <dir>` → `assets/og-*.jpg`
 
 ## 專案結構
@@ -60,7 +62,7 @@ description: 將講稿或非結構化筆記轉換為約定的 Markdown 格式，
 3. **生成 `config.yaml`**：根據主題填入基本欄位（`page.title`、`page.hero_title`、`seo.title`、`seo.description`、`quotes.opening`、`quotes.closing`）；`seo.image` 與 `seo.url` 依照 Step 2-0 偵測到的 GitHub Pages 前綴填入；若偵測失敗則留空。
 
 4. **生成 `content.md` 骨架**：
-   - 推導 3–5 個主要章節（`#`），每章節下 1–2 個子章節（`##`）與 2–3 張卡片（`### Emoji Title`）
+   - 推導 3–5 個主要章節（`#`），每章節下 1–2 個子章節（`##`）與 2–3 張卡片（`### Title`）
    - 每張卡片留 2–4 個條列式占位點（重點提示，非最終內容）
    - 在最後加入 `[summary]` 區塊，列出各章節預期的學習成果
    - 所有占位內容用 `<!-- TODO: ... -->` 或簡短提示標記，讓使用者知道哪裡需要補充
@@ -90,12 +92,12 @@ AI 需要根據以下語法規則，將內容轉換為 `content.md`。
 | `# LABEL：TITLE` | 主章節 | `# 新專案：用 SDD 讓 AI 根據規格建立專案` |
 | `> lead text` | 章節引言（緊接 `#` 後） | `> 規格驅動開發（Spec-Driven Development）` |
 | `## Title` | 子章節 | `## OpenSpec 初始化` |
-| `### Emoji Title` | 卡片標題 | `### 🔧 為什麼需要 OpenSpec？` |
+| `### Title` | 卡片標題 | `### 為什麼需要 OpenSpec？` |
 | `` ```prompt [label="..."] `` | 終端機/Prompt 區塊 | 見下方 |
 | `> **Bold Title**` | 洞察框（Insight） | `> **AI 正在改變企業決策**` |
 | `[flow]...[/flow]` | 流程步驟 | 見下方 |
 | `[tags]...[/tags]` | 標籤（必須用此區塊包裹） | `- [green] 正面` |
-| `[summary]...[/summary]` | 總結卡片 | `- 🏗️ **標題** \| 描述` |
+| `[summary]...[/summary]` | 總結卡片 | `- **標題** \| 描述` |
 | `- [x] item` | 勾選清單（僅用於已驗證/已完成的事項） | `- [x] 已完成項目` |
 | `![alt](src)` | 獨立圖片 | `![架構圖](images/arch.png)` |
 | `[image-text]...[/image-text]` | 圖文並排 | 見下方 |
@@ -136,8 +138,8 @@ npm install -g @fission-ai/openspec@latest
 **Summary Grid：**
 ```markdown
 [summary]
-- 🏗️ **標題** | 描述文字
-- ⚙️ **標題** | 描述文字
+- **標題** | 描述文字
+- **標題** | 描述文字
 [/summary]
 ```
 
@@ -345,7 +347,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs course/cake
 當使用者提供原始講稿時，AI 應該：
 
 1. **萃取章節結構** — 移除口語過場，找出核心主題的轉換點，對應到 `#` 主章節與 `##` 子章節。
-2. **資訊卡片化（極其重要）** — 將長篇大論的解說，提煉成精簡的 `### Emoji Title` 卡片與條列式列表，不要把講稿的段落直接複製貼上。
+2. **資訊卡片化（極其重要）** — 將長篇大論的解說，提煉成精簡的 `### Title` 卡片與條列式列表，不要把講稿的段落直接複製貼上。**不要在標題或任何內容中使用 emoji。**
    - **原則：所有內容都應該落在結構化元件內**（卡片、Insight、Flow、Tags 等），避免出現裸段落（`loose-text`）。
    - ❌ 錯誤示範：直接把講稿貼成段落
      ```markdown
@@ -354,7 +356,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs course/cake
      ```
    - ✅ 正確做法：提煉成卡片 + Insight
      ```markdown
-     ### 💡 第一版很快，但改不動
+     ### 第一版很快，但改不動
      - 把課程大綱直接交給 AI，第一版完成度很高
      - 但 AI 會自行增減文字、改變強調方式
      - 想修改時，得回去改 HTML 原始碼

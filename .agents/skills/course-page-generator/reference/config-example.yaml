@@ -25,17 +25,17 @@ instructor:
   bio: >
     這裡可放講師簡介示意文字，用來介紹背景、實務經驗與授課風格。<br>
     建議聚焦在學員最關心的價值，例如能學到什麼、適合誰，以及為何值得向這位講師學習。
-  # avatar 留空則使用 placeholder（👤 圖示）
+  # avatar 留空則使用 placeholder（人物圖示）
   # 可省略副檔名，build 會自動偵測 jpg/jpeg/png/webp/gif/svg
   # 路徑相對於 config/ 的父目錄（即 global.yaml 所在的 config/ 之上一層）
   avatar: "config/assets/author"
   # stats：text 支援 **粗體** 等 inline markdown
   stats:
-    - text: "📚 代表作品或經歷 **X** 項"
+    - text: "代表作品或經歷 **X** 項"
       url: "https://www.tenlong.com.tw/products/9786264142083"
-    - text: "🎤 累積授課或分享 **X** 場"
+    - text: "累積授課或分享 **X** 場"
       url: "https://www.youtube.com/@dlcorner"
-    - text: "✍️ 發表內容或文章 **X** 篇"
+    - text: "發表內容或文章 **X** 篇"
       url: "https://medium.com/@dean-lin"
   # 支援平台：Medium, Facebook, Threads, YouTube, GitHub, LinkedIn, Email
   socials:
