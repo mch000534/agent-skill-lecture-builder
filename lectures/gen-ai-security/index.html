@@ -5128,6 +5128,11 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
       }
 
       window.__openShareModal = openShare;
+      window.__closeShareModal = closeShare;
+      window.__toggleShareModal = function () {
+        if (shareOverlay.classList.contains('visible')) closeShare();
+        else openShare();
+      };
     })();
 
     // Copy prompt
@@ -6053,7 +6058,7 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
           }
         }
         if ((e.key === 'q' || e.key === 'Q') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          if (window.__openShareModal) window.__openShareModal();
+          if (window.__toggleShareModal) window.__toggleShareModal();
         }
       });
 

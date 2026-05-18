@@ -6081,6 +6081,11 @@ MediaOut → 輸出到時間軸</div>
       }
 
       window.__openShareModal = openShare;
+      window.__closeShareModal = closeShare;
+      window.__toggleShareModal = function () {
+        if (shareOverlay.classList.contains('visible')) closeShare();
+        else openShare();
+      };
     })();
 
     // Copy prompt
@@ -7006,7 +7011,7 @@ MediaOut → 輸出到時間軸</div>
           }
         }
         if ((e.key === 'q' || e.key === 'Q') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          if (window.__openShareModal) window.__openShareModal();
+          if (window.__toggleShareModal) window.__toggleShareModal();
         }
       });
 
