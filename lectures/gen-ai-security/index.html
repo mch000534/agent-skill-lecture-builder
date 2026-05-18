@@ -3186,6 +3186,183 @@
       }
     }
 
+    /* ===== SHARE MODAL ===== */
+    .share-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .65);
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .share-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .share-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 560px;
+      max-height: 82vh;
+      width: 100%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(24px);
+      transition: transform .3s;
+      overflow: hidden;
+    }
+    .share-overlay.visible .share-modal {
+      transform: translateY(0);
+    }
+    .share-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .share-modal-header h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .share-modal-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, color .2s;
+    }
+    .share-modal-close:hover {
+      background: var(--bg-card-alt);
+      color: var(--text);
+    }
+    .share-modal-body {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 154px 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem 1.2rem;
+      overflow-y: auto;
+    }
+    .share-qr-wrap {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .share-qr-img {
+      width: 150px;
+      height: 150px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .share-qr-img canvas,
+    .share-qr-img img {
+      display: block;
+    }
+    .share-qr-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    .share-og-wrap {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .share-og-img {
+      width: 100%;
+      max-height: 168px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .share-url-row {
+      grid-column: 2;
+      grid-row: 2;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.7rem;
+    }
+    .share-url-link {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .share-url-link:hover {
+      text-decoration: underline;
+    }
+    .share-copy-btn {
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.72rem;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .share-copy-btn:hover {
+      opacity: 0.85;
+    }
+    @media (max-width: 480px) {
+      .share-modal-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .share-qr-wrap {
+        grid-column: 1;
+        grid-row: 2;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .share-og-wrap {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .share-url-row {
+        grid-column: 1;
+        grid-row: 3;
+      }
+    }
+
     /* ===== PRESENTATION MODE ===== */
     body.pres-active {
       overflow: hidden;
@@ -3204,6 +3381,7 @@
     body.pres-active .settings-panel,
     body.pres-active .bonus-overlay,
     body.pres-active .break-overlay,
+    body.pres-active .share-overlay,
     body.pres-active .pres-enter-btn {
       display: none !important;
     }
@@ -3511,6 +3689,7 @@
       }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -4555,6 +4734,28 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
     </div>
   </div>
 
+  <div class="share-overlay" id="share-overlay">
+    <div class="share-modal">
+      <div class="share-modal-header">
+        <h3>分享此課程</h3>
+        <button class="share-modal-close" id="share-modal-close">✕</button>
+      </div>
+      <div class="share-modal-body">
+        <div class="share-qr-wrap">
+          <div class="share-qr-img" id="share-qr-container"></div>
+          <span class="share-qr-label">掃描開啟</span>
+        </div>
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script>
     (function () {
       // OG mode: ?og=1 → hide sidebar/sections, hero-only layout for thumbnails
@@ -4809,6 +5010,74 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
           openModal(btn.dataset.bonusTitle || '', btn.dataset.bonusContent || '');
         });
       });
+    })();
+
+    // Share modal (Q key)
+    (function () {
+      var shareOverlay = document.getElementById('share-overlay');
+      var shareClose = document.getElementById('share-modal-close');
+      var shareQrContainer = document.getElementById('share-qr-container');
+      var shareOgImg = document.getElementById('share-og-img');
+      var shareUrlLink = document.getElementById('share-url-link');
+      var shareCopyBtn = document.getElementById('share-copy-btn');
+
+      function openShare() {
+        var url = window.location.href;
+        var ogMeta = document.querySelector('meta[property="og:image"]');
+        var ogImgUrl = ogMeta ? ogMeta.getAttribute('content') : '';
+        shareQrContainer.innerHTML = '';
+        if (typeof QRCode !== 'undefined') {
+          new QRCode(shareQrContainer, {
+            text: url,
+            width: 148,
+            height: 148,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        }
+        if (ogImgUrl) {
+          shareOgImg.src = ogImgUrl;
+          shareOgImg.parentElement.style.display = '';
+        } else {
+          shareOgImg.parentElement.style.display = 'none';
+        }
+        shareUrlLink.href = url;
+        shareUrlLink.textContent = url;
+        shareOverlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeShare() {
+        shareOverlay.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+
+      shareClose.addEventListener('click', closeShare);
+      shareOverlay.addEventListener('click', function (e) { if (e.target === shareOverlay) closeShare(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && shareOverlay.classList.contains('visible')) closeShare(); });
+
+      shareCopyBtn.addEventListener('click', function () {
+        var url = shareUrlLink.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            shareCopyBtn.textContent = '已複製！';
+            setTimeout(function () { shareCopyBtn.textContent = '複製'; }, 2000);
+          }).catch(function () { fallbackCopy(url); });
+        } else {
+          fallbackCopy(url);
+        }
+      });
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); shareCopyBtn.textContent = '已複製！'; setTimeout(function () { shareCopyBtn.textContent = '複製'; }, 2000); } catch (e) { }
+        document.body.removeChild(ta);
+      }
+
+      window.__openShareModal = openShare;
     })();
 
     // Copy prompt
@@ -5718,6 +5987,23 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
         if ((e.key === 'p' || e.key === 'P') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           document.body.classList.contains('pres-active') ? exitPresentation() : enterPresentation();
+        }
+        if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey && !document.body.classList.contains('pres-active')) {
+          document.fullscreenElement
+            ? document.exitFullscreen()
+            : document.documentElement.requestFullscreen().catch(function () { });
+        }
+        if ((e.key === 'a' || e.key === 'A') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.innerWidth >= 1100) {
+            var c = sidebar.classList.toggle('collapsed');
+            document.body.classList.toggle('sidebar-collapsed', c);
+            localStorage.setItem('sidebar-collapsed', c);
+          } else {
+            toggleSidebar();
+          }
+        }
+        if ((e.key === 'q' || e.key === 'Q') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__openShareModal) window.__openShareModal();
         }
       });
 
