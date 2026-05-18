@@ -1,0 +1,20 @@
+page:
+  title: "DaVinci Resolve Fairlight 音頻後製入門"
+  badge: "音頻後製 · 混音 · 修復 · 環繞聲"
+  hero_title: "DaVinci Resolve Fairlight<br>音頻後製入門課程"
+  subtitle: "從基礎錄音到專業混音，掌握 Fairlight 的音頻修復、降噪、EQ 調整與環繞聲處理，為影片打造電影級聲音品質。"
+
+seo:
+  title: "DaVinci Resolve Fairlight 音頻後製入門｜專業混音與音頻修復課程"
+  description: "系統化學習 DaVinci Resolve Fairlight：音頻基礎概念、降噪修復、EQ 與動態處理、混音技巧與環繞聲製作，從零打造專業音頻後製流程。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-fairlight/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-fairlight/"
+
+quotes:
+  opening:
+    text: "聲音是影像的靈魂，<br>觀眾可以原諒畫面的瑕疵，但絕不會容忍糟糕的聲音。"
+  closing:
+    text: >
+      好的音頻後製，是讓觀眾忘記聲音經過處理。<br><br>
+      當對白清晰、音樂動人、環境音自然——<br>
+      那才是聲音設計真正成功的時刻。
