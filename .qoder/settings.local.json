@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /Users/barrymok/Library/CloudStorage/OneDrive-MacaoScienceCenter/project/agent-skill-lecture-builder && git status && git diff --stat)",
+      "Bash(cd /Users/barrymok/Library/CloudStorage/OneDrive-MacaoScienceCenter/project/agent-skill-lecture-builder && git add AGENTS.md build-index.mjs index.html lectures/ README.md && git rm example/README.md gen-ai-security/assets/og-image.jpg gen-ai-security/config.yaml gen-ai-security/content.md gen-ai-security/index.html && git commit -m \"$\\(cat <<'EOF'\nrefactor: reorganise lectures into lectures/ directory and add index page\n\n- Move example/ and gen-ai-security/ into lectures/\n- Add build-index.mjs to auto-generate root index.html from lectures/\n- Add root index.html course catalogue page \\(matching site style\\)\n- Add AGENTS.md with project-specific guidance in Traditional Chinese\n- Update README.md to reflect new structure, workflow, and new sections\nEOF\n\\)\")"
+    ]
+  }
+}
