@@ -1,0 +1,20 @@
+page:
+  title: "DaVinci Resolve 影片製作入門"
+  badge: "影片製作 · 剪輯 · 調色"
+  hero_title: "用 DaVinci Resolve<br>打造專業影片"
+  subtitle: "從零開始學習影片剪輯、調色與音頻處理，掌握 DaVinci Resolve 完整工作流程，製作出電影級質感的影片。"
+
+seo:
+  title: "DaVinci Resolve 影片製作入門｜剪輯、調色、音頻一次學會"
+  description: "從素材導入到最終輸出，完整掌握 DaVinci Resolve 的剪輯工作流程、調色技巧、Fairlight 音頻處理與交付設定，適合零基礎學員入門。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-resolve/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-resolve/"
+
+quotes:
+  opening:
+    text: "剪輯不只是把畫面拼在一起，<br>而是用節奏與情感說一個打動人心的故事。"
+  closing:
+    text: >
+      每一支好影片的背後，都是無數次的剪輯與調整。<br><br>
+      掌握工具，然後忘掉工具——<br>
+      讓創意自由流動，才是影片製作的真正境界。
