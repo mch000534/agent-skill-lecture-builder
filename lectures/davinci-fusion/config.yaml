@@ -1,0 +1,20 @@
+page:
+  title: "DaVinci Resolve Fusion 特效合成入門"
+  badge: "視覺特效 · 節點合成 · 動態圖像"
+  hero_title: "DaVinci Resolve Fusion<br>特效合成入門課程"
+  subtitle: "從節點邏輯到實戰合成，掌握 Fusion 的 2D 合成、摳像、粒子特效與 3D 空間，為影片注入電影級視覺效果。"
+
+seo:
+  title: "DaVinci Resolve Fusion 特效合成入門｜節點式合成實戰課程"
+  description: "系統化學習 DaVinci Resolve Fusion：節點工作流程、2D 合成、Delta/Erase 摳像、粒子特效、3D 攝影機與燈光，從零打造專業視覺效果。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-fusion/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/davinci-fusion/"
+
+quotes:
+  opening:
+    text: "特效不是為了炫技，<br>而是讓觀眾忘記自己在看特效。"
+  closing:
+    text: >
+      每一個讓人驚嘆的畫面，背後都是無數節點的精密串接。<br><br>
+      從理解節點邏輯開始，到熟練地組合遮罩、摳像與特效——<br>
+      當技術不再是障礙，創意才能真正自由飛翔。
