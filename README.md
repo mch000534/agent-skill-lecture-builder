@@ -24,13 +24,15 @@
 
 ---
 
-提供主題 or Markdown 講稿，透過 Agent Skills 單一 HTML 課程頁面。
+提供主題 or Markdown 講稿，透過 Agent Skills 產生單一 HTML 課程頁面。
 
 ## 目錄
 
 - [Quick Start](#quick-start)
 - [專案結構](#專案結構)
 - [新增一門課程](#新增一門課程)
+- [課程目錄索引頁](#課程目錄索引頁)
+- [開發伺服器](#開發伺服器)
 - [Config 機制](#config-機制)
 - [Markdown 語法](#markdown-語法)
 
@@ -81,12 +83,16 @@ agent-skill-lecture-builder/
 ├── config/
 │   ├── global.yaml          # 全域設定（講者、社群、頁尾）
 │   └── assets/              # 共用圖片（avatar 等）
-├── example/                 # 課程目錄示意（建立後會包含下列檔案）
-│   ├── config.yaml          # 課程專屬設定（覆蓋 global）
-│   ├── content.md           # 結構化 Markdown 講稿
-│   ├── index.html           # build 產出
-│   └── assets/
-│       └── og-*.jpg         # generate-og.mjs 產出
+├── lectures/                # 所有課程放在此目錄下
+│   ├── gen-ai-security/     # 範例課程
+│   │   ├── config.yaml
+│   │   ├── content.md
+│   │   ├── index.html       # build 產出
+│   │   └── assets/
+│   │       └── og-image.jpg # generate-og.mjs 產出
+│   └── example/             # 課程範本（含說明）
+├── build-index.mjs          # 產生根目錄課程目錄索引頁
+├── index.html               # 課程目錄索引頁（build-index.mjs 產出）
 ├── package.json
 └── README.md
 ```
@@ -94,49 +100,63 @@ agent-skill-lecture-builder/
 ## 新增一門課程
 
 ```bash
-mkdir -p my-course/assets
+mkdir -p lectures/my-course/assets
 ```
 
-1. **建立 `my-course/content.md`** — 用約定的 Markdown 語法撰寫講稿（或丟原始筆記給 AI，觸發 Skill 自動轉換）
-2. **建立 `my-course/config.yaml`** — 只需寫要覆蓋全域設定的欄位
+1. **建立 `lectures/my-course/content.md`** — 用約定的 Markdown 語法撰寫講稿（或丟原始筆記給 AI，觸發 Skill 自動轉換）
+2. **建立 `lectures/my-course/config.yaml`** — 只需寫要覆蓋全域設定的欄位
 3. **Build**
 
 ```bash
-node .agents/skills/course-page-generator/scripts/build.mjs my-course
+node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
 ```
 
-產出 `my-course/index.html`。
+產出 `lectures/my-course/index.html`。
 
-若只想單純啟動本機預覽：
+4. **產生 OG 縮圖**
 
 ```bash
-node .agents/skills/course-page-generator/scripts/dev.mjs my-course
+node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course
+```
+
+5. **更新根目錄索引頁**
+
+```bash
+node build-index.mjs
+```
+
+## 課程目錄索引頁
+
+根目錄的 `index.html` 是所有課程的入口頁面，列出 `lectures/` 下每門課程的標題、Badge、描述及 OG 縮圖。
+
+每次新增或修改課程後，執行一次即可更新：
+
+```bash
+node build-index.mjs
+```
+
+`build-index.mjs` 會自動掃描 `lectures/` 下所有含 `config.yaml` 的子目錄，不需要手動維護課程清單。
+
+## 開發伺服器
+
+啟動含即時重載的本機預覽伺服器：
+
+```bash
+node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course
 ```
 
 也可以指定 port：
 
 ```bash
-node .agents/skills/course-page-generator/scripts/dev.mjs my-course --port 8080
+node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course --port 8080
 ```
 
 `dev.mjs` 會：
 
-- 啟動本機伺服器
+- 啟動本機伺服器（預設 port 3000，衝突時自動遞增）
 - 先自動執行一次 build
 - 監看 `content.md`、`config.yaml`、`config/global.yaml`、`reference/base.html`
 - 存檔後自動重建並重新整理瀏覽器
-
-若只想產出靜態檔，不需要啟動 server：
-
-```bash
-node .agents/skills/course-page-generator/scripts/build.mjs my-course
-```
-
-若要產出 OG 縮圖：
-
-```bash
-node .agents/skills/course-page-generator/scripts/generate-og.mjs my-course
-```
 
 ## Config 機制
 
@@ -188,8 +208,8 @@ footer:
 seo:
   title: "預設 SEO 標題"
   description: "預設 SEO 描述"
-  image: "https://your-domain.example/course/example/assets/og-image.jpg"
-  url: "https://your-domain.example/course/example/"
+  image: "https://your-domain.example/lectures/example/assets/og-image.jpg"
+  url: "https://your-domain.example/lectures/example/"
 ```
 
 ### 課程 config 範例
