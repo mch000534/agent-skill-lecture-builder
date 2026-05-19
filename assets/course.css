@@ -1880,6 +1880,10 @@
       gap: .45rem;
     }
 
+    .settings-controls-row + .settings-controls-row {
+      margin-top: .6rem;
+    }
+
     .settings-section {
       margin-bottom: .6rem;
     }
