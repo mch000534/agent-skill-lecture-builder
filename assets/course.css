@@ -3375,8 +3375,6 @@
     body.pres-active>footer.footer,
     body.pres-active .settings-panel,
     body.pres-active .bonus-overlay,
-    body.pres-active .timer-widget,
-    body.pres-active .share-overlay,
     body.pres-active .pres-enter-btn {
       display: none !important;
     }
