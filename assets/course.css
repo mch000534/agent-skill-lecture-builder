@@ -3471,7 +3471,7 @@
     .pres-slide--title .pres-lead {
       font-size: clamp(1rem, 1.5vw, 1.3rem);
       color: var(--text-dim);
-      max-width: 640px;
+      max-width: 100%;
       line-height: 1.9;
     }
 
