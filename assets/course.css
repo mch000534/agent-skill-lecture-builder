@@ -2024,6 +2024,7 @@
     .timer-top-bar-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--accent2), var(--accent));
+      opacity: 0.45;
       width: 100%;
       transition: width .95s linear;
     }
