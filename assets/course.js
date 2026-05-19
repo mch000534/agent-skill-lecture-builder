@@ -1353,8 +1353,28 @@
       enterBtn.setAttribute('aria-label', '簡報模式');
       enterBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
       enterBtn.addEventListener('click', enterPresentation);
-      var ctrlsRow = document.querySelector('.settings-controls-row');
-      if (ctrlsRow) ctrlsRow.appendChild(enterBtn);
+
+      var exportIconBtn = document.createElement('button');
+      exportIconBtn.className = 'settings-export-icon';
+      exportIconBtn.setAttribute('aria-label', '匯出 PDF');
+      exportIconBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>';
+      exportIconBtn.addEventListener('click', function () { exportPDF(); });
+
+      var firstRow = document.querySelector('.settings-controls-row');
+      if (firstRow) {
+        var row2 = document.createElement('div');
+        row2.className = 'settings-controls-row';
+        row2.appendChild(enterBtn);
+        row2.appendChild(exportIconBtn);
+        firstRow.insertAdjacentElement('afterend', row2);
+        var oldExportBtn = document.getElementById('export-pdf-btn');
+        if (oldExportBtn) {
+          var oldSection = oldExportBtn.closest('.settings-section');
+          var oldDivider = oldSection && oldSection.previousElementSibling;
+          if (oldDivider && oldDivider.classList.contains('settings-divider')) oldDivider.style.display = 'none';
+          if (oldSection) oldSection.style.display = 'none';
+        }
+      }
 
       var progressBar = document.createElement('div');
       progressBar.className = 'pres-progress-bar';

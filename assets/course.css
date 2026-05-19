@@ -3721,6 +3721,27 @@
       color: var(--accent);
     }
 
+    .settings-export-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .18s;
+      flex-shrink: 0;
+      padding: 0;
+      color: var(--text-dim);
+    }
+
+    .settings-export-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* ── Responsive ── */
     @media (max-width: 1099px) {
       .pres-slide--title {
