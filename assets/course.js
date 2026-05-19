@@ -474,12 +474,24 @@
       topBar.appendChild(topBarFill);
       document.body.appendChild(topBar);
 
-      // Direct time-edit input (created dynamically, no HTML rebuild needed)
+      // Restructure DOM: [−] [display + overlay input] [+]
       var timeEdit = document.createElement('input');
       timeEdit.type = 'text';
       timeEdit.className = 'timer-time-edit';
-      timeEdit.placeholder = 'MM:SS';
-      displayEl.insertAdjacentElement('afterend', timeEdit);
+
+      var displayArea = document.createElement('div');
+      displayArea.className = 'timer-display-area';
+      var displayRow = document.createElement('div');
+      displayRow.className = 'timer-display-row';
+      displayEl.parentNode.insertBefore(displayRow, displayEl);
+      displayRow.appendChild(decBtn);
+      displayRow.appendChild(displayArea);
+      displayRow.appendChild(incBtn);
+      displayArea.appendChild(displayEl);
+      displayArea.appendChild(timeEdit);
+
+      var inputRow = document.querySelector('.timer-input-row');
+      if (inputRow) inputRow.style.display = 'none';
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
@@ -558,39 +570,59 @@
         applySeconds(v * 60);
       });
 
-      // Direct time input on display click
-      function parseTimeInput(val) {
-        val = val.trim();
-        var parts = val.split(':');
-        if (parts.length === 1) {
-          var n = parseFloat(parts[0]);
-          return isNaN(n) || n <= 0 ? 0 : Math.round(n * 60);
-        }
-        if (parts.length === 2) return (parseInt(parts[0]) || 0) * 60 + (parseInt(parts[1]) || 0);
-        if (parts.length === 3) return (parseInt(parts[0]) || 0) * 3600 + (parseInt(parts[1]) || 0) * 60 + (parseInt(parts[2]) || 0);
-        return 0;
+      // Direct 4-digit input: click display → type MMSS → auto-applies on 4th digit
+      var digitBuf = [];
+      var editingTime = false;
+
+      function updateTimeEditValue() {
+        var buf = digitBuf.slice(-4);
+        while (buf.length < 4) buf.unshift('0');
+        timeEdit.value = buf[0] + buf[1] + ':' + buf[2] + buf[3];
       }
 
-      displayEl.addEventListener('click', function () {
+      function openTimeEdit() {
         if (running || displayEl.classList.contains('done')) return;
-        displayEl.style.display = 'none';
-        timeEdit.value = displayEl.textContent;
+        digitBuf = [];
+        editingTime = true;
+        updateTimeEditValue();
+        displayEl.classList.add('editing');
         timeEdit.style.display = 'block';
         timeEdit.focus();
-        timeEdit.select();
-      });
+      }
+
+      function closeTimeEdit() {
+        if (!editingTime) return;
+        editingTime = false;
+        displayEl.classList.remove('editing');
+        timeEdit.style.display = 'none';
+      }
 
       function commitTimeEdit() {
-        var secs = parseTimeInput(timeEdit.value);
-        timeEdit.style.display = 'none';
-        displayEl.style.display = '';
+        if (!editingTime) return;
+        var buf = digitBuf.slice(-4);
+        while (buf.length < 4) buf.unshift('0');
+        var mm = parseInt(buf[0] + buf[1]) || 0;
+        var ss = parseInt(buf[2] + buf[3]) || 0;
+        var secs = mm * 60 + ss;
+        closeTimeEdit();
         if (secs > 0) applySeconds(secs);
       }
 
+      displayEl.addEventListener('click', openTimeEdit);
+
       timeEdit.addEventListener('blur', commitTimeEdit);
       timeEdit.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); commitTimeEdit(); }
-        if (e.key === 'Escape') { timeEdit.style.display = 'none'; displayEl.style.display = ''; }
+        if (e.key === 'Escape') { closeTimeEdit(); e.preventDefault(); return; }
+        if (e.key === 'Enter') { commitTimeEdit(); e.preventDefault(); return; }
+        if (e.key === 'Backspace') { digitBuf.pop(); updateTimeEditValue(); e.preventDefault(); return; }
+        if (/^\d$/.test(e.key) && digitBuf.length < 4) {
+          digitBuf.push(e.key);
+          updateTimeEditValue();
+          e.preventDefault();
+          if (digitBuf.length === 4) commitTimeEdit();
+          return;
+        }
+        e.preventDefault();
       });
 
       // Start / Pause / Resume

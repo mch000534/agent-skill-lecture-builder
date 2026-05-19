@@ -2027,19 +2027,39 @@
       transition: width .95s linear;
     }
 
+    .timer-input-row {
+      display: none;
+    }
+
+    .timer-display-row {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin: .3rem 0 .45rem;
+    }
+
+    .timer-display-area {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+
     .timer-display {
       font-size: 2.6rem;
       font-weight: 700;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       color: var(--text);
-      margin: .3rem 0 .45rem;
       letter-spacing: .04em;
       transition: color .3s;
     }
 
-    .timer-display:not(.running):not(.done) {
+    .timer-display:not(.running):not(.done):not(.editing) {
       cursor: pointer;
+    }
+
+    .timer-display.editing {
+      visibility: hidden;
     }
 
     .timer-display.running {
@@ -2058,24 +2078,21 @@
 
     .timer-time-edit {
       display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       font-size: 2.6rem;
       font-weight: 700;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       color: var(--text);
-      margin: .3rem 0 .45rem;
       letter-spacing: .04em;
-      width: 100%;
       border: none;
       border-bottom: 2px solid var(--accent);
       background: none;
       outline: none;
       padding: 0;
-    }
-
-    .timer-time-edit::-webkit-inner-spin-button,
-    .timer-time-edit::-webkit-outer-spin-button {
-      opacity: 0;
     }
 
     .timer-progress-track {
