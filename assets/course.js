@@ -1756,13 +1756,39 @@
 
       if (!widget) return;
 
+      // ── State ──
       var mode = 'number';
       var fullList = [];
       var pool = [];
       var drawn = [];
       var spinning = false;
       var spinTimer = null;
+      var groupResults = [];
+      var scoreTeams = [
+        { name: '隊伍 1', score: 0 },
+        { name: '隊伍 2', score: 0 },
+        { name: '隊伍 3', score: 0 },
+        { name: '隊伍 4', score: 0 }
+      ];
 
+      // ── Panel switching ──
+      function showPanel(name) {
+        ['draw', 'group', 'score'].forEach(function (p) {
+          var el = document.getElementById('lottery-panel-' + p);
+          if (el) el.style.display = p === name ? '' : 'none';
+        });
+        document.querySelectorAll('.lottery-main-tab').forEach(function (btn) {
+          btn.classList.toggle('active', btn.dataset.panel === name);
+        });
+        if (name === 'group') updateGroupSourceInfo();
+        if (name === 'score') renderScoreTeams();
+      }
+
+      document.querySelectorAll('.lottery-main-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () { showPanel(btn.dataset.panel); });
+      });
+
+      // ── Draw panel ──
       function buildNumberList() {
         var s = parseInt(numStartInput.value) || 1;
         var e = parseInt(numEndInput.value) || 50;
@@ -1778,11 +1804,7 @@
       }
 
       function updateDrawnDisplay() {
-        if (!drawn.length) {
-          drawnWrap.style.display = 'none';
-          drawnListEl.textContent = '';
-          return;
-        }
+        if (!drawn.length) { drawnWrap.style.display = 'none'; drawnListEl.textContent = ''; return; }
         drawnWrap.style.display = '';
         drawnListEl.textContent = drawn.slice().reverse().join('、');
       }
@@ -1801,11 +1823,15 @@
         resultEl.className = 'lottery-result' + (cls ? ' ' + cls : '');
       }
 
-      // Initialize
+      function onListChange() {
+        initPool();
+        updateGroupSourceInfo();
+      }
+
       fullList = buildNumberList();
       initPool();
 
-      // Mode tabs
+      // Draw panel sub-tabs (學號 / 人名)
       document.querySelectorAll('.lottery-tab').forEach(function (btn) {
         btn.addEventListener('click', function () {
           mode = btn.dataset.mode;
@@ -1814,97 +1840,193 @@
           });
           modeNumberPanel.style.display = mode === 'number' ? '' : 'none';
           modeNamePanel.style.display = mode === 'name' ? '' : 'none';
-          if (mode === 'number') {
-            fullList = buildNumberList();
-            initPool();
-          } else {
-            fullList = [];
-            initPool();
-          }
+          fullList = mode === 'number' ? buildNumberList() : [];
+          onListChange();
         });
       });
 
-      // Number range change
       [numStartInput, numEndInput].forEach(function (inp) {
         inp.addEventListener('change', function () {
           if (mode !== 'number') return;
           fullList = buildNumberList();
-          initPool();
+          onListChange();
         });
       });
 
-      // Apply names
       applyNamesBtn.addEventListener('click', function () {
         var lines = namesInput.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
         fullList = lines;
-        initPool();
+        onListChange();
       });
 
-      // Reset draw only
       resetDrawBtn.addEventListener('click', initPool);
 
-      // Reset list (and draw state)
       resetListBtn.addEventListener('click', function () {
         if (mode === 'number') {
-          numStartInput.value = 1;
-          numEndInput.value = 50;
+          numStartInput.value = 1; numEndInput.value = 50;
           fullList = buildNumberList();
         } else {
-          namesInput.value = '';
-          fullList = [];
+          namesInput.value = ''; fullList = [];
         }
-        initPool();
+        onListChange();
       });
 
-      // Draw
       drawBtn.addEventListener('click', function () {
         if (spinning) return;
         var available = allowRepeatChk.checked ? fullList : pool;
-        if (!available.length) {
-          setResultText('已全部抽完', 'exhausted');
-          return;
-        }
+        if (!available.length) { setResultText('已全部抽完', 'exhausted'); return; }
 
-        spinning = true;
-        drawBtn.disabled = true;
-        var count = 0;
-        var spinTotal = 14;
-
+        spinning = true; drawBtn.disabled = true;
+        var count = 0, spinTotal = 14;
         spinTimer = setInterval(function () {
-          var idx = Math.floor(Math.random() * available.length);
-          setResultText(available[idx], 'spinning');
-          count++;
-          if (count >= spinTotal) {
+          setResultText(available[Math.floor(Math.random() * available.length)], 'spinning');
+          if (++count >= spinTotal) {
             clearInterval(spinTimer);
-            var finalIdx = Math.floor(Math.random() * available.length);
-            var result = available[finalIdx];
-
+            var result = available[Math.floor(Math.random() * available.length)];
             if (!allowRepeatChk.checked) {
               var pi = pool.indexOf(result);
               if (pi !== -1) pool.splice(pi, 1);
               drawn.push(result);
-              updatePoolInfo();
-              updateDrawnDisplay();
+              updatePoolInfo(); updateDrawnDisplay();
             }
-
-            // Flash: clear → set with accent
             resultEl.className = 'lottery-result';
             setTimeout(function () { setResultText(result, 'drawn'); }, 40);
-
-            spinning = false;
-            drawBtn.disabled = false;
+            spinning = false; drawBtn.disabled = false;
           }
         }, 55);
       });
 
-      // Show / hide
+      // ── Group panel ──
+      function updateGroupSourceInfo() {
+        var el = document.getElementById('lottery-group-source-info');
+        if (el) el.textContent = '使用抽籤名單（' + fullList.length + ' 人）';
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      function renderGroupResults() {
+        var container = document.getElementById('lottery-group-results');
+        var toScoreBtn = document.getElementById('lottery-group-to-score-btn');
+        container.innerHTML = '';
+        if (!groupResults.length) { toScoreBtn.style.display = 'none'; return; }
+        groupResults.forEach(function (members, idx) {
+          var card = document.createElement('div');
+          card.className = 'lottery-group-card';
+          var title = document.createElement('div');
+          title.className = 'lottery-group-card-title';
+          title.textContent = '第 ' + (idx + 1) + ' 組';
+          var memberEl = document.createElement('div');
+          memberEl.className = 'lottery-group-card-members';
+          memberEl.textContent = members.join('　');
+          card.appendChild(title); card.appendChild(memberEl);
+          container.appendChild(card);
+        });
+        toScoreBtn.style.display = '';
+      }
+
+      var groupDrawBtn = document.getElementById('lottery-group-draw-btn');
+      if (groupDrawBtn) {
+        groupDrawBtn.addEventListener('click', function () {
+          if (!fullList.length) {
+            var container = document.getElementById('lottery-group-results');
+            container.innerHTML = '<div style="font-size:.78rem;color:var(--text-dim);text-align:center;padding:.5rem 0">請先在抽籤頁填入名單</div>';
+            document.getElementById('lottery-group-to-score-btn').style.display = 'none';
+            return;
+          }
+          var n = parseInt(document.getElementById('lottery-group-count').value) || 4;
+          n = Math.max(2, Math.min(10, Math.min(n, fullList.length)));
+          var shuffled = shuffle(fullList);
+          groupResults = [];
+          for (var k = 0; k < n; k++) groupResults.push([]);
+          shuffled.forEach(function (item, i) { groupResults[i % n].push(item); });
+          renderGroupResults();
+        });
+      }
+
+      var toScoreBtn = document.getElementById('lottery-group-to-score-btn');
+      if (toScoreBtn) {
+        toScoreBtn.addEventListener('click', function () {
+          scoreTeams = groupResults.map(function (_, idx) {
+            return { name: '第 ' + (idx + 1) + ' 組', score: 0 };
+          });
+          showPanel('score');
+        });
+      }
+
+      // ── Score panel ──
+      function makeTeamRow(idx) {
+        var team = scoreTeams[idx];
+        var row = document.createElement('div');
+        row.className = 'lottery-score-team';
+
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.className = 'lottery-score-name';
+        nameInput.value = team.name;
+        nameInput.addEventListener('blur', function () {
+          scoreTeams[idx].name = nameInput.value.trim() || ('隊伍 ' + (idx + 1));
+          nameInput.value = scoreTeams[idx].name;
+        });
+
+        var decBtn = document.createElement('button');
+        decBtn.className = 'lottery-score-adj';
+        decBtn.textContent = '−';
+
+        var scoreEl = document.createElement('div');
+        scoreEl.className = 'lottery-score-value';
+        scoreEl.id = 'lottery-sv-' + idx;
+        scoreEl.textContent = team.score;
+
+        var incBtn = document.createElement('button');
+        incBtn.className = 'lottery-score-adj';
+        incBtn.textContent = '+';
+
+        decBtn.addEventListener('click', function () {
+          scoreTeams[idx].score--;
+          document.getElementById('lottery-sv-' + idx).textContent = scoreTeams[idx].score;
+        });
+        incBtn.addEventListener('click', function () {
+          scoreTeams[idx].score++;
+          document.getElementById('lottery-sv-' + idx).textContent = scoreTeams[idx].score;
+        });
+
+        row.appendChild(nameInput);
+        row.appendChild(decBtn);
+        row.appendChild(scoreEl);
+        row.appendChild(incBtn);
+        return row;
+      }
+
+      function renderScoreTeams() {
+        var container = document.getElementById('lottery-score-teams');
+        if (!container) return;
+        container.innerHTML = '';
+        scoreTeams.forEach(function (_, idx) { container.appendChild(makeTeamRow(idx)); });
+      }
+
+      var scoreResetBtn = document.getElementById('lottery-score-reset-btn');
+      if (scoreResetBtn) {
+        scoreResetBtn.addEventListener('click', function () {
+          scoreTeams.forEach(function (t) { t.score = 0; });
+          renderScoreTeams();
+        });
+      }
+
+      // ── Show / hide ──
       function hideWidget() { widget.classList.remove('open'); }
       function toggleWidget() { widget.classList.toggle('open'); }
       window.__toggleLotteryWidget = toggleWidget;
 
       closeBtn.addEventListener('click', hideWidget);
 
-      // Add button to settings row 2 (created by pres IIFE)
+      // ── Settings panel button ──
       var lotteryBtn = document.createElement('button');
       lotteryBtn.className = 'lottery-settings-btn';
       lotteryBtn.setAttribute('aria-label', '抽籤器');
@@ -1919,16 +2041,14 @@
       var targetRow = window.__settingsRow2 || document.querySelectorAll('.settings-controls-row')[1];
       if (targetRow) targetRow.appendChild(lotteryBtn);
 
-      // Drag
+      // ── Drag ──
       var dragging = false, dragOffX = 0, dragOffY = 0;
       dragHandle.addEventListener('mousedown', function (e) {
         if (e.button !== 0) return;
         var rect = widget.getBoundingClientRect();
         widget.style.right = 'auto'; widget.style.bottom = 'auto';
         widget.style.left = rect.left + 'px'; widget.style.top = rect.top + 'px';
-        dragging = true;
-        dragOffX = e.clientX - rect.left;
-        dragOffY = e.clientY - rect.top;
+        dragging = true; dragOffX = e.clientX - rect.left; dragOffY = e.clientY - rect.top;
         e.preventDefault();
       });
       document.addEventListener('mousemove', function (e) {

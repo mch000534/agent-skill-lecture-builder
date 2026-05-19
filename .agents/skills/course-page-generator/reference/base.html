@@ -209,35 +209,66 @@
       <button class="lottery-close" id="lottery-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="lottery-body">
-      <div class="lottery-tabs">
-        <button class="lottery-tab active" data-mode="number">學號</button>
-        <button class="lottery-tab" data-mode="name">人名</button>
+      <!-- Main tabs: 抽籤 / 分組 / 計分 -->
+      <div class="lottery-main-tabs">
+        <button class="lottery-main-tab active" data-panel="draw">抽籤</button>
+        <button class="lottery-main-tab" data-panel="group">分組</button>
+        <button class="lottery-main-tab" data-panel="score">計分</button>
       </div>
-      <div id="lottery-mode-number">
-        <div class="lottery-range-row">
-          <span>學號範圍</span>
-          <input type="number" class="lottery-range-input" id="lottery-num-start" value="1" min="1" max="9999">
-          <span>至</span>
-          <input type="number" class="lottery-range-input" id="lottery-num-end" value="50" min="1" max="9999">
+
+      <!-- 抽籤 Panel -->
+      <div class="lottery-panel" id="lottery-panel-draw">
+        <div class="lottery-tabs">
+          <button class="lottery-tab active" data-mode="number">學號</button>
+          <button class="lottery-tab" data-mode="name">人名</button>
+        </div>
+        <div id="lottery-mode-number">
+          <div class="lottery-range-row">
+            <span>學號範圍</span>
+            <input type="number" class="lottery-range-input" id="lottery-num-start" value="1" min="1" max="9999">
+            <span>至</span>
+            <input type="number" class="lottery-range-input" id="lottery-num-end" value="50" min="1" max="9999">
+          </div>
+        </div>
+        <div id="lottery-mode-name" style="display:none">
+          <textarea class="lottery-names-area" id="lottery-names-input" placeholder="貼上人名，每行一個" rows="4"></textarea>
+          <button class="lottery-apply-btn" id="lottery-apply-names">套用名單</button>
+        </div>
+        <div class="lottery-result" id="lottery-result">---</div>
+        <div class="lottery-pool-info" id="lottery-pool-info">剩餘 50 / 50</div>
+        <div class="lottery-actions">
+          <button class="lottery-draw-btn" id="lottery-draw-btn">抽籤</button>
+          <button class="lottery-reset-btn" id="lottery-reset-draw-btn">重置抽籤</button>
+        </div>
+        <div class="lottery-bottom-row">
+          <label class="lottery-repeat-label"><input type="checkbox" id="lottery-allow-repeat"> 允許重複</label>
+          <button class="lottery-reset-list-btn" id="lottery-reset-list-btn">重置名單</button>
+        </div>
+        <div class="lottery-drawn-wrap" id="lottery-drawn-wrap" style="display:none">
+          <span class="lottery-drawn-label">已抽：</span>
+          <div class="lottery-drawn-list" id="lottery-drawn-list"></div>
         </div>
       </div>
-      <div id="lottery-mode-name" style="display:none">
-        <textarea class="lottery-names-area" id="lottery-names-input" placeholder="貼上人名，每行一個" rows="4"></textarea>
-        <button class="lottery-apply-btn" id="lottery-apply-names">套用名單</button>
+
+      <!-- 分組 Panel -->
+      <div class="lottery-panel" id="lottery-panel-group" style="display:none">
+        <div class="lottery-group-config">
+          <span>分成</span>
+          <input type="number" class="lottery-range-input" id="lottery-group-count" value="4" min="2" max="10">
+          <span>組</span>
+          <button class="lottery-group-draw-btn" id="lottery-group-draw-btn">開始分組</button>
+        </div>
+        <div class="lottery-group-source-info" id="lottery-group-source-info"></div>
+        <div class="lottery-group-results" id="lottery-group-results"></div>
+        <button class="lottery-group-to-score-btn" id="lottery-group-to-score-btn" style="display:none">匯入計分板</button>
       </div>
-      <div class="lottery-result" id="lottery-result">---</div>
-      <div class="lottery-pool-info" id="lottery-pool-info">剩餘 50 / 50</div>
-      <div class="lottery-actions">
-        <button class="lottery-draw-btn" id="lottery-draw-btn">抽籤</button>
-        <button class="lottery-reset-btn" id="lottery-reset-draw-btn">重置抽籤</button>
-      </div>
-      <div class="lottery-bottom-row">
-        <label class="lottery-repeat-label"><input type="checkbox" id="lottery-allow-repeat"> 允許重複</label>
-        <button class="lottery-reset-list-btn" id="lottery-reset-list-btn">重置名單</button>
-      </div>
-      <div class="lottery-drawn-wrap" id="lottery-drawn-wrap" style="display:none">
-        <span class="lottery-drawn-label">已抽：</span>
-        <div class="lottery-drawn-list" id="lottery-drawn-list"></div>
+
+      <!-- 計分 Panel -->
+      <div class="lottery-panel" id="lottery-panel-score" style="display:none">
+        <div class="lottery-score-teams" id="lottery-score-teams"></div>
+        <div class="lottery-score-actions">
+          <button class="lottery-reset-btn" id="lottery-score-reset-btn">重置分數</button>
+        </div>
       </div>
     </div>
   </div>

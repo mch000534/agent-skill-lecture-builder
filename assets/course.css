@@ -4042,4 +4042,170 @@
       border-color: var(--accent);
       color: var(--accent);
     }
-  
+
+    /* Main tabs: 抽籤 / 分組 / 計分 */
+    .lottery-main-tabs {
+      display: flex;
+      gap: .3rem;
+      margin-bottom: .65rem;
+    }
+
+    .lottery-main-tab {
+      flex: 1;
+      padding: .28rem 0;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--text-dim);
+      border-radius: 6px;
+      font-size: .78rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .lottery-main-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Group panel */
+    .lottery-group-config {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-bottom: .45rem;
+      font-size: .8rem;
+      color: var(--text-dim);
+    }
+
+    .lottery-group-draw-btn {
+      margin-left: auto;
+      padding: .3rem .7rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+
+    .lottery-group-draw-btn:hover { opacity: .82; }
+
+    .lottery-group-source-info {
+      font-size: .74rem;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+      text-align: center;
+    }
+
+    .lottery-group-results {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      max-height: 210px;
+      overflow-y: auto;
+    }
+
+    .lottery-group-card {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .38rem .6rem;
+    }
+
+    .lottery-group-card-title {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: .18rem;
+    }
+
+    .lottery-group-card-members {
+      font-size: .78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
+    .lottery-group-to-score-btn {
+      width: 100%;
+      margin-top: .55rem;
+      padding: .35rem 0;
+      background: none;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .lottery-group-to-score-btn:hover { background: rgba(var(--accent-rgb), .1); }
+
+    /* Score panel */
+    .lottery-score-teams {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      margin-bottom: .6rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .lottery-score-team {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .38rem .5rem;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .lottery-score-name {
+      flex: 1;
+      font-size: .82rem;
+      color: var(--text);
+      font-weight: 600;
+      border: none;
+      background: none;
+      outline: none;
+      min-width: 0;
+      padding: 0;
+    }
+
+    .lottery-score-name:focus { border-bottom: 1px solid var(--accent); }
+
+    .lottery-score-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      min-width: 2.2rem;
+      text-align: center;
+    }
+
+    .lottery-score-adj {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: .88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      flex-shrink: 0;
+      padding: 0;
+      transition: all .15s;
+      line-height: 1;
+    }
+
+    .lottery-score-adj:hover { border-color: var(--accent); color: var(--accent); }
+
+    .lottery-score-actions { display: flex; }
