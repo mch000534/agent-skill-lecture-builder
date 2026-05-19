@@ -1,0 +1,20 @@
+page:
+  title: "Agent Skill 課程頁生成器"
+  badge: "AI 工具 · Agent Skill · 課程製作"
+  hero_title: "把 AI 的隨機輸出<br>變成可重複使用的工具"
+  subtitle: "從安裝到上線，手把手帶你用 Agent Skills 建立課程頁面——一次學會，終身複用。"
+
+seo:
+  title: "Agent Skill 課程頁生成器｜安裝、使用、新增課程完整教學"
+  description: "學習如何安裝與使用 agent-skill-lecture-builder，掌握 Markdown 語法、config 設定、建置流程，並透過 Agent Skills 一鍵生成可部署的課程頁面。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/agent-skill-lecture-builder/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/agent-skill-lecture-builder/"
+
+quotes:
+  opening:
+    text: "Vibe Coding 速度很快，<br>但用完就丟的東西，永遠不會變成你的！"
+  closing:
+    text: >
+      AI 時代下，Vibe Coding 的價值不在於生成速度——<br><br>
+      而在於你能不能把成果從「免洗餐具」變成「長期工具」。<br><br>
+      現在你已經擁有這套工具，去創造屬於你的課程吧。

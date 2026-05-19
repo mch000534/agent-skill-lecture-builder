@@ -1,5 +1,12 @@
 window.__courses__ = [
   {
+    "title": "Agent Skill 課程頁生成器",
+    "badge": "AI 工具 · Agent Skill · 課程製作",
+    "subtitle": "學習如何安裝與使用 agent-skill-lecture-builder，掌握 Markdown 語法、config 設定、建置流程，並透過 Agent Skills 一鍵生成可部署的課程頁面。",
+    "ogImage": "lectures/agent-skill-lecture-builder/assets/og-image.jpg",
+    "href": "lectures/agent-skill-lecture-builder/"
+  },
+  {
     "title": "DaVinci Resolve 專業調色",
     "badge": "10 小時完整課程 · 色彩科學 · 節點調色 · 視覺風格",
     "subtitle": "10 小時深度調色課程：色彩科學基礎、示波器解讀、節點系統精通、一二級調色、膚色處理、LUT 製作、ACES 色彩管理，從技術校正到電影級風格創作全面掌握。",
