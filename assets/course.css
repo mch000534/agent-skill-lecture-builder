@@ -4209,3 +4209,73 @@
     .lottery-score-adj:hover { border-color: var(--accent); color: var(--accent); }
 
     .lottery-score-actions { display: flex; }
+
+    /* Expand button in header */
+    .lottery-expand {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dim);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      transition: color .2s;
+    }
+
+    .lottery-expand:hover { color: var(--text); }
+
+    /* Fullscreen overlay */
+    .lottery-fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 10600;
+      background: rgba(0, 0, 0, .93);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .lottery-fullscreen.open { display: flex; }
+
+    .lottery-fullscreen-result {
+      font-size: clamp(4rem, 14vw, 11rem);
+      font-weight: 900;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .04em;
+      text-align: center;
+      transition: color .15s;
+      user-select: none;
+      padding: 0 2rem;
+      word-break: break-all;
+    }
+
+    .lottery-fullscreen-result.drawn { color: var(--accent); }
+
+    .lottery-fullscreen-result.spinning { color: rgba(255,255,255,.3); }
+
+    .lottery-fullscreen-result.exhausted {
+      font-size: clamp(1.8rem, 5vw, 4rem);
+      font-family: inherit;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .lottery-fullscreen-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.25);
+      cursor: pointer;
+      padding: .5rem;
+      border-radius: 8px;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .lottery-fullscreen-close:hover { color: rgba(255,255,255,.8); }
