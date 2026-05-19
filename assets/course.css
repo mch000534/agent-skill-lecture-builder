@@ -2045,7 +2045,7 @@
     }
 
     .timer-display {
-      font-size: 2.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
@@ -2082,7 +2082,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      font-size: 2.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
