@@ -1,0 +1,44 @@
+window.__courses__ = [
+  {
+    "title": "DaVinci Resolve 專業調色",
+    "badge": "10 小時完整課程 · 色彩科學 · 節點調色 · 視覺風格",
+    "subtitle": "10 小時深度調色課程：色彩科學基礎、示波器解讀、節點系統精通、一二級調色、膚色處理、LUT 製作、ACES 色彩管理，從技術校正到電影級風格創作全面掌握。",
+    "ogImage": "lectures/davinci-color/assets/og-image.jpg",
+    "href": "lectures/davinci-color/"
+  },
+  {
+    "title": "DaVinci Resolve Fairlight 音頻後製入門",
+    "badge": "音頻後製 · 混音 · 修復 · 環繞聲",
+    "subtitle": "系統化學習 DaVinci Resolve Fairlight：音頻基礎概念、降噪修復、EQ 與動態處理、混音技巧與環繞聲製作，從零打造專業音頻後製流程。",
+    "ogImage": "lectures/davinci-fairlight/assets/og-image.jpg",
+    "href": "lectures/davinci-fairlight/"
+  },
+  {
+    "title": "DaVinci Resolve Fusion 特效合成入門",
+    "badge": "視覺特效 · 節點合成 · 動態圖像",
+    "subtitle": "系統化學習 DaVinci Resolve Fusion：節點工作流程、2D 合成、Delta/Erase 摳像、粒子特效、3D 攝影機與燈光，從零打造專業視覺效果。",
+    "ogImage": "lectures/davinci-fusion/assets/og-image.jpg",
+    "href": "lectures/davinci-fusion/"
+  },
+  {
+    "title": "DaVinci Resolve 影片製作入門",
+    "badge": "20 小時完整課程 · 剪輯 · 調色 · 音頻 · 特效",
+    "subtitle": "20 小時系統化課程，從零開始學習 DaVinci Resolve：Cut/Edit 剪輯、節點調色、Fairlight 音頻後製、Fusion 特效，完整工作流程一次掌握。",
+    "ogImage": "lectures/davinci-resolve/assets/og-image.jpg",
+    "href": "lectures/davinci-resolve/"
+  },
+  {
+    "title": "生成式 AI 資訊安全",
+    "badge": "資安實戰 · 生成式 AI · 企業防護",
+    "subtitle": "以真實攻擊案例解析生成式 AI 的資安風險，涵蓋 Prompt Injection、RAG 資料外洩、供應鏈攻擊、LLM 濫用防護，協助企業建立 AI 治理框架。",
+    "ogImage": "lectures/gen-ai-security/assets/og-image.jpg",
+    "href": "lectures/gen-ai-security/"
+  },
+  {
+    "title": "Git & GitHub 從零開始",
+    "badge": "版本控制 · Git · GitHub · 團隊協作",
+    "subtitle": "從 Git 基礎概念到 GitHub 團隊協作，涵蓋安裝設定、分支操作、Pull Request 流程，適合完全新手的逐步實作教學。",
+    "ogImage": "lectures/git-github-basics/assets/og-image.jpg",
+    "href": "lectures/git-github-basics/"
+  }
+];

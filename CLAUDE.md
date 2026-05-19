@@ -18,7 +18,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/<cour
 # 本機預覽含即時重載（預設 port 3000）
 node .agents/skills/course-page-generator/scripts/dev.mjs lectures/<course-dir>
 
-# 更新根目錄課程索引頁
+# 更新課程清單（新增/刪除課程後執行，產生 lectures/manifest.js）
 node build-index.mjs
 ```
 
@@ -48,8 +48,9 @@ agent-skill-lecture-builder/
 │       ├── index.html         # build 產出（需 commit）
 │       └── assets/
 │           └── og-image.jpg   # OG 縮圖（需 commit）
-├── build-index.mjs            # 掃描 lectures/ 產生根目錄 index.html
-└── index.html                 # 根目錄課程索引頁（build-index.mjs 產出）
+├── build-index.mjs            # 掃描 lectures/ 產生 lectures/manifest.js
+├── index.html                 # 根目錄課程索引頁（靜態殼層，動態讀取 manifest）
+└── lectures/manifest.js       # 課程清單（build-index.mjs 產出，需 commit）
 ```
 
 ### Build 流程
