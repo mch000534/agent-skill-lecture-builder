@@ -1367,6 +1367,7 @@
         row2.appendChild(enterBtn);
         row2.appendChild(exportIconBtn);
         firstRow.insertAdjacentElement('afterend', row2);
+        window.__settingsRow2 = row2;
         var oldExportBtn = document.getElementById('export-pdf-btn');
         if (oldExportBtn) {
           var oldSection = oldExportBtn.closest('.settings-section');
@@ -1409,6 +1410,9 @@
         }
         if ((e.key === 't' || e.key === 'T') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__toggleTimerWidget) window.__toggleTimerWidget();
+        }
+        if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__toggleLotteryWidget) window.__toggleLotteryWidget();
         }
       });
 
@@ -1912,8 +1916,7 @@
         widget.classList.add('open');
       });
 
-      var rows = document.querySelectorAll('.settings-controls-row');
-      var targetRow = rows[1] || rows[0];
+      var targetRow = window.__settingsRow2 || document.querySelectorAll('.settings-controls-row')[1];
       if (targetRow) targetRow.appendChild(lotteryBtn);
 
       // Drag
