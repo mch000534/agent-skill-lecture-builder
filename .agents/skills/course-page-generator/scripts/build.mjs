@@ -1161,6 +1161,7 @@ function build(courseDir) {
     '{{FOOTER_COPYRIGHT}}': esc(cfg.footer?.copyright || ''),
     '{{SECTION_IDS}}': JSON.stringify(sectionIds),
     '{{ALL_ANCHOR_IDS}}': JSON.stringify(allAnchorIds),
+    '{{VOTE_GAS_URL}}': (cfg.vote && cfg.vote.gas_url) ? cfg.vote.gas_url : '',
   };
 
   for (const [key, val] of Object.entries(replacements)) {

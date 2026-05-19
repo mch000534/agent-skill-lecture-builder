@@ -43,3 +43,7 @@ footer:
   cta: "歡迎追蹤我的社群，獲取更多 AI 開發實戰內容"
   copyright: "© 澳門科學館"
   show_socials: false
+
+vote:
+  # 填入 Google Apps Script Web App URL
+  gas_url: "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec"

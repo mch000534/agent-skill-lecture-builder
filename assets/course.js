@@ -2066,7 +2066,7 @@
       if (!widget) return;
 
       var GAS_KEY = 'voteGasEndpoint';
-      var gasEndpoint = localStorage.getItem(GAS_KEY) || '';
+      var gasEndpoint = (window.__voteGasUrl__ || '') || localStorage.getItem(GAS_KEY) || '';
       var currentSessionId = null;
       var pollInterval = null;
       var currentQuestion = null;
