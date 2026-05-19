@@ -341,7 +341,8 @@
 
       function openSettings() {
         var rect = settingsToggle.getBoundingClientRect();
-        settingsPanel.style.top = (rect.bottom + 8) + 'px';
+        settingsPanel.style.top = '';
+        settingsPanel.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
         settingsPanel.style.left = Math.min(rect.left, window.innerWidth - 218) + 'px';
         settingsPanel.classList.add('open');
         settingsToggle.classList.add('active');

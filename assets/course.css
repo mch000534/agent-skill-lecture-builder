@@ -1582,7 +1582,7 @@
     /* ===== SIDEBAR PROGRESS (BOTTOM) ===== */
     .sidebar-progress {
       flex-shrink: 0;
-      padding: .75rem 1.5rem 1.5rem;
+      padding: .75rem 1.5rem 1.25rem;
       border-top: 1px solid var(--border)
     }
 
@@ -1608,6 +1608,12 @@
       border-radius: 2px;
       width: 0%;
       transition: width .3s ease
+    }
+
+    .sidebar-progress-actions {
+      margin-top: .75rem;
+      display: flex;
+      justify-content: center;
     }
 
     /* ===== COLLAPSED PROGRESS BAR (BOTTOM OF VIEWPORT) ===== */
@@ -1832,7 +1838,7 @@
       z-index: 500;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-6px);
+      transform: translateY(6px);
       transition: opacity .2s, transform .2s;
     }
 
@@ -1840,6 +1846,12 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
+    }
+
+    .settings-controls-row {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
     }
 
     .settings-section {
