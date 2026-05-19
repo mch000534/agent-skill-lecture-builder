@@ -3823,8 +3823,9 @@
       padding: .85rem .9rem;
       flex: 1;
       min-height: 0;
-      overflow-y: auto;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
     }
 
     .lottery-tabs {
@@ -4054,11 +4055,23 @@
       color: var(--accent);
     }
 
+    /* lottery-panel: each tab panel fills remaining body height */
+    .lottery-panel {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Draw panel scrolls as a whole */
+    #lottery-panel-draw { overflow-y: auto; }
+
     /* Main tabs: 抽籤 / 分組 / 計分 */
     .lottery-main-tabs {
       display: flex;
       gap: .3rem;
       margin-bottom: .65rem;
+      flex-shrink: 0;
     }
 
     .lottery-main-tab {
@@ -4087,6 +4100,7 @@
       margin-bottom: .45rem;
       font-size: .8rem;
       color: var(--text-dim);
+      flex-shrink: 0;
     }
 
     .lottery-group-draw-btn {
@@ -4109,13 +4123,15 @@
       color: var(--text-dim);
       margin-bottom: .4rem;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .lottery-group-results {
       display: flex;
       flex-direction: column;
       gap: .35rem;
-      max-height: 210px;
+      flex: 1;
+      min-height: 0;
       overflow-y: auto;
     }
 
@@ -4151,6 +4167,7 @@
       font-size: .8rem;
       cursor: pointer;
       transition: all .15s;
+      flex-shrink: 0;
     }
 
     .lottery-group-to-score-btn:hover { background: rgba(var(--accent-rgb), .1); }
@@ -4160,8 +4177,8 @@
       display: flex;
       flex-direction: column;
       gap: .35rem;
-      margin-bottom: .6rem;
-      max-height: 250px;
+      flex: 1;
+      min-height: 0;
       overflow-y: auto;
     }
 
@@ -4219,4 +4236,4 @@
 
     .lottery-score-adj:hover { border-color: var(--accent); color: var(--accent); }
 
-    .lottery-score-actions { display: flex; }
+    .lottery-score-actions { display: flex; flex-shrink: 0; margin-top: .5rem; }

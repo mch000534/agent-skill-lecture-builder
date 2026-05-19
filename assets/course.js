@@ -1754,40 +1754,7 @@
       var drawnWrap = document.getElementById('lottery-drawn-wrap');
       var drawnListEl = document.getElementById('lottery-drawn-list');
 
-      var expandBtn = document.getElementById('lottery-expand-btn');
-      var fullscreen = document.getElementById('lottery-fullscreen');
-      var fullscreenResult = document.getElementById('lottery-fullscreen-result');
-      var fullscreenClose = document.getElementById('lottery-fullscreen-close');
-
       if (!widget) return;
-
-      var fullscreenOpen = false;
-
-      function syncFullscreen() {
-        if (!fullscreenOpen || !fullscreenResult) return;
-        fullscreenResult.textContent = resultEl.textContent;
-        var extra = resultEl.className.replace('lottery-result', '').trim();
-        fullscreenResult.className = 'lottery-fullscreen-result' + (extra ? ' ' + extra : '');
-      }
-
-      function openFullscreen() {
-        fullscreenOpen = true;
-        syncFullscreen();
-        fullscreen.classList.add('open');
-      }
-
-      function closeFullscreen() {
-        fullscreenOpen = false;
-        fullscreen.classList.remove('open');
-      }
-
-      if (expandBtn) expandBtn.addEventListener('click', function (e) { e.stopPropagation(); openFullscreen(); });
-      if (fullscreen) fullscreen.addEventListener('click', closeFullscreen);
-      if (fullscreenClose) fullscreenClose.addEventListener('click', function (e) { e.stopPropagation(); closeFullscreen(); });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && fullscreenOpen) { closeFullscreen(); e.stopPropagation(); }
-      }, true);
 
       // ── State ──
       var mode = 'number';
@@ -1854,7 +1821,6 @@
       function setResultText(text, cls) {
         resultEl.textContent = text;
         resultEl.className = 'lottery-result' + (cls ? ' ' + cls : '');
-        syncFullscreen();
       }
 
       function onListChange() {
@@ -1924,7 +1890,6 @@
               updatePoolInfo(); updateDrawnDisplay();
             }
             resultEl.className = 'lottery-result';
-            if (fullscreenOpen && fullscreenResult) fullscreenResult.className = 'lottery-fullscreen-result';
             setTimeout(function () { setResultText(result, 'drawn'); }, 40);
             spinning = false; drawBtn.disabled = false;
           }
