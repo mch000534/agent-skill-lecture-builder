@@ -67,9 +67,7 @@
       backdrop-filter: blur(12px);
       z-index: 100;
     }
-    [data-theme="light"] .site-header {
-      background: rgb(245 245 247 / .92);
-    }
+    [data-theme="light"] .site-header { background: rgb(245 245 247 / .92); }
     .site-logo {
       display: flex;
       align-items: center;
@@ -77,11 +75,7 @@
       text-decoration: none;
       color: var(--text);
     }
-    .site-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-    }
+    .site-logo img { width: 32px; height: 32px; border-radius: 50%; }
     .site-logo-name {
       font-family: 'Noto Serif TC', serif;
       font-weight: 700;
@@ -102,27 +96,23 @@
     /* ── Hero ── */
     .hero {
       text-align: center;
-      padding: 5rem 2rem 3rem;
+      padding: 4rem 2rem 2.5rem;
       position: relative;
       overflow: clip;
     }
     .hero::before {
       content: '';
       position: absolute;
-      top: -20%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
+      top: -20%; left: -10%;
+      width: 500px; height: 500px;
       background: radial-gradient(circle, rgb(var(--accent-rgb) / .1) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -20%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
+      bottom: -20%; right: -10%;
+      width: 400px; height: 400px;
       background: radial-gradient(circle, rgb(var(--accent2-rgb) / .07) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -160,7 +150,7 @@
     .hero-sub {
       font-size: clamp(.95rem, 2vw, 1.1rem);
       color: var(--text-dim);
-      max-width: 560px;
+      max-width: 720px;
       margin: 0 auto 1rem;
       font-weight: 300;
     }
@@ -171,25 +161,87 @@
       min-height: 1.4em;
     }
 
+    /* ── Toolbar ── */
+    .toolbar {
+      max-width: min(1080px, 92%);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .search-wrap {
+      flex: 1;
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: .9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+    .search-wrap input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      padding: .6rem .9rem .6rem 2.5rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-wrap input::placeholder { color: var(--text-dim); }
+    .search-wrap input:focus { border-color: rgb(var(--accent-rgb) / .6); }
+    .search-wrap input::-webkit-search-cancel-button { cursor: pointer; }
+
+    .layout-btns {
+      display: flex;
+      gap: .35rem;
+    }
+    .layout-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: .55rem .65rem;
+      display: flex;
+      align-items: center;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .layout-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .layout-btn.active {
+      border-color: rgb(var(--accent-rgb) / .6);
+      color: var(--accent);
+      background: rgb(var(--accent-rgb) / .08);
+    }
+
     /* ── Grid ── */
     .grid-wrap {
       max-width: min(1080px, 92%);
       margin: 0 auto;
-      padding: 2rem 0 6rem;
+      padding: 0 0 6rem;
     }
     .course-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
     }
-    .empty {
+    .course-grid--list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .empty, .no-result {
       color: var(--text-dim);
       text-align: center;
       padding: 4rem 0;
       font-size: .95rem;
     }
 
-    /* ── Course Card ── */
+    /* ── Course Card (grid) ── */
     .course-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -206,15 +258,13 @@
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgb(0 0 0 / .25);
     }
-    .course-card--no-link {
-      opacity: .6;
-      cursor: default;
-    }
+    .course-card--no-link { opacity: .6; cursor: default; }
     .course-img {
       width: 100%;
       aspect-ratio: 1200 / 630;
       overflow: hidden;
       background: var(--bg-card-alt);
+      flex-shrink: 0;
     }
     .course-img img {
       width: 100%;
@@ -223,9 +273,7 @@
       display: block;
       transition: transform .4s ease;
     }
-    .course-card:hover .course-img img {
-      transform: scale(1.03);
-    }
+    .course-card:hover .course-img img { transform: scale(1.03); }
     .course-img--placeholder {
       display: flex;
       align-items: center;
@@ -277,6 +325,41 @@
     }
     .course-card:hover .course-cta { color: var(--accent); }
 
+    /* ── List layout overrides ── */
+    .course-grid--list .course-img { display: none; }
+    .course-grid--list .course-badge,
+    .course-grid--list .course-cta { display: none; }
+    .course-grid--list .course-body {
+      padding: .85rem 1.25rem;
+      justify-content: center;
+      flex: unset;
+    }
+    .course-grid--list .course-title {
+      font-size: 1rem;
+      margin-bottom: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 500;
+    }
+    .course-grid--list .course-desc {
+      display: block;
+      -webkit-line-clamp: unset;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-bottom: 0;
+      margin-top: 0;
+      transition: max-height .25s ease, opacity .2s ease, margin-top .2s ease;
+    }
+    .course-grid--list .course-card:hover .course-desc {
+      max-height: 8rem;
+      opacity: 1;
+      margin-top: .5rem;
+    }
+    .course-grid--list .course-card:hover { transform: none; }
+    @media (max-width: 540px) {
+      .toolbar { flex-wrap: wrap; }
+    }
+
     /* ── Footer ── */
     .site-footer {
       border-top: 1px solid var(--border);
@@ -304,8 +387,31 @@
   <p class="hero-count" id="hero-count"></p>
 </section>
 
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="search" id="search" placeholder="搜尋課程名稱、類別或說明…" autocomplete="off">
+  </div>
+  <div class="layout-btns" role="group" aria-label="版面切換">
+    <button id="btn-grid" class="layout-btn" onclick="setLayout('grid')" aria-label="格狀排列" title="格狀排列">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/>
+        <rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>
+      </svg>
+    </button>
+    <button id="btn-list" class="layout-btn" onclick="setLayout('list')" aria-label="列表排列" title="列表排列">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="11" width="18" height="5" rx="1"/><rect x="3" y="18" width="18" height="3" rx="1"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
 <div class="grid-wrap">
   <p class="empty" id="empty-msg" hidden>尚無課程，請將課程資料夾放入 <code>lectures/</code> 目錄並執行 <code>node build-index.mjs</code>。</p>
+  <p class="no-result" id="no-result-msg" hidden>找不到符合的課程，請嘗試其他關鍵字。</p>
   <div class="course-grid" id="course-grid"></div>
 </div>
 
@@ -317,14 +423,25 @@
 <script src="lectures/manifest.js" onerror="window.__courses__ = [];"></script>
 <script>
   (function () {
-    const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    var saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
   })();
 
   function toggleTheme() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
     document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
     localStorage.setItem('theme', isLight ? 'dark' : 'light');
+  }
+
+  var currentLayout = localStorage.getItem('layout') || 'grid';
+
+  function setLayout(layout) {
+    currentLayout = layout;
+    localStorage.setItem('layout', layout);
+    var gridEl = document.getElementById('course-grid');
+    gridEl.className = layout === 'list' ? 'course-grid course-grid--list' : 'course-grid';
+    document.getElementById('btn-grid').classList.toggle('active', layout === 'grid');
+    document.getElementById('btn-list').classList.toggle('active', layout === 'list');
   }
 
   function esc(s) {
@@ -332,13 +449,13 @@
   }
 
   function buildCard(l) {
-    const firstChar = esc((l.title || '?').charAt(0));
-    const placeholder = '<div class="course-img course-img--placeholder"><span>' + firstChar + '</span></div>';
-    const imgTag = l.ogImage
+    var firstChar = esc((l.title || '?').charAt(0));
+    var placeholder = '<div class="course-img course-img--placeholder"><span>' + firstChar + '</span></div>';
+    var imgTag = l.ogImage
       ? '<div class="course-img"><img src="' + esc(l.ogImage) + '" alt="' + esc(l.title) + '" loading="lazy" onerror="this.parentElement.outerHTML=\'<div class=&quot;course-img course-img--placeholder&quot;><span>' + firstChar + '</span></div>\'"></div>'
       : placeholder;
 
-    const inner = imgTag +
+    var inner = imgTag +
       '<div class="course-body">' +
       (l.badge ? '<p class="course-badge">' + esc(l.badge) + '</p>' : '') +
       '<h2 class="course-title">' + esc(l.title) + '</h2>' +
@@ -346,22 +463,43 @@
       '<span class="course-cta">&#31435;&#21363;&#23416;&#32722; &#8594;</span>' +
       '</div>';
 
-    if (l.href) {
-      return '<a href="' + esc(l.href) + '" class="course-card">' + inner + '</a>';
-    }
+    if (l.href) return '<a href="' + esc(l.href) + '" class="course-card">' + inner + '</a>';
     return '<div class="course-card course-card--no-link">' + inner + '</div>';
   }
 
-  function renderCourses(courses) {
+  function filterAndRender() {
+    var all = window.__courses__ || [];
+    var query = document.getElementById('search').value.trim().toLowerCase();
+    var filtered = query
+      ? all.filter(function (l) {
+          return (l.title + ' ' + l.badge + ' ' + l.subtitle).toLowerCase().indexOf(query) !== -1;
+        })
+      : all;
+
     var countEl = document.getElementById('hero-count');
     var gridEl = document.getElementById('course-grid');
     var emptyEl = document.getElementById('empty-msg');
-    countEl.textContent = courses.length + ' 門課程';
-    if (!courses.length) { emptyEl.hidden = false; return; }
-    gridEl.innerHTML = courses.map(buildCard).join('');
+    var noResultEl = document.getElementById('no-result-msg');
+
+    if (all.length === 0) {
+      emptyEl.hidden = false;
+      noResultEl.hidden = true;
+      countEl.textContent = '0 門課程';
+      return;
+    }
+    emptyEl.hidden = true;
+    countEl.textContent = query
+      ? filtered.length + ' / ' + all.length + ' 門課程'
+      : all.length + ' 門課程';
+    noResultEl.hidden = filtered.length > 0;
+    gridEl.innerHTML = filtered.map(buildCard).join('');
   }
 
-  renderCourses(window.__courses__ || []);
+  // Init
+  setLayout(currentLayout);
+  filterAndRender();
+
+  document.getElementById('search').addEventListener('input', filterAndRender);
 </script>
 </body>
 </html>
