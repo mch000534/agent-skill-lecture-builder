@@ -1350,9 +1350,11 @@
 
       var enterBtn = document.createElement('button');
       enterBtn.className = 'pres-enter-btn';
-      enterBtn.innerHTML = '&#9654; 簡報模式 <kbd style="font-size:.7rem;opacity:.5;margin-left:.2rem">P</kbd>';
+      enterBtn.setAttribute('aria-label', '簡報模式');
+      enterBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
       enterBtn.addEventListener('click', enterPresentation);
-      document.body.appendChild(enterBtn);
+      var ctrlsRow = document.querySelector('.settings-controls-row');
+      if (ctrlsRow) ctrlsRow.appendChild(enterBtn);
 
       var progressBar = document.createElement('div');
       progressBar.className = 'pres-progress-bar';

@@ -3445,8 +3445,7 @@
     body.pres-active>hr.divider,
     body.pres-active>footer.footer,
     body.pres-active .settings-panel,
-    body.pres-active .bonus-overlay,
-    body.pres-active .pres-enter-btn {
+    body.pres-active .bonus-overlay {
       display: none !important;
     }
 
@@ -3702,44 +3701,28 @@
 
     /* ── Enter button ── */
     .pres-enter-btn {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 999;
-      padding: .5rem 1rem;
-      border-radius: 100px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
       border: 1px solid var(--border);
-      background: var(--bg-card);
-      color: var(--text-dim);
-      font-size: .8rem;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: .4rem;
-      transition: all .25s;
-      font-family: 'Noto Sans TC', sans-serif;
-      opacity: .6;
+      justify-content: center;
+      transition: all .18s;
+      flex-shrink: 0;
+      padding: 0;
+      color: var(--text-dim);
     }
 
     .pres-enter-btn:hover {
-      opacity: 1;
       border-color: var(--accent);
       color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    @media print {
-      .pres-enter-btn {
-        display: none !important;
-      }
     }
 
     /* ── Responsive ── */
     @media (max-width: 1099px) {
-      .pres-enter-btn {
-        display: none !important;
-      }
-
       .pres-slide--title {
         padding: 3rem 2rem;
       }
