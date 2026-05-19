@@ -2005,34 +2005,6 @@
       padding: .85rem .9rem;
     }
 
-    .timer-presets {
-      display: flex;
-      gap: .35rem;
-      margin-bottom: .75rem;
-    }
-
-    .timer-preset {
-      flex: 1;
-      padding: .28rem .1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: none;
-      color: var(--text-dim);
-      font-size: .68rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      transition: all .18s;
-      white-space: nowrap;
-    }
-
-    .timer-preset:hover,
-    .timer-preset.active {
-      background: rgb(var(--accent-rgb) / .12);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
     .timer-display {
       font-size: 2.6rem;
       font-weight: 700;

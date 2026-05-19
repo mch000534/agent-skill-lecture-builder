@@ -493,7 +493,12 @@
         applyMinutes(mins);
       }
 
-      // Open
+      // Show / hide (does NOT affect timer state)
+      function hideWidget() { widget.classList.remove('open'); }
+      function toggleWidget() { widget.classList.toggle('open'); }
+      window.__toggleTimerWidget = toggleWidget;
+
+      // Open from settings panel button
       document.getElementById('break-timer-btn').addEventListener('click', function () {
         var sp = document.getElementById('settings-panel');
         sp.classList.remove('open');
@@ -501,24 +506,8 @@
         widget.classList.add('open');
       });
 
-      // Close
-      function closeWidget() { widget.classList.remove('open'); stopTimer(); }
-      closeBtn.addEventListener('click', closeWidget);
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && widget.classList.contains('open')) closeWidget();
-      });
-
-      // Presets
-      document.querySelectorAll('.timer-preset').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          if (running) return;
-          document.querySelectorAll('.timer-preset').forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          minutesInput.value = btn.dataset.min;
-          displayEl.classList.remove('done');
-          applyMinutes(parseInt(btn.dataset.min));
-        });
-      });
+      // Close button = hide only (same as T key)
+      closeBtn.addEventListener('click', hideWidget);
 
       // +/−
       decBtn.addEventListener('click', function () {
@@ -1286,6 +1275,9 @@
         }
         if ((e.key === 'q' || e.key === 'Q') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__toggleShareModal) window.__toggleShareModal();
+        }
+        if ((e.key === 't' || e.key === 'T') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__toggleTimerWidget) window.__toggleTimerWidget();
         }
       });
 
