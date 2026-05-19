@@ -2059,3 +2059,243 @@
       });
       document.addEventListener('mouseup', function () { dragging = false; });
     })();
+
+    // ── Vote Widget ──
+    (function () {
+      var widget = document.getElementById('vote-widget');
+      if (!widget) return;
+
+      var GAS_KEY = 'voteGasEndpoint';
+      var gasEndpoint = localStorage.getItem(GAS_KEY) || '';
+      var currentSessionId = null;
+      var pollInterval = null;
+      var currentQuestion = null;
+      var isStopped = true;
+
+      var dragHandle = document.getElementById('vote-drag-handle');
+      var closeBtn = document.getElementById('vote-widget-close');
+      var panelSetup = document.getElementById('vote-panel-setup');
+      var panelActive = document.getElementById('vote-panel-active');
+      var panelResults = document.getElementById('vote-panel-results');
+      var epInput = document.getElementById('vote-ep-input');
+      var epSaveBtn = document.getElementById('vote-ep-save-btn');
+      var epStatus = document.getElementById('vote-ep-status');
+      var epRow = document.getElementById('vote-ep-row');
+      var hasAnswerCb = document.getElementById('vote-has-answer');
+      var answerChoice = document.getElementById('vote-answer-choice');
+
+      if (epInput) epInput.value = gasEndpoint;
+      updateEpDisplay();
+
+      function updateEpDisplay() {
+        if (epRow) epRow.style.display = gasEndpoint ? 'none' : 'flex';
+        if (epStatus) {
+          epStatus.textContent = gasEndpoint ? '已設定 GAS 後端連線' : '尚未設定後端 URL';
+          epStatus.className = 'vote-ep-status ' + (gasEndpoint ? 'ok' : 'warn');
+        }
+      }
+
+      if (epSaveBtn) {
+        epSaveBtn.addEventListener('click', function () {
+          var url = (epInput ? epInput.value : '').trim();
+          if (!url) return;
+          gasEndpoint = url;
+          localStorage.setItem(GAS_KEY, url);
+          updateEpDisplay();
+        });
+      }
+
+      if (hasAnswerCb && answerChoice) {
+        hasAnswerCb.addEventListener('change', function () {
+          answerChoice.style.display = hasAnswerCb.checked ? 'inline-block' : 'none';
+        });
+      }
+
+      function genSessionId() {
+        var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        var id = '';
+        for (var i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
+        return id;
+      }
+
+      function getVotePageUrl(sid) {
+        var pathname = window.location.pathname.replace(/\/[^\/]*$/, '');
+        var segments = pathname.split('/').filter(function (s) { return s.length > 0; });
+        segments = segments.slice(0, Math.max(0, segments.length - 2));
+        var repoBase = segments.length > 0 ? '/' + segments.join('/') : '';
+        var url = window.location.origin + repoBase + '/vote/?s=' + sid;
+        if (gasEndpoint) url += '&ep=' + encodeURIComponent(gasEndpoint);
+        return url;
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function renderBars(container, options, counts, total, answerId) {
+        if (!container || !options) return;
+        var html = '';
+        options.forEach(function (opt, i) {
+          var count = counts[i] || 0;
+          var pct = total > 0 ? Math.round(count / total * 100) : 0;
+          var correct = (answerId !== null && answerId !== undefined && answerId !== '' && parseInt(answerId) === i);
+          html += '<div class="vote-bar-row' + (correct ? ' vote-bar-correct' : '') + '">';
+          html += '<span class="vote-bar-label">' + String.fromCharCode(65 + i) + '</span>';
+          html += '<div class="vote-bar-wrap">';
+          html += '<span class="vote-bar-text">' + escHtml(opt) + '</span>';
+          html += '<div class="vote-bar-track"><div class="vote-bar-fill" style="width:' + pct + '%"></div></div>';
+          html += '</div>';
+          html += '<span class="vote-bar-stat">' + count + ' (' + pct + '%)</span>';
+          html += '</div>';
+        });
+        container.innerHTML = html;
+      }
+
+      var startBtn = document.getElementById('vote-start-btn');
+      if (startBtn) {
+        startBtn.addEventListener('click', function () {
+          if (!gasEndpoint) {
+            if (epRow) epRow.style.display = 'flex';
+            if (epInput) epInput.focus();
+            return;
+          }
+          var questionEl = document.getElementById('vote-question-input');
+          var question = questionEl ? questionEl.value.trim() : '';
+          if (!question) { alert('請輸入問題'); return; }
+          var optionInputs = document.querySelectorAll('.vote-option-input');
+          var options = [];
+          optionInputs.forEach(function (inp) { if ((inp.value || '').trim()) options.push(inp.value.trim()); });
+          if (options.length < 2) { alert('請至少填入 2 個選項'); return; }
+          var hasAns = hasAnswerCb && hasAnswerCb.checked;
+          var answerId = (hasAns && answerChoice) ? answerChoice.value : null;
+
+          currentSessionId = genSessionId();
+          currentQuestion = { question: question, options: options, answerId: answerId };
+          isStopped = false;
+
+          fetch(gasEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'create', sessionId: currentSessionId, question: question, options: options, answerId: answerId })
+          }).catch(function () {});
+
+          panelSetup.style.display = 'none';
+          panelActive.style.display = 'flex';
+          panelResults.style.display = 'none';
+
+          var codeEl = document.getElementById('vote-session-code');
+          if (codeEl) codeEl.textContent = currentSessionId;
+
+          var qrContainer = document.getElementById('vote-qr-container');
+          if (qrContainer && typeof QRCode !== 'undefined') {
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, { text: getVotePageUrl(currentSessionId), width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M });
+          }
+
+          renderBars(document.getElementById('vote-bars'), options, [], 0, answerId);
+          var labelEl = document.getElementById('vote-count-label');
+          if (labelEl) labelEl.textContent = '等待投票中...';
+
+          if (pollInterval) clearInterval(pollInterval);
+          pollInterval = setInterval(fetchResults, 5000);
+        });
+      }
+
+      function fetchResults() {
+        if (!gasEndpoint || !currentSessionId || isStopped) return;
+        fetch(gasEndpoint + '?action=results&s=' + currentSessionId)
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || !currentQuestion) return;
+            var counts = data.counts || [];
+            var total = counts.reduce(function (a, b) { return a + b; }, 0);
+            renderBars(document.getElementById('vote-bars'), currentQuestion.options, counts, total, currentQuestion.answerId);
+            var labelEl = document.getElementById('vote-count-label');
+            if (labelEl) labelEl.textContent = '已有 ' + total + ' 人投票';
+          })
+          .catch(function () {});
+      }
+
+      var stopBtn = document.getElementById('vote-stop-btn');
+      if (stopBtn) {
+        stopBtn.addEventListener('click', function () {
+          isStopped = true;
+          if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          if (gasEndpoint && currentSessionId) {
+            fetch(gasEndpoint + '?action=results&s=' + currentSessionId)
+              .then(function (r) { return r.json(); })
+              .then(showResults)
+              .catch(function () { showResults(null); });
+          } else {
+            showResults(null);
+          }
+        });
+      }
+
+      function showResults(data) {
+        var counts = (data && data.counts) ? data.counts : [];
+        var total = counts.reduce(function (a, b) { return a + b; }, 0);
+        renderBars(document.getElementById('vote-results-bars'), currentQuestion ? currentQuestion.options : [], counts, total, currentQuestion ? currentQuestion.answerId : null);
+        var totalEl = document.getElementById('vote-results-total');
+        if (totalEl) totalEl.textContent = '共 ' + total + ' 人參與投票';
+        panelSetup.style.display = 'none';
+        panelActive.style.display = 'none';
+        panelResults.style.display = 'flex';
+      }
+
+      var restartBtn = document.getElementById('vote-restart-btn');
+      if (restartBtn) {
+        restartBtn.addEventListener('click', function () {
+          currentSessionId = null;
+          currentQuestion = null;
+          isStopped = true;
+          if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          panelSetup.style.display = 'flex';
+          panelActive.style.display = 'none';
+          panelResults.style.display = 'none';
+        });
+      }
+
+      function hideWidget() { widget.classList.remove('open'); }
+      function toggleWidget() { widget.classList.toggle('open'); }
+      window.__toggleVoteWidget = toggleWidget;
+      closeBtn.addEventListener('click', hideWidget);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'v' || e.key === 'V') {
+          if (['INPUT', 'TEXTAREA', 'SELECT'].indexOf(((document.activeElement || {}).tagName || '').toUpperCase()) >= 0) return;
+          toggleWidget();
+        }
+      });
+
+      var voteBtn = document.createElement('button');
+      voteBtn.className = 'vote-settings-btn';
+      voteBtn.setAttribute('aria-label', '投票');
+      voteBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>';
+      voteBtn.addEventListener('click', function () {
+        var sp = document.getElementById('settings-panel');
+        if (sp) sp.classList.remove('open');
+        var st = document.getElementById('settings-toggle');
+        if (st) st.classList.remove('active');
+        widget.classList.add('open');
+      });
+      var targetRow = window.__settingsRow2 || document.querySelectorAll('.settings-controls-row')[1];
+      if (targetRow) targetRow.appendChild(voteBtn);
+
+      var dragging = false, dragOffX = 0, dragOffY = 0;
+      dragHandle.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        var rect = widget.getBoundingClientRect();
+        widget.style.right = 'auto'; widget.style.bottom = 'auto';
+        widget.style.left = rect.left + 'px'; widget.style.top = rect.top + 'px';
+        dragging = true; dragOffX = e.clientX - rect.left; dragOffY = e.clientY - rect.top;
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        var x = Math.max(0, Math.min(e.clientX - dragOffX, window.innerWidth - widget.offsetWidth));
+        var y = Math.max(0, Math.min(e.clientY - dragOffY, window.innerHeight - widget.offsetHeight));
+        widget.style.left = x + 'px'; widget.style.top = y + 'px';
+      });
+      document.addEventListener('mouseup', function () { dragging = false; });
+    })();

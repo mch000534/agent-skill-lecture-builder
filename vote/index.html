@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0e1117">
+  <title>課堂投票</title>
+  <style>
+    :root {
+      --bg: #0e1117;
+      --bg-card: #1a1d2e;
+      --bg-card2: #242840;
+      --accent: #e03040;
+      --text: #e8eaf0;
+      --text-dim: #8890a8;
+      --border: rgba(255,255,255,.1);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      font-size: .8rem;
+      color: var(--text-dim);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    /* Loading */
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 1rem auto;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: .9rem;
+    }
+
+    /* Question */
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+
+    .option-btn {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: var(--bg-card2);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      transition: border-color .15s, background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .option-btn:hover, .option-btn:active { border-color: var(--accent); background: rgba(var(--accent-rgb, 224,48,64), .08); }
+    .option-btn:disabled { cursor: default; opacity: .6; }
+    .option-btn.selected { border-color: var(--accent); background: rgba(var(--accent-rgb, 224,48,64), .12); }
+
+    .option-key {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--accent);
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-text { flex: 1; line-height: 1.4; }
+
+    /* Success */
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(80,200,120,.15);
+      border: 2px solid #50c878;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .success-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .success-sub {
+      font-size: .85rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+
+    /* Result bars */
+    .result-bars { display: flex; flex-direction: column; gap: .6rem; }
+
+    .result-bar-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .result-bar-row.result-correct .result-bar-key { color: #50c878; border-color: #50c878; }
+    .result-bar-row.result-correct .result-bar-fill { background: #50c878; }
+
+    .result-bar-key {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--accent);
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .75rem;
+    }
+
+    .result-bar-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .2rem; }
+
+    .result-bar-label {
+      font-size: .8rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .result-bar-track {
+      height: 8px;
+      background: rgba(255,255,255,.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width .5s ease;
+    }
+
+    .result-bar-stat {
+      font-size: .78rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      width: 3.8rem;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Error */
+    .error-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(224,48,64,.12);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .error-title {
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .error-sub {
+      font-size: .85rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    .result-total {
+      font-size: .82rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+
+    /* Hidden */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="brand">課堂互動</div>
+
+  <div class="card">
+    <!-- Loading -->
+    <div id="state-loading">
+      <div class="spinner"></div>
+      <p class="loading-text">載入中...</p>
+    </div>
+
+    <!-- Ready: show question -->
+    <div id="state-ready" class="hidden">
+      <p class="question-text" id="question-text"></p>
+      <div class="options-list" id="options-list"></div>
+    </div>
+
+    <!-- Submitted: show result -->
+    <div id="state-submitted" class="hidden">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50c878" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="success-title">投票成功，感謝參與！</p>
+      <p class="success-sub" id="voted-option"></p>
+      <div class="divider"></div>
+      <p class="result-total" id="result-total"></p>
+      <div class="result-bars" id="result-bars"></div>
+    </div>
+
+    <!-- Already voted -->
+    <div id="state-duplicate" class="hidden">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50c878" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="success-title">你已投過此題</p>
+      <p class="success-sub">每個裝置只能投票一次</p>
+    </div>
+
+    <!-- Error -->
+    <div id="state-error" class="hidden">
+      <div class="error-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="error-title" id="error-title">無法載入投票</p>
+      <p class="error-sub" id="error-sub">此投票不存在或已結束</p>
+    </div>
+  </div>
+
+  <script>
+    // 教師可將 GAS URL 填入此常數以產生更短的 QR Code。
+    // 留空時改用 URL 參數 ep= 取得。
+    var GAS_ENDPOINT = '';
+
+    var VOTED_KEY = 'votedSessions';
+
+    function getParam(name) {
+      var m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+    }
+
+    var sessionId = getParam('s');
+    var ep = GAS_ENDPOINT || getParam('ep');
+
+    function setState(id) {
+      ['loading', 'ready', 'submitted', 'duplicate', 'error'].forEach(function (s) {
+        var el = document.getElementById('state-' + s);
+        if (el) el.classList.toggle('hidden', s !== id);
+      });
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renderResultBars(options, counts, total, answerId, container) {
+      if (!container) return;
+      var html = '';
+      options.forEach(function (opt, i) {
+        var count = counts[i] || 0;
+        var pct = total > 0 ? Math.round(count / total * 100) : 0;
+        var correct = (answerId !== '' && answerId !== null && parseInt(answerId) === i);
+        html += '<div class="result-bar-row' + (correct ? ' result-correct' : '') + '">';
+        html += '<div class="result-bar-key">' + String.fromCharCode(65 + i) + '</div>';
+        html += '<div class="result-bar-wrap">';
+        html += '<span class="result-bar-label">' + escHtml(opt) + '</span>';
+        html += '<div class="result-bar-track"><div class="result-bar-fill" style="width:' + pct + '%"></div></div>';
+        html += '</div>';
+        html += '<span class="result-bar-stat">' + count + ' (' + pct + '%)</span>';
+        html += '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    function softHash(str) {
+      var h = 0;
+      for (var i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) & 0xffffffff; }
+      return Math.abs(h).toString(36);
+    }
+
+    var voteHash = softHash(sessionId + (navigator.userAgent || '').slice(0, 40));
+
+    function getVoted() {
+      try { return JSON.parse(localStorage.getItem(VOTED_KEY) || '{}'); } catch (e) { return {}; }
+    }
+
+    function markVoted(sid) {
+      var v = getVoted();
+      v[sid] = true;
+      localStorage.setItem(VOTED_KEY, JSON.stringify(v));
+    }
+
+    if (!sessionId || !ep) {
+      setState('error');
+      document.getElementById('error-title').textContent = '連結無效';
+      document.getElementById('error-sub').textContent = '請重新掃描 QR Code';
+    } else if (getVoted()[sessionId]) {
+      setState('duplicate');
+    } else {
+      fetch(ep + '?action=question&s=' + encodeURIComponent(sessionId))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || !data.ok) {
+            setState('error');
+            return;
+          }
+          var options = data.options || [];
+          document.getElementById('question-text').textContent = data.question || '';
+
+          var list = document.getElementById('options-list');
+          list.innerHTML = '';
+          options.forEach(function (opt, i) {
+            var btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = '<span class="option-key">' + String.fromCharCode(65 + i) + '</span><span class="option-text">' + escHtml(opt) + '</span>';
+            btn.addEventListener('click', function () {
+              list.querySelectorAll('.option-btn').forEach(function (b) { b.disabled = true; });
+              btn.classList.add('selected');
+              submitVote(i, data, options);
+            });
+            list.appendChild(btn);
+          });
+
+          setState('ready');
+        })
+        .catch(function () { setState('error'); });
+    }
+
+    function submitVote(choiceIdx, questionData, options) {
+      fetch(ep, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'vote', sessionId: sessionId, choice: choiceIdx, hash: voteHash })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (voteResult) {
+          if (voteResult && voteResult.duplicate) {
+            setState('duplicate');
+            return;
+          }
+          markVoted(sessionId);
+          document.getElementById('voted-option').textContent = '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + options[choiceIdx];
+          setState('submitted');
+          fetchFinalResults(questionData, options);
+        })
+        .catch(function () {
+          markVoted(sessionId);
+          document.getElementById('voted-option').textContent = '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + options[choiceIdx];
+          setState('submitted');
+        });
+    }
+
+    function fetchFinalResults(questionData, options) {
+      fetch(ep + '?action=results&s=' + encodeURIComponent(sessionId))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var counts = (data && data.counts) ? data.counts : [];
+          var total = counts.reduce(function (a, b) { return a + b; }, 0);
+          var container = document.getElementById('result-bars');
+          var totalEl = document.getElementById('result-total');
+          if (totalEl) totalEl.textContent = '目前共 ' + total + ' 人投票';
+          renderResultBars(options, counts, total, questionData.answerId || '', container);
+        })
+        .catch(function () {});
+    }
+  </script>
+</body>
+</html>

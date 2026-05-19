@@ -1081,6 +1081,51 @@
     </div>
   </div>
 
+    <div class="vote-widget" id="vote-widget">
+    <div class="vote-header" id="vote-drag-handle">
+      <span class="vote-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>投票</span>
+      <button class="vote-close" id="vote-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="vote-body">
+            <div class="vote-panel" id="vote-panel-setup">
+        <div class="vote-ep-row" id="vote-ep-row">
+          <input type="text" class="vote-ep-input" id="vote-ep-input" placeholder="GAS Web App URL（設定一次即可）">
+          <button class="vote-ep-save-btn" id="vote-ep-save-btn">儲存</button>
+        </div>
+        <div class="vote-ep-status" id="vote-ep-status"></div>
+        <textarea class="vote-question-input" id="vote-question-input" placeholder="輸入問題..." rows="2"></textarea>
+        <div class="vote-options-config">
+          <div class="vote-option-row"><span class="vote-option-label">A</span><input type="text" class="vote-option-input" data-idx="0" placeholder="選項 A"></div>
+          <div class="vote-option-row"><span class="vote-option-label">B</span><input type="text" class="vote-option-input" data-idx="1" placeholder="選項 B"></div>
+          <div class="vote-option-row"><span class="vote-option-label">C</span><input type="text" class="vote-option-input" data-idx="2" placeholder="選項 C（選填）"></div>
+          <div class="vote-option-row"><span class="vote-option-label">D</span><input type="text" class="vote-option-input" data-idx="3" placeholder="選項 D（選填）"></div>
+        </div>
+        <label class="vote-answer-label"><input type="checkbox" id="vote-has-answer"> 標記正確答案 <select id="vote-answer-choice" style="display:none"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></label>
+        <button class="vote-start-btn" id="vote-start-btn">開始投票</button>
+      </div>
+
+            <div class="vote-panel" id="vote-panel-active" style="display:none">
+        <div class="vote-session-badge">
+          <span class="vote-session-label">加入碼</span>
+          <span class="vote-session-code" id="vote-session-code">------</span>
+        </div>
+        <div class="vote-qr-wrap">
+          <div class="vote-qr-container" id="vote-qr-container"></div>
+        </div>
+        <div class="vote-count-label" id="vote-count-label">等待投票中...</div>
+        <div class="vote-bars" id="vote-bars"></div>
+        <button class="vote-stop-btn" id="vote-stop-btn">結束投票</button>
+      </div>
+
+            <div class="vote-panel" id="vote-panel-results" style="display:none">
+        <div class="vote-results-header">最終結果</div>
+        <div class="vote-bars" id="vote-results-bars"></div>
+        <div class="vote-results-total" id="vote-results-total"></div>
+        <button class="vote-restart-btn" id="vote-restart-btn">重新出題</button>
+      </div>
+    </div>
+  </div>
+
     <script>
     (function () {
       // OG mode: ?og=1 → hide sidebar/sections, hero-only layout for thumbnails
