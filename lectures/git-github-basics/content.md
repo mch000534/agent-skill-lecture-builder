@@ -400,7 +400,7 @@ git restore hello.py
 
 如果想把整個分支退回到某個舊版本：
 
-```prompt [label="退回到指定 commit（⚠️ 危險）"]
+```prompt [label="退回到指定 commit（危險）"]
 git reset --hard a1b2c3d
 ```
 

@@ -684,6 +684,10 @@
       var sections = document.querySelectorAll('section.section');
       if (!sections.length) { alert('找不到課程章節，請確認頁面已正常載入。'); return; }
 
+      // Force light theme for PDF export, restore after
+      var origTheme = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', 'light');
+
       var printSlides = document.createElement('div');
       printSlides.id = 'print-slides';
       // Off-screen for height measurement
@@ -935,9 +939,9 @@
 
       function runPackerAndPrint() {
         // Force layout before measuring
-        // Scale print font-size proportionally from the user's A1–A5 selection (1.5× web size)
+        // Always use A1 (16px, smallest) for PDF export regardless of user's current setting
         var PRINT_SCALE = 1.2;
-        var webFontSize = fontSizes[fontIdx] || 16;
+        var webFontSize = fontSizes[0];
         var printFontSize = webFontSize * PRINT_SCALE;
         var origFontSize = document.documentElement.style.fontSize;
         document.documentElement.style.fontSize = printFontSize + 'px';
@@ -1291,6 +1295,9 @@
         setTimeout(function () {
           document.body.classList.remove('printing');
           if (printSlides.parentNode) document.body.removeChild(printSlides);
+          // Restore original theme after printing
+          if (origTheme === null) document.documentElement.removeAttribute('data-theme');
+          else document.documentElement.setAttribute('data-theme', origTheme);
         }, 500);
 
       } // end runPackerAndPrint
