@@ -2005,6 +2005,28 @@
       padding: .85rem .9rem;
     }
 
+    .timer-top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      z-index: 10500;
+      display: none;
+      pointer-events: none;
+    }
+
+    .timer-top-bar.active {
+      display: block;
+    }
+
+    .timer-top-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      width: 100%;
+      transition: width .95s linear;
+    }
+
     .timer-display {
       font-size: 2.6rem;
       font-weight: 700;
@@ -2014,6 +2036,10 @@
       margin: .3rem 0 .45rem;
       letter-spacing: .04em;
       transition: color .3s;
+    }
+
+    .timer-display:not(.running):not(.done) {
+      cursor: pointer;
     }
 
     .timer-display.running {
@@ -2028,6 +2054,28 @@
     @keyframes timer-done-flash {
       0%, 100% { opacity: 1; }
       50% { opacity: .3; }
+    }
+
+    .timer-time-edit {
+      display: none;
+      font-size: 2.6rem;
+      font-weight: 700;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text);
+      margin: .3rem 0 .45rem;
+      letter-spacing: .04em;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid var(--accent);
+      background: none;
+      outline: none;
+      padding: 0;
+    }
+
+    .timer-time-edit::-webkit-inner-spin-button,
+    .timer-time-edit::-webkit-outer-spin-button {
+      opacity: 0;
     }
 
     .timer-progress-track {

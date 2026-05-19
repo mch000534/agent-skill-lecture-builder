@@ -463,39 +463,72 @@
       var timer = null;
       var remaining = 0;
       var totalSeconds = 0;
+      var customBaseSeconds = 600;
       var running = false;
 
+      // Top progress bar – shown when timer is running and widget is hidden
+      var topBar = document.createElement('div');
+      topBar.className = 'timer-top-bar';
+      var topBarFill = document.createElement('div');
+      topBarFill.className = 'timer-top-bar-fill';
+      topBar.appendChild(topBarFill);
+      document.body.appendChild(topBar);
+
+      // Direct time-edit input (created dynamically, no HTML rebuild needed)
+      var timeEdit = document.createElement('input');
+      timeEdit.type = 'text';
+      timeEdit.className = 'timer-time-edit';
+      timeEdit.placeholder = 'MM:SS';
+      displayEl.insertAdjacentElement('afterend', timeEdit);
+
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function updateTopBar() {
+        var pct = totalSeconds > 0 ? (remaining / totalSeconds * 100) : 100;
+        topBarFill.style.width = pct + '%';
+        if (running && !widget.classList.contains('open')) {
+          topBar.classList.add('active');
+        } else {
+          topBar.classList.remove('active');
+        }
+      }
 
       function renderDisplay(secs) {
         displayEl.textContent = pad(Math.floor(secs / 60)) + ':' + pad(secs % 60);
         var pct = totalSeconds > 0 ? (secs / totalSeconds * 100) : 100;
         progressFill.style.width = pct + '%';
+        updateTopBar();
       }
 
-      function applyMinutes(mins) {
-        remaining = mins * 60;
-        totalSeconds = remaining;
+      function applySeconds(secs) {
+        secs = Math.max(1, Math.min(7200, secs));
+        customBaseSeconds = secs;
+        remaining = secs;
+        totalSeconds = secs;
         progressFill.style.transition = 'none';
-        renderDisplay(remaining);
+        topBarFill.style.transition = 'none';
+        renderDisplay(secs);
+        minutesInput.value = Math.max(1, Math.round(secs / 60));
       }
+
+      function applyMinutes(mins) { applySeconds(mins * 60); }
 
       function stopTimer() {
         if (timer) { clearInterval(timer); timer = null; }
         running = false;
+        updateTopBar();
       }
 
       function resetTimer() {
         stopTimer();
         displayEl.classList.remove('running', 'done');
         startBtn.textContent = '開始';
-        var mins = Math.max(1, Math.min(120, parseInt(minutesInput.value) || 10));
-        applyMinutes(mins);
+        applySeconds(customBaseSeconds);
       }
 
       // Show / hide (does NOT affect timer state)
-      function hideWidget() { widget.classList.remove('open'); }
-      function toggleWidget() { widget.classList.toggle('open'); }
+      function hideWidget() { widget.classList.remove('open'); updateTopBar(); }
+      function toggleWidget() { widget.classList.toggle('open'); updateTopBar(); }
       window.__toggleTimerWidget = toggleWidget;
 
       // Open from settings panel button
@@ -504,26 +537,60 @@
         sp.classList.remove('open');
         document.getElementById('settings-toggle').classList.remove('active');
         widget.classList.add('open');
+        updateTopBar();
       });
 
       // Close button = hide only (same as T key)
       closeBtn.addEventListener('click', hideWidget);
 
-      // +/−
+      // +/− adjust by 1 minute (60 s)
       decBtn.addEventListener('click', function () {
         if (running) return;
-        var v = Math.max(1, (parseInt(minutesInput.value) || 1) - 1);
-        minutesInput.value = v; applyMinutes(v);
+        applySeconds(Math.max(60, customBaseSeconds - 60));
       });
       incBtn.addEventListener('click', function () {
         if (running) return;
-        var v = Math.min(120, (parseInt(minutesInput.value) || 1) + 1);
-        minutesInput.value = v; applyMinutes(v);
+        applySeconds(Math.min(7200, customBaseSeconds + 60));
       });
       minutesInput.addEventListener('input', function () {
         if (running) return;
         var v = Math.max(1, Math.min(120, parseInt(minutesInput.value) || 1));
-        applyMinutes(v);
+        applySeconds(v * 60);
+      });
+
+      // Direct time input on display click
+      function parseTimeInput(val) {
+        val = val.trim();
+        var parts = val.split(':');
+        if (parts.length === 1) {
+          var n = parseFloat(parts[0]);
+          return isNaN(n) || n <= 0 ? 0 : Math.round(n * 60);
+        }
+        if (parts.length === 2) return (parseInt(parts[0]) || 0) * 60 + (parseInt(parts[1]) || 0);
+        if (parts.length === 3) return (parseInt(parts[0]) || 0) * 3600 + (parseInt(parts[1]) || 0) * 60 + (parseInt(parts[2]) || 0);
+        return 0;
+      }
+
+      displayEl.addEventListener('click', function () {
+        if (running || displayEl.classList.contains('done')) return;
+        displayEl.style.display = 'none';
+        timeEdit.value = displayEl.textContent;
+        timeEdit.style.display = 'block';
+        timeEdit.focus();
+        timeEdit.select();
+      });
+
+      function commitTimeEdit() {
+        var secs = parseTimeInput(timeEdit.value);
+        timeEdit.style.display = 'none';
+        displayEl.style.display = '';
+        if (secs > 0) applySeconds(secs);
+      }
+
+      timeEdit.addEventListener('blur', commitTimeEdit);
+      timeEdit.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); commitTimeEdit(); }
+        if (e.key === 'Escape') { timeEdit.style.display = 'none'; displayEl.style.display = ''; }
       });
 
       // Start / Pause / Resume
@@ -531,11 +598,13 @@
         if (displayEl.classList.contains('done')) { resetTimer(); return; }
         if (!running) {
           running = true;
-          if (remaining <= 0) applyMinutes(parseInt(minutesInput.value) || 10);
+          if (remaining <= 0) applySeconds(customBaseSeconds);
           displayEl.classList.remove('done');
           displayEl.classList.add('running');
           progressFill.style.transition = 'width .95s linear';
+          topBarFill.style.transition = 'width .95s linear';
           startBtn.textContent = '暫停';
+          updateTopBar();
           timer = setInterval(function () {
             remaining--;
             renderDisplay(remaining);
@@ -576,7 +645,7 @@
       });
       document.addEventListener('mouseup', function () { dragging = false; });
 
-      applyMinutes(10);
+      applySeconds(600);
     })();
 
     function exportPDF() {
