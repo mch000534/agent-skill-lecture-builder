@@ -544,6 +544,7 @@
               displayEl.classList.remove('running');
               displayEl.classList.add('done');
               startBtn.textContent = '重新開始';
+              if (!widget.classList.contains('open')) widget.classList.add('open');
             }
           }, 1000);
         } else {
