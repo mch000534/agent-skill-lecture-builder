@@ -35,6 +35,7 @@
 - [開發伺服器](#開發伺服器)
 - [Config 機制](#config-機制)
 - [Markdown 語法](#markdown-語法)
+- [課堂互動工具](#課堂互動工具)
 
 ## Quick Start
 
@@ -74,6 +75,7 @@ agent-skill-lecture-builder/
 │       └── course-page-generator/
 │           ├── scripts/
 │           │   ├── build.mjs        # 建置課程頁
+│           │   ├── build-vote.mjs   # 將 GAS URL 注入 vote/index.html
 │           │   ├── dev.mjs          # 本機預覽
 │           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
 │           └── reference/
@@ -82,9 +84,9 @@ agent-skill-lecture-builder/
 │               └── config-example.yaml
 ├── assets/
 │   ├── course.css           # 所有課程共用 CSS（外部引用，改動免 rebuild）
-│   └── course.js            # 所有課程共用 JS（計時器、簡報、設定等）
+│   └── course.js            # 所有課程共用 JS（計時器、簡報、抽籤器、投票等）
 ├── config/
-│   ├── global.yaml          # 全域設定（講者、社群、頁尾）
+│   ├── global.yaml          # 全域設定（講者、社群、頁尾、投票後端）
 │   └── assets/              # 共用圖片（avatar 等）
 ├── lectures/                # 所有課程放在此目錄下
 │   ├── gen-ai-security/     # 範例課程
@@ -94,6 +96,9 @@ agent-skill-lecture-builder/
 │   │   └── assets/
 │   │       └── og-image.jpg # generate-og.mjs 產出（需 commit）
 │   └── manifest.js          # build-index.mjs 產出的課程清單（需 commit）
+├── vote/
+│   ├── index.html           # 學生掃 QR Code 後的投票頁面
+│   └── vote-backend.gs      # Google Apps Script 後端腳本（部署參考）
 ├── build-index.mjs          # 掃描 lectures/ 產生 manifest.js
 ├── index.html               # 課程目錄索引頁（靜態殼層，動態讀取 manifest.js）
 ├── package.json
@@ -167,7 +172,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course --p
 
 | 層級 | 檔案 | 內容 |
 |------|------|------|
-| 全域 | `config/global.yaml` | 講者資訊、社群連結、頁尾 |
+| 全域 | `config/global.yaml` | 講者資訊、社群連結、頁尾、投票後端 URL |
 | 課程 | `<dir>/config.yaml` | 頁面標題、badge、hero、引言、導覽按鈕 |
 
 課程 config 只需寫要覆蓋的欄位，其餘繼承全域。陣列欄位（如 `socials`）會整個取代。
@@ -213,6 +218,10 @@ seo:
   description: "預設 SEO 描述"
   image: "https://your-domain.example/lectures/example/assets/og-image.jpg"
   url: "https://your-domain.example/lectures/example/"
+
+vote:
+  # 填入 Google Apps Script Web App URL（課堂投票功能必填）
+  gas_url: ""
 ```
 
 ### 課程 config 範例
@@ -326,7 +335,7 @@ quotes:
 - 點擊遮罩或右上角 ✕ 可關閉
 - 按 `Esc` 亦可關閉
 
-## 課程頁面功能
+## 課堂互動工具
 
 ### 設定面板
 
@@ -340,6 +349,8 @@ quotes:
 | 計時器 | 開啟浮動計時器 |
 | 電視機 | 進入簡報模式 |
 | 打印機 | 匯出 PDF（投影片版） |
+| 骰子 | 開啟抽籤器 |
+| 勾選框 | 開啟投票 Widget |
 
 色票區可即時切換課程主題配色，預設為正紅。
 
@@ -350,6 +361,51 @@ quotes:
 - 兩側 `−` / `+` 每次調整 1 分鐘
 - 計時中隱藏視窗時，畫面頂端顯示細長進度條
 - 計時結束自動彈出視窗
+
+### 抽籤器
+
+- 學號模式：設定起始 / 結束學號範圍隨機抽取
+- 人名模式：貼上名單（每行一人），支援不重複抽籤
+- 分組功能：將名單隨機分成 2-10 組，結果以卡片呈現
+- 計分板：對應分組或自訂隊伍名稱，支援 +/− 加減分
+- 可拖曳移動位置
+
+### 課堂投票 Widget
+
+學生掃 QR Code 用手機即時投票，教師頁面每 5 秒自動更新長條圖。
+
+#### 一次性設定（需 Google 帳號）
+
+1. 前往 [Google 試算表](https://sheets.google.com) 建立新試算表
+2. 點「擴充功能 > Apps Script」，將 `vote/vote-backend.gs` 的內容貼入並儲存
+3. 點「部署 > 新增部署作業」→ 類型選「網路應用程式」→ 執行身分「我自己」→ 存取對象「所有人（包含匿名）」→ 複製 Web App URL
+4. 將 URL 填入 `config/global.yaml` 的 `vote.gas_url` 欄位（注釋放在上一行，不放行尾）：
+
+```yaml
+vote:
+  # 填入 Google Apps Script Web App URL
+  gas_url: "https://script.google.com/macros/s/YOUR_ID/exec"
+```
+
+5. 重新 build 課程頁，並執行一次 `build-vote.mjs`：
+
+```bash
+node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
+node .agents/skills/course-page-generator/scripts/build-vote.mjs
+```
+
+#### 課堂使用流程
+
+1. 開啟課程頁，點設定齒輪 → 投票圖示（或按 `V`）
+2. 在 Widget 中輸入題目和 2-4 個選項（可勾選「標記正確答案」）
+3. 點「開始投票」— Widget 切換為 QR Code + 加入碼顯示
+4. 學生掃 QR Code → 選擇選項 → 看到目前投票結果
+5. 教師頁面長條圖每 5 秒自動更新，顯示各選項票數與百分比
+6. 點「結束投票」顯示最終統計，點「重新出題」繼續下一題
+
+#### 安全說明
+
+GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/global.yaml` 並 commit 至 GitHub 是正常做法。攻擊者最多只能送假投票，無法存取你的 Google 帳號或試算表內容。若遇到濫用，重新部署 GAS 即可取得新 URL。
 
 ### 鍵盤快捷鍵
 
@@ -362,4 +418,11 @@ quotes:
 | `A` | 桌面端：收合/展開側邊欄；行動端：開啟/關閉導航選單 |
 | `Q` | 切換 QR code 分享視窗（開啟/關閉，簡報模式亦可用） |
 | `T` | 切換計時器顯示/隱藏（不影響計時狀態，簡報模式亦可用） |
+| `R` | 切換抽籤器顯示/隱藏 |
+| `V` | 切換投票 Widget 顯示/隱藏 |
+| `B` | 切換暗色/亮色主題 |
+| `C` | 輪迴切換色彩主題（循環所有色票） |
+| `=` / `+` | 增大文字 |
+| `-` / `_` | 縮小文字 |
+| `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票） |
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |

@@ -4565,17 +4565,23 @@
     }
 
     .vote-settings-btn {
-      background: none;
-      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
       cursor: pointer;
-      color: var(--text-dim);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: .3rem;
-      border-radius: 6px;
-      transition: color .15s, background .15s;
+      transition: all .18s;
       flex-shrink: 0;
+      padding: 0;
+      color: var(--text-dim);
     }
 
-    .vote-settings-btn:hover { color: var(--accent); background: var(--bg-card); }
+    .vote-settings-btn:hover {
+      background: rgba(var(--accent-rgb), .12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
