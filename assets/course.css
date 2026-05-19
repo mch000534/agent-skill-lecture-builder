@@ -1748,6 +1748,10 @@
       padding: 0;
     }
 
+    .theme-toggle > svg {
+      color: #9a9aaa;
+    }
+
     .theme-toggle:hover {
       border-color: var(--accent);
       transform: scale(1.1)
