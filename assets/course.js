@@ -1729,3 +1729,210 @@
         return d.innerHTML;
       }
     })();
+
+    // ===== LOTTERY WIDGET =====
+    (function () {
+      var widget = document.getElementById('lottery-widget');
+      var dragHandle = document.getElementById('lottery-drag-handle');
+      var closeBtn = document.getElementById('lottery-widget-close');
+      var modeNumberPanel = document.getElementById('lottery-mode-number');
+      var modeNamePanel = document.getElementById('lottery-mode-name');
+      var numStartInput = document.getElementById('lottery-num-start');
+      var numEndInput = document.getElementById('lottery-num-end');
+      var namesInput = document.getElementById('lottery-names-input');
+      var applyNamesBtn = document.getElementById('lottery-apply-names');
+      var resultEl = document.getElementById('lottery-result');
+      var poolInfoEl = document.getElementById('lottery-pool-info');
+      var drawBtn = document.getElementById('lottery-draw-btn');
+      var resetDrawBtn = document.getElementById('lottery-reset-draw-btn');
+      var allowRepeatChk = document.getElementById('lottery-allow-repeat');
+      var resetListBtn = document.getElementById('lottery-reset-list-btn');
+      var drawnWrap = document.getElementById('lottery-drawn-wrap');
+      var drawnListEl = document.getElementById('lottery-drawn-list');
+
+      if (!widget) return;
+
+      var mode = 'number';
+      var fullList = [];
+      var pool = [];
+      var drawn = [];
+      var spinning = false;
+      var spinTimer = null;
+
+      function buildNumberList() {
+        var s = parseInt(numStartInput.value) || 1;
+        var e = parseInt(numEndInput.value) || 50;
+        if (s > e) { var t = s; s = e; e = t; numStartInput.value = s; numEndInput.value = e; }
+        s = Math.max(1, s); e = Math.min(9999, e);
+        var list = [];
+        for (var i = s; i <= e; i++) list.push(String(i));
+        return list;
+      }
+
+      function updatePoolInfo() {
+        poolInfoEl.textContent = '剩餘 ' + pool.length + ' / ' + fullList.length;
+      }
+
+      function updateDrawnDisplay() {
+        if (!drawn.length) {
+          drawnWrap.style.display = 'none';
+          drawnListEl.textContent = '';
+          return;
+        }
+        drawnWrap.style.display = '';
+        drawnListEl.textContent = drawn.slice().reverse().join('、');
+      }
+
+      function initPool() {
+        pool = fullList.slice();
+        drawn = [];
+        resultEl.textContent = '---';
+        resultEl.className = 'lottery-result';
+        updatePoolInfo();
+        updateDrawnDisplay();
+      }
+
+      function setResultText(text, cls) {
+        resultEl.textContent = text;
+        resultEl.className = 'lottery-result' + (cls ? ' ' + cls : '');
+      }
+
+      // Initialize
+      fullList = buildNumberList();
+      initPool();
+
+      // Mode tabs
+      document.querySelectorAll('.lottery-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          mode = btn.dataset.mode;
+          document.querySelectorAll('.lottery-tab').forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+          });
+          modeNumberPanel.style.display = mode === 'number' ? '' : 'none';
+          modeNamePanel.style.display = mode === 'name' ? '' : 'none';
+          if (mode === 'number') {
+            fullList = buildNumberList();
+            initPool();
+          } else {
+            fullList = [];
+            initPool();
+          }
+        });
+      });
+
+      // Number range change
+      [numStartInput, numEndInput].forEach(function (inp) {
+        inp.addEventListener('change', function () {
+          if (mode !== 'number') return;
+          fullList = buildNumberList();
+          initPool();
+        });
+      });
+
+      // Apply names
+      applyNamesBtn.addEventListener('click', function () {
+        var lines = namesInput.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+        fullList = lines;
+        initPool();
+      });
+
+      // Reset draw only
+      resetDrawBtn.addEventListener('click', initPool);
+
+      // Reset list (and draw state)
+      resetListBtn.addEventListener('click', function () {
+        if (mode === 'number') {
+          numStartInput.value = 1;
+          numEndInput.value = 50;
+          fullList = buildNumberList();
+        } else {
+          namesInput.value = '';
+          fullList = [];
+        }
+        initPool();
+      });
+
+      // Draw
+      drawBtn.addEventListener('click', function () {
+        if (spinning) return;
+        var available = allowRepeatChk.checked ? fullList : pool;
+        if (!available.length) {
+          setResultText('已全部抽完', 'exhausted');
+          return;
+        }
+
+        spinning = true;
+        drawBtn.disabled = true;
+        var count = 0;
+        var spinTotal = 14;
+
+        spinTimer = setInterval(function () {
+          var idx = Math.floor(Math.random() * available.length);
+          setResultText(available[idx], 'spinning');
+          count++;
+          if (count >= spinTotal) {
+            clearInterval(spinTimer);
+            var finalIdx = Math.floor(Math.random() * available.length);
+            var result = available[finalIdx];
+
+            if (!allowRepeatChk.checked) {
+              var pi = pool.indexOf(result);
+              if (pi !== -1) pool.splice(pi, 1);
+              drawn.push(result);
+              updatePoolInfo();
+              updateDrawnDisplay();
+            }
+
+            // Flash: clear → set with accent
+            resultEl.className = 'lottery-result';
+            setTimeout(function () { setResultText(result, 'drawn'); }, 40);
+
+            spinning = false;
+            drawBtn.disabled = false;
+          }
+        }, 55);
+      });
+
+      // Show / hide
+      function hideWidget() { widget.classList.remove('open'); }
+      function toggleWidget() { widget.classList.toggle('open'); }
+      window.__toggleLotteryWidget = toggleWidget;
+
+      closeBtn.addEventListener('click', hideWidget);
+
+      // Add button to settings row 2 (created by pres IIFE)
+      var lotteryBtn = document.createElement('button');
+      lotteryBtn.className = 'lottery-settings-btn';
+      lotteryBtn.setAttribute('aria-label', '抽籤器');
+      lotteryBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor" stroke="none"/></svg>';
+      lotteryBtn.addEventListener('click', function () {
+        var sp = document.getElementById('settings-panel');
+        sp.classList.remove('open');
+        document.getElementById('settings-toggle').classList.remove('active');
+        widget.classList.add('open');
+      });
+
+      var rows = document.querySelectorAll('.settings-controls-row');
+      var targetRow = rows[1] || rows[0];
+      if (targetRow) targetRow.appendChild(lotteryBtn);
+
+      // Drag
+      var dragging = false, dragOffX = 0, dragOffY = 0;
+      dragHandle.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        var rect = widget.getBoundingClientRect();
+        widget.style.right = 'auto'; widget.style.bottom = 'auto';
+        widget.style.left = rect.left + 'px'; widget.style.top = rect.top + 'px';
+        dragging = true;
+        dragOffX = e.clientX - rect.left;
+        dragOffY = e.clientY - rect.top;
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        var x = Math.max(0, Math.min(e.clientX - dragOffX, window.innerWidth - widget.offsetWidth));
+        var y = Math.max(0, Math.min(e.clientY - dragOffY, window.innerHeight - widget.offsetHeight));
+        widget.style.left = x + 'px'; widget.style.top = y + 'px';
+      });
+      document.addEventListener('mouseup', function () { dragging = false; });
+    })();
