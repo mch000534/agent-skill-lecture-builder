@@ -1000,23 +1000,28 @@ Ctrl+Shift+D — 斷開選取節點的連線
     </div>
   </div>
 
-    <div class="break-overlay" id="break-overlay">
-    <div class="break-modal">
-      <button class="break-modal-close" id="break-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      <div class="break-modal-icon" id="break-modal-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
-      <h3>休息一下</h3>
-      <p id="break-intro-text">設定休息時間，時間到會提醒你</p>
-      <div id="break-setup">
-        <div class="break-input-row">
-          <input type="number" id="break-minutes" value="10" min="1" max="120">
-          <span>分鐘</span>
-        </div>
-        <button class="break-start-btn" id="break-start-btn">開始休息</button>
+    <div class="timer-widget" id="timer-widget">
+    <div class="timer-header" id="timer-drag-handle">
+      <span class="timer-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><polyline points="12 9 12 13 16 15"/><path d="M9 3h6"/><path d="M12 3v2"/></svg>計時器</span>
+      <button class="timer-close" id="timer-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="timer-body">
+      <div class="timer-presets">
+        <button class="timer-preset active" data-min="10">休息 10</button>
+        <button class="timer-preset" data-min="5">作答 5</button>
+        <button class="timer-preset" data-min="15">練習 15</button>
       </div>
-      <div class="break-countdown" id="break-countdown">
-        <div class="break-countdown-time" id="break-countdown-time">10:00</div>
-        <p class="break-done-message" id="break-done-message"><strong>休息時間到</strong><br>回來繼續下一段內容吧。</p>
-        <button class="break-end-btn" id="break-end-btn">結束休息</button>
+      <div class="timer-display" id="timer-display">10:00</div>
+      <div class="timer-progress-track"><div class="timer-progress-fill" id="timer-progress-fill"></div></div>
+      <div class="timer-input-row">
+        <button class="timer-adj" id="timer-dec">−</button>
+        <input type="number" class="timer-input" id="timer-minutes" value="10" min="1" max="120">
+        <span class="timer-unit">分鐘</span>
+        <button class="timer-adj" id="timer-inc">+</button>
+      </div>
+      <div class="timer-actions">
+        <button class="timer-start-btn" id="timer-start-btn">開始</button>
+        <button class="timer-reset-btn" id="timer-reset-btn">重設</button>
       </div>
     </div>
   </div>

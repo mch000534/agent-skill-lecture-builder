@@ -447,89 +447,146 @@
       });
     })();
 
-    // ===== BREAK TIMER =====
+    // ===== TIMER WIDGET =====
     (function () {
-      var overlay = document.getElementById('break-overlay');
-      var closeBtn = document.getElementById('break-modal-close');
-      var modal = overlay.querySelector('.break-modal');
-      var modalIcon = document.getElementById('break-modal-icon');
-      var introText = document.getElementById('break-intro-text');
-      var minutesInput = document.getElementById('break-minutes');
-      var startBtn = document.getElementById('break-start-btn');
-      var setupDiv = document.getElementById('break-setup');
-      var countdownDiv = document.getElementById('break-countdown');
-      var countdownTime = document.getElementById('break-countdown-time');
-      var doneMessage = document.getElementById('break-done-message');
-      var endBtn = document.getElementById('break-end-btn');
+      var widget = document.getElementById('timer-widget');
+      var dragHandle = document.getElementById('timer-drag-handle');
+      var closeBtn = document.getElementById('timer-widget-close');
+      var displayEl = document.getElementById('timer-display');
+      var progressFill = document.getElementById('timer-progress-fill');
+      var minutesInput = document.getElementById('timer-minutes');
+      var startBtn = document.getElementById('timer-start-btn');
+      var resetBtn = document.getElementById('timer-reset-btn');
+      var decBtn = document.getElementById('timer-dec');
+      var incBtn = document.getElementById('timer-inc');
+
       var timer = null;
+      var remaining = 0;
+      var totalSeconds = 0;
+      var running = false;
 
-      function resetBreakState() {
-        setupDiv.style.display = '';
-        countdownDiv.classList.remove('active', 'done');
-        modal.classList.remove('done');
-        introText.classList.remove('hidden');
-        doneMessage.style.display = '';
-        modalIcon.innerHTML = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>';
-        endBtn.textContent = '結束休息';
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function renderDisplay(secs) {
+        displayEl.textContent = pad(Math.floor(secs / 60)) + ':' + pad(secs % 60);
+        var pct = totalSeconds > 0 ? (secs / totalSeconds * 100) : 100;
+        progressFill.style.width = pct + '%';
       }
 
-      document.getElementById('break-timer-btn').addEventListener('click', function () {
-        var settingsPanel = document.getElementById('settings-panel');
-        settingsPanel.classList.remove('open');
-        document.getElementById('settings-toggle').classList.remove('active');
-        resetBreakState();
-        overlay.classList.add('open');
-        minutesInput.focus();
-      });
+      function applyMinutes(mins) {
+        remaining = mins * 60;
+        totalSeconds = remaining;
+        progressFill.style.transition = 'none';
+        renderDisplay(remaining);
+      }
 
-      function closeBreak() {
-        overlay.classList.remove('open');
+      function stopTimer() {
         if (timer) { clearInterval(timer); timer = null; }
-        resetBreakState();
+        running = false;
       }
 
-      closeBtn.addEventListener('click', closeBreak);
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) closeBreak();
+      function resetTimer() {
+        stopTimer();
+        displayEl.classList.remove('running', 'done');
+        startBtn.textContent = '開始';
+        var mins = Math.max(1, Math.min(120, parseInt(minutesInput.value) || 10));
+        applyMinutes(mins);
+      }
+
+      // Open
+      document.getElementById('break-timer-btn').addEventListener('click', function () {
+        var sp = document.getElementById('settings-panel');
+        sp.classList.remove('open');
+        document.getElementById('settings-toggle').classList.remove('active');
+        widget.classList.add('open');
       });
+
+      // Close
+      function closeWidget() { widget.classList.remove('open'); stopTimer(); }
+      closeBtn.addEventListener('click', closeWidget);
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) closeBreak();
+        if (e.key === 'Escape' && widget.classList.contains('open')) closeWidget();
       });
 
+      // Presets
+      document.querySelectorAll('.timer-preset').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (running) return;
+          document.querySelectorAll('.timer-preset').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          minutesInput.value = btn.dataset.min;
+          displayEl.classList.remove('done');
+          applyMinutes(parseInt(btn.dataset.min));
+        });
+      });
+
+      // +/−
+      decBtn.addEventListener('click', function () {
+        if (running) return;
+        var v = Math.max(1, (parseInt(minutesInput.value) || 1) - 1);
+        minutesInput.value = v; applyMinutes(v);
+      });
+      incBtn.addEventListener('click', function () {
+        if (running) return;
+        var v = Math.min(120, (parseInt(minutesInput.value) || 1) + 1);
+        minutesInput.value = v; applyMinutes(v);
+      });
+      minutesInput.addEventListener('input', function () {
+        if (running) return;
+        var v = Math.max(1, Math.min(120, parseInt(minutesInput.value) || 1));
+        applyMinutes(v);
+      });
+
+      // Start / Pause / Resume
       startBtn.addEventListener('click', function () {
-        var mins = parseInt(minutesInput.value) || 10;
-        if (mins < 1) mins = 1;
-        if (mins > 120) mins = 120;
-        var remaining = mins * 60;
-
-        setupDiv.style.display = 'none';
-        countdownDiv.classList.add('active');
-        introText.classList.add('hidden');
-
-        function update() {
-          var m = Math.floor(remaining / 60);
-          var s = remaining % 60;
-          countdownTime.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        if (displayEl.classList.contains('done')) { resetTimer(); return; }
+        if (!running) {
+          running = true;
+          if (remaining <= 0) applyMinutes(parseInt(minutesInput.value) || 10);
+          displayEl.classList.remove('done');
+          displayEl.classList.add('running');
+          progressFill.style.transition = 'width .95s linear';
+          startBtn.textContent = '暫停';
+          timer = setInterval(function () {
+            remaining--;
+            renderDisplay(remaining);
+            if (remaining <= 0) {
+              stopTimer();
+              displayEl.classList.remove('running');
+              displayEl.classList.add('done');
+              startBtn.textContent = '重新開始';
+            }
+          }, 1000);
+        } else {
+          stopTimer();
+          displayEl.classList.remove('running');
+          startBtn.textContent = '繼續';
         }
-        update();
-
-        timer = setInterval(function () {
-          remaining--;
-          if (remaining <= 0) {
-            clearInterval(timer);
-            timer = null;
-            countdownTime.textContent = '00:00';
-            countdownDiv.classList.add('done');
-            modal.classList.add('done');
-            modalIcon.innerHTML = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
-            endBtn.textContent = '回到課程';
-            return;
-          }
-          update();
-        }, 1000);
       });
 
-      endBtn.addEventListener('click', closeBreak);
+      resetBtn.addEventListener('click', resetTimer);
+
+      // Drag (mousedown converts right/bottom → left/top then tracks movement)
+      var dragging = false, dragOffX = 0, dragOffY = 0;
+      dragHandle.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        var rect = widget.getBoundingClientRect();
+        widget.style.right = 'auto'; widget.style.bottom = 'auto';
+        widget.style.left = rect.left + 'px'; widget.style.top = rect.top + 'px';
+        dragging = true;
+        dragOffX = e.clientX - rect.left;
+        dragOffY = e.clientY - rect.top;
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        var x = Math.max(0, Math.min(e.clientX - dragOffX, window.innerWidth - widget.offsetWidth));
+        var y = Math.max(0, Math.min(e.clientY - dragOffY, window.innerHeight - widget.offsetHeight));
+        widget.style.left = x + 'px'; widget.style.top = y + 'px';
+      });
+      document.addEventListener('mouseup', function () { dragging = false; });
+
+      applyMinutes(10);
     })();
 
     function exportPDF() {
