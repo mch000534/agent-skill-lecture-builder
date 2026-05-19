@@ -413,7 +413,7 @@
           });
         } catch (e) { }
       } else {
-        var firstSwatch = document.querySelector('.color-swatch[data-theme-id="coral"]');
+        var firstSwatch = document.querySelector('.color-swatch[data-theme-id="red"]');
         if (firstSwatch) firstSwatch.classList.add('selected');
       }
 
