@@ -77,9 +77,12 @@ agent-skill-lecture-builder/
 │           │   ├── dev.mjs          # 本機預覽
 │           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
 │           └── reference/
-│               ├── base.html
+│               ├── base.html        # 唯一 HTML 模板
 │               ├── components.md
 │               └── config-example.yaml
+├── assets/
+│   ├── course.css           # 所有課程共用 CSS（外部引用，改動免 rebuild）
+│   └── course.js            # 所有課程共用 JS（計時器、簡報、設定等）
 ├── config/
 │   ├── global.yaml          # 全域設定（講者、社群、頁尾）
 │   └── assets/              # 共用圖片（avatar 等）
@@ -87,12 +90,12 @@ agent-skill-lecture-builder/
 │   ├── gen-ai-security/     # 範例課程
 │   │   ├── config.yaml
 │   │   ├── content.md
-│   │   ├── index.html       # build 產出
+│   │   ├── index.html       # build 產出（需 commit）
 │   │   └── assets/
-│   │       └── og-image.jpg # generate-og.mjs 產出
-│   └── example/             # 課程範本（含說明）
-├── build-index.mjs          # 產生根目錄課程目錄索引頁
-├── index.html               # 課程目錄索引頁（build-index.mjs 產出）
+│   │       └── og-image.jpg # generate-og.mjs 產出（需 commit）
+│   └── manifest.js          # build-index.mjs 產出的課程清單（需 commit）
+├── build-index.mjs          # 掃描 lectures/ 產生 manifest.js
+├── index.html               # 課程目錄索引頁（靜態殼層，動態讀取 manifest.js）
 ├── package.json
 └── README.md
 ```
@@ -323,14 +326,40 @@ quotes:
 - 點擊遮罩或右上角 ✕ 可關閉
 - 按 `Esc` 亦可關閉
 
-## 鍵盤快捷鍵
+## 課程頁面功能
+
+### 設定面板
+
+點擊左下角齒輪圖示開啟，提供兩排快捷功能：
+
+| 圖示 | 功能 |
+|------|------|
+| A2 | 切換字體大小 |
+| 月亮 | 切換深色 / 淺色主題 |
+| QR | 顯示課程分享 QR Code |
+| 計時器 | 開啟浮動計時器 |
+| 電視機 | 進入簡報模式 |
+| 打印機 | 匯出 PDF（投影片版） |
+
+色票區可即時切換課程主題配色，預設為正紅。
+
+### 浮動計時器
+
+- 可自由拖曳移動位置
+- 點擊時間數字直接輸入（MMSS 格式，如輸入 `0530` = 05:30）
+- 兩側 `−` / `+` 每次調整 1 分鐘
+- 計時中隱藏視窗時，畫面頂端顯示細長進度條
+- 計時結束自動彈出視窗
+
+### 鍵盤快捷鍵
 
 課程頁面支援以下快捷鍵（輸入框中不觸發）：
 
 | 按鍵 | 功能 |
 |------|------|
-| `Q` | 切換 QR code 分享視窗（開啟/關閉） |
 | `P` | 切換簡報模式（全頁投影片輪播） |
 | `F` | 切換全螢幕模式（簡報模式下不可用） |
 | `A` | 桌面端：收合/展開側邊欄；行動端：開啟/關閉導航選單 |
+| `Q` | 切換 QR code 分享視窗（開啟/關閉，簡報模式亦可用） |
+| `T` | 切換計時器顯示/隱藏（不影響計時狀態，簡報模式亦可用） |
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |
