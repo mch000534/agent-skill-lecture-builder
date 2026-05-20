@@ -305,6 +305,37 @@
       };
     })();
 
+
+    // Keyboard shortcuts modal
+    (function () {
+      var overlay = document.getElementById('shortcut-overlay');
+      if (!overlay) return;
+      var closeBtn = document.getElementById('shortcut-modal-close');
+      var openBtn = document.getElementById('shortcut-modal-btn');
+
+      function openShortcuts() {
+        var sp = document.getElementById('settings-panel');
+        if (sp && sp.classList.contains('open')) {
+          sp.classList.remove('open');
+          var toggle = document.getElementById('settings-toggle');
+          if (toggle) toggle.classList.remove('active');
+        }
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeShortcuts() {
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openShortcuts);
+      if (closeBtn) closeBtn.addEventListener('click', closeShortcuts);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeShortcuts(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) closeShortcuts();
+      });
+    })();
+
     // Copy prompt
     function copyPrompt(btn) {
       var text = btn.closest('.prompt-block').querySelector('.prompt-body').textContent;

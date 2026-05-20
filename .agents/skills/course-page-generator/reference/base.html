@@ -178,6 +178,10 @@
       <div class="settings-label">匯出</div>
       <button class="settings-export-btn" id="export-pdf-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 匯出 PDF（投影片版）</button>
     </div>
+    <div class="settings-divider"></div>
+    <div class="settings-section">
+      <button class="settings-shortcut-btn" id="shortcut-modal-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="14" y2="10"/><line x1="18" y1="10" x2="18" y2="10"/><line x1="6" y1="14" x2="6" y2="14"/><line x1="18" y1="14" x2="18" y2="14"/><line x1="10" y1="14" x2="14" y2="14"/></svg> 快捷鍵說明</button>
+    </div>
   </div>
 
   <!-- Timer Widget (floating, draggable) -->
@@ -305,6 +309,53 @@
             <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
             <button class="share-copy-btn" id="share-copy-btn">複製</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="shortcut-overlay" id="shortcut-overlay">
+    <div class="shortcut-modal">
+      <div class="shortcut-modal-header">
+        <h3>快捷鍵說明</h3>
+        <button class="shortcut-modal-close" id="shortcut-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="shortcut-modal-body">
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">頁面操作</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">工具面板</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>P</kbd></span></td><td class="shortcut-desc">投影片模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Q</kbd></span></td><td class="shortcut-desc">分享 QR Code</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>T</kbd></span></td><td class="shortcut-desc">計時器</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">投影片模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>→</kbd><span class="shortcut-sep">/</span><kbd>↓</kbd><span class="shortcut-sep">/</span><kbd>Space</kbd></span></td><td class="shortcut-desc">下一張</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>←</kbd><span class="shortcut-sep">/</span><kbd>↑</kbd><span class="shortcut-sep">/</span><kbd>⌫</kbd></span></td><td class="shortcut-desc">上一張</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Home</kbd></span></td><td class="shortcut-desc">第一張</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>End</kbd></span></td><td class="shortcut-desc">最後一張</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">退出全螢幕 / 投影片模式</td></tr>
+          </table>
         </div>
       </div>
     </div>

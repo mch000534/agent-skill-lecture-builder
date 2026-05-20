@@ -3254,7 +3254,9 @@
       pointer-events: auto;
     }
     .share-modal {
-      background: var(--bg-card);
+      background: color-mix(in srgb, var(--bg-card) 82%, transparent);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       width: 90vw;
@@ -4584,4 +4586,163 @@
       background: rgba(var(--accent-rgb), .12);
       border-color: var(--accent);
       color: var(--accent);
+    }
+
+    /* ===== SETTINGS SHORTCUT BUTTON ===== */
+    .settings-shortcut-btn {
+      width: 100%;
+      padding: .45rem .75rem;
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+      font-family: 'Noto Sans TC', sans-serif;
+      line-height: 1.4;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .settings-shortcut-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ===== KEYBOARD SHORTCUTS MODAL ===== */
+    .shortcut-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .65);
+      z-index: 11000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .shortcut-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .shortcut-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(24px);
+      transition: transform .3s;
+      overflow: hidden;
+    }
+    .shortcut-overlay.visible .shortcut-modal {
+      transform: translateY(0);
+    }
+    .shortcut-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .shortcut-modal-header h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .shortcut-modal-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      transition: all .2s;
+      padding: 0;
+    }
+    .shortcut-modal-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .shortcut-modal-body {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+    }
+    .shortcut-col {
+      flex: 1;
+      min-width: 0;
+    }
+    .shortcut-section-title {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .6rem;
+      margin-top: 1.2rem;
+    }
+    .shortcut-section-title:first-child {
+      margin-top: 0;
+    }
+    .shortcut-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .shortcut-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .shortcut-table tr:last-child {
+      border-bottom: none;
+    }
+    .shortcut-table td {
+      padding: .55rem .25rem;
+      font-size: .85rem;
+      vertical-align: middle;
+    }
+    .shortcut-table td:first-child {
+      width: 48%;
+      padding-right: 1rem;
+    }
+    .shortcut-key {
+      display: inline-flex;
+      align-items: center;
+      gap: .2rem;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .shortcut-key kbd {
+      display: inline-block;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .12rem .38rem;
+      font-size: .75rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .shortcut-sep {
+      font-size: .7rem;
+      color: var(--text-dim);
+      padding: 0 .1rem;
+    }
+    .shortcut-desc {
+      color: var(--text-dim);
+      font-size: .85rem;
+      white-space: nowrap;
     }
