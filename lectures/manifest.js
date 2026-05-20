@@ -47,5 +47,12 @@ window.__courses__ = [
     "subtitle": "從 Git 基礎概念到 GitHub 團隊協作，涵蓋安裝設定、分支操作、Pull Request 流程，適合完全新手的逐步實作教學。",
     "ogImage": "lectures/git-github-basics/assets/og-image.jpg",
     "href": "lectures/git-github-basics/"
+  },
+  {
+    "title": "手機拍片與攝影技巧",
+    "badge": "攝影技巧 · 手機拍攝 · 學生活動記錄",
+    "subtitle": "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。",
+    "ogImage": "lectures/mobile-photography/assets/og-image.jpg",
+    "href": "lectures/mobile-photography/"
   }
 ];

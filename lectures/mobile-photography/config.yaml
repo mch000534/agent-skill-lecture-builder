@@ -1,0 +1,20 @@
+page:
+  title: "手機拍片與攝影技巧"
+  badge: "攝影技巧 · 手機拍攝 · 學生活動記錄"
+  hero_title: "用手機記錄每一個<br>值得被看見的瞬間"
+  subtitle: "從曝光、構圖到不同場景的拍攝策略，學會用手機拍出專業感的影片與相片，讓學生活動和課堂記錄都能留下高品質的畫面。"
+
+seo:
+  title: "手機拍片與攝影技巧｜學生活動與課堂記錄完整指南"
+  description: "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/mobile-photography/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/mobile-photography/"
+
+quotes:
+  opening:
+    text: "最好的相機，是你隨身攜帶的那一台。<br>而現在，那台相機就在你的口袋裡。"
+  closing:
+    text: >
+      拍攝技巧可以學，眼光需要培養。<br><br>
+      多拍、多看、多思考——<br>
+      每一次按下快門，都是你對這個世界的一次詮釋。
