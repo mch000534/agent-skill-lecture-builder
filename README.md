@@ -1,5 +1,12 @@
 # Course Page Generator
 
+> [!IMPORTANT]
+> 此為 Fork 自原始專案的修改版本。
+>
+> - **我的 Repo**：[mch000534/agent-skill-lecture-builder](https://github.com/mch000534/agent-skill-lecture-builder)
+> - **示範主頁**：[class.barrymok.cc](https://class.barrymok.cc/)
+> - **示範案例**：[Agent Skill Lecture Builder 課程頁](https://class.barrymok.cc/lectures/agent-skill-lecture-builder/)
+
 > [!NOTE]
 > 📺 **搭配影片觀看效果更佳** — [YouTube 完整教學](https://youtu.be/0pZri5f_tfk)
 
@@ -13,7 +20,7 @@
 
 這支影片將透過實戰，帶你用「模板思維 + Agent Skills」解決以上痛點：
 
-1. 登入 ChatGPT 免費體驗 Codex
+1. 登入 ChatGPT 免費體驗 Codex（本 Fork 改用 Claude Code，任何 AI 編程工具皆可）
 2. 終端機 vs 編輯器，自由選擇操作模式
 3. 把 AI 隨機的輸出，變成可用 Markdown 維護的模板
 4. 將模板封裝成 Agent Skill，建立完整工作流
@@ -426,3 +433,35 @@ GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/glo
 | `-` / `_` | 縮小文字 |
 | `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票） |
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |
+
+## 未來開發方向
+
+### AI 內容生成
+
+| 功能 | 說明 |
+|------|------|
+| `content-drafting` Skill | 給定主題、目標受眾、時長，AI 自動生成符合 `components.md` 語法的 `content.md` 草稿（含 flow、tags、summary 等標籤） |
+| 內容審閱 Skill | 分析章節結構是否符合「說明→範例→實作」教學節奏，輸出改善建議 |
+
+### 學員互動元件
+
+| 語法 | 功能 |
+|------|------|
+| `[quiz]...[/quiz]` | 選擇題 / 是非題，即時回饋，結果存 localStorage |
+| 進度追蹤 | 章節旁顯示已讀勾選，localStorage 持久化 |
+| 投票嵌入 | 整合現有 `vote/` 功能到課程頁面內 |
+
+### 教學內容元件
+
+| 語法 | 功能 |
+|------|------|
+| `[compare]...[/compare]` | 左右並排對比卡（舊做法 vs 新做法） |
+| Flow 展開動畫 | 步驟逐一展開，純 CSS 實作，無外部依賴 |
+| 程式碼語法高亮 | prompt 區塊加入輕量 highlight，提升可讀性 |
+
+### 開發流程
+
+| 工具 | 功能 |
+|------|------|
+| `validate.mjs` | build 前檢查 `content.md` 語法（未閉合標籤、全形冒號缺失、`seo.url` 路徑格式） |
+| `new-lecture.mjs` | 一行指令建立含 `config.yaml`、`content.md` 模板的新課程目錄 |
