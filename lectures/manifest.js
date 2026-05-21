@@ -7,6 +7,13 @@ window.__courses__ = [
     "href": "lectures/agent-skill-lecture-builder/"
   },
   {
+    "title": "AI 圖片到印刷完整流程",
+    "badge": "Photopea · Vectorpea · AI 後處理 · 印刷輸出",
+    "subtitle": "整合 Photopea 與 Vectorpea 的完整印刷前處理課程：AI 圖片修復調色、SVG 生成與排版、出血設定、CMYK 轉換，到 PDF 送印輸出。",
+    "ogImage": "lectures/ai-print-workflow/assets/og-image.jpg",
+    "href": "lectures/ai-print-workflow/"
+  },
+  {
     "title": "DaVinci Resolve 專業調色",
     "badge": "10 小時完整課程 · 色彩科學 · 節點調色 · 視覺風格",
     "subtitle": "10 小時深度調色課程：色彩科學基礎、示波器解讀、節點系統精通、一二級調色、膚色處理、LUT 製作、ACES 色彩管理，從技術校正到電影級風格創作全面掌握。",
@@ -68,5 +75,12 @@ window.__courses__ = [
     "subtitle": "專為長輩設計的 AI 科普課程，帶您認識人工智慧、學習實用工具、掌握安全使用原則。",
     "ogImage": "lectures/senior-ai-literacy/assets/og-image.jpg",
     "href": "lectures/senior-ai-literacy/"
+  },
+  {
+    "title": "Vectorpea AI 向量設計",
+    "badge": "Vectorpea · AI 生成 SVG · 排版 · 印刷輸出",
+    "subtitle": "完整的 Vectorpea 課程：AI 生成 SVG 圖形的三種方法、路徑節點編輯、文字排版與轉外框、填色筆畫設定，以及 PDF 印刷輸出。",
+    "ogImage": "lectures/vectorpea-print-prep/assets/og-image.jpg",
+    "href": "lectures/vectorpea-print-prep/"
   }
 ];

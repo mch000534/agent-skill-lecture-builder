@@ -1,0 +1,20 @@
+page:
+  title: "Vectorpea AI 向量設計"
+  badge: "Vectorpea · AI 生成 SVG · 排版 · 印刷輸出"
+  hero_title: "用 AI 生成 SVG，<br>排版後直接送印"
+  subtitle: "從 Vectorpea 介面入門，學會用 AI 工具產生向量圖形、在 Vectorpea 中完成排版設計，再以正確格式輸出印刷檔，完整掌握從生圖到成品的現代設計流程。"
+
+seo:
+  title: "Vectorpea AI 向量設計｜AI 生成 SVG 到印刷輸出完整指南"
+  description: "完整的 Vectorpea 課程：AI 生成 SVG 圖形的三種方法、路徑節點編輯、文字排版與轉外框、填色筆畫設定，以及 PDF 印刷輸出。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/vectorpea-print-prep/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/vectorpea-print-prep/"
+
+quotes:
+  opening:
+    text: "向量圖沒有解析度上限——無論放多大，邊緣永遠銳利。<br>AI 幫你生圖，Vectorpea 幫你完成最後的專業設計。"
+  closing:
+    text: >
+      向量圖形是印刷設計的通用語言。<br><br>
+      掌握 AI 生成 + Vectorpea 排版這套流程，<br>
+      你的設計從此沒有「解析度不夠」的困擾。

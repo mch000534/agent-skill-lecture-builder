@@ -1,0 +1,20 @@
+page:
+  title: "AI 圖片到印刷完整流程"
+  badge: "Photopea · Vectorpea · AI 後處理 · 印刷輸出"
+  hero_title: "從 AI 生圖到成品印刷<br>Photopea + Vectorpea 完整工作流程"
+  subtitle: "一門課掌握兩套工具：用 Photopea 修復和調色 AI 生成的點陣圖，用 Vectorpea 製作向量圖形和完成排版，再以正確格式輸出送印。"
+
+seo:
+  title: "AI 圖片到印刷完整流程｜Photopea + Vectorpea 設計課程"
+  description: "整合 Photopea 與 Vectorpea 的完整印刷前處理課程：AI 圖片修復調色、SVG 生成與排版、出血設定、CMYK 轉換，到 PDF 送印輸出。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-print-workflow/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-print-workflow/"
+
+quotes:
+  opening:
+    text: "AI 幫你生圖，你還需要兩件事：<br>把圖修好，把版排好——然後才能送印。"
+  closing:
+    text: >
+      Photopea 讓你不再被解析度和瑕疵困住，<br>
+      Vectorpea 讓你的排版和向量圖形無限延伸。<br><br>
+      掌握這兩套工具，AI 生圖才真正成為你的設計資產。
