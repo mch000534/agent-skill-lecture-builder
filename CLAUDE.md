@@ -93,7 +93,9 @@ agent-skill-lecture-builder/
 
 詳細語法與 HTML 對照見 `.agents/skills/course-page-generator/reference/components.md`。
 
-## Agent Skill
+## Agent Skills
+
+### course-page-generator
 
 課程頁面生成的完整工作流程定義在 `.agents/skills/course-page-generator/SKILL.md`。
 
@@ -103,6 +105,18 @@ agent-skill-lecture-builder/
 - Step 2：確認或建立 `config.yaml`（含偵測 GitHub Pages 前綴）
 - Step 3：執行 build
 - Step 4：產生 OG 縮圖（與 Step 3 綁定，不可省略）
+
+### content-drafting
+
+根據主題、目標受眾、時長三個參數，AI 生成符合 `components.md` 語法的完整 `content.md` 草稿（有實質內容，非佔位骨架）。工作流程定義在 `.agents/skills/content-drafting/SKILL.md`。
+
+當使用者說「幫我起草課程內容」、「生成 content.md」、「根據主題寫講義」或類似指令時，請讀取該檔案並執行，若未提供受眾或時長則主動詢問。
+
+### content-review
+
+分析現有 `content.md` 是否符合「說明→範例→實作」教學節奏，輸出章節節奏診斷表與改善建議清單。工作流程定義在 `.agents/skills/content-review/SKILL.md`。
+
+當使用者說「審閱課程內容」「分析教學節奏」「幫我看 content.md」或類似指令時，請讀取該檔案並執行。
 
 ## 關鍵慣例
 
