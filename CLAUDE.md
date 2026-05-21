@@ -19,7 +19,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/<cour
 node .agents/skills/course-page-generator/scripts/dev.mjs lectures/<course-dir>
 
 # 更新課程清單（新增/刪除課程後執行，產生 lectures/manifest.js）
-node build-index.mjs
+node .agents/skills/course-page-generator/scripts/build-index.mjs
 ```
 
 `npm install` 只需執行一次（唯一相依：Puppeteer，用於 OG 縮圖）。
@@ -48,7 +48,7 @@ agent-skill-lecture-builder/
 │       ├── index.html         # build 產出（需 commit）
 │       └── assets/
 │           └── og-image.jpg   # OG 縮圖（需 commit）
-├── build-index.mjs            # 掃描 lectures/ 產生 lectures/manifest.js
+│   │   └── build-index.mjs    # 掃描 lectures/ 產生 lectures/manifest.js
 ├── index.html                 # 根目錄課程索引頁（靜態殼層，動態讀取 manifest）
 └── lectures/manifest.js       # 課程清單（build-index.mjs 產出，需 commit）
 ```
@@ -92,6 +92,17 @@ agent-skill-lecture-builder/
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 `.agents/skills/course-page-generator/reference/components.md`。
+
+## Agent Skill
+
+課程頁面生成的完整工作流程定義在 `.agents/skills/course-page-generator/SKILL.md`。
+
+當使用者說「幫我生成課程頁面」、「把講稿轉成課程頁面」或類似指令時，請讀取該檔案並依照其中的 Step 0–4 完整執行，包含：
+- Step 0：偵測輸入類型（純主題 vs 有講稿 vs 現有目錄）
+- Step 1：將講稿轉為結構化 `content.md`
+- Step 2：確認或建立 `config.yaml`（含偵測 GitHub Pages 前綴）
+- Step 3：執行 build
+- Step 4：產生 OG 縮圖（與 Step 3 綁定，不可省略）
 
 ## 關鍵慣例
 

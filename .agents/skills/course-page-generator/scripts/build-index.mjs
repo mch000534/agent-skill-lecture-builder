@@ -3,7 +3,7 @@
  * 課程清單產生器
  * 掃描 lectures/ 子目錄，讀取每門課程的 config.yaml，產生 lectures/manifest.js
  *
- * Usage: node build-index.mjs
+ * Usage: node .agents/skills/course-page-generator/scripts/build-index.mjs
  */
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
@@ -11,8 +11,9 @@ import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const LECTURES_DIR = resolve(__dirname, 'lectures');
-const OUT_FILE = resolve(__dirname, 'lectures', 'manifest.js');
+const REPO_ROOT = resolve(__dirname, '../../../../');
+const LECTURES_DIR = resolve(REPO_ROOT, 'lectures');
+const OUT_FILE = resolve(REPO_ROOT, 'lectures', 'manifest.js');
 
 // ─── Minimal YAML parser ───
 

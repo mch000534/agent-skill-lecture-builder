@@ -8,15 +8,15 @@
 > - **示範案例**：[Agent Skill Lecture Builder 課程頁](https://class.barrymok.cc/lectures/agent-skill-lecture-builder/)
 
 > [!NOTE]
-> 📺 **搭配影片觀看效果更佳** — [YouTube 完整教學](https://youtu.be/0pZri5f_tfk)
+> 搭配影片觀看效果更佳 — [YouTube 完整教學](https://youtu.be/0pZri5f_tfk)
 
 ❝Vibe Coding 速度很快，但用完就丟的東西，永遠不會變成你的！❞
 
 這句話，是我用 Vibe Coding 做了幾十個網頁後的感悟。
 
-- 👉 AI 生成的網頁很漂亮，但細節與架構很難調整
-- 👉 每次生成結果都很隨機，風格、排版無法完全掌控
-- 👉 做完的東西無法重複使用，下次又要從零開始
+- AI 生成的網頁很漂亮，但細節與架構很難調整
+- 每次生成結果都很隨機，風格、排版無法完全掌控
+- 做完的東西無法重複使用，下次又要從零開始
 
 這支影片將透過實戰，帶你用「模板思維 + Agent Skills」解決以上痛點：
 
@@ -35,6 +35,7 @@
 
 ## 目錄
 
+- [與原版的差異](#與原版的差異)
 - [Quick Start](#quick-start)
 - [專案結構](#專案結構)
 - [新增一門課程](#新增一門課程)
@@ -43,6 +44,38 @@
 - [Config 機制](#config-機制)
 - [Markdown 語法](#markdown-語法)
 - [課堂互動工具](#課堂互動工具)
+- [未來開發方向](#未來開發方向)
+
+## 與原版的差異
+
+本 Fork 在原版基礎上新增了以下功能，並調整了專案結構：
+
+### 結構調整
+
+| 項目 | 原版 | 本 Fork |
+|------|------|---------|
+| AI 工具 | ChatGPT Codex | Claude Code（任何工具皆可） |
+| 課程目錄 | 根目錄下（`my-course/`） | 統一放在 `lectures/`（`lectures/my-course/`） |
+| 多課程管理 | 無索引頁 | 自動掃描產生課程目錄首頁 |
+
+### 新增功能
+
+**課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁。
+
+**課堂互動工具**：
+- 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
+- 抽籤器：支援學號範圍、人名清單、分組、計分板
+- 課堂投票 Widget：學生掃 QR Code 即時投票，教師頁每 5 秒自動更新長條圖（需 Google Apps Script 後端）
+
+**鍵盤快捷鍵**：完整的快捷鍵支援（`P` 簡報模式、`T` 計時器、`R` 抽籤器、`V` 投票、`B` 主題切換等，詳見[鍵盤快捷鍵](#鍵盤快捷鍵)）。
+
+**設定面板**：點左下角齒輪圖示開啟，集中管理字體大小、深淺色主題、色票、QR Code 分享、各工具入口。
+
+**新增腳本**：
+- `build-vote.mjs`：將 Google Apps Script URL 注入 `vote/index.html`（投票學生端）
+- `build-index.mjs`：掃描 `lectures/` 產生 `manifest.js`，供索引頁動態讀取
+
+---
 
 ## Quick Start
 
@@ -82,7 +115,8 @@ agent-skill-lecture-builder/
 │       └── course-page-generator/
 │           ├── scripts/
 │           │   ├── build.mjs        # 建置課程頁
-│           │   ├── build-vote.mjs   # 將 GAS URL 注入 vote/index.html
+│           │   ├── build-index.mjs  # 掃描 lectures/ 產生 manifest.js（新增）
+│           │   ├── build-vote.mjs   # 將 GAS URL 注入 vote/index.html（新增）
 │           │   ├── dev.mjs          # 本機預覽
 │           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
 │           └── reference/
@@ -95,7 +129,7 @@ agent-skill-lecture-builder/
 ├── config/
 │   ├── global.yaml          # 全域設定（講者、社群、頁尾、投票後端）
 │   └── assets/              # 共用圖片（avatar 等）
-├── lectures/                # 所有課程放在此目錄下
+├── lectures/                # 所有課程放在此目錄下（新增）
 │   ├── gen-ai-security/     # 範例課程
 │   │   ├── config.yaml
 │   │   ├── content.md
@@ -103,11 +137,10 @@ agent-skill-lecture-builder/
 │   │   └── assets/
 │   │       └── og-image.jpg # generate-og.mjs 產出（需 commit）
 │   └── manifest.js          # build-index.mjs 產出的課程清單（需 commit）
-├── vote/
+├── vote/                    # 課堂投票學生端（新增）
 │   ├── index.html           # 學生掃 QR Code 後的投票頁面
 │   └── vote-backend.gs      # Google Apps Script 後端腳本（部署參考）
-├── build-index.mjs          # 掃描 lectures/ 產生 manifest.js
-├── index.html               # 課程目錄索引頁（靜態殼層，動態讀取 manifest.js）
+├── index.html               # 課程目錄索引頁（靜態殼層，動態讀取 manifest.js）（新增）
 ├── package.json
 └── README.md
 ```
@@ -137,7 +170,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-co
 5. **更新根目錄索引頁**
 
 ```bash
-node build-index.mjs
+node .agents/skills/course-page-generator/scripts/build-index.mjs
 ```
 
 ## 課程目錄索引頁
@@ -147,7 +180,7 @@ node build-index.mjs
 每次新增或修改課程後，執行一次即可更新：
 
 ```bash
-node build-index.mjs
+node .agents/skills/course-page-generator/scripts/build-index.mjs
 ```
 
 `build-index.mjs` 會自動掃描 `lectures/` 下所有含 `config.yaml` 的子目錄，不需要手動維護課程清單。
@@ -202,7 +235,7 @@ instructor:
     支援 HTML `<br>` 換行。
   avatar: "config/assets/author"  # 可省略副檔名
   stats:
-    - text: "📚 代表作品或經歷 **X** 項"
+    - text: "代表作品或經歷 X 項"
       url: "https://example.com/books"
   socials:
     - platform: "YouTube"
@@ -263,7 +296,7 @@ quotes:
 | `# LABEL：TITLE` | 主章節 |
 | `> lead text`（緊接 `#`） | 章節引言 |
 | `## Title` | 子章節 |
-| `### 🔧 Title` | 卡片 |
+| `### Title` | 卡片 |
 | `` ```prompt [label="..."] `` | 終端機 / Prompt 區塊 |
 | `> **Bold Title**` | 洞察框 |
 | `[flow]...[/flow]` | 流程步驟 |
@@ -326,7 +359,7 @@ quotes:
 在任何章節（通常放在總結最下方）加入 `[bonus]` 區塊，build 後會產出一個按鈕，點擊開啟 Modal 彈窗，彈窗內容支援 Markdown。
 
 ```markdown
-[bonus title="🎁 幕後製作心得"]
+[bonus title="幕後製作心得"]
 這裡是**彈窗內容**，支援基本 Markdown：
 
 - 段落間用空行分隔
@@ -343,6 +376,8 @@ quotes:
 - 按 `Esc` 亦可關閉
 
 ## 課堂互動工具
+
+本 Fork 新增一套完整的課堂互動工具，全部整合於課程頁面中，無需額外安裝。
 
 ### 設定面板
 
@@ -386,7 +421,7 @@ quotes:
 1. 前往 [Google 試算表](https://sheets.google.com) 建立新試算表
 2. 點「擴充功能 > Apps Script」，將 `vote/vote-backend.gs` 的內容貼入並儲存
 3. 點「部署 > 新增部署作業」→ 類型選「網路應用程式」→ 執行身分「我自己」→ 存取對象「所有人（包含匿名）」→ 複製 Web App URL
-4. 將 URL 填入 `config/global.yaml` 的 `vote.gas_url` 欄位（注釋放在上一行，不放行尾）：
+4. 將 URL 填入 `config/global.yaml` 的 `vote.gas_url` 欄位：
 
 ```yaml
 vote:

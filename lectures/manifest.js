@@ -35,13 +35,6 @@ window.__courses__ = [
     "href": "lectures/davinci-resolve/"
   },
   {
-    "title": "手機拍片與攝影技巧",
-    "badge": "攝影技巧 · 手機拍攝 · 學生活動記錄",
-    "subtitle": "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。",
-    "ogImage": "lectures/mobile-photography/assets/og-image.jpg",
-    "href": "lectures/mobile-photography/"
-  },
-  {
     "title": "生成式 AI 資訊安全",
     "badge": "資安實戰 · 生成式 AI · 企業防護",
     "subtitle": "以真實攻擊案例解析生成式 AI 的資安風險，涵蓋 Prompt Injection、RAG 資料外洩、供應鏈攻擊、LLM 濫用防護，協助企業建立 AI 治理框架。",
@@ -54,5 +47,12 @@ window.__courses__ = [
     "subtitle": "從 Git 基礎概念到 GitHub 團隊協作，涵蓋安裝設定、分支操作、Pull Request 流程，適合完全新手的逐步實作教學。",
     "ogImage": "lectures/git-github-basics/assets/og-image.jpg",
     "href": "lectures/git-github-basics/"
+  },
+  {
+    "title": "手機拍片與攝影技巧",
+    "badge": "攝影技巧 · 手機拍攝 · 學生活動記錄",
+    "subtitle": "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。",
+    "ogImage": "lectures/mobile-photography/assets/og-image.jpg",
+    "href": "lectures/mobile-photography/"
   }
 ];
