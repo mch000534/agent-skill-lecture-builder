@@ -388,7 +388,7 @@ function parseContent(md) {
       while (i < lines.length) {
         const cl = lines[i];
         if (/^#{1,3} /.test(cl) || /^---\s*$/.test(cl.trim())) break;
-        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl)) break;
+        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl) || /^\[vote/.test(cl) || /^\[quiz/.test(cl)) break;
         if (/^- \[x\]/.test(cl) || /^!\[/.test(cl)) break;
         if (isMarkdownTableHeader(cl, lines[i + 1])) break;
 
@@ -486,6 +486,51 @@ function parseContent(md) {
       }
       i++;
       if (current) current.blocks.push({ type: 'compare', labelLeft, labelRight, rows });
+      continue;
+    }
+
+    if (/^\[vote/.test(line.trim())) {
+      const idMatch = line.match(/id="([^"]+)"/);
+      const titleMatch = line.match(/title="([^"]+)"/);
+      const voteId = idMatch ? idMatch[1] : 'vote-' + i;
+      const voteTitle = titleMatch ? titleMatch[1] : '';
+      const options = [];
+      i++;
+      while (i < lines.length && !/^\[\/vote\]/.test(lines[i].trim())) {
+        const optMatch = lines[i].trim().match(/^-\s+(.*)/);
+        if (optMatch) options.push(optMatch[1].trim());
+        i++;
+      }
+      i++;
+      if (current) current.blocks.push({ type: 'vote', voteId, voteTitle, options });
+      continue;
+    }
+
+    if (/^\[quiz/.test(line.trim())) {
+      const typeMatch = line.match(/type="([^"]+)"/);
+      const quizType = typeMatch ? typeMatch[1] : 'single';
+      let question = '';
+      const options = [];
+      let correctIdx = -1;
+      let hint = '';
+      i++;
+      while (i < lines.length && !/^\[\/quiz\]/.test(lines[i].trim())) {
+        const l = lines[i].trim();
+        if (/^Q:/.test(l)) {
+          question = l.replace(/^Q:\s*/, '').trim();
+        } else if (/^- \[x\]/.test(l)) {
+          correctIdx = options.length;
+          options.push(l.replace(/^- \[x\]\s*/, '').trim());
+        } else if (/^- \[ \]/.test(l)) {
+          options.push(l.replace(/^- \[ \]\s*/, '').trim());
+        } else if (/^Hint:/.test(l)) {
+          hint = l.replace(/^Hint:\s*/, '').trim();
+        }
+        i++;
+      }
+      i++;
+      const quizId = 'q-' + question.toLowerCase().replace(/[^\w一-鿿]/g, '').slice(0, 20);
+      if (current) current.blocks.push({ type: 'quiz', quizType, quizId, question, options, correctIdx, hint });
       continue;
     }
 
@@ -691,7 +736,7 @@ function buildTocItems(sections) {
     const numDisplay = sec.label === '總結' ? '★' : sec.num;
     html += `    <li class="toc-group" data-section="${sec.id}">
       <a href="#${sec.id}" class="toc-group-title">
-        <span class="toc-num">${numDisplay}</span> ${esc(navLabel)}
+        <span class="toc-num">${numDisplay}</span> ${esc(navLabel)}<span class="toc-read-dot" data-for="${sec.id}"></span>
       </a>
       <ul class="toc-sub">\n`;
     for (const sub of sec.subs) {
@@ -856,6 +901,35 @@ ${childrenHtml}
       for (const t of block.tags) {
         s += `      <span class="tag ${t.color}">${esc(t.text)}</span>\n`;
       }
+      s += `    </div>`;
+      return s;
+    }
+
+    case 'vote': {
+      const optsJson = JSON.stringify(block.options).replace(/"/g, '&quot;');
+      let s = `<div class="inline-vote" data-vote-id="${esc(block.voteId)}" data-vote-options="${optsJson}">\n`;
+      s += `      <div class="inline-vote-q">${esc(block.voteTitle)}</div>\n`;
+      s += `      <div class="inline-vote-opts">\n`;
+      block.options.forEach((opt, idx) => {
+        s += `        <button class="inline-vote-btn" data-idx="${idx}"><span class="inline-vote-key">${String.fromCharCode(65 + idx)}</span><span>${esc(opt)}</span></button>\n`;
+      });
+      s += `      </div>\n`;
+      s += `      <div class="inline-vote-results" hidden></div>\n`;
+      s += `      <div class="inline-vote-status"></div>\n`;
+      s += `    </div>`;
+      return s;
+    }
+
+    case 'quiz': {
+      let s = `<div class="quiz-block" data-quiz-id="${esc(block.quizId)}" data-quiz-answer="${block.correctIdx}">\n`;
+      s += `      <div class="quiz-q">${esc(block.question)}</div>\n`;
+      s += `      <div class="quiz-opts">\n`;
+      block.options.forEach((opt, idx) => {
+        s += `        <button class="quiz-btn" data-idx="${idx}"><span class="quiz-key">${String.fromCharCode(65 + idx)}</span><span>${esc(opt)}</span></button>\n`;
+      });
+      s += `      </div>\n`;
+      if (block.hint) s += `      <div class="quiz-hint" hidden>${esc(block.hint)}</div>\n`;
+      s += `      <div class="quiz-fb" hidden></div>\n`;
       s += `    </div>`;
       return s;
     }

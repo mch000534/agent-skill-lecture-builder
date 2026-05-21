@@ -2437,3 +2437,157 @@
         });
       } catch (e) { }
     })();
+
+  // ─── Inline Vote Widget ────────────────────────────────────
+  (function () {
+    var ep = (window.__voteGasUrl__ || '').trim();
+    var VOTED_KEY = 'votedSessions';
+
+    function getVoted() { try { return JSON.parse(localStorage.getItem(VOTED_KEY) || '{}'); } catch (e) { return {}; } }
+    function markVoted(s) { var v = getVoted(); v[s] = true; localStorage.setItem(VOTED_KEY, JSON.stringify(v)); }
+    function softHash(str) { var h = 0; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xffffffff; return Math.abs(h).toString(36); }
+    function escH(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    document.querySelectorAll('.inline-vote').forEach(function (widget) {
+      var sid = widget.dataset.voteId;
+      var opts; try { opts = JSON.parse(widget.dataset.voteOptions); } catch (e) { opts = []; }
+      var stEl = widget.querySelector('.inline-vote-status');
+      var resEl = widget.querySelector('.inline-vote-results');
+
+      if (!ep) {
+        widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
+        if (stEl) stEl.textContent = '（請在 config.yaml 設定 vote.gas_url）';
+        return;
+      }
+
+      var voteHash = softHash(sid + (navigator.userAgent || '').slice(0, 40));
+
+      function buildBars(counts, total) {
+        var html = '<div class="inline-vote-bars">';
+        opts.forEach(function (opt, i) {
+          var c = counts[i] || 0, pct = total > 0 ? Math.round(c / total * 100) : 0;
+          html += '<div class="inline-vote-bar-row">'
+            + '<span class="ivb-key">' + String.fromCharCode(65 + i) + '</span>'
+            + '<div class="ivb-wrap"><span class="ivb-label">' + escH(opt) + '</span>'
+            + '<div class="ivb-track"><div class="ivb-fill" style="width:' + pct + '%"></div></div></div>'
+            + '<span class="ivb-stat">' + c + ' (' + pct + '%)</span></div>';
+        });
+        return html + '</div>';
+      }
+
+      function fetchResults() {
+        fetch(ep + '?action=results&s=' + encodeURIComponent(sid))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            var counts = (data && data.counts) ? data.counts : new Array(opts.length).fill(0);
+            var total = counts.reduce(function (a, b) { return a + b; }, 0);
+            if (resEl) { resEl.innerHTML = buildBars(counts, total); resEl.removeAttribute('hidden'); }
+            if (stEl) stEl.textContent = '目前共 ' + total + ' 人投票';
+          }).catch(function () {});
+      }
+
+      // Auto-create session (idempotent on server side)
+      fetch(ep, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'create', sessionId: sid,
+          question: widget.querySelector('.inline-vote-q') ? widget.querySelector('.inline-vote-q').textContent : '',
+          options: opts }) }).catch(function () {});
+
+      if (getVoted()[sid]) {
+        widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
+        if (stEl) stEl.textContent = '你已投票';
+        fetchResults();
+        return;
+      }
+
+      widget.querySelectorAll('.inline-vote-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
+          btn.classList.add('selected');
+          fetch(ep, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'vote', sessionId: sid, choice: parseInt(btn.dataset.idx), hash: voteHash }) })
+            .then(function (r) { return r.json(); })
+            .then(function () {
+              markVoted(sid);
+              if (stEl) stEl.textContent = '投票成功，感謝參與！';
+              fetchResults();
+            }).catch(function () { markVoted(sid); });
+        });
+      });
+    });
+  })();
+
+  // ─── Quiz Block ────────────────────────────────────────────
+  (function () {
+    var QUIZ_KEY = 'quizResults_' + location.pathname;
+    function getResults() { try { return JSON.parse(localStorage.getItem(QUIZ_KEY) || '{}'); } catch (e) { return {}; } }
+    function saveResult(qid, ok) { var r = getResults(); r[qid] = ok ? 'correct' : 'wrong'; localStorage.setItem(QUIZ_KEY, JSON.stringify(r)); }
+
+    document.querySelectorAll('.quiz-block').forEach(function (block) {
+      var qid = block.dataset.quizId;
+      var answerIdx = parseInt(block.dataset.quizAnswer);
+      var btns = block.querySelectorAll('.quiz-btn');
+      var hintEl = block.querySelector('.quiz-hint');
+      var fbEl = block.querySelector('.quiz-fb');
+
+      function applyResult(correct, chosenIdx) {
+        btns.forEach(function (b) { b.disabled = true; });
+        if (correct) {
+          btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--correct');
+          if (fbEl) { fbEl.textContent = '正確！'; fbEl.className = 'quiz-fb quiz-fb--correct'; fbEl.removeAttribute('hidden'); }
+        } else {
+          btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--wrong');
+          if (answerIdx >= 0) btns[answerIdx] && btns[answerIdx].classList.add('quiz-btn--correct');
+          if (hintEl) hintEl.removeAttribute('hidden');
+          if (fbEl) { fbEl.textContent = '答錯了，正確答案已標示'; fbEl.className = 'quiz-fb quiz-fb--wrong'; fbEl.removeAttribute('hidden'); }
+        }
+      }
+
+      // Restore previous answer from localStorage
+      var prev = getResults()[qid];
+      if (prev) {
+        var prevIdx = prev === 'correct' ? answerIdx : -1;
+        applyResult(prev === 'correct', prevIdx);
+        return;
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = parseInt(btn.dataset.idx);
+          var correct = idx === answerIdx;
+          saveResult(qid, correct);
+          applyResult(correct, idx);
+        });
+      });
+    });
+  })();
+
+  // ─── Chapter Progress Tracking ─────────────────────────────
+  (function () {
+    var READ_KEY = 'readSections_' + location.pathname;
+    function getRead() { try { return JSON.parse(localStorage.getItem(READ_KEY) || '[]'); } catch (e) { return []; } }
+    function markRead(id) {
+      var r = getRead();
+      if (r.indexOf(id) < 0) { r.push(id); localStorage.setItem(READ_KEY, JSON.stringify(r)); }
+    }
+    function setDot(id) {
+      var dot = document.querySelector('.toc-read-dot[data-for="' + id + '"]');
+      if (dot) dot.classList.add('read');
+    }
+
+    // Restore persisted state
+    getRead().forEach(setDot);
+
+    // Mark section as read when its heading scrolls off the top (user passed it)
+    var readObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) return;
+        if (e.boundingClientRect.top > 0) return; // exited at bottom, not top
+        markRead(e.target.id);
+        setDot(e.target.id);
+      });
+    }, { threshold: 0 });
+
+    document.querySelectorAll('.section-label[id]').forEach(function (el) {
+      readObs.observe(el);
+    });
+  })();

@@ -77,6 +77,9 @@
 - 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
 - 抽籤器：支援學號範圍、人名清單、分組、計分板
 - 課堂投票 Widget：學生掃 QR Code 即時投票，教師頁每 5 秒自動更新長條圖（需 Google Apps Script 後端）
+- `[vote]` 投票嵌入：將投票卡片直接嵌入課程內容，學員在頁面內作答並即時看到橫條圖結果
+- `[quiz]` 即時測驗：選擇題 / 是非題，點選即時回饋，結果存 localStorage（無需後端）
+- 章節進度追蹤：TOC 每個章節旁顯示已讀圓點，捲動過即自動標記，localStorage 持久化
 
 **鍵盤快捷鍵**：完整的快捷鍵支援（`P` 簡報模式、`T` 計時器、`R` 抽籤器、`V` 投票、`B` 主題切換等，詳見[鍵盤快捷鍵](#鍵盤快捷鍵)）。
 
@@ -350,6 +353,8 @@ quotes:
 | `> **Bold Title**` | 洞察框 |
 | `[flow]...[/flow]` | 流程步驟（捲動進入視窗時步驟逐一滑入） |
 | `[compare label-left="..." label-right="..."]...[/compare]` | 左右對比卡（舊做法 vs 新做法） |
+| `[vote id="..." title="..."]...[/vote]` | 投票卡片嵌入（需設定 `vote.gas_url`） |
+| `[quiz type="single"]...[/quiz]` | 即時測驗（選擇題 / 是非題，localStorage 保存狀態） |
 | `[tags]...[/tags]` | 標籤（`green / orange / purple / blue`，必須用此區塊包裹） |
 | `[summary]...[/summary]` | 總結卡片 |
 | `[bonus title="..."]...[/bonus]` | Bonus 按鈕 + 彈窗 |
@@ -419,6 +424,53 @@ quotes:
 - `label-left` / `label-right`：欄標題（省略時預設「舊做法」/「新做法」）
 - 每行 `- 左側內容 | 右側內容`（`|` 為分隔符）
 - 支援行內 Markdown（`**粗體**`、`` `code` ``、連結）
+
+### Vote 投票嵌入
+
+將課堂投票直接嵌入 content 中，學員無需跳頁即可投票，投票後立即顯示即時橫條圖。需先設定 `vote.gas_url`（見[課堂投票 Widget](#課堂投票-widget)）。
+
+```markdown
+[vote id="tool-pref" title="你最常用的 AI 工具？"]
+- Claude
+- ChatGPT
+- Gemini
+- 其他
+[/vote]
+```
+
+- `id`：投票場次唯一識別碼，對應 Google Sheets 的 sessionId
+- `title`：顯示給學員的問題文字
+- 選項以 `- ` 開頭（最多 26 個）
+- 頁面載入自動向 GAS 建立場次（幂等）；未設定 `gas_url` 時按鈕停用並顯示提示
+
+### Quiz 即時測驗
+
+純前端測驗，無需後端。點選即時回饋，結果存 localStorage，重新整理後保留狀態。
+
+```markdown
+[quiz type="single"]
+Q: Claude 預設使用哪個模型？
+- [ ] GPT-4
+- [x] claude-sonnet-4-6
+- [ ] Gemini Pro
+Hint: 查看 CLAUDE.md 的 Environment 段落
+[/quiz]
+```
+
+是非題範例：
+
+```markdown
+[quiz type="bool"]
+Q: build.mjs 會自動讀取 global.yaml？
+- [x] 是
+- [ ] 否
+[/quiz]
+```
+
+- `Q:` 定義問題文字
+- `- [x]` 為正確選項（只能有一個），`- [ ]` 為錯誤選項
+- `Hint:` 選填，答錯後顯示提示文字
+- 省略 `[x]` 則任何選項點選後僅記錄，不顯示對錯
 
 ### Bonus 彈窗
 
@@ -511,9 +563,23 @@ node .agents/skills/course-page-generator/scripts/build-vote.mjs
 5. 教師頁面長條圖每 5 秒自動更新，顯示各選項票數與百分比
 6. 點「結束投票」顯示最終統計，點「重新出題」繼續下一題
 
+#### 課程頁嵌入投票
+
+除了 Widget 浮動面板，也可將投票直接嵌入 content.md 中（見 [Vote 投票嵌入](#vote-投票嵌入)）。兩種方式共用同一個 GAS 後端和試算表。
+
 #### 安全說明
 
 GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/global.yaml` 並 commit 至 GitHub 是正常做法。攻擊者最多只能送假投票，無法存取你的 Google 帳號或試算表內容。若遇到濫用，重新部署 GAS 即可取得新 URL。
+
+### 即時測驗（Quiz）
+
+在 content.md 中使用 `[quiz]` 語法加入測驗題，無需後端或外部服務。詳細語法見 [Quiz 即時測驗](#quiz-即時測驗)。
+
+### 章節進度追蹤
+
+TOC（左側邊欄）每個章節標題旁顯示小圓點，捲動過該章節後自動標為已讀（綠色）。狀態以 `localStorage` 持久化，重新整理頁面後保留。
+
+學員完全讀完一個章節（其標題從頂端離開畫面）即視為已讀，不需任何設定或 Markdown 語法。
 
 ### 鍵盤快捷鍵
 
@@ -536,14 +602,6 @@ GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/glo
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |
 
 ## 未來開發方向
-
-### 學員互動元件
-
-| 語法 | 功能 |
-|------|------|
-| `[quiz]...[/quiz]` | 選擇題 / 是非題，即時回饋，結果存 localStorage |
-| 進度追蹤 | 章節旁顯示已讀勾選，localStorage 持久化 |
-| 投票嵌入 | 整合現有 `vote/` 功能到課程頁面內 |
 
 ### 開發流程工具
 

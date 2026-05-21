@@ -16,6 +16,9 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs <course-dir>
 
 # 開發伺服器，含即時重載，預設 port 3000
 node .agents/skills/course-page-generator/scripts/dev.mjs <course-dir>
+
+# 更新課程清單（新增/刪除課程後執行，產生 lectures/manifest.js）
+node .agents/skills/course-page-generator/scripts/build-index.mjs
 ```
 
 `npm install` 只需執行一次（唯一相依套件為 Puppeteer）。
@@ -44,6 +47,9 @@ HTML 輸出為完全自包含（CSS/JS 已嵌入）。`.agents/skills/course-pag
 
 ## 專案慣例
 
+- **禁止 Emoji**：所有課程內容、卡片標題、設定檔一律不得使用 emoji，改用 SVG 或純文字
 - 每門課程獨立存放於 `lectures/` 目錄下（例如 `lectures/gen-ai-security/`）
 - 建置產物 `index.html` 與 `assets/og-image.jpg` 需與原始檔一同提交
 - `.agents/skills/course-page-generator/reference/` 中的參考檔案為規範來源——修改前須同步更新 `SKILL.md`
+- **HTML 屬性中的引號**：在 HTML double-quoted 屬性（如 `onerror`）中嵌入 SVG 或 HTML 片段時，所有 `"` 必須改為 `&quot;`
+- **`seo.image` / `seo.url` 須為絕對 URL**，路徑必須含 `lectures/`（格式：`https://<user>.github.io/<repo>/lectures/<course-dir>/`）

@@ -199,7 +199,69 @@ openspec init</div>
 - 左欄：紅色調（代表舊/問題），右欄：綠色調（代表新/解法）
 - 支援行內 Markdown（`**粗體**`、`` `code` ``、連結）
 
-## 9. Tags（標籤）
+## 8. Vote（課堂投票嵌入）
+
+**前置條件：** `config.yaml` 需設定 `vote.gas_url`，指向 Google Apps Script Web App URL。
+
+**Markdown：**
+```markdown
+[vote id="tool-pref" title="你最常用的 AI 工具？"]
+- Claude
+- ChatGPT
+- Gemini
+- 其他
+[/vote]
+```
+
+**規則：**
+- `id`：投票場次唯一識別碼（需與 Google Sheets sessions 表的 sessionId 一致）
+- `title`：顯示給學員的問題文字
+- 選項以 `- ` 開頭，最多支援 26 個選項（A–Z）
+- 頁面載入時自動向 GAS 建立場次（idempotent）
+- 已投票者（localStorage 記錄）自動顯示結果橫條圖
+- 未設定 `vote.gas_url` 時按鈕停用並顯示提示
+
+**config.yaml 設定：**
+```yaml
+vote:
+  gas_url: "https://script.google.com/macros/s/<deployment-id>/exec"
+```
+
+---
+
+## 9. Quiz（即時測驗）
+
+**Markdown：**
+```markdown
+[quiz type="single"]
+Q: Claude 預設使用哪個模型？
+- [ ] GPT-4
+- [x] claude-sonnet-4-6
+- [ ] Gemini Pro
+Hint: 查看 CLAUDE.md 的 Environment 段落
+[/quiz]
+```
+
+**是非題：**
+```markdown
+[quiz type="bool"]
+Q: build.mjs 會自動讀取 global.yaml？
+- [x] 是
+- [ ] 否
+[/quiz]
+```
+
+**規則：**
+- `type`：`single`（單選）或 `bool`（是非），目前 HTML 輸出相同，僅作語意標記
+- `Q:` 行定義問題文字
+- `- [x]` 為正確選項，`- [ ]` 為錯誤選項；正確選項只能有一個
+- `Hint:` 為選填，答錯後顯示提示文字
+- 答題結果存入 `localStorage`，重新整理後保留狀態
+- 若 `data-quiz-answer="-1"`（無正確答案），點選任何選項僅記錄，不顯示對錯
+
+---
+
+## 10. Tags（標籤）
 
 **Markdown：**
 ```markdown
@@ -223,7 +285,7 @@ openspec init</div>
 
 ⚠️ 帶顏色的 `- [color] text` 項目**必須**放在 `[tags]...[/tags]` 區塊內才會生效。獨立使用時會被當成普通文字，不會套用顏色樣式。
 
-## 10. Checklist（勾選清單）
+## 11. Checklist（勾選清單）
 
 **Markdown：**
 ```markdown
@@ -248,7 +310,7 @@ openspec init</div>
 - ✅ 適合：測試情境清單、踩坑紀錄、已確認的檢查項目
 - ❌ 不適合：核心觀點、重點摘要、一般條列（這些應使用卡片 `###` + 普通 list `- item`）
 
-## 11. Summary Grid（總結卡片）
+## 12. Summary Grid（總結卡片）
 
 **Markdown：**
 ```markdown
@@ -276,7 +338,7 @@ openspec init</div>
 - 每項格式：`**標題** | 描述`（不使用 emoji）
 - 粗體 → `<h4>`，`|` 後面 → `<p>`
 
-## 12. Image（獨立圖片）
+## 13. Image（獨立圖片）
 
 **Markdown：**
 ```markdown
@@ -298,7 +360,7 @@ openspec init</div>
 - 圖片包在 `<div class="reveal">` 中
 - 行內圖片（在文字段落或列表中）則以 `<img class="inline-image">` 渲染
 
-## 13. Image-Text（圖文並排）
+## 14. Image-Text（圖文並排）
 
 **Markdown：**
 ```markdown
@@ -335,7 +397,7 @@ openspec init</div>
 - 響應式：平板（≤ 900px）及手機自動改為上下排列（圖片在上）
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 14. YouTube Embed（YouTube 影片嵌入）
+## 15. YouTube Embed（YouTube 影片嵌入）
 
 **Markdown（單行）：**
 ```markdown
@@ -367,7 +429,7 @@ openspec init</div>
 - 列印模式下 iframe 隱藏，改為顯示 YouTube 連結
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 15. Inline Elements
+## 16. Inline Elements
 
 | Markdown | HTML | 說明 |
 |---|---|---|
@@ -376,7 +438,7 @@ openspec init</div>
 | `[text](url)` | `<a href="url">text</a>` | 連結 |
 | 一般段落 | `<p>` | card 或 section 內的段落 |
 
-## 16. Wrapping Rules
+## 17. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
 - 連續的 card + prompt-block 可以在同一個 reveal wrapper 中
