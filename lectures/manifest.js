@@ -54,5 +54,12 @@ window.__courses__ = [
     "subtitle": "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。",
     "ogImage": "lectures/mobile-photography/assets/og-image.jpg",
     "href": "lectures/mobile-photography/"
+  },
+  {
+    "title": "老人AI科普",
+    "badge": "AI 科普",
+    "subtitle": "專為長輩設計的 AI 科普課程，帶您認識人工智慧、學習實用工具、掌握安全使用原則。",
+    "ogImage": "lectures/senior-ai-literacy/assets/og-image.jpg",
+    "href": "lectures/senior-ai-literacy/"
   }
 ];

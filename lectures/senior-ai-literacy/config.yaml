@@ -1,0 +1,20 @@
+page:
+  title: "老人AI科普"
+  badge: "AI 科普"
+  hero_title: "認識人工智慧<br>從生活出發"
+  subtitle: "專為長輩設計，輕鬆了解 AI 如何改善日常生活"
+
+seo:
+  title: "老人AI科普｜認識人工智慧，從生活出發"
+  description: "專為長輩設計的 AI 科普課程，帶您認識人工智慧、學習實用工具、掌握安全使用原則。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/senior-ai-literacy/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/senior-ai-literacy/"
+
+quotes:
+  opening:
+    text: "科技不是年輕人的專利，<br>AI 是為每一個人設計的生活助手。"
+  closing:
+    text: >
+      學習新科技，永遠不嫌晚。<br>
+      每一次嘗試，都是給自己最好的禮物。<br><br>
+      帶著今天學到的知識，讓 AI 成為您生活中的好夥伴。
