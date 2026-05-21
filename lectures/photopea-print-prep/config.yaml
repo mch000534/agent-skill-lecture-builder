@@ -1,0 +1,20 @@
+page:
+  title: "Photopea 印刷前處理"
+  badge: "Photopea · AI 圖片後處理 · 印刷輸出"
+  hero_title: "AI 生圖到成品印刷<br>的完整後處理流程"
+  subtitle: "從 Photopea 介面入門，學會修復 AI 圖片缺陷、調整解析度與色彩模式，確保每一張 AI 生成圖片都能達到專業印刷標準。"
+
+seo:
+  title: "Photopea 印刷前處理｜AI 生圖到印刷輸出完整指南"
+  description: "完整的 Photopea 課程，聚焦 AI 生成圖片的印刷前處理：瑕疵修復、300dpi 解析度調整、RGB 到 CMYK 轉換、出血設定與 PDF 匯出。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/photopea-print-prep/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/photopea-print-prep/"
+
+quotes:
+  opening:
+    text: "AI 幫你生圖，你幫圖片完成最後一哩路。<br>從螢幕到紙張，每一個細節都值得認真對待。"
+  closing:
+    text: >
+      印刷是最古老的傳播媒介，也是最考驗細節的輸出形式。<br><br>
+      掌握這套流程後，你的每一張 AI 圖片<br>
+      都能以最完整的面貌呈現在紙張上。

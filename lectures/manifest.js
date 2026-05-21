@@ -56,6 +56,13 @@ window.__courses__ = [
     "href": "lectures/mobile-photography/"
   },
   {
+    "title": "Photopea 印刷前處理",
+    "badge": "Photopea · AI 圖片後處理 · 印刷輸出",
+    "subtitle": "完整的 Photopea 課程，聚焦 AI 生成圖片的印刷前處理：瑕疵修復、300dpi 解析度調整、RGB 到 CMYK 轉換、出血設定與 PDF 匯出。",
+    "ogImage": "lectures/photopea-print-prep/assets/og-image.jpg",
+    "href": "lectures/photopea-print-prep/"
+  },
+  {
     "title": "老人AI科普",
     "badge": "AI 科普",
     "subtitle": "專為長輩設計的 AI 科普課程，帶您認識人工智慧、學習實用工具、掌握安全使用原則。",
