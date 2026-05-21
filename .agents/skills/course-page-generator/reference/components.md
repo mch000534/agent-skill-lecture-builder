@@ -165,7 +165,41 @@ openspec init</div>
 - 若無分隔符，整行作為 step-title，step-desc 留空
 - 也可以不用 `[flow]` 標記，在 `###` 卡片標題包含「流程」「步驟」等關鍵字時自動轉換
 
-## 7. Tags（標籤）
+## 7. Compare（左右對比卡）
+
+**Markdown：**
+```markdown
+[compare label-left="以前的做法" label-right="現在的做法"]
+- 手動複製貼上 commit message | 使用 git-smart-commit Skill 自動生成
+- 風格不一致，長短隨機 | 統一格式，一行摘要 + bullet 詳情
+- 想修改時得回去改 HTML | 只要更新 content.md 重新 build
+[/compare]
+```
+
+**HTML：**
+```html
+<div class="compare">
+  <div class="compare-header">
+    <div class="compare-label compare-label--old">以前的做法</div>
+    <div class="compare-label compare-label--new">現在的做法</div>
+  </div>
+  <div class="compare-body">
+    <div class="compare-row">
+      <div class="compare-cell compare-cell--old">手動複製貼上 commit message</div>
+      <div class="compare-cell compare-cell--new">使用 git-smart-commit Skill 自動生成</div>
+    </div>
+    <!-- ... -->
+  </div>
+</div>
+```
+
+規則：
+- `label-left` / `label-right`：左右欄標題（省略時預設「舊做法」/「新做法」）
+- 每行格式：`- 左側內容 | 右側內容`（`|` 為分隔符）
+- 左欄：紅色調（代表舊/問題），右欄：綠色調（代表新/解法）
+- 支援行內 Markdown（`**粗體**`、`` `code` ``、連結）
+
+## 9. Tags（標籤）
 
 **Markdown：**
 ```markdown
@@ -189,7 +223,7 @@ openspec init</div>
 
 ⚠️ 帶顏色的 `- [color] text` 項目**必須**放在 `[tags]...[/tags]` 區塊內才會生效。獨立使用時會被當成普通文字，不會套用顏色樣式。
 
-## 8. Checklist（勾選清單）
+## 10. Checklist（勾選清單）
 
 **Markdown：**
 ```markdown
@@ -214,7 +248,7 @@ openspec init</div>
 - ✅ 適合：測試情境清單、踩坑紀錄、已確認的檢查項目
 - ❌ 不適合：核心觀點、重點摘要、一般條列（這些應使用卡片 `###` + 普通 list `- item`）
 
-## 9. Summary Grid（總結卡片）
+## 11. Summary Grid（總結卡片）
 
 **Markdown：**
 ```markdown
@@ -242,7 +276,7 @@ openspec init</div>
 - 每項格式：`**標題** | 描述`（不使用 emoji）
 - 粗體 → `<h4>`，`|` 後面 → `<p>`
 
-## 10. Image（獨立圖片）
+## 12. Image（獨立圖片）
 
 **Markdown：**
 ```markdown
@@ -264,7 +298,7 @@ openspec init</div>
 - 圖片包在 `<div class="reveal">` 中
 - 行內圖片（在文字段落或列表中）則以 `<img class="inline-image">` 渲染
 
-## 11. Image-Text（圖文並排）
+## 13. Image-Text（圖文並排）
 
 **Markdown：**
 ```markdown
@@ -301,7 +335,7 @@ openspec init</div>
 - 響應式：平板（≤ 900px）及手機自動改為上下排列（圖片在上）
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 12. YouTube Embed（YouTube 影片嵌入）
+## 14. YouTube Embed（YouTube 影片嵌入）
 
 **Markdown（單行）：**
 ```markdown
@@ -333,7 +367,7 @@ openspec init</div>
 - 列印模式下 iframe 隱藏，改為顯示 YouTube 連結
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 13. Inline Elements
+## 15. Inline Elements
 
 | Markdown | HTML | 說明 |
 |---|---|---|
@@ -342,7 +376,7 @@ openspec init</div>
 | `[text](url)` | `<a href="url">text</a>` | 連結 |
 | 一般段落 | `<p>` | card 或 section 內的段落 |
 
-## 14. Wrapping Rules
+## 16. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
 - 連續的 card + prompt-block 可以在同一個 reveal wrapper 中

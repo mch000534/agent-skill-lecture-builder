@@ -1,6 +1,13 @@
-    // Reveal on scroll
+    // Reveal on scroll (with flow-step stagger)
     var revealObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible') });
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.flow-step').forEach(function (step, idx) {
+          var delay = (.6 + idx * .15).toFixed(2);
+          step.style.transitionDelay = delay + 's,' + delay + 's,0s';
+        });
+      });
     }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el) });
 
@@ -2357,4 +2364,76 @@
         widget.style.left = x + 'px'; widget.style.top = y + 'px';
       });
       document.addEventListener('mouseup', function () { dragging = false; });
+    })();
+    // Syntax highlight for prompt blocks
+    (function () {
+      var BASH_CMDS = 'npm npx node git docker curl brew pip python python3 ruby go openspec claude bash sh zsh cd ls cp mv rm mkdir echo export source chmod cat grep find head tail wc sort uniq tee xargs'.split(' ');
+
+      function escH(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function hlBashLine(line) {
+        if (/^\s*#/.test(line)) return '<span class="hl-cmt">' + escH(line) + '</span>';
+        var out = '', i = 0, n = line.length, beforeFirst = true;
+        while (i < n) {
+          var c = line[i];
+          if (c === '"' || c === "'") {
+            var q = c, s = q; i++;
+            while (i < n) {
+              if (line[i] === '\\' && i + 1 < n) { s += line[i] + line[i + 1]; i += 2; continue; }
+              if (line[i] === q) { s += line[i++]; break; }
+              s += line[i++];
+            }
+            out += '<span class="hl-str">' + escH(s) + '</span>';
+            beforeFirst = false; continue;
+          }
+          if (c === '$') {
+            var s = '$'; i++;
+            var brace = i < n && line[i] === '{';
+            if (brace) s += line[i++];
+            while (i < n && /\w/.test(line[i])) s += line[i++];
+            if (brace && i < n && line[i] === '}') s += line[i++];
+            out += s.length > 1 ? '<span class="hl-var">' + escH(s) + '</span>' : escH(s);
+            beforeFirst = false; continue;
+          }
+          if (c === '-' && (i === 0 || line[i - 1] === ' ' || line[i - 1] === '\t') && i + 1 < n && (line[i + 1] === '-' || /[a-zA-Z]/.test(line[i + 1]))) {
+            var s = '-'; i++;
+            while (i < n && /[\w-]/.test(line[i])) s += line[i++];
+            out += '<span class="hl-flag">' + escH(s) + '</span>';
+            beforeFirst = false; continue;
+          }
+          if (beforeFirst && c !== ' ' && c !== '\t') {
+            var s = '';
+            while (i < n && line[i] !== ' ' && line[i] !== '\t') s += line[i++];
+            beforeFirst = false;
+            out += BASH_CMDS.indexOf(s) >= 0 ? '<span class="hl-cmd">' + escH(s) + '</span>' : escH(s);
+            continue;
+          }
+          out += escH(c); i++;
+        }
+        return out;
+      }
+
+      function hlPromptLine(line) {
+        var e = escH(line);
+        e = e.replace(/`([^`]+)`/g, '<span class="hl-code">`$1`</span>');
+        if (!e.includes('<span') && /^([ \t]*)([\w-]+)(:\s+)(.*)$/.test(e)) {
+          e = e.replace(/^([ \t]*)([\w-]+)(:\s+)(.*)$/, function (m, sp, key, col, val) {
+            var cls = /^(true|false|null|yes|no)$/.test(val.trim()) ? ' class="hl-bool"'
+              : /^\d/.test(val.trim()) ? ' class="hl-num"' : '';
+            return sp + '<span class="hl-key">' + key + '</span>' + col + (cls ? '<span' + cls + '>' + val + '</span>' : val);
+          });
+        }
+        return e;
+      }
+
+      try {
+        document.querySelectorAll('.prompt-body').forEach(function (el) {
+          var raw = el.textContent;
+          var block = el.closest('.prompt-block');
+          var isTerminal = block && /Terminal/i.test(block.querySelector('.prompt-header').textContent);
+          el.innerHTML = raw.split('\n').map(isTerminal ? hlBashLine : hlPromptLine).join('\n');
+        });
+      } catch (e) { }
     })();

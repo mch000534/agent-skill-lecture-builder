@@ -37,6 +37,7 @@
 
 - [與原版的差異](#與原版的差異)
 - [Quick Start](#quick-start)
+- [Agent Skills](#agent-skills)
 - [專案結構](#專案結構)
 - [新增一門課程](#新增一門課程)
 - [課程目錄索引頁](#課程目錄索引頁)
@@ -60,7 +61,17 @@
 
 ### 新增功能
 
+**Agent Skills**：三個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
+- `course-page-generator`：講稿 / 主題 → 完整 HTML 課程頁
+- `content-drafting`：給定主題、受眾、時長，自動生成有實質內容的 `content.md` 草稿
+- `content-review`：分析 `content.md` 的「說明→範例→實作」教學節奏，輸出改善建議
+
 **課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁。
+
+**教學內容元件**（已上線）：
+- `[compare]...[/compare]`：左右並排對比卡（舊做法 vs 新做法），紅綠色區分
+- Flow 展開動畫：步驟逐一滑入，純 CSS + IntersectionObserver，無外部依賴
+- 程式碼語法高亮：Terminal 識別指令/旗標/字串/變數，Prompt 識別 backtick code 與 YAML key/value
 
 **課堂互動工具**：
 - 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
@@ -106,23 +117,61 @@ AI 會依序：生成 `content.md` + `config.yaml` → build `index.html` → �
 
 AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml` → build `index.html` → 產生 OG 縮圖
 
+## Agent Skills
+
+三個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
+
+### course-page-generator
+
+**觸發詞**：「幫我生成課程頁面」、「把講稿轉成課程頁面」
+
+給定主題或講稿，AI 自動完成：生成 `content.md` + `config.yaml` → build `index.html` → 產生 OG 縮圖。詳見 [SKILL.md](.agents/skills/course-page-generator/SKILL.md)。
+
+### content-drafting
+
+**觸發詞**：「幫我起草課程內容」、「生成 content.md」
+
+輸入三個參數（缺少時 AI 主動詢問）：
+
+| 參數 | 說明 | 範例 |
+|------|------|------|
+| `topic` | 課程主題 | "Claude Code 進階工作流程" |
+| `audience` | 目標受眾與前置知識 | "有 1 年以上使用經驗的工程師" |
+| `duration` | 課程時長（分鐘） | "90 分鐘" |
+
+AI 依時長推算章節數（90 分鐘 → 4–5 個主章節），依受眾調整深度，強制套用「說明→範例→實作」三層節奏，產出有實質內容的草稿（而非佔位骨架）。詳見 [SKILL.md](.agents/skills/content-drafting/SKILL.md)。
+
+### content-review
+
+**觸發詞**：「審閱課程內容」、「分析教學節奏」、「幫我看 content.md」
+
+分析現有 `content.md`，對每個主章節輸出節奏診斷表（說明/範例/實作各欄 ✅ / ⚠️ / ❌），並附具體改善建議與時間估算。詳見 [SKILL.md](.agents/skills/content-review/SKILL.md)。
+
+---
+
+三個 Skill 的典型使用流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。
+
 ## 專案結構
 
 ```
 agent-skill-lecture-builder/
 ├── .agents/
 │   └── skills/
-│       └── course-page-generator/
-│           ├── scripts/
-│           │   ├── build.mjs        # 建置課程頁
-│           │   ├── build-index.mjs  # 掃描 lectures/ 產生 manifest.js（新增）
-│           │   ├── build-vote.mjs   # 將 GAS URL 注入 vote/index.html（新增）
-│           │   ├── dev.mjs          # 本機預覽
-│           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
-│           └── reference/
-│               ├── base.html        # 唯一 HTML 模板
-│               ├── components.md
-│               └── config-example.yaml
+│       ├── course-page-generator/   # 講稿/主題 → HTML 課程頁
+│       │   ├── scripts/
+│       │   │   ├── build.mjs        # 建置課程頁
+│       │   │   ├── build-index.mjs  # 掃描 lectures/ 產生 manifest.js
+│       │   │   ├── build-vote.mjs   # 將 GAS URL 注入 vote/index.html
+│       │   │   ├── dev.mjs          # 本機預覽
+│       │   │   └── generate-og.mjs  # 產出 1200x630 OG 圖
+│       │   └── reference/
+│       │       ├── base.html        # 唯一 HTML 模板
+│       │       ├── components.md    # 所有元件語法對照
+│       │       └── config-example.yaml
+│       ├── content-drafting/        # 主題+受眾+時長 → content.md 草稿
+│       │   └── SKILL.md
+│       └── content-review/          # 分析教學節奏，輸出改善建議
+│           └── SKILL.md
 ├── assets/
 │   ├── course.css           # 所有課程共用 CSS（外部引用，改動免 rebuild）
 │   └── course.js            # 所有課程共用 JS（計時器、簡報、抽籤器、投票等）
@@ -299,7 +348,8 @@ quotes:
 | `### Title` | 卡片 |
 | `` ```prompt [label="..."] `` | 終端機 / Prompt 區塊 |
 | `> **Bold Title**` | 洞察框 |
-| `[flow]...[/flow]` | 流程步驟 |
+| `[flow]...[/flow]` | 流程步驟（捲動進入視窗時步驟逐一滑入） |
+| `[compare label-left="..." label-right="..."]...[/compare]` | 左右對比卡（舊做法 vs 新做法） |
 | `[tags]...[/tags]` | 標籤（`green / orange / purple / blue`，必須用此區塊包裹） |
 | `[summary]...[/summary]` | 總結卡片 |
 | `[bonus title="..."]...[/bonus]` | Bonus 按鈕 + 彈窗 |
@@ -353,6 +403,22 @@ quotes:
 - `title` 為選填的標題/說明，顯示在影片下方
 - 影片以 16:9 比例響應式嵌入
 - 列印模式下顯示 YouTube 連結取代 iframe
+
+### Compare 對比卡
+
+左右並排呈現「舊做法 vs 新做法」，左欄紅色調、右欄綠色調：
+
+```markdown
+[compare label-left="以前的做法" label-right="現在的做法"]
+- 手動複製貼上 commit message | 使用 git-smart-commit Skill 自動生成
+- 風格不一致，長短隨機 | 統一格式，一行摘要 + bullet 詳情
+- 想修改時得回去改 HTML | 只要更新 content.md 重新 build
+[/compare]
+```
+
+- `label-left` / `label-right`：欄標題（省略時預設「舊做法」/「新做法」）
+- 每行 `- 左側內容 | 右側內容`（`|` 為分隔符）
+- 支援行內 Markdown（`**粗體**`、`` `code` ``、連結）
 
 ### Bonus 彈窗
 
@@ -471,13 +537,6 @@ GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/glo
 
 ## 未來開發方向
 
-### AI 內容生成
-
-| 功能 | 說明 |
-|------|------|
-| `content-drafting` Skill | 給定主題、目標受眾、時長，AI 自動生成符合 `components.md` 語法的 `content.md` 草稿（含 flow、tags、summary 等標籤） |
-| 內容審閱 Skill | 分析章節結構是否符合「說明→範例→實作」教學節奏，輸出改善建議 |
-
 ### 學員互動元件
 
 | 語法 | 功能 |
@@ -486,15 +545,7 @@ GAS URL 屬公開端點（學生瀏覽器需直接呼叫），放在 `config/glo
 | 進度追蹤 | 章節旁顯示已讀勾選，localStorage 持久化 |
 | 投票嵌入 | 整合現有 `vote/` 功能到課程頁面內 |
 
-### 教學內容元件
-
-| 語法 | 功能 |
-|------|------|
-| `[compare]...[/compare]` | 左右並排對比卡（舊做法 vs 新做法） |
-| Flow 展開動畫 | 步驟逐一展開，純 CSS 實作，無外部依賴 |
-| 程式碼語法高亮 | prompt 區塊加入輕量 highlight，提升可讀性 |
-
-### 開發流程
+### 開發流程工具
 
 | 工具 | 功能 |
 |------|------|

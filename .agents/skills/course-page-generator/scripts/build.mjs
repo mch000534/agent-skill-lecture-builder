@@ -388,7 +388,7 @@ function parseContent(md) {
       while (i < lines.length) {
         const cl = lines[i];
         if (/^#{1,3} /.test(cl) || /^---\s*$/.test(cl.trim())) break;
-        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl)) break;
+        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl)) break;
         if (/^- \[x\]/.test(cl) || /^!\[/.test(cl)) break;
         if (isMarkdownTableHeader(cl, lines[i + 1])) break;
 
@@ -469,6 +469,23 @@ function parseContent(md) {
       }
       i++;
       if (current) current.blocks.push({ type: 'tags', tags });
+      continue;
+    }
+
+    if (/^\[compare/.test(line.trim())) {
+      const labelLeftMatch = line.match(/label-left="([^"]+)"/);
+      const labelRightMatch = line.match(/label-right="([^"]+)"/);
+      const labelLeft = labelLeftMatch ? labelLeftMatch[1] : '舊做法';
+      const labelRight = labelRightMatch ? labelRightMatch[1] : '新做法';
+      const rows = [];
+      i++;
+      while (i < lines.length && !/^\[\/compare\]/.test(lines[i].trim())) {
+        const rowMatch = lines[i].trim().match(/^-\s+(.*?)\s*\|\s*(.*)/);
+        if (rowMatch) rows.push({ left: rowMatch[1].trim(), right: rowMatch[2].trim() });
+        i++;
+      }
+      i++;
+      if (current) current.blocks.push({ type: 'compare', labelLeft, labelRight, rows });
       continue;
     }
 
@@ -839,6 +856,24 @@ ${childrenHtml}
       for (const t of block.tags) {
         s += `      <span class="tag ${t.color}">${esc(t.text)}</span>\n`;
       }
+      s += `    </div>`;
+      return s;
+    }
+
+    case 'compare': {
+      let s = `<div class="compare">\n`;
+      s += `      <div class="compare-header">\n`;
+      s += `        <div class="compare-label compare-label--old">${esc(block.labelLeft)}</div>\n`;
+      s += `        <div class="compare-label compare-label--new">${esc(block.labelRight)}</div>\n`;
+      s += `      </div>\n`;
+      s += `      <div class="compare-body">\n`;
+      for (const row of block.rows) {
+        s += `        <div class="compare-row">\n`;
+        s += `          <div class="compare-cell compare-cell--old">${inlineFormat(row.left)}</div>\n`;
+        s += `          <div class="compare-cell compare-cell--new">${inlineFormat(row.right)}</div>\n`;
+        s += `        </div>\n`;
+      }
+      s += `      </div>\n`;
       s += `    </div>`;
       return s;
     }

@@ -97,6 +97,7 @@ AI 需要根據以下語法規則，將內容轉換為 `content.md`。
 | `> **Bold Title**` | 洞察框（Insight） | `> **AI 正在改變企業決策**` |
 | `[flow]...[/flow]` | 流程步驟 | 見下方 |
 | `[tags]...[/tags]` | 標籤（必須用此區塊包裹） | `- [green] 正面` |
+| `[compare label-left="..." label-right="..."]...[/compare]` | 左右對比卡（舊做法 vs 新做法） | `- 舊 \| 新` |
 | `[summary]...[/summary]` | 總結卡片 | `- **標題** \| 描述` |
 | `- [x] item` | 勾選清單（僅用於已驗證/已完成的事項） | `- [x] 已完成項目` |
 | `![alt](src)` | 獨立圖片 | `![架構圖](images/arch.png)` |
