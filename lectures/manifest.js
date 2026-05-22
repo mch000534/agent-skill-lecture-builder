@@ -14,6 +14,13 @@ window.__courses__ = [
     "href": "lectures/ai-print-workflow/"
   },
   {
+    "title": "Claude Code 由入門到精通",
+    "badge": "AI Coding",
+    "subtitle": "從心智模型、核心工作流（Plan / Edit / Verify）、CLAUDE.md 規範、Skills、Subagents、Hooks、MCP，到團隊協作心法的 180 分鐘完整課程。",
+    "ogImage": "lectures/claude-code-mastery/assets/og-image.jpg",
+    "href": "lectures/claude-code-mastery/"
+  },
+  {
     "title": "DaVinci Resolve 專業調色",
     "badge": "10 小時完整課程 · 色彩科學 · 節點調色 · 視覺風格",
     "subtitle": "10 小時深度調色課程：色彩科學基礎、示波器解讀、節點系統精通、一二級調色、膚色處理、LUT 製作、ACES 色彩管理，從技術校正到電影級風格創作全面掌握。",

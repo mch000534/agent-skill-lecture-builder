@@ -1,0 +1,21 @@
+page:
+  title: "Claude Code 由入門到精通"
+  badge: "AI Coding"
+  hero_title: "Claude Code<br>由入門到精通"
+  subtitle: "從心智模型到團隊協作，180 分鐘走完代理型 AI 工作流的完整地圖"
+
+seo:
+  title: "Claude Code 由入門到精通｜代理型 AI 工作流完整指南"
+  description: "從心智模型、核心工作流（Plan / Edit / Verify）、CLAUDE.md 規範、Skills、Subagents、Hooks、MCP，到團隊協作心法的 180 分鐘完整課程。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/claude-code-mastery/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/claude-code-mastery/"
+
+quotes:
+  opening:
+    text: "從補完到代理 —<br>重新定義你和 AI 的分工。"
+  closing:
+    text: >
+      工具會更新，心法不會。<br>
+      讓你的工作流變成團隊資產，<br><br>
+      工具自己會呼叫工具，<br>
+      而你只負責思考下一個值得做的問題。
