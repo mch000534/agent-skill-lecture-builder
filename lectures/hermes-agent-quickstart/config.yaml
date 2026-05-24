@@ -1,0 +1,21 @@
+page:
+  title: "Hermes Agent 快速入門"
+  badge: "AI Agent"
+  hero_title: "Hermes Agent<br>快速入門"
+  subtitle: "從安裝到實戰，認識開源 AI Agent 框架的核心能力與快速上手路徑"
+
+seo:
+  title: "Hermes Agent 快速入門｜開源 AI Agent 框架實戰指南"
+  description: "介紹 Hermes Agent 的核心架構、安裝設定、CLI 操作、Skills 與記憶系統、Gateway 多平台連接，以及進階的 Subagent 與 Cron 排程，帶你從零開始掌握這款開源 AI Agent 框架。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/hermes-agent-quickstart/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/hermes-agent-quickstart/"
+
+quotes:
+  opening:
+    text: "一個會記住你是誰的 AI Agent —<br>不只是對話，而是持續協作的夥伴。"
+  closing:
+    text: >
+      工具的價值不在功能多寡，<br>
+      而在於它能否融入你的日常工作。<br><br>
+      Hermes 的真正力量，<br>
+      來自每一次對話中累積的記憶與技能。

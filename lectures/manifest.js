@@ -63,6 +63,20 @@ window.__courses__ = [
     "href": "lectures/git-github-basics/"
   },
   {
+    "title": "Hermes Agent 快速入門",
+    "badge": "AI Agent",
+    "subtitle": "介紹 Hermes Agent 的核心架構、安裝設定、CLI 操作、Skills 與記憶系統、Gateway 多平台連接，以及進階的 Subagent 與 Cron 排程，帶你從零開始掌握這款開源 AI Agent 框架。",
+    "ogImage": "lectures/hermes-agent-quickstart/assets/og-image.jpg",
+    "href": "lectures/hermes-agent-quickstart/"
+  },
+  {
+    "title": "LLM Wiki 從入門到策略實作",
+    "badge": "LLM Wiki · 知識管理 · AI Agent",
+    "subtitle": "結合入門導向、實作導向與策略導向的 240 分鐘 LLM Wiki 課程，帶領學員理解 Karpathy LLM Wiki 模式、建立 Markdown 知識庫、用 AI Agent 維護索引與交叉連結，並設計可落地的教育與研究團隊知識管理流程。",
+    "ogImage": "lectures/llm-wiki/assets/og-image.jpg",
+    "href": "lectures/llm-wiki/"
+  },
+  {
     "title": "手機拍片與攝影技巧",
     "badge": "攝影技巧 · 手機拍攝 · 學生活動記錄",
     "subtitle": "專為學生設計的手機攝影課程，涵蓋基礎設定、構圖法則、光線運用、學生活動拍攝、課堂記錄技巧，以及後期剪輯入門。",

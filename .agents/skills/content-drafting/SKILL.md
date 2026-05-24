@@ -85,21 +85,35 @@ description: 根據「主題 + 目標受眾 + 時長」三個參數，AI 自動�
 
 依據內容類型選擇對應元件：
 
-| 內容類型 | 推薦元件 |
-|---------|---------|
-| 操作步驟、工作流程 | `[flow]` |
-| 對比、分類、要點歸納 | `[tags]`（`green/orange/purple/blue`） |
-| 核心觀點、反直覺洞察 | Insight Box（`> **Title**`） |
-| CLI 指令、Prompt、程式碼 | Prompt Block（` ```prompt ` ） |
-| 已完成/已驗證的清單 | Checklist（`- [x]`） |
-| 架構圖、截圖說明 | `[image-text]`（若有圖檔）或 `<!-- TODO: 建議加圖 -->` |
-| 章節總結、學習成果 | `[summary]` |
-| 補充知識、進階延伸 | `[bonus title="..."]` |
+| 內容類型 | 推薦元件 | 語法速記 |
+|---------|---------|---------|
+| 操作步驟、工作流程 | Flow Steps | `[flow]...[/flow]`，每行一步 |
+| 兩種做法的結構化對比 | Compare | `[compare label-left="舊" label-right="新"]` + `- 左側 \| 右側` |
+| 對比、分類、要點歸納 | Tags | `[tags]` + `- [green/orange/purple/blue] 文字` |
+| 核心觀點、反直覺洞察 | Insight Box | `> **標題**` 後跟 `>` 段落 |
+| CLI 指令、Prompt、程式碼 | Prompt Block | ` ```prompt [label="..."] ` |
+| 課堂互動確認點 | Vote | `[vote id="v1" title="問題"]` + `- 選項` |
+| 章節末知識檢核 | Quiz | `[quiz type="single"]` + `Q:` + `- [x] 正確` + `- [ ] 錯誤` + `Hint:` |
+| 已完成/已驗證的清單 | Checklist | `- [x] 項目`（獨立行） |
+| 架構圖、截圖說明 | Image-Text | `[image-text position="left" width="40"]`（無圖時留 `<!-- TODO: 建議加圖 -->`） |
+| 章節總結、學習成果 | Summary Grid | `[summary]` + `- **標題** \| 描述` |
+| 補充知識、進階延伸 | Bonus | `[bonus title="..."]...[/bonus]` |
+
+**元件使用節奏**（一個主章節的建議組合）：
+- 說明層：卡片（`###`）+ Insight Box
+- 範例層：Prompt Block 或 Flow Steps；若有兩種做法對比 → Compare
+- 實作層：Flow Steps 或 Checklist；互動課程可加 Vote 或 Quiz
+
+**使用時機**（互動元件）：
+- `[compare]`：兩種方案有結構化的逐點對比（非泛泛而談）
+- `[vote]`：適合放在章節開頭暖身（預測問題）或章節末確認理解
+- `[quiz]`：知識密集章節的末尾，驗收單一概念
 
 **避免**：
 - 裸段落（loose text）— 段落式文字應改為卡片 + 條列
 - 過度使用 insight box（一個主章節最多 2–3 個）
 - 連續多張卡片無任何 flow 或 prompt block（顯得單調）
+- 每個章節都加 vote/quiz（互動元件應選擇性使用，每門課 3–5 個為宜）
 
 ---
 

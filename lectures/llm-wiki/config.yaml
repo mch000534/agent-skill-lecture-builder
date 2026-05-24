@@ -1,0 +1,21 @@
+page:
+  title: "LLM Wiki 從入門到策略實作"
+  badge: "LLM Wiki · 知識管理 · AI Agent"
+  hero_title: "LLM Wiki<br>從入門到策略實作"
+  subtitle: "240 分鐘完整課程：從概念入門、Obsidian 與 Markdown 實作，到教育、研究與團隊知識管理策略"
+
+seo:
+  title: "LLM Wiki 從入門到策略實作｜AI 時代的知識管理課程"
+  description: "結合入門導向、實作導向與策略導向的 240 分鐘 LLM Wiki 課程，帶領學員理解 Karpathy LLM Wiki 模式、建立 Markdown 知識庫、用 AI Agent 維護索引與交叉連結，並設計可落地的教育與研究團隊知識管理流程。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/llm-wiki/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/llm-wiki/"
+
+quotes:
+  opening:
+    text: "把每一次閱讀變成可累積的知識網絡 —<br>LLM Wiki 讓 AI 不只回答問題，而是幫你建立可追溯、可更新、可協作的理解系統。"
+  closing:
+    text: >
+      真正有價值的不是一次漂亮的回答，<br>
+      而是下次提問時，系統已經比上次更懂你的世界。<br><br>
+      LLM Wiki 的核心，<br>
+      是把知識從聊天紀錄中解放出來，變成團隊可以共同維護的資產。

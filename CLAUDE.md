@@ -85,9 +85,13 @@ agent-skill-lecture-builder/
 | `> **Bold Title**` | Insight Box |
 | `[flow]...[/flow]` | 流程步驟 |
 | `[tags]...[/tags]` | 標籤（`green/orange/purple/blue`） |
+| `[compare label-left="..." label-right="..."]` + `- 左 \| 右` | 左右對比卡 |
+| `[vote id="..." title="..."]` + `- 選項` + `[/vote]` | 課堂投票（匿名即時） |
+| `[quiz type="single"]` + `Q:` + `- [x] 正確` + `- [ ] 錯誤` + `Hint:` + `[/quiz]` | 即時測驗（單選） |
+| `- [x] 項目` | Checklist（帶勾選樣式） |
 | `[summary]...[/summary]` | 總結卡片 |
-| `[bonus title="..."]...[/bonus]` | 按鈕 + Modal 彈窗 |
-| `[image-text position="left" width="N"]...[/image-text]` | 圖文並排 |
+| `[bonus title="..."]...[/bonus]` | 按鈕 + Modal 彈窗（延伸補充） |
+| `[image-text position="left\|right" width="N"]...[/image-text]` | 圖文並排 |
 | `[youtube id="..." title="..."]` | YouTube 嵌入（16:9 響應式） |
 | `---` | 章節分隔線 |
 
@@ -116,7 +120,13 @@ agent-skill-lecture-builder/
 
 分析現有 `content.md` 是否符合「說明→範例→實作」教學節奏，輸出章節節奏診斷表與改善建議清單。工作流程定義在 `.agents/skills/content-review/SKILL.md`。
 
-當使用者說「審閱課程內容」「分析教學節奏」「幫我看 content.md」或類似指令時，請讀取該檔案並執行。
+當使用者說「審閱課程內容」「分析教學節奏」「幫我看 content.md」或類似指令時，請讀取該檔案並執行。說「審閱並存檔」「存成報告」時直接將報告寫入 `<course_dir>/review-report.md`，否則詢問使用者是否存檔。
+
+### topic-to-page
+
+從主題到課程頁面的完整工作流，依序串聯 content-drafting → content-review → course-page-generator 三個階段。每個 Phase 結束後暫停確認，使用者可插入修改後說「繼續 Phase N」恢復。工作流程定義在 `.agents/skills/topic-to-page/SKILL.md`。
+
+當使用者說「從主題到頁面」「完整流程」「一鍵生成課程」「幫我完整做一個課程」時，請讀取該檔案並執行。
 
 ## 關鍵慣例
 

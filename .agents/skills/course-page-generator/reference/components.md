@@ -310,7 +310,34 @@ Q: build.mjs 會自動讀取 global.yaml？
 - ✅ 適合：測試情境清單、踩坑紀錄、已確認的檢查項目
 - ❌ 不適合：核心觀點、重點摘要、一般條列（這些應使用卡片 `###` + 普通 list `- item`）
 
-## 12. Summary Grid（總結卡片）
+## 12. Bonus（延伸補充彈窗）
+
+**Markdown：**
+```markdown
+[bonus title="延伸閱讀：Prompt Caching 最佳實踐"]
+- 在對話開頭放置最穩定的內容（system prompt、文件）
+- 動態內容放最後，避免破壞快取前綴
+- 搭配 `cache_control: ephemeral` 標記快取斷點
+[/bonus]
+```
+
+**HTML：**
+```html
+<button class="bonus-btn"
+  data-bonus-title="延伸閱讀：Prompt Caching 最佳實踐"
+  data-bonus-content="- 在對話開頭放置最穩定的內容（system prompt、文件）&#10;- 動態內容放最後，避免破壞快取前綴&#10;- 搭配 `cache_control: ephemeral` 標記快取斷點">
+  延伸閱讀：Prompt Caching 最佳實踐
+</button>
+```
+
+規則：
+- `[bonus title="..."]...[/bonus]` 包裹任意 Markdown 內容
+- `title` 為按鈕顯示文字（必填）
+- 區塊內容在點擊按鈕後以 Modal 彈窗顯示
+- 內容支援一般 Markdown（段落、列表、`code`、**粗體**）
+- 適用場景：補充知識、進階延伸、不影響主線閱讀的參考資料
+
+## 13. Summary Grid（總結卡片）
 
 **Markdown：**
 ```markdown
@@ -338,7 +365,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 每項格式：`**標題** | 描述`（不使用 emoji）
 - 粗體 → `<h4>`，`|` 後面 → `<p>`
 
-## 13. Image（獨立圖片）
+## 14. Image（獨立圖片）
 
 **Markdown：**
 ```markdown
@@ -360,7 +387,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 圖片包在 `<div class="reveal">` 中
 - 行內圖片（在文字段落或列表中）則以 `<img class="inline-image">` 渲染
 
-## 14. Image-Text（圖文並排）
+## 15. Image-Text（圖文並排）
 
 **Markdown：**
 ```markdown
@@ -397,7 +424,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 響應式：平板（≤ 900px）及手機自動改為上下排列（圖片在上）
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 15. YouTube Embed（YouTube 影片嵌入）
+## 16. YouTube Embed（YouTube 影片嵌入）
 
 **Markdown（單行）：**
 ```markdown
@@ -429,7 +456,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 列印模式下 iframe 隱藏，改為顯示 YouTube 連結
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 16. Inline Elements
+## 17. Inline Elements
 
 | Markdown | HTML | 說明 |
 |---|---|---|
@@ -438,7 +465,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 | `[text](url)` | `<a href="url">text</a>` | 連結 |
 | 一般段落 | `<p>` | card 或 section 內的段落 |
 
-## 17. Wrapping Rules
+## 18. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
 - 連續的 card + prompt-block 可以在同一個 reveal wrapper 中

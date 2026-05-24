@@ -133,7 +133,17 @@ description: 分析現有 content.md 的章節結構是否符合「說明→範�
 
 ## Step 4：輸出審閱報告
 
-報告結構如下：
+### 存檔判斷
+
+| 情境 | 行為 |
+|------|------|
+| 由 `topic-to-page` Skill 呼叫 | 直接將報告寫入 `<course_dir>/review-report.md`，不詢問 |
+| 使用者說「審閱並存檔」「存成報告」「save report」 | 直接寫入 `<course_dir>/review-report.md` |
+| 一般單獨觸發 | 在對話中輸出完整報告，並詢問「是否要將報告存為 review-report.md？」；確認後再寫入 |
+
+寫入時使用 Write 工具，路徑為 `<course_dir>/review-report.md`（覆蓋舊檔）。
+
+### 報告結構如下：
 
 ```markdown
 ## 章節節奏診斷
