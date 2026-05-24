@@ -117,6 +117,8 @@ agent-skill-lecture-builder/
 | `[bonus title="..."]...[/bonus]` | 按鈕 + Modal 彈窗（延伸補充） |
 | `[image-text position="left\|right" width="N"]...[/image-text]` | 圖文並排 |
 | `[youtube id="..." title="..."]` | YouTube 嵌入（16:9 響應式） |
+| `[tabs][tab label="..."]...[/tab][/tabs]` | 分頁切換卡（多語言範例對照） |
+| `[callout type="info\|warning\|tip" title="..."]...[/callout]` | 標注框（藍/橙/綠三色） |
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 `.agents/skills/course-page-generator/reference/components.md`。
