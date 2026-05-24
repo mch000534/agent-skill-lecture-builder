@@ -388,7 +388,7 @@ function parseContent(md) {
       while (i < lines.length) {
         const cl = lines[i];
         if (/^#{1,3} /.test(cl) || /^---\s*$/.test(cl.trim())) break;
-        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl) || /^\[vote/.test(cl) || /^\[quiz/.test(cl)) break;
+        if (/^```(prompt|terminal)/i.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl) || /^\[vote/.test(cl) || /^\[quiz/.test(cl) || /^\[tabs\]/.test(cl) || /^\[callout/.test(cl)) break;
         if (/^- \[x\]/.test(cl) || /^!\[/.test(cl)) break;
         if (isMarkdownTableHeader(cl, lines[i + 1])) break;
 
@@ -563,6 +563,44 @@ function parseContent(md) {
       }
       i++;
       if (current) current.blocks.push({ type: 'bonus', title, content });
+      continue;
+    }
+
+    if (/^\[tabs\]/.test(line.trim())) {
+      const tabs = [];
+      i++;
+      while (i < lines.length && !/^\[\/tabs\]/.test(lines[i].trim())) {
+        const tabMatch = lines[i].trim().match(/^\[tab\s+label="([^"]+)"\]/);
+        if (tabMatch) {
+          const tabLabel = tabMatch[1];
+          const tabLines = [];
+          i++;
+          while (i < lines.length && !/^\[\/tab\]/.test(lines[i].trim())) {
+            tabLines.push(lines[i]);
+            i++;
+          }
+          tabs.push({ label: tabLabel, lines: tabLines });
+        }
+        i++;
+      }
+      i++;
+      if (current) current.blocks.push({ type: 'tabs', tabs });
+      continue;
+    }
+
+    if (/^\[callout/.test(line.trim())) {
+      const typeMatch = line.match(/type="([^"]+)"/);
+      const calloutType = typeMatch ? typeMatch[1] : 'info';
+      const titleMatch = line.match(/title="([^"]+)"/);
+      const calloutTitle = titleMatch ? titleMatch[1] : '';
+      const calloutLines = [];
+      i++;
+      while (i < lines.length && !/^\[\/callout\]/.test(lines[i].trim())) {
+        calloutLines.push(lines[i]);
+        i++;
+      }
+      i++;
+      if (current) current.blocks.push({ type: 'callout', calloutType, calloutTitle, lines: calloutLines });
       continue;
     }
 
@@ -1007,6 +1045,71 @@ ${childrenHtml}
       let s = `<ul class="loose-list">\n`;
       for (const item of block.items) s += `      <li>${item}</li>\n`;
       s += `    </ul>`;
+      return s;
+    }
+
+    case 'tabs': {
+      function renderSimpleLines(lines) {
+        let html = '';
+        let inList = false;
+        for (const ln of lines) {
+          if (ln.trim() === '') {
+            if (inList) { html += '</ul>'; inList = false; }
+            continue;
+          }
+          if (/^- /.test(ln)) {
+            if (!inList) { html += '<ul>'; inList = true; }
+            html += `<li>${inlineFormat(ln.replace(/^- /, '').trim())}</li>`;
+          } else {
+            if (inList) { html += '</ul>'; inList = false; }
+            html += `<p>${inlineFormat(ln.trim())}</p>`;
+          }
+        }
+        if (inList) html += '</ul>';
+        return html;
+      }
+      let s = `<div class="tabs-block">\n`;
+      s += `  <div class="tabs-nav">\n`;
+      block.tabs.forEach((tab, idx) => {
+        s += `    <button class="tab-btn${idx === 0 ? ' active' : ''}" data-tab="${idx}">${esc(tab.label)}</button>\n`;
+      });
+      s += `  </div>\n`;
+      block.tabs.forEach((tab, idx) => {
+        s += `  <div class="tab-panel${idx === 0 ? ' active' : ''}" data-panel="${idx}">\n    ${renderSimpleLines(tab.lines)}\n  </div>\n`;
+      });
+      s += `</div>`;
+      return s;
+    }
+
+    case 'callout': {
+      const calloutIcons = {
+        info:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+        warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+        tip:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg>`,
+      };
+      const icon = calloutIcons[block.calloutType] || calloutIcons.info;
+      let bodyHtml = '';
+      let inList = false;
+      for (const ln of block.lines) {
+        if (ln.trim() === '') {
+          if (inList) { bodyHtml += '</ul>'; inList = false; }
+          continue;
+        }
+        if (/^- /.test(ln)) {
+          if (!inList) { bodyHtml += '<ul>'; inList = true; }
+          bodyHtml += `<li>${inlineFormat(ln.replace(/^- /, '').trim())}</li>`;
+        } else {
+          if (inList) { bodyHtml += '</ul>'; inList = false; }
+          bodyHtml += `<p>${inlineFormat(ln.trim())}</p>`;
+        }
+      }
+      if (inList) bodyHtml += '</ul>';
+      let s = `<div class="callout callout--${esc(block.calloutType)}">\n`;
+      s += `  <div class="callout-icon">${icon}</div>\n`;
+      s += `  <div class="callout-body">\n`;
+      if (block.calloutTitle) s += `    <div class="callout-title">${esc(block.calloutTitle)}</div>\n`;
+      s += `    ${bodyHtml}\n`;
+      s += `  </div>\n</div>`;
       return s;
     }
 

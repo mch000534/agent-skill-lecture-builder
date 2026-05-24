@@ -456,7 +456,91 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 列印模式下 iframe 隱藏，改為顯示 YouTube 連結
 - 整個區塊包在 `<div class="reveal">` 中
 
-## 17. Inline Elements
+## 17. Tabs 切換卡
+
+**Markdown：**
+```markdown
+[tabs]
+[tab label="Python"]
+- 第一種寫法
+- 適合初學者
+[/tab]
+[tab label="JavaScript"]
+- 另一種寫法
+- 適合前端開發者
+[/tab]
+[/tabs]
+```
+
+**HTML：**
+```html
+<div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">Python</button>
+    <button class="tab-btn" data-tab="1">JavaScript</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>第一種寫法</li><li>適合初學者</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>另一種寫法</li><li>適合前端開發者</li></ul>
+  </div>
+</div>
+```
+
+規則：
+- `[tab label="..."]` 定義每個分頁的標籤名稱
+- 內容支援 `- 項目`（轉為 `<ul><li>`）與一般段落（轉為 `<p>`）
+- 第一個分頁預設顯示，其餘隱藏
+- 點擊標籤切換，帶淡入動畫
+
+---
+
+## 18. Callout 標注框
+
+**Markdown：**
+```markdown
+[callout type="info"]
+這是一個提示訊息，說明某個重要概念。
+[/callout]
+
+[callout type="warning" title="注意"]
+此操作無法還原，請謹慎執行。
+[/callout]
+
+[callout type="tip" title="實用技巧"]
+- 技巧一：簡短有力
+- 技巧二：配合實例
+[/callout]
+```
+
+**HTML：**
+```html
+<div class="callout callout--info">
+  <div class="callout-icon"><!-- info SVG --></div>
+  <div class="callout-body">
+    <p>這是一個提示訊息，說明某個重要概念。</p>
+  </div>
+</div>
+
+<div class="callout callout--warning">
+  <div class="callout-icon"><!-- warning SVG --></div>
+  <div class="callout-body">
+    <div class="callout-title">注意</div>
+    <p>此操作無法還原，請謹慎執行。</p>
+  </div>
+</div>
+```
+
+規則：
+- `type` 三種值：`info`（藍）、`warning`（橙）、`tip`（綠），預設 `info`
+- `title` 選用，省略則無標題列
+- 內容支援 `- 項目`（轉為 `<ul><li>`）與一般段落（轉為 `<p>`）
+- 左側 3px 彩色邊框 + 對應圖示，純 CSS 無需 JS
+
+---
+
+## 19. Inline Elements
 
 | Markdown | HTML | 說明 |
 |---|---|---|
@@ -465,7 +549,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 | `[text](url)` | `<a href="url">text</a>` | 連結 |
 | 一般段落 | `<p>` | card 或 section 內的段落 |
 
-## 18. Wrapping Rules
+## 20. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
 - 連續的 card + prompt-block 可以在同一個 reveal wrapper 中

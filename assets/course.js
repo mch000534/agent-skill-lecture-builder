@@ -1474,11 +1474,16 @@
         if ((e.key === '-' || e.key === '_') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__decreaseFontSize) window.__decreaseFontSize();
         }
+        if ((e.key === 's' || e.key === 'S') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__toggleSpotlight) window.__toggleSpotlight();
+        }
         if ((e.key === 'x' || e.key === 'X') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           ['timer-widget', 'lottery-widget', 'vote-widget'].forEach(function (id) {
             var el = document.getElementById(id);
             if (el) el.classList.remove('open');
           });
+          var sl = document.getElementById('spotlight-overlay');
+          if (sl) { sl.classList.remove('active'); window.__spotlightActive = false; }
         }
       });
 
@@ -2556,6 +2561,47 @@
           var correct = idx === answerIdx;
           saveResult(qid, correct);
           applyResult(correct, idx);
+        });
+      });
+    });
+  })();
+
+  // ─── Spotlight Mode ────────────────────────────────────────
+  (function () {
+    var overlay = document.createElement('div');
+    overlay.id = 'spotlight-overlay';
+    document.body.appendChild(overlay);
+
+    window.__spotlightActive = false;
+
+    document.addEventListener('mousemove', function (e) {
+      if (!window.__spotlightActive) return;
+      overlay.style.setProperty('--sl-x', e.clientX + 'px');
+      overlay.style.setProperty('--sl-y', e.clientY + 'px');
+    });
+
+    window.__toggleSpotlight = function () {
+      window.__spotlightActive = !window.__spotlightActive;
+      overlay.classList.toggle('active', window.__spotlightActive);
+      if (window.__spotlightActive) {
+        overlay.style.setProperty('--sl-x', '50%');
+        overlay.style.setProperty('--sl-y', '50%');
+      }
+    };
+  })();
+
+  // ─── Tabs Block ────────────────────────────────────────────
+  (function () {
+    document.querySelectorAll('.tabs-block').forEach(function (block) {
+      block.querySelectorAll('.tab-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = btn.dataset.tab;
+          block.querySelectorAll('.tab-btn').forEach(function (b) {
+            b.classList.toggle('active', b.dataset.tab === idx);
+          });
+          block.querySelectorAll('.tab-panel').forEach(function (p) {
+            p.classList.toggle('active', p.dataset.panel === idx);
+          });
         });
       });
     });
