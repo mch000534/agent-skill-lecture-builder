@@ -66,7 +66,7 @@
 - `content-drafting`：給定主題、受眾、時長，自動生成有實質內容的 `content.md` 草稿
 - `content-review`：分析 `content.md` 的「說明→範例→實作」教學節奏，輸出改善建議
 
-**課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁。
+**課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁，支援分類篩選、搜尋、格狀/列表切換。
 
 **教學內容元件**（已上線）：
 - `[compare]...[/compare]`：左右並排對比卡（舊做法 vs 新做法），紅綠色區分
@@ -237,6 +237,20 @@ node .agents/skills/course-page-generator/scripts/build-index.mjs
 
 `build-index.mjs` 會自動掃描 `lectures/` 下所有含 `config.yaml` 的子目錄，不需要手動維護課程清單。
 
+### 課程分類與顯示控制
+
+在課程 `config.yaml` 的 `page` 區塊加入兩個選填欄位：
+
+```yaml
+page:
+  title: "課程標題"
+  badge: "BADGE 文字"
+  category: "AI & 程式設計"   # 分類名稱，用於索引頁篩選
+  published: true             # 設為 false 時不會出現在索引頁
+```
+
+索引頁會自動依 `category` 產生分類篩選按鈕，點擊即可過濾該類別課程。未設定 `category` 的課程歸入「未分類」；`published` 預設為 `true`，只有明確設為 `false` 的課程才會被隱藏。
+
 ## 開發伺服器
 
 啟動含即時重載的本機預覽伺服器：
@@ -322,6 +336,8 @@ vote:
 page:
   title: "課程標題"
   badge: "BADGE 文字"
+  category: "AI & 程式設計"   # 分類名稱（用於索引頁篩選）
+  published: true             # false 則隱藏，預設顯示
   hero_title: "Hero 大標題<br>支援換行"
   subtitle: "副標題"
 

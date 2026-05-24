@@ -9,6 +9,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 建置指令
 
 ```bash
+# 建立新課程目錄（含 config.yaml、content.md 模板）
+node .agents/skills/course-page-generator/scripts/new-lecture.mjs lectures/<course-dir>
+
+# 建置前驗證語法（未閉合標籤、全形冒號、seo.url 格式）
+node .agents/skills/course-page-generator/scripts/validate.mjs lectures/<course-dir>
+
 # 建置單一課程頁（從 repo 根目錄執行）
 node .agents/skills/course-page-generator/scripts/build.mjs lectures/<course-dir>
 
