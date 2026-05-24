@@ -132,7 +132,6 @@ agent-skill-lecture-builder/
 - Step 0：偵測輸入類型（純主題 vs 有講稿 vs 現有目錄）
 - Step 1：將講稿轉為結構化 `content.md`
 - Step 2：確認或建立 `config.yaml`（含偵測 GitHub Pages 前綴）
-- Step 2.5：（建議）執行 `validate.mjs` 檢查 content.md 語法
 - Step 3：執行 build
 - Step 4：產生 OG 縮圖（與 Step 3 綁定，不可省略）
 
@@ -153,15 +152,6 @@ agent-skill-lecture-builder/
 從主題到課程頁面的完整工作流，依序串聯 content-drafting → content-review → course-page-generator 三個階段。每個 Phase 結束後暫停確認，使用者可插入修改後說「繼續 Phase N」恢復。工作流程定義在 `.agents/skills/topic-to-page/SKILL.md`。
 
 當使用者說「從主題到頁面」「完整流程」「一鍵生成課程」「幫我完整做一個課程」時，請讀取該檔案並執行。
-
-## 課堂互動工具
-
-課程頁內建互動功能，由 `assets/course.js` 提供，完整使用說明見 `README.md`：
-
-- **計時器、抽籤器、投票 Widget、Quiz**：左下角設定面板開啟，或快捷鍵 `T` / `R` / `V`
-- **章節進度追蹤**：捲動自動標記，`localStorage` 持久化
-- **鍵盤快捷鍵**：`P` 簡報模式、`B` 主題切換、`Q` QR Code、`F` 全螢幕、`C` 色票輪迴等
-- **投票後端**：需設定 `config/global.yaml` 的 `vote.gas_url`（Google Apps Script Web App URL），更新後執行 `build-vote.mjs` 注入學生端 `vote/index.html`
 
 ## 關鍵慣例
 
