@@ -1,6 +1,8 @@
 page:
   title: "DaVinci Resolve Fusion 特效合成入門"
   badge: "視覺特效 · 節點合成 · 動態圖像"
+  category: "影音製作"
+  published: true
   hero_title: "DaVinci Resolve Fusion<br>特效合成入門課程"
   subtitle: "從節點邏輯到實戰合成，掌握 Fusion 的 2D 合成、摳像、粒子特效與 3D 空間，為影片注入電影級視覺效果。"
 

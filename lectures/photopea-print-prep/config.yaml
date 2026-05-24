@@ -1,6 +1,8 @@
 page:
   title: "Photopea 印刷前處理"
   badge: "Photopea · AI 圖片後處理 · 印刷輸出"
+  category: "設計印刷"
+  published: true
   hero_title: "AI 生圖到成品印刷<br>的完整後處理流程"
   subtitle: "從 Photopea 介面入門，學會修復 AI 圖片缺陷、調整解析度與色彩模式，確保每一張 AI 生成圖片都能達到專業印刷標準。"
 

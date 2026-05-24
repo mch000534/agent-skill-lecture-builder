@@ -1,6 +1,8 @@
 page:
   title: "老人AI科普"
   badge: "AI 科普"
+  category: "素養與科普"
+  published: true
   hero_title: "認識人工智慧<br>從生活出發"
   subtitle: "專為長輩設計，輕鬆了解 AI 如何改善日常生活"
 

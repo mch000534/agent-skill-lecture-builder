@@ -1,6 +1,8 @@
 page:
   title: "LLM Wiki 從入門到策略實作"
   badge: "LLM Wiki · 知識管理 · AI Agent"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "LLM Wiki<br>從入門到策略實作"
   subtitle: "240 分鐘完整課程：從概念入門、Obsidian 與 Markdown 實作，到教育、研究與團隊知識管理策略"
 

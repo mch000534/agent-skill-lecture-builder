@@ -219,6 +219,40 @@
       background: rgb(var(--accent-rgb) / .08);
     }
 
+    /* ── Category Filter ── */
+    .category-bar {
+      max-width: min(1080px, 92%);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+    }
+    .cat-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: .35rem .85rem;
+      font-family: inherit;
+      font-size: .82rem;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap;
+    }
+    .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cat-btn.active {
+      border-color: rgb(var(--accent-rgb) / .6);
+      color: var(--accent);
+      background: rgb(var(--accent-rgb) / .08);
+    }
+    .cat-count {
+      font-size: .75rem;
+      color: var(--text-dim);
+      margin-left: .25rem;
+      opacity: .7;
+    }
+
     /* ── Grid ── */
     .grid-wrap {
       max-width: min(1080px, 92%);
@@ -381,7 +415,6 @@
 </header>
 
 <section class="hero">
-  <div class="hero-badge"><span class="dot"></span>AI 課程系列</div>
   <h1>課程目錄</h1>
   <p class="hero-sub">探索生成式 AI 的實務應用與資安防護，與澳門科學館一同踏入 AI 新時代。</p>
   <p class="hero-count" id="hero-count"></p>
@@ -409,6 +442,8 @@
   </div>
 </div>
 
+<div class="category-bar" id="category-bar"></div>
+
 <div class="grid-wrap">
   <p class="empty" id="empty-msg" hidden>尚無課程，請將課程資料夾放入 <code>lectures/</code> 目錄並執行 <code>node build-index.mjs</code>。</p>
   <p class="no-result" id="no-result-msg" hidden>找不到符合的課程，請嘗試其他關鍵字。</p>
@@ -434,6 +469,7 @@
   }
 
   var currentLayout = localStorage.getItem('layout') || 'grid';
+  var currentCategory = localStorage.getItem('category') || '';
 
   function setLayout(layout) {
     currentLayout = layout;
@@ -442,6 +478,35 @@
     gridEl.className = layout === 'list' ? 'course-grid course-grid--list' : 'course-grid';
     document.getElementById('btn-grid').classList.toggle('active', layout === 'grid');
     document.getElementById('btn-list').classList.toggle('active', layout === 'list');
+  }
+
+  function buildCategoryBar() {
+    var all = window.__courses__ || [];
+    var catMap = {};
+    for (var i = 0; i < all.length; i++) {
+      var cat = all[i].category || '未分類';
+      catMap[cat] = (catMap[cat] || 0) + 1;
+    }
+    var cats = Object.keys(catMap).sort();
+    var barEl = document.getElementById('category-bar');
+    var html = '<button class="cat-btn' + (currentCategory === '' ? ' active' : '') + '" data-cat="" onclick="setCategory(this)">全部<span class="cat-count">(' + all.length + ')</span></button>';
+    for (var j = 0; j < cats.length; j++) {
+      var c = cats[j];
+      var active = currentCategory === c ? ' active' : '';
+      html += '<button class="cat-btn' + active + '" data-cat="' + esc(c) + '" onclick="setCategory(this)">' + esc(c) + '<span class="cat-count">(' + catMap[c] + ')</span></button>';
+    }
+    barEl.innerHTML = html;
+  }
+
+  function setCategory(btn) {
+    var cat = btn.getAttribute('data-cat');
+    currentCategory = cat;
+    localStorage.setItem('category', cat);
+    var btns = document.querySelectorAll('.cat-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('active', btns[i].getAttribute('data-cat') === cat);
+    }
+    filterAndRender();
   }
 
   function esc(s) {
@@ -470,11 +535,18 @@
   function filterAndRender() {
     var all = window.__courses__ || [];
     var query = document.getElementById('search').value.trim().toLowerCase();
-    var filtered = query
-      ? all.filter(function (l) {
-          return (l.title + ' ' + l.badge + ' ' + l.subtitle).toLowerCase().indexOf(query) !== -1;
-        })
+
+    // Filter by category
+    var byCat = currentCategory
+      ? all.filter(function (l) { return (l.category || '未分類') === currentCategory; })
       : all;
+
+    // Filter by search
+    var filtered = query
+      ? byCat.filter(function (l) {
+          return (l.title + ' ' + l.badge + ' ' + l.subtitle + ' ' + (l.category || '')).toLowerCase().indexOf(query) !== -1;
+        })
+      : byCat;
 
     var countEl = document.getElementById('hero-count');
     var gridEl = document.getElementById('course-grid');
@@ -488,15 +560,17 @@
       return;
     }
     emptyEl.hidden = true;
+    var catLabel = currentCategory ? '（' + currentCategory + '）' : '';
     countEl.textContent = query
-      ? filtered.length + ' / ' + all.length + ' 門課程'
-      : all.length + ' 門課程';
+      ? '搜尋「' + esc(query) + '」' + catLabel + ' ' + filtered.length + ' / ' + all.length + ' 門課程'
+      : catLabel ? catLabel + ' ' + all.length + ' 門課程' : all.length + ' 門課程';
     noResultEl.hidden = filtered.length > 0;
     gridEl.innerHTML = filtered.map(buildCard).join('');
   }
 
   // Init
   setLayout(currentLayout);
+  buildCategoryBar();
   filterAndRender();
 
   document.getElementById('search').addEventListener('input', filterAndRender);

@@ -1,6 +1,8 @@
 page:
   title: "Git & GitHub 從零開始"
   badge: "版本控制 · Git · GitHub · 團隊協作"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "Git & GitHub<br>從零開始"
   subtitle: "完全沒學過版本控制也沒關係——跟著實作練習，從第一行 git init 到獨立完成 Pull Request，建立真正能用的協作能力。"
 

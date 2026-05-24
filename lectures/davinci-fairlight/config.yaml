@@ -1,6 +1,8 @@
 page:
   title: "DaVinci Resolve Fairlight 音頻後製入門"
   badge: "音頻後製 · 混音 · 修復 · 環繞聲"
+  category: "影音製作"
+  published: true
   hero_title: "DaVinci Resolve Fairlight<br>音頻後製入門課程"
   subtitle: "從基礎錄音到專業混音，掌握 Fairlight 的音頻修復、降噪、EQ 調整與環繞聲處理，為影片打造電影級聲音品質。"
 

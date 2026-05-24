@@ -167,6 +167,11 @@ function scanLectures(base) {
     const title = cfg.page?.title || cfg.seo?.title || name;
     const badge = cfg.page?.badge || '';
     const subtitle = cfg.seo?.description || cfg.page?.subtitle || '';
+    const category = cfg.page?.category || '';
+    const published = cfg.page?.published !== false; // default true
+
+    // Skip unpublished courses
+    if (!published) continue;
 
     // Prefer local og-image (relative path), fallback to seo.image URL
     const localOgJpg = join(dir, 'assets', 'og-image.jpg');
@@ -178,7 +183,9 @@ function scanLectures(base) {
 
     const href = existsSync(indexPath) ? `lectures/${name}/` : null;
 
-    lectures.push({ title, badge, subtitle, ogImage, href });
+    const entry = { title, badge, subtitle, ogImage, href };
+    if (category) entry.category = category;
+    lectures.push(entry);
   }
   return lectures;
 }
@@ -190,7 +197,8 @@ const lectures = scanLectures(LECTURES_DIR);
 console.log(`掃描到 ${lectures.length} 門課程：`);
 for (const l of lectures) {
   const status = l.href ? '✓' : '（無 index.html）';
-  console.log(`  • ${l.title}  ${status}`);
+  const cat = l.category ? ` [${l.category}]` : '';
+  console.log(`  • ${l.title}${cat}  ${status}`);
 }
 
 writeFileSync(OUT_FILE, `window.__courses__ = ${JSON.stringify(lectures, null, 2)};\n`, 'utf-8');

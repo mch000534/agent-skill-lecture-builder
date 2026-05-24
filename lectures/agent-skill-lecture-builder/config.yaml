@@ -1,6 +1,8 @@
 page:
   title: "Agent Skill 課程頁生成器"
   badge: "AI 工具 · Agent Skill · 課程製作"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "把 AI 的隨機輸出<br>變成可重複使用的工具"
   subtitle: "從安裝到上線，手把手帶你用 Agent Skills 建立課程頁面——一次學會，終身複用。"
 

@@ -1,6 +1,8 @@
 page:
   title: "生成式 AI 資訊安全"
   badge: "資安實戰 · 生成式 AI · 企業防護"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "生成式 AI 時代<br>你的資安防線在哪裡？"
   subtitle: "從真實攻擊案例出發，掌握 Prompt Injection、資料外洩、模型濫用等核心威脅，建立企業 AI 安全策略。"
 

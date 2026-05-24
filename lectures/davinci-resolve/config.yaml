@@ -1,6 +1,8 @@
 page:
   title: "DaVinci Resolve 影片製作入門"
   badge: "20 小時完整課程 · 剪輯 · 調色 · 音頻 · 特效"
+  category: "影音製作"
+  published: true
   hero_title: "DaVinci Resolve<br>影片製作完整課程"
   subtitle: "20 小時系統化學習：從軟體安裝到專業輸出，涵蓋剪輯、調色、Fairlight 音頻與 Fusion 特效，製作出電影級質感的影片。"
 

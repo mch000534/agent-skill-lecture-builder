@@ -1,6 +1,8 @@
 page:
   title: "Hermes Agent 快速入門"
   badge: "AI Agent"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "Hermes Agent<br>快速入門"
   subtitle: "從安裝到實戰，認識開源 AI Agent 框架的核心能力與快速上手路徑"
 

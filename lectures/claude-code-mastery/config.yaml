@@ -1,6 +1,8 @@
 page:
   title: "Claude Code 由入門到精通"
   badge: "AI Coding"
+  category: "AI & 程式設計"
+  published: true
   hero_title: "Claude Code<br>由入門到精通"
   subtitle: "從心智模型到團隊協作，180 分鐘走完代理型 AI 工作流的完整地圖"
 
