@@ -7,7 +7,7 @@ description: 將講稿或非結構化筆記轉換為約定的 Markdown 格式，
 
 > **禁止使用 Emoji**：所有生成的課程內容（卡片標題、總結項目、群組標頭、設定檔等）一律不得使用 emoji 字符。
 
-原始講稿 → 結構化 Markdown → `node .agents/skills/course-page-generator/scripts/build.mjs <dir>` → `index.html` → `node .agents/skills/course-page-generator/scripts/generate-og.mjs <dir>` → `assets/og-*.jpg`
+原始講稿 → 結構化 Markdown → `validate.mjs`（建議） → `build.mjs` → `index.html` → `generate-og.mjs` → `assets/og-*.jpg`
 
 ## 專案結構
 
@@ -292,6 +292,24 @@ nav:
 ```
 
 YAML 完整範例：[config-example.yaml](reference/config-example.yaml)
+
+### Step 2.5：驗證語法（建議）
+
+在執行 build 前可選用 `validate.mjs` 檢查 content.md 是否有未閉合標籤、半形冒號等常見錯誤：
+
+```bash
+node .agents/skills/course-page-generator/scripts/validate.mjs <course-dir>
+```
+
+退出碼為 0 即可繼續 build；若回報錯誤則先修正 content.md。警告（如半形冒號）可忽略。
+
+何時建議執行：
+
+- 使用者提供的舊講稿、外部來源 Markdown，或轉換結果不確定時
+- 使用者在生成後手動編輯過 content.md
+- 連續多次 build 失敗，懷疑 content.md 語法問題
+
+AI 自己剛生成的 content.md 通常可跳過此步驟。
 
 ### Step 3 + 4：執行 Build 並產生 OG 縮圖（必須連續執行）
 

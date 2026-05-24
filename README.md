@@ -199,27 +199,54 @@ agent-skill-lecture-builder/
 
 ## 新增一門課程
 
+### 快速方式（推薦）
+
+一行指令建立目錄與模板檔案：
+
+```bash
+node .agents/skills/course-page-generator/scripts/new-lecture.mjs lectures/my-course
+```
+
+會自動建立：
+
+- `lectures/my-course/config.yaml`（含偵測到的 GitHub Pages SEO URL）
+- `lectures/my-course/content.md`（兩個章節範例）
+- `lectures/my-course/assets/`（空資料夾）
+
+### 手動方式
+
 ```bash
 mkdir -p lectures/my-course/assets
 ```
 
 1. **建立 `lectures/my-course/content.md`** — 用約定的 Markdown 語法撰寫講稿（或丟原始筆記給 AI，觸發 Skill 自動轉換）
 2. **建立 `lectures/my-course/config.yaml`** — 只需寫要覆蓋全域設定的欄位
-3. **Build**
+
+### Build 流程
+
+1. **（建議）驗證 content.md 語法**
+
+```bash
+node .agents/skills/course-page-generator/scripts/validate.mjs lectures/my-course
+```
+
+   檢查未閉合標籤、半形冒號、`seo.url` 格式等常見錯誤。退出碼為 0 即可繼續。
+
+2. **Build 課程頁**
 
 ```bash
 node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
 ```
 
-產出 `lectures/my-course/index.html`。
+   產出 `lectures/my-course/index.html`。
 
-4. **產生 OG 縮圖**
+3. **產生 OG 縮圖**
 
 ```bash
 node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course
 ```
 
-5. **更新根目錄索引頁**
+4. **更新根目錄索引頁**
 
 ```bash
 node .agents/skills/course-page-generator/scripts/build-index.mjs
@@ -619,9 +646,4 @@ TOC（左側邊欄）每個章節標題旁顯示小圓點，捲動過該章節�
 
 ## 未來開發方向
 
-### 開發流程工具
-
-| 工具 | 功能 |
-|------|------|
-| `validate.mjs` | build 前檢查 `content.md` 語法（未閉合標籤、全形冒號缺失、`seo.url` 路徑格式） |
-| `new-lecture.mjs` | 一行指令建立含 `config.yaml`、`content.md` 模板的新課程目錄 |
+歡迎透過 Issue 提出建議或 PR 貢獻新工具。當前已實作的開發流程工具（`new-lecture.mjs`、`validate.mjs`）見上方「新增一門課程」段。

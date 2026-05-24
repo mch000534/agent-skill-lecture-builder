@@ -65,7 +65,9 @@ description: 從主題到課程頁面的完整工作流，串聯 content-draftin
 content.md 已存在，從 **Step 2** 開始執行（跳過 Step 0–1 的輸入偵測與草稿生成）。
 
 **讀取並執行** `.agents/skills/course-page-generator/SKILL.md` Step 2–4：
+
 - Step 2：確認或建立 `<course_dir>/config.yaml`（含偵測 GitHub Pages 前綴）
+- Step 2.5（建議）：執行 `node .agents/skills/course-page-generator/scripts/validate.mjs <course_dir>` 確認 content.md 語法無誤；若使用者在 Phase 2 後手動編輯過內容，此步驟尤其重要
 - Step 3：執行 `node .agents/skills/course-page-generator/scripts/build.mjs <course_dir>`
 - Step 4：執行 `node .agents/skills/course-page-generator/scripts/generate-og.mjs <course_dir>`
 
