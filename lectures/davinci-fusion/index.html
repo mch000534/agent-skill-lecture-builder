@@ -259,6 +259,44 @@
   <li>資料從左到右流動：輸入 → 處理 → 輸出</li>
   <li>節點之間透過連線傳遞影像資料</li>
 </ul>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">圖層式（After Effects）</div>
+        <div class="compare-label compare-label--new">節點式（Fusion）</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">上下堆疊，上層覆蓋下層</div>
+          <div class="compare-cell compare-cell--new">左右流向，輸入連接到輸出</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">圖層多時難以追蹤依賴關係</div>
+          <div class="compare-cell compare-cell--new">每條連線清楚標示資料來源</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">修改中間層可能影響所有上層</div>
+          <div class="compare-cell compare-cell--new">修改單一節點不影響其他分支</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合直覺式、線性合成</div>
+          <div class="compare-cell compare-cell--new">適合複雜、多分支的非線性合成</div>
+        </div>
+      </div>
+    </div>
+        <dl class="definition-list">
+      <dt>Merge</dt>
+      <dd>將前景與背景合成的節點，黃端接前景、綠端接背景</dd>
+      <dt>Delta Keyer</dt>
+      <dd>高品質摳像工具，內建溢色抑制</dd>
+      <dt>Tracker</dt>
+      <dd>追蹤畫面中物體的運動軌跡，可套用至遮罩或特效</dd>
+      <dt>pEmitter</dt>
+      <dd>粒子發射源，控制粒子的出生位置、方向與數量</dd>
+      <dt>Shape 3D</dt>
+      <dd>將 2D 影像轉換為 3D 空間中的平面物件</dd>
+      <dt>Macro</dt>
+      <dd>將多個節點打包為單一節點的巨集，方便複用</dd>
+    </dl>
         <div class="tags">
       <span class="tag blue">MediaIn — 匯入媒體素材</span>
       <span class="tag green">Effect — 套用視覺效果</span>
@@ -279,10 +317,20 @@
   <li><strong>Branch</strong>：從同一節點拉出多條連線，建立分支處理</li>
   <li><strong>Insert</strong>：在兩個已連接的節點之間插入新節點</li>
 </ul>
-        <div class="insight">
-      <div class="insight-title">節點思維 vs 圖層思維</div>
-      <p>After Effects 採用圖層堆疊，上層覆蓋下層；Fusion 採用節點流向，資料沿連線傳遞。節點架構在處理複雜合成時更具彈性，每個處理步驟獨立可見、可調整，不用擔心圖層順序造成的意外覆蓋。</p>
-    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">節點連接注意事項</div>
+    <ul><li>節點的三角形方向：大三角為輸出端（右側），小三角為輸入端（左側）</li><li>不同顏色的輸入端代表不同資料類型：藍色為 2D 影像、綠色為背景、黃色為前景</li><li>連線時若類型不匹配，該連線不會生效</li><li>使用 Branch 時，建議為每個分支命名（Label），方便後續追蹤</li></ul>
+  </div>
+</div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">節點思維 vs 圖層思維</div>
+    <p>After Effects 採用圖層堆疊，上層覆蓋下層；Fusion 採用節點流向，資料沿連線傳遞。節點架構在處理複雜合成時更具彈性，每個處理步驟獨立可見、可調整，不用擔心圖層順序造成的意外覆蓋。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -305,6 +353,17 @@ Ctrl+T — 新增 Transform 節點
 Ctrl+D — 新增 Merge 節點
 Ctrl+Shift+D — 斷開選取節點的連線
 1 / 2 — 切換左/右檢視器顯示</div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-在fusion中merge節點的黃色輸入" data-quiz-answer="0">
+      <div class="quiz-q">在 Fusion 中，Merge 節點的黃色輸入端連接的是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>前景（Foreground）</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>背景（Background）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>遮罩（Mask）</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>3D 攝影機</span></button>
+      </div>
+      <div class="quiz-hint" hidden>回想節點資料流向與 Merge 的連接邏輯</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -442,10 +501,13 @@ Ctrl+Shift+D — 斷開選取節點的連線
   <li><strong>Restore</strong>：手動還原被誤移除的主體區域</li>
   <li>適合處理頭髮、半透明材質等摳像難點</li>
 </ul>
-        <div class="insight">
-      <div class="insight-title">摳像的關鍵在拍攝端</div>
-      <p>再好的摳像工具也救不回拍攝品質太差的素材。均勻打光的綠幕/藍幕、主體與背景足夠的距離、避免壓縮失真——這些前置作業決定了摳像的成敗。</p>
-    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">摳像的關鍵在拍攝端</div>
+    <p>再好的摳像工具也救不回拍攝品質太差的素材。均勻打光的綠幕/藍幕、主體與背景足夠的距離、避免壓縮失真——這些前置作業決定了摳像的成敗。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -471,12 +533,25 @@ Ctrl+Shift+D — 斷開選取節點的連線
     <div class="group-block">
       <div class="group-header">常用混合模式</div>
       <div class="group-body">
-        <ul>
-  <li><strong>Normal</strong>：標準前景覆蓋背景，受 Alpha 通道控制</li>
-  <li><strong>Screen</strong>：適合光暈、光芒等發光效果合成</li>
-  <li><strong>Multiply</strong>：適合陰影、暗部疊加</li>
-  <li><strong>Overlay</strong>：保留背景明暗層次的同時疊加紋理</li>
-</ul>
+        <details class="spoiler">
+      <summary>Merge 前後接反會怎樣？</summary>
+      <div class="spoiler-body"><p>如果前景接在綠色端、背景接在黃色端，合成結果會相反——原本該在上面的畫面跑到下面，原本該當背景的變成前景。這是新手最常犯的錯誤之一，畫面全黑或效果不對時，第一件事就是檢查 Merge 的連線方向。</p></div>
+    </details>
+        <ul class="loose-list">
+      <li><strong>Normal</strong>：標準前景覆蓋背景，受 Alpha 通道控制</li>
+      <li><strong>Screen</strong>：適合光暈、光芒等發光效果合成</li>
+      <li><strong>Multiply</strong>：適合陰影、暗部疊加</li>
+      <li><strong>Overlay</strong>：保留背景明暗層次的同時疊加紋理</li>
+    </ul>
+        <div class="quiz-block" data-quiz-id="q-fusion的遮罩中白色區域代表不受影響" data-quiz-answer="1">
+      <div class="quiz-q">Fusion 的遮罩中，白色區域代表不受影響的範圍？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否（白色 = 作用範圍，黑色 = 不作用）</span></button>
+      </div>
+      <div class="quiz-hint" hidden>遮罩的明暗對應作用區域</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -558,10 +633,13 @@ Ctrl+Shift+D — 斷開選取節點的連線
       <li>統一動畫節奏：進場、停留、退場各階段保持一致的速度感</li>
       <li>建立可複用的文字模板，提升專案效率</li>
     </ul>
-        <div class="insight">
-      <div class="insight-title">動態圖像的核心是節奏</div>
-      <p>好的動態圖像不是特效越多越好，而是每個元素在正確的時間點出現與消失。觀察專業作品的進場節奏——簡潔、有層次、不搶畫面。</p>
-    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">動態圖像的核心是節奏</div>
+    <p>好的動態圖像不是特效越多越好，而是每個元素在正確的時間點出現與消失。觀察專業作品的進場節奏——簡潔、有層次、不搶畫面。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -675,10 +753,13 @@ Ctrl+Shift+D — 斷開選取節點的連線
   <li><strong>ColorCurves</strong>：精細控制色彩曲線</li>
   <li><strong>HueSaturation</strong>：調整色相與飽和度</li>
 </ul>
-        <div class="insight">
-      <div class="insight-title">特效是為敘事服務的</div>
-      <p>特效的目的是強化故事，而非取代故事。觀眾不會因為粒子多而感動，但會因為粒子出現的時機恰到好處而驚嘆。每一次加特效前，先問自己：這個效果對畫面說了什麼？</p>
-    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">特效是為敘事服務的</div>
+    <p>特效的目的是強化故事，而非取代故事。觀眾不會因為粒子多而感動，但會因為粒子出現的時機恰到好處而驚嘆。每一次加特效前，先問自己：這個效果對畫面說了什麼？</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -700,11 +781,23 @@ Ctrl+Shift+D — 斷開選取節點的連線
     <div class="group-block">
       <div class="group-header">從 2D 邁向 3D</div>
       <div class="group-body">
-        <ul>
-  <li>將 2D 素材透過 Shape 3D 節點轉為 3D 平面</li>
-  <li>3D 空間中可自由旋轉、位移、縮放每個元素</li>
-  <li>攝影機決定觀看視角，燈光決定明暗層次</li>
-</ul>
+        <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">2D 節點</button>
+    <button class="tab-btn" data-tab="1">3D 節點</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>在平面空間（X, Y）中處理合成</li><li>使用 Merge 節點疊加前景與背景</li><li>適合遮罩、摳像、文字動畫等平面效果</li><li>不需要 Camera 3D 或 Renderer 3D</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>在立體空間（X, Y, Z）中處理合成</li><li>使用 Merge 3D 將所有物件合併到同一場景</li><li>需要 Shape 3D 將 2D 素材轉為 3D 物件</li><li>必須有 Camera 3D 決定視角、Renderer 3D 渲染輸出</li></ul>
+  </div>
+</div>
+        <ul class="loose-list">
+      <li>將 2D 素材透過 Shape 3D 節點轉為 3D 平面</li>
+      <li>3D 空間中可自由旋轉、位移、縮放每個元素</li>
+      <li>攝影機決定觀看視角，燈光決定明暗層次</li>
+    </ul>
       </div>
     </div>
   </div>
@@ -794,10 +887,10 @@ Ctrl+Shift+D — 斷開選取節點的連線
   <li>霧化（Fog）效果強化遠近層次感</li>
   <li>景深模糊讓焦點外的元素自然虛化</li>
 </ul>
-        <div class="insight">
-      <div class="insight-title">3D 合成的靈魂是燈光</div>
-      <p>沒有燈光的 3D 場景就像沒有靈魂的空殼。燈光決定了物體的立體感、空間感與氛圍。一盞方向光搭配一盞補光，往往比三盞燈同時全開更能營造真實感。</p>
-    </div>
+        <details class="spoiler">
+      <summary>如何用最少燈光做出真實感？</summary>
+      <div class="spoiler-body"><p>一盞主光（Key Light）決定主要明暗與陰影方向，一盞補光（Fill Light）以較低強度柔化暗部，再加一盞背光（Rim Light）從後方打出輪廓邊緣。三盞燈的經典配置比五盞燈全開更容易控制、更省效能，而且畫面更有層次。</p></div>
+    </details>
       </div>
     </div>
   </div>
@@ -850,12 +943,19 @@ Ctrl+Shift+D — 斷開選取節點的連線
     <div class="group-block">
       <div class="group-header">效能優化技巧</div>
       <div class="group-body">
-        <ul>
-  <li>減少不必要的節點數量，合併可合併的處理步驟</li>
-  <li>使用 Proxy 模式降低預覽解析度，加快即時預覽速度</li>
-  <li>善用 Cache 機制：Render Cache 設為 Auto 或 User 定義</li>
-  <li>關閉不需即時預覽的分支，使用 Disable 節點暫時停用</li>
-</ul>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">效能優化注意事項</div>
+    <ul><li>粒子數量直接影響渲染效能，寧可少而精也不要過量</li><li>3D 場景中的 Renderer 3D 是最耗時的節點之一，預覽時可降低抗鋸齒等級</li><li>大量 Blur 節點會嚴重拖慢速度，可考慮先用 Fast Blur 替代</li><li>完成預覽後再開啟 Render Cache 做最終輸出</li></ul>
+  </div>
+</div>
+        <ul class="loose-list">
+      <li>減少不必要的節點數量，合併可合併的處理步驟</li>
+      <li>使用 Proxy 模式降低預覽解析度，加快即時預覽速度</li>
+      <li>善用 Cache 機制：Render Cache 設為 Auto 或 User 定義</li>
+      <li>關閉不需即時預覽的分支，使用 Disable 節點暫時停用</li>
+    </ul>
       </div>
     </div>
   </div>
@@ -893,6 +993,31 @@ Ctrl+Shift+D — 斷開選取節點的連線
           <div class="step-desc">檢查 Proxy 設定與 Cache 狀態</div>
         </div>
       </div>
+    </div>
+        <div class="accordion">
+      <details class="acc-item" open>
+        <summary>如何把做好的特效存成模板？</summary>
+        <div class="acc-body"><p>選取多個節點後按右鍵，選擇 Create Macro。在彈出視窗中勾選你希望暴露給使用者調整的參數，儲存到 Fusion 的 Templates 目錄即可。之後在任何專案中都能從 Effects Library 拖曳使用。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>為什麼我的合成畫面是半透明的？</summary>
+        <div class="acc-body"><p>最常見的原因是 Merge 節點的 Alpha 通道設定。檢查前景是否有透明的 Alpha，或是否誤用了 Screen/Multiply 等混合模式。切換回 Normal 模式確認基礎合成效果。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>粒子特效在預覽時很卡怎麼辦？</summary>
+        <div class="acc-body"><p>先在 pEmitter 中將 Quantity 降到最低可做預覽的數值，確認運動方向與生命周期設定無誤後再逐步調高。也可以使用 Proxy 模式降低預覽解析度。</p></div>
+      </details>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-在fusion的3d流程中哪個節點負責將" data-quiz-answer="2">
+      <div class="quiz-q">在 Fusion 的 3D 流程中，哪個節點負責將 3D 場景渲染回 2D 畫面？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>Camera 3D</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>Merge 3D</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>Renderer 3D</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>Shape 3D</span></button>
+      </div>
+      <div class="quiz-hint" hidden>它是 3D 流程的最後一個節點，輸出到 2D 檢視器</div>
+      <div class="quiz-fb" hidden></div>
     </div>
         <div class="insight">
       <div class="insight-title">模板化是專業的起點</div>

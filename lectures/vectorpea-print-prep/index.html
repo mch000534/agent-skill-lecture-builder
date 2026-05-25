@@ -129,6 +129,15 @@
         <li><a href="#sub-section-28">送印工作流程總覽</a></li>
       </ul>
     </li>
+    <li class="toc-group" data-section="section-9">
+      <a href="#section-9" class="toc-group-title">
+        <span class="toc-num">9</span> 即時測驗<span class="toc-read-dot" data-for="section-9"></span>
+      </a>
+      <ul class="toc-sub">
+        <li><a href="#sub-section-29">基礎概念題</a></li>
+        <li><a href="#sub-faq">常見問題 FAQ</a></li>
+      </ul>
+    </li>
 
           </ul>
     <div class="sidebar-progress">
@@ -166,6 +175,7 @@
     <a href="#section-6">色彩</a>
     <a href="#section-7">規格</a>
     <a href="#svgpdf">匯出</a>
+    <a href="#section-9">即時測驗</a>
           </nav>
   </header>
 
@@ -217,7 +227,42 @@
     <div class="group-block">
       <div class="group-header">根本的差異</div>
       <div class="group-body">
-        <p><strong>點陣圖（Raster）</strong>：由固定數量的像素組成，放大超過原始尺寸就會模糊。AI 生圖工具（Midjourney、Stable Diffusion）輸出的 JPG/PNG，都是點陣圖。</p>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">點陣圖（Raster）</div>
+        <div class="compare-label compare-label--new">向量圖（Vector）</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">由固定數量的像素組成</div>
+          <div class="compare-cell compare-cell--new">由數學公式描述的路徑和形狀組成</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">放大超過原始尺寸就會模糊失真</div>
+          <div class="compare-cell compare-cell--new">放大到任何尺寸都不失真</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">常見格式：JPG、PNG、WEBP</div>
+          <div class="compare-cell compare-cell--new">常見格式：SVG、AI、PDF</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">AI 生圖工具預設輸出格式</div>
+          <div class="compare-cell compare-cell--new">Logo、插圖、字體輪廓應使用此格式</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">印刷大尺寸需極高解析度</div>
+          <div class="compare-cell compare-cell--new">無限縮放，檔案大小與尺寸無關</div>
+        </div>
+      </div>
+    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">如何記憶這個差異</div>
+    <p>點陣圖就像<strong>馬賽克拼貼</strong>——每塊磁磚大小固定，拉開距離看就糊了。</p><p>向量圖就像<strong>幾何公式</strong>——不管畫多大，公式重新計算一次就對了。</p>
+  </div>
+</div>
+        <p class="loose-text"><strong>點陣圖（Raster）</strong>：由固定數量的像素組成，放大超過原始尺寸就會模糊。AI 生圖工具（Midjourney、Stable Diffusion）輸出的 JPG/PNG，都是點陣圖。</p>
         <p class="loose-text"><strong>向量圖（Vector）</strong>：由數學公式描述的路徑和形狀組成，放大到任何尺寸都不失真。Logo、插圖、字體輪廓，都應該是向量格式。</p>
         <div class="tags">
       <span class="tag orange">點陣圖：JPG、PNG、WEBP——像素固定，放大就糊</span>
@@ -290,6 +335,30 @@
         <div class="insight">
       <div class="insight-title">Vectorpea 與 Photopea 的分工</div>
       <p>Photopea 處理點陣圖（修圖、合成、印刷解析度調整），Vectorpea 處理向量圖（路徑、排版、無限縮放）。兩者可以搭配使用：先在 Photopea 處理 AI 生成的點陣圖，再在 Vectorpea 做排版和向量整合。</p>
+    </div>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">點陣圖編輯（Photopea）</div>
+        <div class="compare-label compare-label--new">向量圖編輯（Vectorpea）</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">以像素為單位操作（選取、塗抹、濾鏡）</div>
+          <div class="compare-cell compare-cell--new">以物件為單位操作（路徑、錨點、形狀）</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">選取靠顏色或邊緣偵測</div>
+          <div class="compare-cell compare-cell--new">每個物件獨立可選取，不需選取範圍</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">放大後像素化，無法無限縮放</div>
+          <div class="compare-cell compare-cell--new">放大不失真，適合印刷大尺寸輸出</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合修圖、合成、照片後製</div>
+          <div class="compare-cell compare-cell--new">適合 Logo、排版、幾何圖形設計</div>
+        </div>
+      </div>
     </div>
       </div>
     </div>
@@ -427,6 +496,13 @@
         <p>每一個向量形狀都有兩個視覺屬性，在右側面板控制：</p>
         <p class="loose-text"><strong>Fill（填色）</strong>：封閉路徑內部的顏色，可以是純色、漸層或圖樣。開放路徑無法填色。</p>
         <p class="loose-text"><strong>Stroke（筆畫）</strong>：沿著路徑邊緣繪製的線條，可以設定顏色、寬度和端點樣式。印刷時筆畫寬度至少設定 0.25pt，過細的線條在印刷機上可能消失。</p>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">印刷筆畫最小寬度</div>
+    <p>送印時筆畫寬度<strong>不可低於 0.25pt</strong>（約 0.088mm）。</p><p>螢幕上看得到不代表印得出來——印刷機的網點解析度有限，過細線條會斷線或完全消失。</p>
+  </div>
+</div>
         <div class="tags">
       <span class="tag green">Fill：路徑內部的顏色，印刷主體色彩</span>
       <span class="tag blue">Stroke：路徑外框線，可設定粗細和樣式</span>
@@ -653,6 +729,13 @@
       <div class="group-header">在 AI 圖片上層描繪向量路徑</div>
       <div class="group-body">
         <p>當自動向量化效果不理想時，可以把 AI 圖片作為底圖，在上方手動用鋼筆工具描繪路徑。這個方法最費時，但結果最乾淨，適合 Logo 設計。</p>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">鋼筆工具實用技巧</div>
+    <ul><li>描繪曲線時<strong>節點越少越平滑</strong>——盡量在曲線轉折處才放錨點</li><li>拖曳控制把手時按住 Shift 可限制角度</li><li>完成一段路徑後按 Enter 結束，避免多餘節點</li></ul>
+  </div>
+</div>
         <div class="flow">
       <div class="flow-step">
         <div class="step-num">1</div>
@@ -828,6 +911,10 @@
       <div class="insight-title">印刷用途的布林運算</div>
       <p>送印前建議用 Unite 合併相同顏色的色塊，減少路徑數量，也避免印刷時出現色塊之間的白縫（叫做「漏白」，trapping 問題的一種）。</p>
     </div>
+        <details class="spoiler">
+      <summary>常見問題：為什麼兩個相鄰色塊之間會出現白縫？</summary>
+      <div class="spoiler-body"><p>這叫做「漏白」（trapping 問題）。原因通常是：</p><ul><li>兩個色塊各自有微小的間隙（肉眼在螢幕上看不出來）</li><li>印刷裁切時的微小偏移讓間隙顯露</li></ul><p><strong>解法</strong>：使用 Unite（聯集）將相同顏色的相鄰色塊合併為單一路徑，徹底消除縫隙。</p></div>
+    </details>
       </div>
     </div>
   </div>
@@ -920,6 +1007,13 @@
       <div class="insight-title">轉外框前先存一份帶文字的備份</div>
       <p>轉外框後無法修改文字內容。建議先 File → Save 存一份帶文字的 SVG 工作檔，再轉外框後存另一份送印版本，命名加上「_outline」以區分。</p>
     </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">轉外框是不可逆操作</div>
+    <p>文字一旦轉為外框，就變成普通向量路徑——<strong>無法再修改內容、字型、字距</strong>。</p><p>務必確認文字內容完全正確後再執行此步驟。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1232,8 +1326,50 @@
   </div>
 
   <div class="reveal">
-    <div class="summary-grid">
-    </div>
+    <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">所有文字已轉外框（Text → Create Outlines）</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">筆畫寬度不小於 0.25pt</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">畫板尺寸含出血（每邊 +3mm）</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">重要元素距邊緣 3mm 以上（安全區域）</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">向量路徑全部封閉（無意外開放路徑）</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">已存一份帶文字的 SVG 備份工作檔</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">漸層效果已在 PNG 校稿版本確認</div>
+        </div>
+      </li>
+    </ol>
   </div>
 
   <div class="reveal">
@@ -1385,6 +1521,88 @@
           <div class="step-desc"></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+<section class="section">
+  <div class="reveal">
+    <span class="section-label" id="section-9"><span class="num">9</span> 即時測驗</span>
+    <h2>檢驗你的印前知識</h2>
+    
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-section-29"><span class="bar"></span>基礎概念題</div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-block" data-quiz-id="q-為什麼送印前文字需要轉外框" data-quiz-answer="1">
+      <div class="quiz-q">為什麼送印前文字需要轉外框？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>讓文字可以填色</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>避免印刷廠缺少相同字型導致顯示錯誤</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>讓檔案變小</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>讓文字可以放大縮小</span></button>
+      </div>
+      <div class="quiz-hint" hidden>想想如果印刷廠沒有你用的字型，會發生什麼事？</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-block" data-quiz-id="q-印刷品的筆畫寬度建議不可低於多少" data-quiz-answer="2">
+      <div class="quiz-q">印刷品的筆畫寬度建議不可低於多少？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>0.1pt</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>0.5pt</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>0.25pt</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>1.0pt</span></button>
+      </div>
+      <div class="quiz-hint" hidden>印刷機的網點解析度有限，過細線條會斷線或消失。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-block" data-quiz-id="q-a4傳單210297mm含出血的畫板尺寸" data-quiz-answer="0">
+      <div class="quiz-q">A4 傳單（210×297mm）含出血的畫板尺寸應設定為 216×303mm？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>出血是每邊各加 3mm，寬高各加多少？</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-faq"><span class="bar"></span>常見問題 FAQ</div>
+  </div>
+
+  <div class="reveal">
+    <div class="accordion">
+      <details class="acc-item" open>
+        <summary>AI 生成的 SVG 可以直接送印嗎？</summary>
+        <div class="acc-body"><p>不一定。AI 生成的 SVG 需要確認以下幾點：</p><ul><li>路徑是否全部封閉（開放路徑無法正確填色）</li><li>是否有過多不必要的節點（影響印刷平滑度）</li><li>筆畫寬度是否符合印刷廠要求（不低於 0.25pt）</li><li>文字是否已轉外框（如果 SVG 包含文字）</li></ul><p>建議匯入 Vectorpea 檢查並整理後再送印。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>RGB 和 CMYK 該用哪個？</summary>
+        <div class="acc-body"><p>Vectorpea 目前以 RGB 為主要工作模式。多數數位印刷廠接受 RGB 的 PDF，他們會自行轉換。但部分傳統印刷廠可能要求 CMYK 格式。</p><p><strong>安全做法</strong>：送印前先確認印刷廠的規格要求，避免色彩偏差。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>為什麼印刷需要加出血？</summary>
+        <div class="acc-body"><p>印刷完成後需要裁切成成品尺寸，裁切機有微小的誤差。出血（每邊 3mm）確保裁切偏離時不會露出白邊。</p><p>沒有出血的設計，裁切後邊緣可能出現細白線，影響成品品質。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>Vectorpea 能開啟 Adobe Illustrator 的 .ai 檔嗎？</summary>
+        <div class="acc-body"><p>可以。Vectorpea 支援開啟 .ai（Adobe Illustrator）格式，以及 SVG 和 PDF。開啟後所有路徑會以可編輯的向量物件匯入。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>漸層印刷時出現條帶感（Banding）怎麼辦？</summary>
+        <div class="acc-body"><p>印刷機的半色調網點對細微漸層不友善，特別是接近白色的端點容易出現條帶。</p><p><strong>建議解法</strong>：</p><ul><li>在 PNG 校稿版本上仔細確認漸層效果</li><li>避免從深色直接過渡到純白的漸層</li><li>考慮改用純色或減少漸層跨度</li></ul></div>
+      </details>
     </div>
   </div>
 </section>
@@ -1704,8 +1922,8 @@
   </script>
 
   <script>
-    window.__sectionIds__ = ["instructor","vectorpea","section-2","ai-svg","section-4","section-5","section-6","section-7","svgpdf"];
-    window.__allAnchorIds__ = ["instructor","vectorpea","sub-vs","sub-vectorpea","sub-section-3","section-2","sub-section-4","sub-fillstroke","sub-section-6","ai-svg","sub-ai-svg","sub-ai-svg-2","sub-manual-trace","section-4","sub-section-10","sub-section-11","sub-section-12","section-5","sub-section-13","sub-outline","sub-section-15","sub-section-16","section-6","sub-section-17","sub-section-18","sub-stroke","sub-section-20","section-7","sub-section-21","sub-section-22","sub-artboards","svgpdf","sub-section-24","sub-pdf","sub-svg","sub-png","sub-section-28"];
+    window.__sectionIds__ = ["instructor","vectorpea","section-2","ai-svg","section-4","section-5","section-6","section-7","svgpdf","section-9"];
+    window.__allAnchorIds__ = ["instructor","vectorpea","sub-vs","sub-vectorpea","sub-section-3","section-2","sub-section-4","sub-fillstroke","sub-section-6","ai-svg","sub-ai-svg","sub-ai-svg-2","sub-manual-trace","section-4","sub-section-10","sub-section-11","sub-section-12","section-5","sub-section-13","sub-outline","sub-section-15","sub-section-16","section-6","sub-section-17","sub-section-18","sub-stroke","sub-section-20","section-7","sub-section-21","sub-section-22","sub-artboards","svgpdf","sub-section-24","sub-pdf","sub-svg","sub-png","sub-section-28","section-9","sub-section-29","sub-faq"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>

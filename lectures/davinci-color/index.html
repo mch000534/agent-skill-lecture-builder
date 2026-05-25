@@ -401,6 +401,30 @@
 
   <div class="reveal">
     <div class="group-block">
+      <div class="group-header">色彩名詞解釋</div>
+      <div class="group-body">
+        <dl class="definition-list">
+      <dt>色域（Color Gamut）</dt>
+      <dd>一個色彩系統能表現的全部色彩範圍，色域越大能顯示的颜色越多</dd>
+      <dt>色溫（Color Temperature）</dt>
+      <dd>以克耳文（K）為單位的光源顏色指標，數值越低越偏藍（冷），越高越偏橙（暖）</dd>
+      <dt>LUT（Look-Up Table）</dt>
+      <dd>色彩查找表，將輸入色彩值映射到輸出值，用於快速套用風格或技術轉換</dd>
+      <dt>Gamma</dt>
+      <dd>亮度的非線性編碼曲線，決定數值與實際感知亮度的對應關係</dd>
+      <dt>動態範圍（Dynamic Range）</dt>
+      <dd>影像能同時記錄的最亮與最暗區域的比值，單位為 stops</dd>
+      <dt>色彩空間（Color Space）</dt>
+      <dd>定義色彩如何數位化編碼與解碼的完整規範，包含色域與 Gamma</dd>
+      <dt>廣播安全（Broadcast Safe）</dt>
+      <dd>亮度與色度不超出電視廣播標準的範圍，確保在所有接收設備上正確顯示</dd>
+    </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
       <div class="group-header">色彩視覺的三個恆常現象</div>
       <div class="group-body">
         <div class="flow">
@@ -431,6 +455,12 @@
       <p>長時間盯著同一畫面調色，眼睛會對當前色調適應，導致過度校正。</p>
       <p style="margin-top:.5rem">專業調色師的習慣：每 30-45 分鐘休息 5 分鐘，或用「中性灰眼神飛秒測試」——閉眼 30 秒後快速看畫面，感受第一眼的色偏印象。</p>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <ul><li>每隔 30 分鐘起身走動，讓眼睛遠離螢幕</li><li>準備一張標準色卡紙放在旁邊，偶爾看一眼作為「色彩重置」</li><li>不要在疲勞時做最終確認——隔天早上再看往往會發現問題</li><li>使用 DaVinci 的「A/B 比較」功能，切換回原始畫面快速重置視覺</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -561,6 +591,42 @@ LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
 
   <div class="reveal">
     <div class="group-block">
+      <div class="group-header">LOG 與 Rec.709 視覺對比</div>
+      <div class="group-body">
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">LOG 原始畫面</div>
+        <div class="compare-label compare-label--new">套用 Rec.709 轉換後</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">低對比，畫面灰矇矇</div>
+          <div class="compare-cell compare-cell--new">對比正常，暗部紮實高光通透</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">色彩平淡，飽和度極低</div>
+          <div class="compare-cell compare-cell--new">色彩飽滿鮮明</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">保留 14+ stops 動態範圍</div>
+          <div class="compare-cell compare-cell--new">約 6-8 stops 可用範圍</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">不適合直接觀看或交付</div>
+          <div class="compare-cell compare-cell--new">適合直接輸出到 YouTube / 電視</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">必須經過色彩轉換才能調色</div>
+          <div class="compare-cell compare-cell--new">可直接進行風格化調色</div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
       <div class="group-header">各廠商 LOG 格式對照</div>
       <div class="group-body">
         <div class="tags">
@@ -592,6 +658,12 @@ LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
 → 各廠商提供 LOG → Rec.709 的 LUT 檔案（可官網免費下載）
 → 在調色節點最前端套用此 LUT</div>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <p>第一次接觸 LOG 素材時，建議先用「方法二」在 Color 管理中設定自動轉換。這樣你不需要在每個鏡頭手動處理技術轉換，可以專注在創意調色上。等熟悉後再改用 CST 節點獲得更精確的控制。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -692,6 +764,29 @@ Ctrl + 拖拉節點  ：複製節點</div>
   </div>
 
   <div class="reveal">
+    <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">Waveform 波形圖</button>
+    <button class="tab-btn" data-tab="1">Parade 分量圖</button>
+    <button class="tab-btn" data-tab="2">Vectorscope 向量圖</button>
+    <button class="tab-btn" data-tab="3">Histogram 直方圖</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>顯示畫面左右位置的亮度分布</li><li>橫軸對應畫面左右，縱軸是亮度 0-100%</li><li>最適合判斷整體曝光與對比度</li><li>波形觸底 0% = 死黑，觸頂 100% = 死白</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>同時顯示 RGB 三個通道的獨立波形</li><li>最適合判斷色偏（三條線等高 = 中性色）</li><li>白平衡校正時最重要的工具</li><li>R 偏高 = 偏紅，B 偏高 = 偏藍</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="2">
+    <ul><li>圓形圖顯示色相與飽和度</li><li>圓心 = 中性灰，越外越飽和</li><li>膚色線：健康膚色應落在此線附近</li><li>最適合判斷膚色與整體色彩平衡</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="3">
+    <ul><li>顯示各亮度的像素數量</li><li>鐘形分布 = 理想人像</li><li>右側截斷 = 過曝，左側截斷 = 欠曝</li><li>最適合快速判斷曝光是否正確</li></ul>
+  </div>
+</div>
+  </div>
+
+  <div class="reveal">
     <div class="group-block">
       <div class="group-header">Waveform（波形圖）</div>
       <div class="group-body">
@@ -723,6 +818,12 @@ Ctrl + 拖拉節點  ：複製節點</div>
       <p>當波形觸及 0% 下方（死黑）或 100% 以上（死白），代表該區域像素完全沒有細節。</p>
       <p style="margin-top:.5rem">死白是拍攝時的問題（曝光過度），調色無法救回。死黑則在調色時可以適當利用——電影感調色往往刻意保留一點「純黑」區域增加深度感。</p>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <p>一旦拍攝時高光過曝（死白），該區域的像素資訊已經完全丟失，調色軟體無能為力。這就像在錄音時爆音一樣，後製無法恢復原本的聲音。所以拍攝時寧可欠曝一點（往左偏），也不要過曝——欠曝的暗部至少還保有可以拉回的資訊。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -860,29 +961,36 @@ CIE 色度圖（Chromaticity Diagram）：
     <div class="group-block">
       <div class="group-header">圖層思維 vs 節點思維</div>
       <div class="group-body">
-        <div class="flow">
-      <div class="flow-step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-title">Photoshop 圖層思維</div>
-          <div class="step-desc">上方圖層蓋住下方圖層，效果疊加方向從下到上</div>
-        </div>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">Photoshop 圖層思維</div>
+        <div class="compare-label compare-label--new">DaVinci 節點思維</div>
       </div>
-      <div class="flow-step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-title">DaVinci 節點思維</div>
-          <div class="step-desc">像水管，影像資訊從左流向右，每個節點做一件事</div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">上方圖層蓋住下方圖層</div>
+          <div class="compare-cell compare-cell--new">像水管，資訊從左流向右</div>
         </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-title">節點的優勢</div>
-          <div class="step-desc">可以做分支、混合、非線性的複雜處理，圖層做不到</div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">疊加方向從下到上</div>
+          <div class="compare-cell compare-cell--new">每個節點做一件事</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合靜態影像處理</div>
+          <div class="compare-cell compare-cell--new">可做分支、混合、非線性處理</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">效果疊加難以追蹤</div>
+          <div class="compare-cell compare-cell--new">節點樹一目了然</div>
         </div>
       </div>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <p>剛從 Photoshop 或手機修圖 App 轉入 DaVinci 的調色師，最容易卡在「圖層思維」。記住：節點不是圖層，沒有「誰蓋誰」的問題。每個節點只負責「修改進入的影像，然後送出去」。把節點想成一條流水線，而不是一疊紙。</p>
+  </div>
+</div>
         <div class="prompt-block">
       <div class="prompt-header">
         <div class="dots"><span></span><span></span><span></span></div>
@@ -909,6 +1017,29 @@ CIE 色度圖（Chromaticity Diagram）：
 
   <div class="reveal">
     <div class="sub-title" id="sub-section-8"><span class="bar"></span>四種核心節點類型</div>
+  </div>
+
+  <div class="reveal">
+    <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">串行 Serial</button>
+    <button class="tab-btn" data-tab="1">並行 Parallel</button>
+    <button class="tab-btn" data-tab="2">圖層 Layer</button>
+    <button class="tab-btn" data-tab="3">外部 Outside</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>影像依序通過每個節點，最基本也最常用</li><li>適合：LOG 轉換、一級校正、對比調整、風格 LUT</li><li>特點：簡單直覺，一個節點做一件事</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>多條路徑同時處理同一個輸入，結果自動混合</li><li>適合：分開處理高光與陰影、創意風格比較</li><li>特點：各調整互不影響，可獨立控制強度</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="2">
+    <ul><li>上層蓋下層，支援混合模式（Overlay、Soft Light 等）</li><li>適合：需要 Photoshop 風格疊加效果的場景</li><li>特點：可以做複雜的多重曝光或質感疊加</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="3">
+    <ul><li>遮罩選到的走一條路，沒選到的走另一條路</li><li>適合：天空偏藍但不影響地面、主體與背景分開處理</li><li>特點：自動分離遮罩內外，不需要手動複製節點</li></ul>
+  </div>
+</div>
   </div>
 
   <div class="reveal">
@@ -1190,6 +1321,10 @@ CIE 色度圖（Chromaticity Diagram）：
         </div>
       </div>
     </div>
+        <details class="spoiler">
+      <summary>新手最常見的順序錯誤</summary>
+      <div class="spoiler-body"><p>很多新手會先調整對比或風格，結果發現怎麼調都不對。原因是：<strong>在素材還未達到技術標準前做任何風格化調整，都是在沙地上蓋房子</strong>。</p><p>正確的順序永遠是：技術校正（曝光、白平衡、對比）→ 風格創作（LUT、色彩偏移）。前者讓畫面「正確」，後者讓畫面「好看」。兩者順序顛倒會事倍功半。</p></div>
+    </details>
       </div>
     </div>
   </div>
@@ -1265,6 +1400,37 @@ Log Wheels（對數控制輪）：
   Tint 往左 = 偏綠 / 往右 = 偏洋紅
   適合知道目標色溫（日光 5500K、陰天 6500K、鎢絲燈 3200K）時快速設定</div>
     </div>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">快速方法</div>
+        <div class="compare-label compare-label--new">精確方法</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">自動白平衡吸管一鍵校正</div>
+          <div class="compare-cell compare-cell--new">Parade 圖手動校正 RGB 三線</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合時間緊迫、畫面簡單的場景</div>
+          <div class="compare-cell compare-cell--new">適合專業輸出、有中性色參考物的場景</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">可能因為畫面複雜而計算錯誤</div>
+          <div class="compare-cell compare-cell--new">結果穩定可重現，數據說話</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">Temperature/Tint 滑桿直觀調整</div>
+          <div class="compare-cell compare-cell--new">用 Offset 微調，精度更高</div>
+        </div>
+      </div>
+    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">白平衡校正小技巧</div>
+    <p>如果畫面中沒有任何中性色物體可以参考，可以試試「灰卡技巧」：拍攝時在場景中放一張白紙或灰卡，調色時先以此為基準做白平衡校正，完成後再用 Qualifier 排除灰卡區域。這樣即使環境色複雜，也能獲得準確的白平衡起點。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1366,6 +1532,45 @@ Log Wheels（對數控制輪）：
       </div>
     </div>
   </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">即時測驗：一級調色基礎</div>
+      <div class="group-body">
+        <div class="quiz-block" data-quiz-id="q-在parade圖中如果白色物體對應的r通" data-quiz-answer="1">
+      <div class="quiz-q">在 Parade 圖中，如果白色物體對應的 R 通道比 G、B 高 10-15%，代表什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>曝光不足</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>整體偏暖橘色（白平衡未校正）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>對比度過高</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>素材是 LOG 格式</span></button>
+      </div>
+      <div class="quiz-hint" hidden>Parade 圖中 RGB 三條線等高代表中性色，R 偏高代表白色物體偏紅/橙</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-拍攝時過曝死白的區域可以在後製調色時完全" data-quiz-answer="1">
+      <div class="quiz-q">拍攝時過曝（死白）的區域可以在後製調色時完全救回？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>死白代表像素資訊完全丟失，調色軟體無法創造不存在的資訊</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-一級調色primarygrading和二" data-quiz-answer="0">
+      <div class="quiz-q">一級調色（Primary Grading）和二級調色（Secondary Grading）的主要區別是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>一級是整體調整，二級是局部精確調整</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>一級只用 Color Wheels，二級只用 Curves</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>一級在 Edit 頁面，二級在 Color 頁面</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>一級只能調亮度，二級只能調色彩</span></button>
+      </div>
+      <div class="quiz-hint" hidden>想一下 Qualifier 和 Power Window 的作用範圍</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -1455,6 +1660,12 @@ Log Wheels（對數控制輪）：
   控制點不超過 4-5 個，太多控制點曲線會震盪
   使用「平滑（Smooth）」選項讓曲線過渡更自然</div>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <p>過度拉 S 形曲線是新手最常犯的錯誤——暗部拉太深導致死黑，高光拉太高導致死白。每次調整後務必看波形圖確認：暗部不低於 2%，高光不超過 98%。好的 S 形曲線是讓畫面「有對比」而不是「有死黑死白」。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -2019,6 +2230,12 @@ HSL 限定器膚色範圍建議：
   波形圖確認臉部亮度在 50-75%（特寫訪談的標準亮度）
   不要為了「讓膚色好看」而破壞整體場景的色彩一致性</div>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <p>處理膚色時，先用 Vectorscope 確認方向（偏紅/偏黃），再用 Qualifier 只選膚色範圍微調。記住：觀眾對膚色的敏感度遠超過其他色彩——膚色正確了，整個畫面的真實感就會大幅提升。如果時間有限，膚色校正的投資報酬率最高。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -2256,6 +2473,62 @@ HSL 限定器膚色範圍建議：
 步驟 6：Hue vs. Hue 色相偏移
   藍色往青色方向推（讓天空偏舊照片的青藍）
   綠色往黃色方向推（草地偏黃褐色）</div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">四種經典風格快速對照</div>
+      <div class="group-body">
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">電影感</div>
+        <div class="compare-label compare-label--new">日系清新</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">對比度中高，暗部有深度</div>
+          <div class="compare-cell compare-cell--new">低對比，柔和均勻</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">飽和度 70-85%</div>
+          <div class="compare-cell compare-cell--new">飽和度 60-75%</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">暖色高光 + 冷色陰影</div>
+          <div class="compare-cell compare-cell--new">整體暖白空氣感</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合動作片、劇情片</div>
+          <div class="compare-cell compare-cell--new">適合文青片、美食、旅拍</div>
+        </div>
+      </div>
+    </div>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">Orange &amp; Teal</div>
+        <div class="compare-label compare-label--new">復古膠片（1970s）</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">膚色橙 vs 背景青的強烈對比</div>
+          <div class="compare-cell compare-cell--new">整體橙棕色調，無純黑純白</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">飽和度 75-85%，保留橙青</div>
+          <div class="compare-cell compare-cell--new">大幅去飽和至 50-65%</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">好萊塢動作片標準</div>
+          <div class="compare-cell compare-cell--new">老照片、懷舊回憶</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">LUT 強度 30-60%</div>
+          <div class="compare-cell compare-cell--new">膠片顆粒 ISO 800-1600</div>
+        </div>
+      </div>
     </div>
       </div>
     </div>
@@ -2561,6 +2834,45 @@ Step 4：設定輸出色彩空間
           <div class="step-desc">輸出代理檔（1080p H.264）給客戶審閱，確認後再做最終輸出</div>
         </div>
       </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">進階測驗：綜合應用</div>
+      <div class="group-body">
+        <div class="quiz-block" data-quiz-id="q-要建立高光偏暖陰影偏冷的電影感效果應該如" data-quiz-answer="2">
+      <div class="quiz-q">要建立「高光偏暖、陰影偏冷」的電影感效果，應該如何使用分通道曲線？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>Y 通道拉 S 形，R 和 B 通道不動</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>R 通道暗部往上，B 通道高光往上</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>R 通道高光微微往上、暗部往下，B 通道暗部往上、高光往下</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>所有通道都拉到完全一樣</span></button>
+      </div>
+      <div class="quiz-hint" hidden>往上是該通道顏色增強，往下是其補色增強。要高光偏暖（紅/橙）就拉 R 高光，要陰影偏冷（藍）就拉 B 暗部</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-在節點樹中創意風格lut應該放在一級校正" data-quiz-answer="0">
+      <div class="quiz-q">在節點樹中，創意風格 LUT 應該放在一級校正節點之後？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>LUT 是在畫面已經技術正確的前提下疊加風格，不是替代校正</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-健康人類的膚色在vectorscope上" data-quiz-answer="2">
+      <div class="quiz-q">健康人類的膚色在 Vectorscope 上應該落在哪裡？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>圓心位置（中性灰）</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>圓周最外圍</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>膚色線（Skin Tone Line）附近</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>紅色目標點附近</span></button>
+      </div>
+      <div class="quiz-hint" hidden>膚色線從圓心延伸到約 11 點鐘方向，所有膚色（無論深淺）都應落在此線附近</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>

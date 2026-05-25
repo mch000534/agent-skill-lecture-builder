@@ -102,6 +102,7 @@
         <li><a href="#sub-cron">Cron：排程自動化</a></li>
         <li><a href="#sub-profile">Profile：多實例隔離</a></li>
         <li><a href="#sub-mcp">MCP：擴充工具生態</a></li>
+        <li><a href="#sub-faq">常見問題 FAQ</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="summary">
@@ -226,10 +227,23 @@
         </div>
       </div>
     </div>
-        <div class="insight">
-      <div class="insight-title">Agent 的核心差異：從「問答」到「行動」</div>
-      <p>聊天型 AI 只能告訴你怎麼做，Agent 型 AI 會直接幫你做。</p>
-      <p style="margin-top:.5rem">更重要的是，Hermes 會記住你上次做了什麼、你偏好什麼工具、你的專案結構長怎樣 — 這讓它不是一次性的助手，而是持續進化的協作者。</p>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">核心觀點</div>
+    <p>Agent 的核心差異：從「問答」到「行動」</p><ul><li>聊天型 AI 只能告訴你怎麼做</li><li>Agent 型 AI 會直接幫你做</li><li>Hermes 會記住你上次做了什麼、你偏好什麼工具、你的專案結構長怎樣 — 這讓它不是一次性的助手，而是持續進化的協作者</li></ul>
+  </div>
+</div>
+        <div class="quiz-block" data-quiz-id="q-hermesagent與一般聊天型ai最" data-quiz-answer="1">
+      <div class="quiz-q">Hermes Agent 與一般聊天型 AI 最大的差異是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>支援更多種語言</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>具備持久記憶、能自主執行工具、跨平台運作</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>回答速度更快</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>完全免費開源</span></button>
+      </div>
+      <div class="quiz-hint" hidden>從「被動回答」vs「主動行動」的角度思考</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -257,42 +271,82 @@
 
   <div class="reveal">
     <div class="group-block">
+      <div class="group-header">快速入門路徑</div>
+      <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">第 2 章 — 安裝、設定與第一次對話</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">第 3 章 — CLI 核心操作與 Slash Commands</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">第 4 章 — Skills 技能系統與 Memory 記憶</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">第 5 章 — Gateway 多平台連接</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">第 6 章 — 進階能力：Subagent、Cron、Profile</div>
+        </div>
+      </li>
+    </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
       <div class="group-header">你會學到什麼</div>
       <div class="group-body">
         <div class="flow">
       <div class="flow-step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <div class="step-title">第 2 章</div>
-          <div class="step-desc">安裝、設定與第一次對話</div>
+          <div class="step-title">安裝與設定</div>
+          <div class="step-desc">完成環境建置，與 Agent 進行第一次對話</div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">第 3 章</div>
-          <div class="step-desc">CLI 核心操作與 Slash Commands</div>
+          <div class="step-title">CLI 核心操作</div>
+          <div class="step-desc">掌握日常操作中最常用的指令與 Slash Commands</div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">第 4 章</div>
-          <div class="step-desc">Skills 技能系統與 Memory 記憶</div>
+          <div class="step-title">Skills 與 Memory</div>
+          <div class="step-desc">讓 Agent 透過技能與記憶的累積越用越強</div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <div class="step-title">第 5 章</div>
-          <div class="step-desc">Gateway 多平台連接</div>
+          <div class="step-title">Gateway 多平台</div>
+          <div class="step-desc">把 Agent 接到 Telegram、Discord 等日常通訊工具</div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">5</div>
         <div class="step-content">
-          <div class="step-title">第 6 章</div>
-          <div class="step-desc">進階能力：Subagent、Cron、Profile</div>
+          <div class="step-title">進階能力</div>
+          <div class="step-desc">Subagent 平行委派、Cron 排程、Profile 隔離、MCP 工具擴充</div>
         </div>
       </div>
     </div>
@@ -321,10 +375,13 @@
     <div class="group-block">
       <div class="group-header">系統需求與安裝指令</div>
       <div class="group-body">
-        <ul>
-  <li>支援 macOS / Linux / Windows（WSL）</li>
-  <li>需要 Python 3.10 以上</li>
-</ul>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">系統需求</div>
+    <ul><li>支援 macOS / Linux / Windows（WSL）</li><li>需要 Python 3.10 以上版本</li><li>建議預留至少 500MB 磁碟空間（虛擬環境 + 依賴套件）</li></ul>
+  </div>
+</div>
         <div class="prompt-block">
       <div class="prompt-header">
         <div class="dots"><span></span><span></span><span></span></div>
@@ -439,6 +496,22 @@
           <div class="compare-cell compare-cell--new">Provider 的 API Key 都放這裡</div>
         </div>
       </div>
+    </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">為什麼分開存放？</div>
+    <p>將 API Key 獨立到 <code>.env</code> 檔案是安全最佳實踐：</p><ul><li><code>config.yaml</code> 可以安全地備份或分享（不含敏感資訊）</li><li><code>.env</code> 應加入 <code>.gitignore</code>，避免意外洩露金鑰</li><li>Hermes 在讀取設定時會自動合併兩層</li></ul>
+  </div>
+</div>
+        <div class="quiz-block" data-quiz-id="q-hermesconfigyaml可以安全" data-quiz-answer="1">
+      <div class="quiz-q">`~/.hermes/config.yaml` 可以安全地放入 Git 版本控制嗎？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>想一下哪些資訊應該避免進入版控</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -558,6 +631,10 @@ hermes config path</div>
       <li>輸入 <code>/help</code> 列出所有 Slash Commands</li>
       <li>嘗試讓它執行一個簡單指令（如 <code>pwd</code>）確認工具正常</li>
     </ul>
+        <details class="spoiler">
+      <summary>如果 hermes doctor 報錯怎麼辦？</summary>
+      <div class="spoiler-body"><p>常見問題與解法：</p><ul><li><strong>Python 版本過低</strong>：升級至 Python 3.10+，可使用 pyenv 管理多版本</li><li><strong>API Key 無效</strong>：檢查 <code>~/.hermes/.env</code> 中的 Key 是否正確，確認 Provider 帳戶有可用額度</li><li><strong>網路連線問題</strong>：確認終端機可以存取外部 API，企業環境可能需要設定 proxy</li><li><strong>權限不足</strong>：安裝腳本需要寫入權限，可使用 <code>sudo</code> 或檢查目錄權限</li></ul></div>
+    </details>
       </div>
     </div>
   </div>
@@ -614,6 +691,13 @@ hermes --resume SESSION_ID</div>
       <span class="tag orange">--yolo — 跳過危險指令確認（不建議日常使用）</span>
       <span class="tag purple">--worktree, -w — 隔離 Git Worktree 模式</span>
     </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">注意 --yolo 模式</div>
+    <p><code>--yolo</code> 會讓 Hermes 自動執行所有指令，包含 <code>rm -rf</code> 等危險操作。僅在受控環境（如測試用 VM、隔離的 container）中使用，日常操作請勿啟用。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -725,6 +809,10 @@ hermes sessions prune       # 清理舊對話（--older-than N 天）</div>
       <li>Session 資料存放在 <code>~/.hermes/state.db</code>（SQLite + FTS5 全文搜尋）</li>
       <li>可用 <code>hermes sessions stats</code> 查看儲存統計</li>
     </ul>
+        <details class="spoiler">
+      <summary>Session 會佔用很多空間嗎？</summary>
+      <div class="spoiler-body"><p>一般情況下不會：</p><ul><li>每筆 Session 只儲存對話文字，大小通常在幾 KB 到幾百 KB</li><li>使用 <code>hermes sessions prune --older-than 30</code> 可定期清理 30 天前的舊對話</li><li>SQLite 資料庫支援 FTS5 全文搜尋，即使大量 Session 也不影響查詢效能</li></ul></div>
+    </details>
       </div>
     </div>
   </div>
@@ -811,10 +899,23 @@ hermes skills uninstall N   # 移除技能</div>
       </div>
       <div class="prompt-body">hermes skills install https://example.com/skills/my-skill/SKILL.md</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">好技能的判斷標準</div>
-      <p>如果你發現自己對 AI 解釋同一件事超過 3 次，每次內容都很像 — 它就應該被寫成 Skill。</p>
-      <p style="margin-top:.5rem">Skill 的價值不是「省打字」，而是讓每次對話、每台機器、每個團隊成員，都遵循同一套標準作業流程。</p>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">好技能的判斷標準</div>
+    <p>如果你發現自己對 AI 解釋同一件事超過 3 次，每次內容都很像 — 它就應該被寫成 Skill。</p><p>Skill 的價值不是「省打字」，而是讓每次對話、每台機器、每個團隊成員，都遵循同一套標準作業流程。</p>
+  </div>
+</div>
+        <div class="quiz-block" data-quiz-id="q-什麼情況下最適合建立一個新的skill" data-quiz-answer="2">
+      <div class="quiz-q">什麼情況下最適合建立一個新的 Skill？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>只需要執行一次的操作</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>簡單到一句話就能說清楚的指令</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>需要反覆解釋、有固定流程的領域知識</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>只有你自己會用到的個人偏好</span></button>
+      </div>
+      <div class="quiz-hint" hidden>回想前面提到的「解釋超過 3 次」原則</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -935,11 +1036,13 @@ description: 當使用者要 commit 時，分析變更並拆成多個語意清�
         </div>
       </div>
     </div>
-        <div class="insight">
-      <div class="insight-title">記憶應該記什麼？</div>
-      <p>使用者偏好和修正 > 環境事實 > 程序性知識。</p>
-      <p style="margin-top:.5rem">不要記錄任務進度、Session 結果、Commit SHA 等會過時的資訊 — 那些屬於 Session 搜尋，不是記憶。好的記憶是那種「7 天後仍然重要」的事實。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">記憶應該記什麼？</div>
+    <p>優先順序：使用者偏好和修正 > 環境事實 > 程序性知識。</p><p>不要記錄任務進度、Session 結果、Commit SHA 等會過時的資訊 — 那些屬於 Session 搜尋，不是記憶。好的記憶是那種「7 天後仍然重要」的事實。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1098,10 +1201,13 @@ hermes gateway status</div>
 /sethome          # 設定當前聊天室為主頻道
 /platforms        # 查看平台連接狀態</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">Gateway 的安全設計</div>
-      <p>危險指令（如 rm、git push --force）不會自動執行，而是暫停等待你在聊天室中輸入 <code>/approve</code> 或 <code>/deny</code>。這讓你在手機上也能安全地使用 Agent。</p>
-    </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Gateway 的安全設計</div>
+    <p>危險指令（如 <code>rm</code>、<code>git push --force</code>）不會自動執行，而是暫停等待你在聊天室中輸入 <code>/approve</code> 或 <code>/deny</code>。這讓你在手機上也能安全地使用 Agent。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1300,11 +1406,13 @@ hermes cron resume ID          # 恢復
 hermes cron run ID             # 手動觸發
 hermes cron remove ID          # 刪除</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">Cron Job 的安全設計</div>
-      <p>Cron 運行在獨立的 Session 中，無法與使用者互動或要求澄清。因此 prompt 必須是自包含的 — 包含所有必要的上下文與指令。</p>
-      <p style="margin-top:.5rem">每次運行有 3 分鐘的硬性中斷限制，防止無窮迴圈。執行結果會自動送到指定的聊天頻道。</p>
-    </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Cron Job 的安全設計</div>
+    <p>Cron 運行在獨立的 Session 中，無法與使用者互動或要求澄清。因此 prompt 必須是自包含的 — 包含所有必要的上下文與指令。</p><p>每次運行有 3 分鐘的硬性中斷限制，防止無窮迴圈。執行結果會自動送到指定的聊天頻道。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1374,11 +1482,43 @@ hermes mcp remove NAME       # 移除 Server
 hermes mcp test NAME         # 測試連線
 hermes mcp configure NAME    # 選擇啟用的工具</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">MCP 是擴充 Hermes 能力的最快捷徑</div>
-      <p>不需要寫 Python 工具，只需要設定一個 MCP Server 的連線資訊，Hermes 就能自動發現並使用該 Server 提供的所有工具。從資料庫查詢到 API 操作，生態系中已有數百個現成 Server 可用。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">MCP 是擴充 Hermes 能力的最快捷徑</div>
+    <p>不需要寫 Python 工具，只需要設定一個 MCP Server 的連線資訊，Hermes 就能自動發現並使用該 Server 提供的所有工具。從資料庫查詢到 API 操作，生態系中已有數百個現成 Server 可用。</p>
+  </div>
+</div>
       </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-faq"><span class="bar"></span>常見問題 FAQ</div>
+  </div>
+
+  <div class="reveal">
+    <div class="accordion">
+      <details class="acc-item" open>
+        <summary>Hermes Agent 是免費的嗎？</summary>
+        <div class="acc-body"><p>Hermes Agent 本身是完全開源免費的（由 Nous Research 開發）。</p><p>但使用 AI 模型需要 API Key，部分 Provider 提供免費額度：</p><ul><li>Google Gemini：免費額度較大，適合探索</li><li>OpenRouter：新帳號有試用額度</li><li>本地模型：完全免費，但需要硬體資源</li></ul></div>
+      </details>
+      <details class="acc-item">
+        <summary>Hermes 會把我的資料傳到哪裡？</summary>
+        <div class="acc-body"><p>Hermes 只在你的本機執行，所有對話、記憶、技能都儲存在本地（<code>~/.hermes/</code>）。</p><p>模型推理需要呼叫外部 API（如 Anthropic、OpenAI），這與使用任何 AI 服務相同。你可以選擇本地模型來完全離線運行。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>我可以同時在多個平台使用同一个 Agent 嗎？</summary>
+        <div class="acc-body"><p>可以。Gateway 允許同一個 Agent 同時連接多個平台（Telegram、Discord、Slack 等），共享同一套技能與記憶。</p><p>在任何一个平台與 Agent 互動的經驗，都會反映在其他平台上。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>Skill 和 Memory 的差別是什麼？</summary>
+        <div class="acc-body"><ul><li><strong>Skill</strong>：結構化的操作流程與領域知識，類似 SOP。例如「如何產生好的 commit message」</li><li><strong>Memory</strong>：關於你與環境的事實。例如「我偏好使用 conventional commits」、「這個專案用 pytest」</li></ul><p>Skill 是「怎麼做」，Memory 是「什麼是」。兩者互補，讓 Agent 更懂你。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何備份我的 Hermes 設定？</summary>
+        <div class="acc-body"><p>備份 <code>~/.hermes/</code> 目錄即可包含所有設定：</p><ul><li><code>config.yaml</code> — 主要設定（可安全備份）</li><li><code>state.db</code> — Session 與對話紀錄</li><li><code>skills/</code> — 已安裝的技能</li><li><code>.env</code> — API Key（請妥善保管，建議加密備份）</li></ul></div>
+      </details>
     </div>
   </div>
 </section>
@@ -1737,7 +1877,7 @@ hermes mcp configure NAME    # 選擇啟用的工具</div>
 
   <script>
     window.__sectionIds__ = ["instructor","hermes-agent-ai-agent","hermes","cli-slash-commands","skills-memory-agent","gateway-agent","subagentcron-profile","summary"];
-    window.__allAnchorIds__ = ["instructor","hermes-agent-ai-agent","sub-ai-agent","sub-section-2","hermes","sub-section-3","sub-section-4","sub-section-5","cli-slash-commands","sub-flag","sub-slash-commands","sub-session","skills-memory-agent","sub-skills","sub-memory","gateway-agent","sub-gateway","sub-gateway-2","sub-section-13","subagentcron-profile","sub-subagent","sub-cron","sub-profile","sub-mcp","summary"];
+    window.__allAnchorIds__ = ["instructor","hermes-agent-ai-agent","sub-ai-agent","sub-section-2","hermes","sub-section-3","sub-section-4","sub-section-5","cli-slash-commands","sub-flag","sub-slash-commands","sub-session","skills-memory-agent","sub-skills","sub-memory","gateway-agent","sub-gateway","sub-gateway-2","sub-section-13","subagentcron-profile","sub-subagent","sub-cron","sub-profile","sub-mcp","sub-faq","summary"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>

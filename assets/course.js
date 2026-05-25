@@ -2529,41 +2529,48 @@
     function getResults() { try { return JSON.parse(localStorage.getItem(QUIZ_KEY) || '{}'); } catch (e) { return {}; } }
     function saveResult(qid, ok) { var r = getResults(); r[qid] = ok ? 'correct' : 'wrong'; localStorage.setItem(QUIZ_KEY, JSON.stringify(r)); }
 
-    document.querySelectorAll('.quiz-block').forEach(function (block) {
-      var qid = block.dataset.quizId;
-      var answerIdx = parseInt(block.dataset.quizAnswer);
+    function applyQuizResult(block, correct, chosenIdx) {
       var btns = block.querySelectorAll('.quiz-btn');
       var hintEl = block.querySelector('.quiz-hint');
       var fbEl = block.querySelector('.quiz-fb');
-
-      function applyResult(correct, chosenIdx) {
-        btns.forEach(function (b) { b.disabled = true; });
-        if (correct) {
-          btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--correct');
-          if (fbEl) { fbEl.textContent = '正確！'; fbEl.className = 'quiz-fb quiz-fb--correct'; fbEl.removeAttribute('hidden'); }
-        } else {
-          btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--wrong');
-          if (answerIdx >= 0) btns[answerIdx] && btns[answerIdx].classList.add('quiz-btn--correct');
-          if (hintEl) hintEl.removeAttribute('hidden');
-          if (fbEl) { fbEl.textContent = '答錯了，正確答案已標示'; fbEl.className = 'quiz-fb quiz-fb--wrong'; fbEl.removeAttribute('hidden'); }
-        }
+      var answerIdx = parseInt(block.dataset.quizAnswer);
+      btns.forEach(function (b) { b.disabled = true; });
+      if (correct) {
+        btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--correct');
+        if (fbEl) { fbEl.textContent = '正確！'; fbEl.className = 'quiz-fb quiz-fb--correct'; fbEl.removeAttribute('hidden'); }
+      } else {
+        btns[chosenIdx] && btns[chosenIdx].classList.add('quiz-btn--wrong');
+        if (answerIdx >= 0) btns[answerIdx] && btns[answerIdx].classList.add('quiz-btn--correct');
+        if (hintEl) hintEl.removeAttribute('hidden');
+        if (fbEl) { fbEl.textContent = '答錯了，正確答案已標示'; fbEl.className = 'quiz-fb quiz-fb--wrong'; fbEl.removeAttribute('hidden'); }
       }
+    }
 
-      // Restore previous answer from localStorage
+    function restoreQuizBlock(block) {
+      var qid = block.dataset.quizId;
+      var answerIdx = parseInt(block.dataset.quizAnswer);
       var prev = getResults()[qid];
-      if (prev) {
-        var prevIdx = prev === 'correct' ? answerIdx : -1;
-        applyResult(prev === 'correct', prevIdx);
-        return;
-      }
+      if (!prev) return;
+      var prevIdx = prev === 'correct' ? answerIdx : -1;
+      applyQuizResult(block, prev === 'correct', prevIdx);
+    }
 
-      btns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var idx = parseInt(btn.dataset.idx);
-          var correct = idx === answerIdx;
-          saveResult(qid, correct);
-          applyResult(correct, idx);
-        });
+    document.querySelectorAll('.quiz-block').forEach(restoreQuizBlock);
+    window.__restoreQuiz = restoreQuizBlock;
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.quiz-btn');
+      if (!btn || btn.disabled) return;
+      var block = btn.closest('.quiz-block');
+      if (!block) return;
+      var qid = block.dataset.quizId;
+      var answerIdx = parseInt(block.dataset.quizAnswer);
+      var idx = parseInt(btn.dataset.idx);
+      var correct = idx === answerIdx;
+      saveResult(qid, correct);
+      // Sync state across all instances (e.g. original + presentation clone)
+      document.querySelectorAll('.quiz-block[data-quiz-id="' + qid + '"]').forEach(function (b) {
+        applyQuizResult(b, correct, idx);
       });
     });
   })();
@@ -2731,17 +2738,17 @@
 
   // ─── Tabs Block ────────────────────────────────────────────
   (function () {
-    document.querySelectorAll('.tabs-block').forEach(function (block) {
-      block.querySelectorAll('.tab-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var idx = btn.dataset.tab;
-          block.querySelectorAll('.tab-btn').forEach(function (b) {
-            b.classList.toggle('active', b.dataset.tab === idx);
-          });
-          block.querySelectorAll('.tab-panel').forEach(function (p) {
-            p.classList.toggle('active', p.dataset.panel === idx);
-          });
-        });
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.tab-btn');
+      if (!btn) return;
+      var block = btn.closest('.tabs-block');
+      if (!block) return;
+      var idx = btn.dataset.tab;
+      block.querySelectorAll('.tab-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.tab === idx);
+      });
+      block.querySelectorAll('.tab-panel').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.panel === idx);
       });
     });
   })();

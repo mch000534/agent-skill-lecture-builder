@@ -79,10 +79,11 @@
         <span class="toc-num">4</span> Markdown 語法<span class="toc-read-dot" data-for="markdown"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-9">結構元件</a></li>
+        <li><a href="#sub-agent-skill">Agent Skill 技術演進</a></li>
+        <li><a href="#sub-section-10">結構元件</a></li>
         <li><a href="#sub-prompt">終端機 / Prompt 區塊</a></li>
-        <li><a href="#sub-section-11">媒體元件</a></li>
-        <li><a href="#sub-section-12">進階元件</a></li>
+        <li><a href="#sub-section-12">媒體元件</a></li>
+        <li><a href="#sub-section-13">進階元件</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="og-image">
@@ -92,8 +93,8 @@
       <ul class="toc-sub">
         <li><a href="#sub-og-image">什麼是 OG Image？</a></li>
         <li><a href="#sub-og-image-2">這個專案的 OG Image 如何產生？</a></li>
-        <li><a href="#sub-section-15">執行與設定</a></li>
-        <li><a href="#sub-section-16">什麼時候需要重新產生？</a></li>
+        <li><a href="#sub-section-16">執行與設定</a></li>
+        <li><a href="#sub-section-17">什麼時候需要重新產生？</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="section-6">
@@ -101,11 +102,11 @@
         <span class="toc-num">6</span> 課堂互動工具<span class="toc-read-dot" data-for="section-6"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-17">設定面板</a></li>
-        <li><a href="#sub-section-18">鍵盤快捷鍵</a></li>
-        <li><a href="#sub-section-19">聚光燈與放大鏡</a></li>
-        <li><a href="#sub-section-20">浮動計時器</a></li>
-        <li><a href="#sub-section-21">抽籤器</a></li>
+        <li><a href="#sub-section-18">設定面板</a></li>
+        <li><a href="#sub-section-19">鍵盤快捷鍵</a></li>
+        <li><a href="#sub-section-20">聚光燈與放大鏡</a></li>
+        <li><a href="#sub-section-21">浮動計時器</a></li>
+        <li><a href="#sub-section-22">抽籤器</a></li>
         <li><a href="#sub-widget">課堂投票 Widget</a></li>
       </ul>
     </li>
@@ -114,9 +115,9 @@
         <span class="toc-num">7</span> 擴展小工具<span class="toc-read-dot" data-for="section-7"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-23">小工具的共用架構</a></li>
-        <li><a href="#sub-section-24">新增小工具的步驟</a></li>
-        <li><a href="#sub-section-25">實際案例：計時器的實作參考</a></li>
+        <li><a href="#sub-section-24">小工具的共用架構</a></li>
+        <li><a href="#sub-section-25">新增小工具的步驟</a></li>
+        <li><a href="#sub-section-26">實際案例：計時器的實作參考</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="agent-skill">
@@ -124,10 +125,10 @@
         <span class="toc-num">8</span> Agent Skill 工作流<span class="toc-read-dot" data-for="agent-skill"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-agent-skill">什麼是 Agent Skill？</a></li>
+        <li><a href="#sub-agent-skill-2">什麼是 Agent Skill？</a></li>
         <li><a href="#sub-skill">Skill 的觸發與執行</a></li>
         <li><a href="#sub-skill-2">Skill 檔案結構</a></li>
-        <li><a href="#sub-section-29">自訂與擴展</a></li>
+        <li><a href="#sub-section-30">自訂與擴展</a></li>
       </ul>
     </li>
 
@@ -229,6 +230,42 @@
 
   <div class="reveal">
     <div class="group-block">
+      <div class="group-header">傳統課程開發 vs Agent Skill 開發</div>
+      <div class="group-body">
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">傳統課程開發</div>
+        <div class="compare-label compare-label--new">Agent Skill 開發</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">手動寫 HTML / CSS / JS</div>
+          <div class="compare-cell compare-cell--new">用 content.md 描述內容，AI 自動建置</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">每次風格不一致</div>
+          <div class="compare-cell compare-cell--new">所有課程共用同一模板與設計語言</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">修改樣式要逐頁調整</div>
+          <div class="compare-cell compare-cell--new">改 base.html / course.css 一次，全部套用</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">產 OG 圖需要設計軟體</div>
+          <div class="compare-cell compare-cell--new">Puppeteer 自動截取 Hero 區，零設計成本</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">版本差異難以審查</div>
+          <div class="compare-cell compare-cell--new">git diff 清晰可讀，只看內容變化</div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
       <div class="group-header">取得專案</div>
       <div class="group-body">
         <div class="prompt-block">
@@ -245,6 +282,13 @@ cd agent-skill-lecture-builder
 npm install</div>
     </div>
         <p class="loose-text"><code>npm install</code> 只需執行一次。唯一的外部相依套件是 Puppeteer，用於自動產生 OG 縮圖。</p>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">提示</div>
+    <p>如果你只是要快速試用，可以先跳過 <code>npm install</code>——build 和 dev 都能正常運作。只有在第一次產 OG 縮圖時才需要 Puppeteer。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -324,6 +368,29 @@ npm install</div>
 （貼上你的講稿內容）</div>
     </div>
         <p class="loose-text">AI 會萃取重點、重新結構化，轉為 Markdown 格式並建置頁面。</p>
+        <details class="spoiler">
+      <summary>想一想：為什麼用 Markdown 而不是直接寫 HTML？</summary>
+      <div class="spoiler-body"><ul><li>內容與樣式分離，改模板自動套用所有課程</li><li>git diff 清晰可讀，只顯示內容變化</li><li>AI 生成的 Markdown 結構一致，可預期</li><li>非技術背景的人也能直接編輯內容</li></ul></div>
+    </details>
+        <div class="quiz-block" data-quiz-id="q-第一次建置課程頁面最少的必要指令是哪幾個" data-quiz-answer="0">
+      <div class="quiz-q">第一次建置課程頁面，最少的必要指令是哪幾個？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>build.mjs + generate-og.mjs</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>validate.mjs + dev.mjs</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>build-index.mjs + build-vote.mjs</span></button>
+      </div>
+      <div class="quiz-hint" hidden>build 產出 HTML，generate-og 產出縮圖，這兩步就能上線。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-npminstall每次build前都需" data-quiz-answer="1">
+      <div class="quiz-q">npm install 每次 build 前都需要執行？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>npm install 只需執行一次，安裝 Puppeteer 後即可反覆 build。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -339,6 +406,13 @@ npm install</div>
 
   <div class="reveal">
     <div class="sub-title" id="sub-section-3"><span class="bar"></span>目錄總覽</div>
+  </div>
+
+  <div class="reveal">
+    <div class="insight">
+      <div class="insight-title">核心概念</div>
+      <p>整個專案只依賴三個核心要素：<span class="gloss" tabindex="0" data-tip="一種輕量級標記語言，用簡單的符號表示標題、清單、程式碼等格式">Markdown</span> 寫內容、<span class="gloss" tabindex="0" data-tip="一種人類可讀的資料序列化格式，常用於設定檔">YAML</span> 管設定、<span class="gloss" tabindex="0" data-tip="Google 開頭的無頭瀏覽器自動化工具，這裡用於自動截取網頁畫面產生 OG 縮圖">Puppeteer</span> 產圖片。</p>
+    </div>
   </div>
 
   <div class="reveal">
@@ -415,6 +489,13 @@ npm install</div>
       <p>socials、nav 等陣列欄位若在課程 config 中定義，會整體取代全域設定，不做合併。</p>
       <p style="margin-top:.5rem">nav（Hero 導覽按鈕）預設從 content.md 的主章節（<code>#</code>）自動產生，通常不需手動設定。</p>
     </div>
+  </div>
+
+  <div class="reveal">
+    <details class="spoiler">
+      <summary>想一想：為什麼不直接合併陣列欄位？</summary>
+      <div class="spoiler-body"><p>如果課程 config 定義了 2 個 nav 按鈕，全域有 5 個——合併後變成 7 個，但講者可能只想顯示自己的 2 個。整體取代讓課程有完全的控制權，避免不相關的按鈕混入。</p></div>
+    </details>
   </div>
 </section>
 
@@ -538,6 +619,46 @@ quotes:
   </div>
 
   <div class="reveal">
+    <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">環境設定</div>
+          <div class="ss-desc">確認 Node.js、Git、Claude Code 已安裝</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">建立課程目錄</div>
+          <div class="ss-desc">mkdir -p lectures/my-course/assets</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">撰寫 content.md + config.yaml</div>
+          <div class="ss-desc">用 AI 生成或手動編寫</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">執行 build + generate-og</div>
+          <div class="ss-desc">產出 index.html 和 OG 縮圖</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">更新索引 + commit + push</div>
+          <div class="ss-desc">build-index.mjs 後部署到 GitHub Pages</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="reveal">
     <div class="prompt-block">
       <div class="prompt-header">
         <div class="dots"><span></span><span></span><span></span></div>
@@ -575,6 +696,30 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
       </ul>
     </div>
   </div>
+
+  <div class="reveal">
+    <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">注意</div>
+    <p>content.md 和 config.yaml 是<strong>原始檔</strong>，index.html 和 og-image.jpg 是<strong>建置產物</strong>。兩者都需要 commit，因為 GitHub Pages 需要靜態檔案才能正確展示。不要把 index.html 加入 .gitignore。</p>
+  </div>
+</div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-block" data-quiz-id="q-新增課程後哪一步能讓課程出現在根目錄的索" data-quiz-answer="2">
+      <div class="quiz-q">新增課程後，哪一步能讓課程出現在根目錄的索引頁？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>build.mjs</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>generate-og.mjs</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>build-index.mjs</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>dev.mjs</span></button>
+      </div>
+      <div class="quiz-hint" hidden>build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁依賴此檔案。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -586,7 +731,73 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-9"><span class="bar"></span>結構元件</div>
+    <div class="sub-title" id="sub-agent-skill"><span class="bar"></span>Agent Skill 技術演進</div>
+  </div>
+
+  <div class="reveal">
+    <ol class="timeline">
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2023</div>
+        <div class="tl-title">ChatGPT Plugins</div>
+        <div class="tl-desc">AI 首次能呼叫外部 API，但依賴單一平台</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2024</div>
+        <div class="tl-title">Claude Projects</div>
+        <div class="tl-desc">上傳文件作為知識庫，但仍是被動問答</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2025</div>
+        <div class="tl-title">Claude Code</div>
+        <div class="tl-desc">終端機原生 AI 編程助手，能讀寫檔案、執行指令</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2025</div>
+        <div class="tl-title">Claude Skills</div>
+        <div class="tl-desc">可封裝、可分享的自訂工作流，AI 能力可組合</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2026</div>
+        <div class="tl-title">Agent Skill Ecosystem</div>
+        <div class="tl-desc">社群共享 Skill，一鍵安裝複雜工作流</div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="reveal">
+    <div class="insight">
+      <div class="insight-title">從「對話」到「技能」的關鍵轉變</div>
+      <p>過去我們用自然語言跟 AI 對話，每次結果都不同。Skill 把成功的工作流封裝起來，讓任何人都能重現一致的產出——這才是可規模化的教學工具。</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-section-10"><span class="bar"></span>結構元件</div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">內容輸入方式比較</div>
+      <div class="group-body">
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>方式</th><th class="is-highlight">推薦：AI 生成</th><th>手動編寫</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">速度</th><td>幾秒內產出完整草稿</td><td class="is-highlight">需要熟悉語法與排版</td></tr>
+          <tr><th class="row-label">一致性</th><td>AI 自動遵循 components.md 規範</td><td class="is-highlight">容易遺漏元件語法</td></tr>
+          <tr><th class="row-label">適合場景</th><td>新課程快速起步</td><td class="is-highlight">現有課程精修調整</td></tr>
+          <tr><th class="row-label">門檻</th><td>只需會下 Prompt</td><td class="is-highlight">需要了解 Markdown 擴充語法</td></tr>
+          <tr><th class="row-label">維護性</th><td>生成的內容可手動二次編輯</td><td class="is-highlight">完全掌控每個細節</td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
   </div>
 
   <div class="reveal">
@@ -750,7 +961,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-11"><span class="bar"></span>媒體元件</div>
+    <div class="sub-title" id="sub-section-12"><span class="bar"></span>媒體元件</div>
   </div>
 
   <div class="reveal">
@@ -823,7 +1034,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-12"><span class="bar"></span>進階元件</div>
+    <div class="sub-title" id="sub-section-13"><span class="bar"></span>進階元件</div>
   </div>
 
   <div class="reveal">
@@ -1285,6 +1496,34 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
       <dt>SDD</dt>
       <dd>Spec-Driven Development，規格驅動開發</dd>
     </dl>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <ul><li>結構用 <code>#</code> 和 <code>##</code>：跟一般 Markdown 一樣</li><li>互動元件用 <code>[xxx]</code>：方括號包起來的都是進階元件</li><li>程式碼用 ```：跟 GitHub Flavored Markdown 一樣</li><li>其餘都是「自然語言延伸」：像是 <code>> </code> 引言、<code>- </code> 清單</li></ul>
+  </div>
+</div>
+        <div class="quiz-block" data-quiz-id="q-在contentmd中哪種語法會渲染為帶" data-quiz-answer="1">
+      <div class="quiz-q">在 content.md 中，哪種語法會渲染為帶顏色的標籤？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>`- 標籤文字`</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>`[tags]- [green] 文字[/tags]`</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>`## 標籤：文字`</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>`[label color=&quot;green&quot;]文字[/label]`</span></button>
+      </div>
+      <div class="quiz-hint" hidden>`[tags]` 區塊內使用 `- [color] 文字` 格式才能套用顏色。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-想要學生先思考再看到答案應該用哪個元件" data-quiz-answer="2">
+      <div class="quiz-q">想要學生先思考再看到答案，應該用哪個元件？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>[bonus]</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>[callout]</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>[reveal]</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>[summary]</span></button>
+      </div>
+      <div class="quiz-hint" hidden>[reveal] 渲染為 `&lt;details&gt;` 元素，點擊才會展開內容。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -1359,7 +1598,17 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-15"><span class="bar"></span>執行與設定</div>
+    <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">為什麼用 Puppeteer 而不是手動做圖？</div>
+    <ul><li>每次改 Hero 標題不用重新設計：截圖自動同步</li><li>品牌一致性：配色、字型、排版全部來自課程頁面本身</li><li>零學習成本：不需要會用 Figma、Photoshop 等設計工具</li><li>可自動化：CI/CD 流程中可以自動產生最新 OG 圖</li></ul>
+  </div>
+</div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-section-16"><span class="bar"></span>執行與設定</div>
   </div>
 
   <div class="reveal">
@@ -1408,7 +1657,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-16"><span class="bar"></span>什麼時候需要重新產生？</div>
+    <div class="sub-title" id="sub-section-17"><span class="bar"></span>什麼時候需要重新產生？</div>
   </div>
 
   <div class="reveal">
@@ -1430,7 +1679,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-17"><span class="bar"></span>設定面板</div>
+    <div class="sub-title" id="sub-section-18"><span class="bar"></span>設定面板</div>
   </div>
 
   <div class="reveal">
@@ -1503,7 +1752,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-18"><span class="bar"></span>鍵盤快捷鍵</div>
+    <div class="sub-title" id="sub-section-19"><span class="bar"></span>鍵盤快捷鍵</div>
   </div>
 
   <div class="reveal">
@@ -1590,7 +1839,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-19"><span class="bar"></span>聚光燈與放大鏡</div>
+    <div class="sub-title" id="sub-section-20"><span class="bar"></span>聚光燈與放大鏡</div>
   </div>
 
   <div class="reveal">
@@ -1638,7 +1887,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-20"><span class="bar"></span>浮動計時器</div>
+    <div class="sub-title" id="sub-section-21"><span class="bar"></span>浮動計時器</div>
   </div>
 
   <div class="reveal">
@@ -1652,7 +1901,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-21"><span class="bar"></span>抽籤器</div>
+    <div class="sub-title" id="sub-section-22"><span class="bar"></span>抽籤器</div>
   </div>
 
   <div class="reveal">
@@ -1749,7 +1998,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-23"><span class="bar"></span>小工具的共用架構</div>
+    <div class="sub-title" id="sub-section-24"><span class="bar"></span>小工具的共用架構</div>
   </div>
 
   <div class="reveal">
@@ -1790,7 +2039,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-24"><span class="bar"></span>新增小工具的步驟</div>
+    <div class="sub-title" id="sub-section-25"><span class="bar"></span>新增小工具的步驟</div>
   </div>
 
   <div class="reveal">
@@ -1895,7 +2144,7 @@ function toggleMyTool() {
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-25"><span class="bar"></span>實際案例：計時器的實作參考</div>
+    <div class="sub-title" id="sub-section-26"><span class="bar"></span>實際案例：計時器的實作參考</div>
   </div>
 
   <div class="reveal">
@@ -1930,7 +2179,7 @@ function toggleMyTool() {
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-agent-skill"><span class="bar"></span>什麼是 Agent Skill？</div>
+    <div class="sub-title" id="sub-agent-skill-2"><span class="bar"></span>什麼是 Agent Skill？</div>
   </div>
 
   <div class="reveal">
@@ -2017,7 +2266,82 @@ function toggleMyTool() {
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-29"><span class="bar"></span>自訂與擴展</div>
+    <div class="sub-title" id="sub-section-30"><span class="bar"></span>自訂與擴展</div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">FAQ 常見問題</div>
+      <div class="group-body">
+        <div class="accordion">
+      <details class="acc-item" open>
+        <summary>Skill 應該放在哪個目錄？</summary>
+        <div class="acc-body"><p>專案層級：<code>.agents/skills/<skill-name>/</code>（只有這個專案可用）。</p><p>全域層級：<code>~/.claude/skills/<skill-name>/</code>（所有 Claude Code 專案皆可用）。</p><p>建議先在專案層級測試，確認無誤後再考慮移至全域。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>怎麼讓 Claude 自動偵測到我的 Skill？</summary>
+        <div class="acc-body"><p>只要把 Skill 資料夾放到 <code>.agents/skills/</code> 或 <code>~/.claude/skills/</code>，Claude Code 啟動時會自動掃描。SKILL.md 中的觸發條件（trigger keywords）會決定何時自動套用。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>SKILL.md 必須寫什麼？</summary>
+        <div class="acc-body"><p>最低限度：Skill 的描述和觸發時機。建議包含：工作流程步驟、參考檔案路徑、輸出格式範例。越詳細，AI 執行越準確。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>可以一個 Skill 呼叫另一個 Skill 嗎？</summary>
+        <div class="acc-body"><p>可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 就是串聯三個 Skill 的範例。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>怎麼知道目前有哪些 Skill 被啟用了？</summary>
+        <div class="acc-body"><p>在 Claude Code 中輸入 <code>/skills</code> 或類似指令（取決於版本），可以列出所有已偵測到的 Skill。也可以在 <code>~/.claude/</code> 或專案的 <code>.agents/skills/</code> 目錄下直接查看資料夾。</p></div>
+      </details>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Skill 建立流程</div>
+      <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">環境準備</div>
+          <div class="ss-desc">確認 Claude Code 已安裝，找到 <code>.agents/skills/</code> 目錄</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">建立模板</div>
+          <div class="ss-desc">用 <code>skill-creator</code> Skill 生成 SKILL.md 骨架</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">撰寫工作流</div>
+          <div class="ss-desc">定義觸發條件、執行步驟、參考檔案</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">測試與除錯</div>
+          <div class="ss-desc">用真實 Prompt 觸發，驗證 AI 是否正確執行</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">發佈與分享</div>
+          <div class="ss-desc">推到 GitHub 或放到團隊共用全域 Skills 目錄</div>
+        </div>
+      </li>
+    </ol>
+      </div>
+    </div>
   </div>
 
   <div class="reveal">
@@ -2036,6 +2360,28 @@ function toggleMyTool() {
       <div class="group-body">
         <p><code>reference/base.html</code> 是唯一的 HTML 模板。如需調整頁面結構，在這裡修改，然後重新 build 所有課程即可。</p>
         <div class="summary-grid">
+    </div>
+        <div class="quiz-block" data-quiz-id="q-想要讓其他團隊成員也能使用你建立的ski" data-quiz-answer="0">
+      <div class="quiz-q">想要讓其他團隊成員也能使用你建立的 Skill，應該放在哪裡？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>~/.claude/skills/（全域 Skill）</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>只有你的 .agents/skills/（專案 Skill）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>上傳到 Claude 雲端</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>寄給對方 SKILL.md 檔案</span></button>
+      </div>
+      <div class="quiz-hint" hidden>全域 Skill 放在 ~/.claude/skills/，所有 Claude Code 專案都能使用。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-修改了assetscoursecss後需" data-quiz-answer="2">
+      <div class="quiz-q">修改了 assets/course.css 後需要執行什麼指令？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>build.mjs 重新建置</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>generate-og.mjs 重新產圖</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>不需要，直接重新整理瀏覽器即可</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>dev.mjs 重新啟動伺服器</span></button>
+      </div>
+      <div class="quiz-hint" hidden>course.css 和 course.js 是外部引用檔案，瀏覽器每次載入都會讀取最新版本。</div>
+      <div class="quiz-fb" hidden></div>
     </div>
         <button class="bonus-btn" data-bonus-title="為什麼用 Markdown 而非直接生成 HTML？" data-bonus-content="純 HTML 的問題：
 - AI 每次生成的結構不同，很難維護
@@ -2370,7 +2716,7 @@ Markdown + 模板的優勢：
 
   <script>
     window.__sectionIds__ = ["instructor","section-1","section-2","section-3","markdown","og-image","section-6","section-7","agent-skill"];
-    window.__allAnchorIds__ = ["instructor","section-1","sub-section-1","sub-section-2","section-2","sub-section-3","sub-section-4","section-3","sub-section-5","sub-contentmd","sub-configyaml","sub-section-8","markdown","sub-section-9","sub-prompt","sub-section-11","sub-section-12","og-image","sub-og-image","sub-og-image-2","sub-section-15","sub-section-16","section-6","sub-section-17","sub-section-18","sub-section-19","sub-section-20","sub-section-21","sub-widget","section-7","sub-section-23","sub-section-24","sub-section-25","agent-skill","sub-agent-skill","sub-skill","sub-skill-2","sub-section-29"];
+    window.__allAnchorIds__ = ["instructor","section-1","sub-section-1","sub-section-2","section-2","sub-section-3","sub-section-4","section-3","sub-section-5","sub-contentmd","sub-configyaml","sub-section-8","markdown","sub-agent-skill","sub-section-10","sub-prompt","sub-section-12","sub-section-13","og-image","sub-og-image","sub-og-image-2","sub-section-16","sub-section-17","section-6","sub-section-18","sub-section-19","sub-section-20","sub-section-21","sub-section-22","sub-widget","section-7","sub-section-24","sub-section-25","sub-section-26","agent-skill","sub-agent-skill-2","sub-skill","sub-skill-2","sub-section-30"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>

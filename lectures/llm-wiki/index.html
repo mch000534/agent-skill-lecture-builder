@@ -50,8 +50,9 @@
         <span class="toc-num">1</span> 入門導向<span class="toc-read-dot" data-for="llm-wiki"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-1">從一次性問答到長期知識庫</a></li>
-        <li><a href="#sub-section-2">課程地圖與三種學習視角</a></li>
+        <li><a href="#sub-section-1">知識管理工具演進</a></li>
+        <li><a href="#sub-section-2">從一次性問答到長期知識庫</a></li>
+        <li><a href="#sub-section-3">課程地圖與三種學習視角</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="llm-wiki-2">
@@ -59,8 +60,8 @@
         <span class="toc-num">2</span> 結構導向<span class="toc-read-dot" data-for="llm-wiki-2"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-3">三層架構</a></li>
-        <li><a href="#sub-section-4">頁面格式與命名規則</a></li>
+        <li><a href="#sub-section-4">三層架構</a></li>
+        <li><a href="#sub-section-5">頁面格式與命名規則</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="llm-wiki-3">
@@ -68,7 +69,7 @@
         <span class="toc-num">3</span> 實作導向<span class="toc-read-dot" data-for="llm-wiki-3"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-5">環境準備</a></li>
+        <li><a href="#sub-section-6">環境準備</a></li>
         <li><a href="#sub-ingest">第一次 Ingest：把來源變成知識頁</a></li>
       </ul>
     </li>
@@ -86,9 +87,9 @@
         <span class="toc-num">5</span> 策略導向<span class="toc-read-dot" data-for="section-5"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-9">教育場景</a></li>
-        <li><a href="#sub-section-10">研究場景</a></li>
-        <li><a href="#sub-section-11">團隊知識管理場景</a></li>
+        <li><a href="#sub-section-10">教育場景</a></li>
+        <li><a href="#sub-section-11">研究場景</a></li>
+        <li><a href="#sub-section-12">團隊知識管理場景</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="mini-wiki">
@@ -96,8 +97,16 @@
         <span class="toc-num">6</span> 工作坊<span class="toc-read-dot" data-for="mini-wiki"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-12">分組任務</a></li>
-        <li><a href="#sub-section-13">成果檢核</a></li>
+        <li><a href="#sub-section-13">分組任務</a></li>
+        <li><a href="#sub-section-14">成果檢核</a></li>
+      </ul>
+    </li>
+    <li class="toc-group" data-section="section-7">
+      <a href="#section-7" class="toc-group-title">
+        <span class="toc-num">7</span> 常見問題<span class="toc-read-dot" data-for="section-7"></span>
+      </a>
+      <ul class="toc-sub">
+        <li><a href="#sub-llm-wiki">LLM Wiki 常見疑問</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="summary">
@@ -142,6 +151,7 @@
     <a href="#querylint">維護導向</a>
     <a href="#section-5">策略導向</a>
     <a href="#mini-wiki">工作坊</a>
+    <a href="#section-7">常見問題</a>
     <a href="#summary">總結</a>
           </nav>
   </header>
@@ -187,7 +197,46 @@
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-1"><span class="bar"></span>從一次性問答到長期知識庫</div>
+    <div class="sub-title" id="sub-section-1"><span class="bar"></span>知識管理工具演進</div>
+  </div>
+
+  <div class="reveal">
+    <ol class="timeline">
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2000s</div>
+        <div class="tl-title">傳統 Wiki（MediaWiki）</div>
+        <div class="tl-desc">企業內部文件協作，需要專門維護人員</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2010s</div>
+        <div class="tl-title">Notion / Confluence</div>
+        <div class="tl-desc">富文本協作平台，但知識結構由平台鎖定</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2018</div>
+        <div class="tl-title">Obsidian / Logseq</div>
+        <div class="tl-desc">Markdown + 本地優先 + 雙向連結，知識屬於使用者</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2023</div>
+        <div class="tl-title">LLM + 知識庫</div>
+        <div class="tl-desc">AI 協助閱讀、整理、交叉連結，但缺乏制度容易失真</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2025</div>
+        <div class="tl-title">LLM Wiki 工作法</div>
+        <div class="tl-desc">結合 Markdown 本機檔案、AI Agent 流程與治理規則</div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-section-2"><span class="bar"></span>從一次性問答到長期知識庫</div>
   </div>
 
   <div class="reveal">
@@ -229,6 +278,13 @@
       <p>它的重點是讓 AI 幫你把資料整理成可閱讀、可連結、可長期維護的知識結構。</p>
       <p style="margin-top:.5rem">這種方式比單次 RAG 更像「有編輯制度的知識庫」：資料被消化、命名、分類、交叉引用，而不是每次查詢才臨時拼湊。</p>
     </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">注意：不是所有資料都適合收錄</div>
+    <p>LLM Wiki 強調「有門檻地收錄」。路過提到一次的名詞不需要建頁，低品質或不確定的來源應暫緩收錄。知識庫的價值不在數量，而在可信度與可維護性。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -248,7 +304,7 @@
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-2"><span class="bar"></span>課程地圖與三種學習視角</div>
+    <div class="sub-title" id="sub-section-3"><span class="bar"></span>課程地圖與三種學習視角</div>
   </div>
 
   <div class="reveal">
@@ -346,7 +402,7 @@
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-3"><span class="bar"></span>三層架構</div>
+    <div class="sub-title" id="sub-section-4"><span class="bar"></span>三層架構</div>
   </div>
 
   <div class="reveal">
@@ -410,6 +466,13 @@
 ├── comparisons/
 └── queries/</div>
     </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">實用技巧：先求能跑再求完整</div>
+    <p>不需要一開始就建立所有資料夾。如果某個類別（如 <code>comparisons/</code>）暫時沒有內容，可以晚點再建。重要的是先有 <code>SCHEMA.md</code>、<code>index.md</code>、<code>log.md</code> 三個核心檔案，以及 <code>raw/</code> 和至少一種頁面目錄。</p>
+  </div>
+</div>
         <div class="insight">
       <div class="insight-title">結構是給未來的自己看的</div>
       <p>一開始多建立幾個資料夾看似麻煩，但三個月後你會感謝它。</p>
@@ -420,7 +483,7 @@
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-4"><span class="bar"></span>頁面格式與命名規則</div>
+    <div class="sub-title" id="sub-section-5"><span class="bar"></span>頁面格式與命名規則</div>
   </div>
 
   <div class="reveal">
@@ -505,6 +568,32 @@ confidence: medium
       <span class="tag orange">暫不建立：只是路過提到一次的名詞</span>
       <span class="tag purple">拆分頁面：單頁超過約 200 行，或同時涵蓋太多子題</span>
     </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">LLM Wiki 核心名詞</div>
+      <div class="group-body">
+        <dl class="definition-list">
+      <dt>Raw Source</dt>
+      <dd>原始資料，包含文章、論文、訪談等，原則上不可修改，作為追溯依據</dd>
+      <dt>Wiki Page</dt>
+      <dd>由 AI 協助整理的知識頁，分為實體頁、概念頁、比較頁、查詢頁</dd>
+      <dt>SCHEMA.md</dt>
+      <dd>制度檔，定義命名規則、頁面格式、標籤分類與建立門檻</dd>
+      <dt>Ingest</dt>
+      <dd>將原始來源收錄進 wiki 的流程：讀制度、查既有、建頁面、更索引</dd>
+      <dt>Query</dt>
+      <dd>基於 wiki 內容回答問題，並有價值時保存為查詢頁的流程</dd>
+      <dt>Lint</dt>
+      <dd>定期健康檢查，找出壞連結、孤兒頁、缺欄位等品質問題</dd>
+      <dt>Wikilinks</dt>
+      <dd>用 <code>[[page-name]]</code> 語法連結頁面，形成知識網路</dd>
+      <dt>Confidence</dt>
+      <dd>信心等級，標記該頁面的可信程度（high / medium / low）</dd>
+    </dl>
         <div class="quiz-block" data-quiz-id="q-為什麼raw目錄中的原始資料通常不應該被" data-quiz-answer="1">
       <div class="quiz-q">為什麼 raw/ 目錄中的原始資料通常不應該被 AI 直接修改？</div>
       <div class="quiz-opts">
@@ -513,6 +602,15 @@ confidence: medium
         <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>因為 Obsidian 無法讀取 raw/ 目錄</span></button>
       </div>
       <div class="quiz-hint" hidden>想想日後如果 wiki 頁面出現錯誤，要回頭查哪一份材料。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-llmwiki的大小就是它的價值嗎頁面越" data-quiz-answer="1">
+      <div class="quiz-q">LLM Wiki 的大小就是它的價值嗎？頁面越多越好？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>想想 lint 章節提到的「信任」問題。</div>
       <div class="quiz-fb" hidden></div>
     </div>
       </div>
@@ -529,7 +627,52 @@ confidence: medium
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-5"><span class="bar"></span>環境準備</div>
+    <div class="sub-title" id="sub-section-6"><span class="bar"></span>環境準備</div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Wiki 搭建進度</div>
+      <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">理解 LLM Wiki 概念</div>
+          <div class="ss-desc">了解三層架構與頁面類型</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">建立資料夾與核心檔案</div>
+          <div class="ss-desc">初始化 wiki/ 目錄、SCHEMA.md、index.md、log.md</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">第一次 Ingest</div>
+          <div class="ss-desc">收錄來源、建立概念頁</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">設定 Query 流程</div>
+          <div class="ss-desc">練習從 wiki 產生可追溯回答</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">執行 Lint 檢查</div>
+          <div class="ss-desc">檢查壞連結、孤兒頁、frontmatter 完整性</div>
+        </div>
+      </li>
+    </ol>
+      </div>
+    </div>
   </div>
 
   <div class="reveal">
@@ -930,6 +1073,10 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
       <li>重要結論保留來源或信心等級</li>
       <li>定期檢查壞連結與孤兒頁</li>
     </ul>
+        <details class="spoiler">
+      <summary>最佳實踐：如何建立高品質的 wiki 頁面</summary>
+      <div class="spoiler-body"><ul><li><strong>一頁一事</strong>：每個頁面只討論一個概念或實體，避免變成萬用雜燴</li><li><strong>交叉連結優先</strong>：新頁面建立時，至少連到 2 個既有頁面，讓知識形成網路而非孤島</li><li><strong>保留不確定性</strong>：用 <code>confidence</code> 欄位標記信心等級，低信心頁面更值得被審查</li><li><strong>定期回顧</strong>：每月花 30 分鐘 lint 一次，比堆積 100 個壞問題好處理</li><li><strong>人類把關</strong>：AI 負責整理格式、檢查連結、生成草稿；人類負責判斷哪些值得收錄、哪些需要更新</li></ul></div>
+    </details>
       </div>
     </div>
   </div>
@@ -944,7 +1091,27 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-9"><span class="bar"></span>教育場景</div>
+    <div class="sub-title" id="sub-section-10"><span class="bar"></span>教育場景</div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">教育 vs 研究 vs 團隊：場景比較</div>
+      <div class="group-body">
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>教育場景</th><th class="is-highlight">研究場景</th><th>團隊場景</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">主要目標</th><td>教學資料累積</td><td class="is-highlight">文獻與方法追蹤</td><td>決策與經驗沉澱</td></tr>
+          <tr><th class="row-label">使用者</th><td>老師與學生</td><td class="is-highlight">研究員與教授</td><td>專案成員</td></tr>
+          <tr><th class="row-label">更新頻率</th><td>每學期整理</td><td class="is-highlight">每週或每篇論文後</td><td>每個里程碑後</td></tr>
+          <tr><th class="row-label">關鍵頁面</th><td>queries/ 高品質問答</td><td class="is-highlight">comparisons/ 方法比較</td><td>決策紀錄與案例</td></tr>
+          <tr><th class="row-label">治理角色</th><td>老師審核</td><td class="is-highlight">研究助理或 PI</td><td>知識管理負責人</td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
   </div>
 
   <div class="reveal">
@@ -1011,7 +1178,7 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-10"><span class="bar"></span>研究場景</div>
+    <div class="sub-title" id="sub-section-11"><span class="bar"></span>研究場景</div>
   </div>
 
   <div class="reveal">
@@ -1089,7 +1256,7 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-11"><span class="bar"></span>團隊知識管理場景</div>
+    <div class="sub-title" id="sub-section-12"><span class="bar"></span>團隊知識管理場景</div>
   </div>
 
   <div class="reveal">
@@ -1183,7 +1350,7 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-12"><span class="bar"></span>分組任務</div>
+    <div class="sub-title" id="sub-section-13"><span class="bar"></span>分組任務</div>
   </div>
 
   <div class="reveal">
@@ -1270,7 +1437,7 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-13"><span class="bar"></span>成果檢核</div>
+    <div class="sub-title" id="sub-section-14"><span class="bar"></span>成果檢核</div>
   </div>
 
   <div class="reveal">
@@ -1335,7 +1502,55 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
       <p>真正的成果是學員能說清楚：這個 wiki 的範圍是什麼、頁面為什麼存在、來源在哪裡、下一步該補什麼。</p>
       <p style="margin-top:.5rem">只要這四件事清楚，wiki 就有延續的可能。</p>
     </div>
+        <div class="quiz-block" data-quiz-id="q-建立新wiki頁面時至少應該連到幾個相關" data-quiz-answer="1">
+      <div class="quiz-q">建立新 wiki 頁面時，至少應該連到幾個相關頁面？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>不需要連到任何頁面</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>至少 2 個相關頁面</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>至少 10 個相關頁面</span></button>
       </div>
+      <div class="quiz-hint" hidden>參考 SCHEMA.md 最小版的 Conventions 規則。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+<section class="section">
+  <div class="reveal">
+    <span class="section-label" id="section-7"><span class="num">7</span> 常見問題</span>
+    <h2>常見問題</h2>
+    
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-llm-wiki"><span class="bar"></span>LLM Wiki 常見疑問</div>
+  </div>
+
+  <div class="reveal">
+    <div class="accordion">
+      <details class="acc-item" open>
+        <summary>LLM Wiki 和一般用 ChatGPT 整理筆記有什麼不同？</summary>
+        <div class="acc-body"><p>ChatGPT 的輸出停留在對話紀錄，缺乏結構化管理、交叉連結與追溯機制。LLM Wiki 則是把 AI 輸出轉成有 frontmatter、有來源連結、有索引目錄的 Markdown 檔案，可以長期維護。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>需要學會使用 Obsidian 嗎？</summary>
+        <div class="acc-body"><p>不需要。Obsidian 只是可選的閱讀工具。LLM Wiki 的核心是純 Markdown 檔案，任何文字編輯器（VS Code、Notepad++、甚至系統內建編輯器）都能開啟。Obsidian 的好處是內建圖譜視圖與 wikilinks 支援，但非必要。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>raw/ 裡可以放 PDF 或圖片嗎？</summary>
+        <div class="acc-body"><p>可以。<code>raw/</code> 存放所有原始資料，包含 PDF、圖片、錄音檔等。AI Agent 可以閱讀文字類型的檔案（Markdown、TXT），對於 PDF 或圖片可能需要先轉成文字再收錄。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>wiki 越來越大的時候會變慢嗎？</summary>
+        <div class="acc-body"><p>由於是純本地 Markdown 檔案，不會有資料庫查詢延遲。但頁面太多時，AI Agent 需要更有效率的搜尋策略（如 <code>grep</code> 全文搜尋而非逐頁讀取）。建議每 50-100 頁做一次架構回顧，確認分類是否仍合理。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何處理衝突的資訊來源？</summary>
+        <div class="acc-body"><p>在 wiki 頁面中同時保留兩種觀點，並各自標註來源。可以用 <code>confidence: low</code> 標記該頁面，並在「開放問題」區段說明衝突點。比較頁（<code>comparisons/</code>）也很適合用來結構化地呈現兩種立場。</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -1702,8 +1917,8 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
   </script>
 
   <script>
-    window.__sectionIds__ = ["instructor","llm-wiki","llm-wiki-2","llm-wiki-3","querylint","section-5","mini-wiki","summary"];
-    window.__allAnchorIds__ = ["instructor","llm-wiki","sub-section-1","sub-section-2","llm-wiki-2","sub-section-3","sub-section-4","llm-wiki-3","sub-section-5","sub-ingest","querylint","sub-query-wiki","sub-lint-wiki","section-5","sub-section-9","sub-section-10","sub-section-11","mini-wiki","sub-section-12","sub-section-13","summary"];
+    window.__sectionIds__ = ["instructor","llm-wiki","llm-wiki-2","llm-wiki-3","querylint","section-5","mini-wiki","section-7","summary"];
+    window.__allAnchorIds__ = ["instructor","llm-wiki","sub-section-1","sub-section-2","sub-section-3","llm-wiki-2","sub-section-4","sub-section-5","llm-wiki-3","sub-section-6","sub-ingest","querylint","sub-query-wiki","sub-lint-wiki","section-5","sub-section-10","sub-section-11","sub-section-12","mini-wiki","sub-section-13","sub-section-14","section-7","sub-llm-wiki","summary"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>

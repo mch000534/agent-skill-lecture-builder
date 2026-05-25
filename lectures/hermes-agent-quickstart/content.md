@@ -13,10 +13,21 @@
 - 所有能力固定 | 透過 Skills 持續累積領域知識，越用越強
 [/compare]
 
-> **Agent 的核心差異：從「問答」到「行動」**
-> 聊天型 AI 只能告訴你怎麼做，Agent 型 AI 會直接幫你做。
->
-> 更重要的是，Hermes 會記住你上次做了什麼、你偏好什麼工具、你的專案結構長怎樣 — 這讓它不是一次性的助手，而是持續進化的協作者。
+[callout type="tip" title="核心觀點"]
+Agent 的核心差異：從「問答」到「行動」
+- 聊天型 AI 只能告訴你怎麼做
+- Agent 型 AI 會直接幫你做
+- Hermes 會記住你上次做了什麼、你偏好什麼工具、你的專案結構長怎樣 — 這讓它不是一次性的助手，而是持續進化的協作者
+[/callout]
+
+[quiz type="single"]
+Q: Hermes Agent 與一般聊天型 AI 最大的差異是什麼？
+- [ ] 支援更多種語言
+- [x] 具備持久記憶、能自主執行工具、跨平台運作
+- [ ] 回答速度更快
+- [ ] 完全免費開源
+Hint: 從「被動回答」vs「主動行動」的角度思考
+[/quiz]
 
 ### Hermes Agent 的核心特色
 
@@ -31,14 +42,24 @@
 
 ## 課程地圖
 
+### 快速入門路徑
+
+[steps-status]
+- [done] 第 2 章 — 安裝、設定與第一次對話
+- [doing] 第 3 章 — CLI 核心操作與 Slash Commands
+- [todo] 第 4 章 — Skills 技能系統與 Memory 記憶
+- [todo] 第 5 章 — Gateway 多平台連接
+- [todo] 第 6 章 — 進階能力：Subagent、Cron、Profile
+[/steps-status]
+
 ### 你會學到什麼
 
 [flow]
-1. 第 2 章 — 安裝、設定與第一次對話
-2. 第 3 章 — CLI 核心操作與 Slash Commands
-3. 第 4 章 — Skills 技能系統與 Memory 記憶
-4. 第 5 章 — Gateway 多平台連接
-5. 第 6 章 — 進階能力：Subagent、Cron、Profile
+1. 安裝與設定 — 完成環境建置，與 Agent 進行第一次對話
+2. CLI 核心操作 — 掌握日常操作中最常用的指令與 Slash Commands
+3. Skills 與 Memory — 讓 Agent 透過技能與記憶的累積越用越強
+4. Gateway 多平台 — 把 Agent 接到 Telegram、Discord 等日常通訊工具
+5. 進階能力 — Subagent 平行委派、Cron 排程、Profile 隔離、MCP 工具擴充
 [/flow]
 
 > **本章為背景鋪陳**
@@ -53,8 +74,11 @@
 
 ### 系統需求與安裝指令
 
+[callout type="warning" title="系統需求"]
 - 支援 macOS / Linux / Windows（WSL）
-- 需要 Python 3.10 以上
+- 需要 Python 3.10 以上版本
+- 建議預留至少 500MB 磁碟空間（虛擬環境 + 依賴套件）
+[/callout]
 
 ```prompt [label="一鍵安裝"]
 curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
@@ -78,6 +102,13 @@ hermes setup
 2. 輸入 API Key — 設定會寫入 ~/.hermes/.env，不會進入版控
 3. 啟用工具 — 選擇你需要的 Toolset（web、terminal、file 等）
 4. 完成設定 — 自動產生 ~/.hermes/config.yaml
+
+[reveal title="第一次設定推薦的 Provider 是什麼？"]
+推薦使用 **OpenRouter** 作為起點：
+- 一個 API Key 即可存取數百種模型，不需分別註冊
+- 提供免費額度，適合初次探索
+- 後續想切換到特定 Provider（如 Anthropic、Google）時隨時可改
+[/reveal]
 [/flow]
 
 > **設定精靈不是唯一方式**
@@ -93,6 +124,20 @@ hermes setup
 - 可用 hermes config edit 編輯 | 用 hermes config env-path 查看路徑
 - 支援 hermes config set KEY VAL 快速修改 | Provider 的 API Key 都放這裡
 [/compare]
+
+[callout type="info" title="為什麼分開存放？"]
+將 API Key 獨立到 `.env` 檔案是安全最佳實踐：
+- `config.yaml` 可以安全地備份或分享（不含敏感資訊）
+- `.env` 應加入 `.gitignore`，避免意外洩露金鑰
+- Hermes 在讀取設定時會自動合併兩層
+[/callout]
+
+[quiz type="bool"]
+Q: `~/.hermes/config.yaml` 可以安全地放入 Git 版本控制嗎？
+- [ ] 是
+- [x] 否
+Hint: 想一下哪些資訊應該避免進入版控
+[/quiz]
 
 ### 常用設定指令
 
@@ -156,6 +201,14 @@ hermes chat -q "解釋什麼是 AI Agent"
 - [x] 輸入 `/help` 列出所有 Slash Commands
 - [x] 嘗試讓它執行一個簡單指令（如 `pwd`）確認工具正常
 
+[reveal title="如果 hermes doctor 報錯怎麼辦？"]
+常見問題與解法：
+- **Python 版本過低**：升級至 Python 3.10+，可使用 pyenv 管理多版本
+- **API Key 無效**：檢查 `~/.hermes/.env` 中的 Key 是否正確，確認 Provider 帳戶有可用額度
+- **網路連線問題**：確認終端機可以存取外部 API，企業環境可能需要設定 proxy
+- **權限不足**：安裝腳本需要寫入權限，可使用 `sudo` 或檢查目錄權限
+[/reveal]
+
 ---
 
 # CLI 操作：核心指令與 Slash Commands
@@ -193,6 +246,10 @@ hermes --resume SESSION_ID
 - [orange] --yolo — 跳過危險指令確認（不建議日常使用）
 - [purple] --worktree, -w — 隔離 Git Worktree 模式
 [/tags]
+
+[callout type="warning" title="注意 --yolo 模式"]
+`--yolo` 會讓 Hermes 自動執行所有指令，包含 `rm -rf` 等危險操作。僅在受控環境（如測試用 VM、隔離的 container）中使用，日常操作請勿啟用。
+[/callout]
 
 ## Slash Commands
 
@@ -247,6 +304,13 @@ hermes sessions prune       # 清理舊對話（--older-than N 天）
 - Session 資料存放在 `~/.hermes/state.db`（SQLite + FTS5 全文搜尋）
 - 可用 `hermes sessions stats` 查看儲存統計
 
+[reveal title="Session 會佔用很多空間嗎？"]
+一般情況下不會：
+- 每筆 Session 只儲存對話文字，大小通常在幾 KB 到幾百 KB
+- 使用 `hermes sessions prune --older-than 30` 可定期清理 30 天前的舊對話
+- SQLite 資料庫支援 FTS5 全文搜尋，即使大量 Session 也不影響查詢效能
+[/reveal]
+
 ---
 
 # Skills 與 Memory：讓 Agent 越用越強
@@ -283,10 +347,20 @@ hermes skills uninstall N   # 移除技能
 hermes skills install https://example.com/skills/my-skill/SKILL.md
 ```
 
-> **好技能的判斷標準**
-> 如果你發現自己對 AI 解釋同一件事超過 3 次，每次內容都很像 — 它就應該被寫成 Skill。
->
-> Skill 的價值不是「省打字」，而是讓每次對話、每台機器、每個團隊成員，都遵循同一套標準作業流程。
+[callout type="tip" title="好技能的判斷標準"]
+如果你發現自己對 AI 解釋同一件事超過 3 次，每次內容都很像 — 它就應該被寫成 Skill。
+
+Skill 的價值不是「省打字」，而是讓每次對話、每台機器、每個團隊成員，都遵循同一套標準作業流程。
+[/callout]
+
+[quiz type="single"]
+Q: 什麼情況下最適合建立一個新的 Skill？
+- [ ] 只需要執行一次的操作
+- [ ] 簡單到一句話就能說清楚的指令
+- [x] 需要反覆解釋、有固定流程的領域知識
+- [ ] 只有你自己會用到的個人偏好
+Hint: 回想前面提到的「解釋超過 3 次」原則
+[/quiz]
 
 ### Skill 的基本結構
 
@@ -333,10 +407,11 @@ description: 當使用者要 commit 時，分析變更並拆成多個語意清�
 4. 你也可以主動要求 Agent 記住某件事
 [/flow]
 
-> **記憶應該記什麼？**
-> 使用者偏好和修正 > 環境事實 > 程序性知識。
->
-> 不要記錄任務進度、Session 結果、Commit SHA 等會過時的資訊 — 那些屬於 Session 搜尋，不是記憶。好的記憶是那種「7 天後仍然重要」的事實。
+[callout type="tip" title="記憶應該記什麼？"]
+優先順序：使用者偏好和修正 > 環境事實 > 程序性知識。
+
+不要記錄任務進度、Session 結果、Commit SHA 等會過時的資訊 — 那些屬於 Session 搜尋，不是記憶。好的記憶是那種「7 天後仍然重要」的事實。
+[/callout]
 
 ### 記憶管理
 
@@ -413,8 +488,9 @@ hermes gateway status
 /platforms        # 查看平台連接狀態
 ```
 
-> **Gateway 的安全設計**
-> 危險指令（如 rm、git push --force）不會自動執行，而是暫停等待你在聊天室中輸入 `/approve` 或 `/deny`。這讓你在手機上也能安全地使用 Agent。
+[callout type="warning" title="Gateway 的安全設計"]
+危險指令（如 `rm`、`git push --force`）不會自動執行，而是暫停等待你在聊天室中輸入 `/approve` 或 `/deny`。這讓你在手機上也能安全地使用 Agent。
+[/callout]
 
 ## 語音能力
 
@@ -505,10 +581,11 @@ hermes cron run ID             # 手動觸發
 hermes cron remove ID          # 刪除
 ```
 
-> **Cron Job 的安全設計**
-> Cron 運行在獨立的 Session 中，無法與使用者互動或要求澄清。因此 prompt 必須是自包含的 — 包含所有必要的上下文與指令。
->
-> 每次運行有 3 分鐘的硬性中斷限制，防止無窮迴圈。執行結果會自動送到指定的聊天頻道。
+[callout type="warning" title="Cron Job 的安全設計"]
+Cron 運行在獨立的 Session 中，無法與使用者互動或要求澄清。因此 prompt 必須是自包含的 — 包含所有必要的上下文與指令。
+
+每次運行有 3 分鐘的硬性中斷限制，防止無窮迴圈。執行結果會自動送到指定的聊天頻道。
+[/callout]
 
 ## Profile：多實例隔離
 
@@ -546,8 +623,45 @@ hermes mcp test NAME         # 測試連線
 hermes mcp configure NAME    # 選擇啟用的工具
 ```
 
-> **MCP 是擴充 Hermes 能力的最快捷徑**
-> 不需要寫 Python 工具，只需要設定一個 MCP Server 的連線資訊，Hermes 就能自動發現並使用該 Server 提供的所有工具。從資料庫查詢到 API 操作，生態系中已有數百個現成 Server 可用。
+[callout type="tip" title="MCP 是擴充 Hermes 能力的最快捷徑"]
+不需要寫 Python 工具，只需要設定一個 MCP Server 的連線資訊，Hermes 就能自動發現並使用該 Server 提供的所有工具。從資料庫查詢到 API 操作，生態系中已有數百個現成 Server 可用。
+[/callout]
+
+## 常見問題 FAQ
+
+[accordion]
+[item title="Hermes Agent 是免費的嗎？" open]
+Hermes Agent 本身是完全開源免費的（由 Nous Research 開發）。
+
+但使用 AI 模型需要 API Key，部分 Provider 提供免費額度：
+- Google Gemini：免費額度較大，適合探索
+- OpenRouter：新帳號有試用額度
+- 本地模型：完全免費，但需要硬體資源
+[/item]
+[item title="Hermes 會把我的資料傳到哪裡？"]
+Hermes 只在你的本機執行，所有對話、記憶、技能都儲存在本地（`~/.hermes/`）。
+
+模型推理需要呼叫外部 API（如 Anthropic、OpenAI），這與使用任何 AI 服務相同。你可以選擇本地模型來完全離線運行。
+[/item]
+[item title="我可以同時在多個平台使用同一个 Agent 嗎？"]
+可以。Gateway 允許同一個 Agent 同時連接多個平台（Telegram、Discord、Slack 等），共享同一套技能與記憶。
+
+在任何一个平台與 Agent 互動的經驗，都會反映在其他平台上。
+[/item]
+[item title="Skill 和 Memory 的差別是什麼？"]
+- **Skill**：結構化的操作流程與領域知識，類似 SOP。例如「如何產生好的 commit message」
+- **Memory**：關於你與環境的事實。例如「我偏好使用 conventional commits」、「這個專案用 pytest」
+
+Skill 是「怎麼做」，Memory 是「什麼是」。兩者互補，讓 Agent 更懂你。
+[/item]
+[item title="如何備份我的 Hermes 設定？"]
+備份 `~/.hermes/` 目錄即可包含所有設定：
+- `config.yaml` — 主要設定（可安全備份）
+- `state.db` — Session 與對話紀錄
+- `skills/` — 已安裝的技能
+- `.env` — API Key（請妥善保管，建議加密備份）
+[/item]
+[/accordion]
 
 ---
 

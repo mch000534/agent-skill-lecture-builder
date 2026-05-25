@@ -249,6 +249,27 @@
       <span class="tag orange">邊界：商業判斷、UX 取捨、跨系統的架構決策仍需要人主導</span>
       <span class="tag purple">風險：它會自信地產生看似正確、實則錯誤的程式碼，務必要驗證</span>
     </div>
+        <dl class="definition-list">
+      <dt>Copilot</dt>
+      <dd>補完型 AI 工具，在游標處預測下一行程式碼，上下文限於目前檔案</dd>
+      <dt>Agent AI（代理型 AI）</dt>
+      <dd>能自主規劃多步驟、讀檔、改檔、跑指令的 AI 系統</dd>
+      <dt>Claude Code</dt>
+      <dd>Anthropic 的代理型程式設計工具，透過終端機介面與 repo 互動</dd>
+      <dt>Context Window</dt>
+      <dd>AI 模型的上下文視窗，決定它能「記住」多少資訊</dd>
+    </dl>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">建立正確心智模型的捷徑</div>
+    <ul><li>每次對話都當成你正在跟一位新同事講解需求</li><li>不要說「請教我 X」，改說「請用 X 完成 Y，條件是 Z」</li><li>把 AI 的每個產出都當成 pull request 來審核，而不是 final answer</li></ul>
+  </div>
+</div>
+        <details class="spoiler">
+      <summary>什麼樣的 prompt 最讓 Claude Code 發揮價值？</summary>
+      <div class="spoiler-body"><p>最優秀的 prompt 格式：「專案背景 + 明確目標 + 邊界條件 + 驗證方式」</p><p>例如：「這是一個 Next.js 14 的電商前台（背景），請把商品列表改為 SSR（目標），不要改 CSS 和路由（邊界），完成後跑 <code>npm run build</code> 確認無 error（驗證）。」</p></div>
+    </details>
       </div>
     </div>
   </div>
@@ -308,6 +329,25 @@
         <div class="insight">
       <div class="insight-title">本章為背景鋪陳</div>
       <p>第 1 章只提供心智模型，沒有實作步驟。下一章開始我們會打開終端機，一行一行驗證每個概念。</p>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-claudecode與copilot最根" data-quiz-answer="1">
+      <div class="quiz-q">Claude Code 與 Copilot 最根本的差異是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>Claude Code 的模型參數更大</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>Claude Code 是代理型 AI，能自主讀檔、改檔、跑指令</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>Claude Code 支援更多程式語言</span></button>
+      </div>
+      <div class="quiz-hint" hidden>回想本章「補完型」與「代理型」的比較</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-ai產生的程式碼若沒有測試驗證就可以先c" data-quiz-answer="1">
+      <div class="quiz-q">AI 產生的程式碼若沒有測試驗證，就可以先 commit？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>代理型工具的產出是真實的檔案異動，必須驗證</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -373,6 +413,13 @@ claude</div>
       <li>設定會寫到 <code>~/.claude/</code>，包含 token、模型偏好、權限快取</li>
       <li>退出對話：在 prompt 輸入 <code>/exit</code> 或按兩次 Ctrl+C</li>
     </ul>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">API Key 安全提醒</div>
+    <ul><li>切勿將 API Key commit 進 Git repo 或貼到社群</li><li>建議使用 <code>~/.claude/</code> 下的設定檔管理，而非環境變數</li><li>公司提供的 API Key 請遵循內部資安規範</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -441,6 +488,10 @@ claude</div>
       <p>「請告訴我 react-query 怎麼用」會得到一篇文章，但不會改你的程式碼。</p>
       <p style="margin-top:.5rem">Claude Code 的價值在於它能讀你的 repo、改你的檔案、跑你的測試。把它當成「願意幫你做事的工程同事」，每次對話都要包含明確的目標與邊界。</p>
     </div>
+        <details class="spoiler">
+      <summary>第一次對話最容易犯的錯誤</summary>
+      <div class="spoiler-body"><ul><li>錯誤一：什麼都不說，直接丟一個需求 — AI 缺少專案背景，會憑空想像</li><li>錯誤二：一次給 10 個需求 — blast radius 太大，AI 很難同時做好每件事</li><li>錯誤三：沒有設定邊界 — AI 可能改到你不想動的測試檔或設定檔</li><li>正確做法：「背景 + 目標 + 邊界」三句話，讓 AI 像真正的同事一樣開工</li></ul></div>
+    </details>
       </div>
     </div>
   </div>
@@ -456,6 +507,25 @@ claude</div>
       <span class="tag blue">/model — 切換模型（Opus / Sonnet / Haiku）</span>
       <span class="tag blue">/cost — 查看本次對話累計 token 用量</span>
     </div>
+        <div class="quiz-block" data-quiz-id="q-安裝claudecode後第一次執行cl" data-quiz-answer="1">
+      <div class="quiz-q">安裝 Claude Code 後，第一次執行 `claude` 時會發生什麼事？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>自動建立 CLAUDE.md 檔案</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>引導完成 OAuth 授權或貼上 API Key</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>直接開始對話，不需要任何設定</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看「安裝指令」段落的說明</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-compact指令的用途是壓縮對話歷史以" data-quiz-answer="0">
+      <div class="quiz-q">`/compact` 指令的用途是壓縮對話歷史以節省 context？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看常用 Slash Commands 列表</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -467,6 +537,32 @@ claude</div>
     <span class="section-label" id="planeditverify"><span class="num">3</span> 核心工作流</span>
     <h2>Plan、Edit、Verify</h2>
     <p class="lead">任何複雜任務都拆成三段：先規劃、再動手、最後驗證 — 這是把 Claude Code 從玩具變成生產力工具的關鍵</p>
+  </div>
+
+  <div class="reveal">
+    <ol class="steps-status">
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">初學者</div>
+          <div class="ss-desc">只會下單一指令，沒有規劃與驗證</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">進階</div>
+          <div class="ss-desc">會使用 Plan 模式，但 Edit 與 Verify 偶爾省略</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">精通</div>
+          <div class="ss-desc">每輪都嚴格遵循 Plan → Edit → Verify，自動驗證每步</div>
+        </div>
+      </li>
+    </ol>
   </div>
 
   <div class="reveal">
@@ -539,6 +635,13 @@ claude</div>
       <p>計畫的真正價值在於「你能不能讀懂並挑出問題」。如果計畫看起來都對，但你看不懂某個步驟，那就是該追問的時候。</p>
       <p style="margin-top:.5rem">別假裝看懂後就 approve — 一旦 AI 開始動手，你損失的是後續每一步的審核機會。</p>
     </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Plan 模式的實用技巧</div>
+    <ul><li>要求 AI 以條列式呈現，不要長篇大論</li><li>明確指出「不要動程式碼」，避免它直接開幹</li><li>如果計畫有風險，要求它標出「如果做錯，影響範圍多大」</li><li>對複雜任務，要求它先列出「需要讀哪些檔案才能開始規劃」</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -632,6 +735,35 @@ claude</div>
       <div class="insight-title">永遠不要相信「應該可以了」</div>
       <p>AI 很容易在沒跑測試的情況下宣稱完成。請把 verify 步驟明寫進每一輪指令，並要求看到輸出。</p>
       <p style="margin-top:.5rem">沒看到綠色的測試結果之前，沒有任何任務算完成。</p>
+    </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">常見錯誤：一次改太多</div>
+    <ul><li>當 AI 在同一輪中改了 3 個以上的 feature，出錯機率會大幅增加</li><li>正確做法：每次只要求一個明確的變更，改完即 commit，再進行下一步</li><li>若發現 AI 開始「順便也修了 X」，立刻停下，逐一檢查每項變更</li></ul>
+  </div>
+</div>
+        <div class="quiz-block" data-quiz-id="q-在plan階段最重要的動作是什麼" data-quiz-answer="2">
+      <div class="quiz-q">在 Plan 階段最重要的動作是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>讓 AI 直接開始改程式碼以節省時間</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>提供盡可能長的背景說明，讓 AI 充分理解</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>要求 AI 列出計畫、標出風險，並明確指示「先不要動程式碼」</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>讓 AI 自行決定最優的實作方式</span></button>
+      </div>
+      <div class="quiz-hint" hidden>Plan 的真正價值在於「你能不能讀懂並挑出問題」</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-verify階段應該驗證哪些項目" data-quiz-answer="0">
+      <div class="quiz-q">Verify 階段應該驗證哪些項目？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>Type check、Lint、Test、手動驗證關鍵路徑</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>只跑測試就足夠</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>只看 lint 結果即可</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>由 AI 自行決定驗證方式</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看「驗證的最小單位」流程</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -729,10 +861,15 @@ claude</div>
     <div class="group-block">
       <div class="group-header">三種權限模式</div>
       <div class="group-body">
-        <div class="tags">
-      <span class="tag green">Ask — 每個寫檔/執行指令都要你按 yes（最安全，最慢）</span>
-      <span class="tag orange">Auto-allow rules — 對特定指令類別預先授權（推薦）</span>
-      <span class="tag purple">Bypass — 完全不問，全自動（只在沙盒環境使用）</span>
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>模式</th><th>說明</th><th>推薦場景</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label"><strong>Ask</strong></th><td>每個寫檔/執行都要確認</td><td>剛開始使用、高風險 repo</td></tr>
+          <tr><th class="row-label">Auto-allow</th><td>對特定指令類別預先授權</td><td><strong>日常開發（推薦）</strong></td></tr>
+          <tr><th class="row-label">Bypass</th><td>完全不問，全自動執行</td><td>沙盒環境、CI/CD 流程</td></tr>
+        </tbody>
+      </table>
     </div>
         <div class="prompt-block">
       <div class="prompt-header">
@@ -762,6 +899,24 @@ claude</div>
       <div class="insight-title">預授權只給「無副作用」的指令</div>
       <p>跑測試、看 git status、查 lint，這些再怎麼跑也不會壞東西。</p>
       <p style="margin-top:.5rem">但 <code>git push</code>、<code>rm</code>、<code>migrate down</code>、<code>prisma db push</code> 這類具破壞性或對外可見的指令，永遠保留人工確認 — 哪怕你今天信任它 100 次。</p>
+    </div>
+        <details class="spoiler">
+      <summary>什麼樣的 auto-allow 規則最安全？</summary>
+      <div class="spoiler-body"><p>最安全的 auto-allow 規則遵循三個原則：</p><ul><li><strong>唯讀操作</strong>：<code>git status</code>、<code>git diff</code>、<code>cat</code>、<code>ls</code> 永遠安全</li><li><strong>可逆操作</strong>：跑測試、lint、typecheck 即使跑壞了也可以重新執行</li><li><strong>有明確 pattern</strong>：用 <code>npm test:*</code> 比單純 <code>npm test:*</code> 更精確，避免意外匹配</li></ul></div>
+    </details>
+        <div class="accordion">
+      <details class="acc-item">
+        <summary>CLAUDE.md 應該放在哪裡？</summary>
+        <div class="acc-body"><p>推薦放在 repo 根目錄。也支援 <code>~/.claude/CLAUDE.md</code>（全域套用所有專案）與子目錄局部覆寫。</p><ul><li>根目錄：團隊共用，commit 進 repo</li><li>全域：個人偏好，不 commit</li><li>子目錄：特定模組有特殊規範時</li></ul></div>
+      </details>
+      <details class="acc-item">
+        <summary>Permissions 設定會影響團隊其他人嗎？</summary>
+        <div class="acc-body"><p>不會。<code>.claude/settings.json</code> 是個人本地設定，不會 commit 進 repo。但 CLAUDE.md、Slash Commands、Skills 可以 commit 共用。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>Slash Command 跟 Skill 應該同時存在嗎？</summary>
+        <div class="acc-body"><p>可以。Slash Command 適合「人類主動觸發的標準流程」，Skill 適合「AI 自行判斷該用哪套專業知識」。兩者互補而非互斥。</p></div>
+      </details>
     </div>
       </div>
     </div>
@@ -823,6 +978,26 @@ description: 對當前 branch 的變更做一次 code review
           <div class="step-desc">把 <code>.claude/commands/</code> commit 進 repo</div>
         </div>
       </div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-claudemd的主要用途是什麼" data-quiz-answer="2">
+      <div class="quiz-q">CLAUDE.md 的主要用途是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>讓 Claude Code 的 UI 變得更漂亮</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>設定 API Key 和認證資訊</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>提供專案規範給 AI 讀取，等同 onboarding 文件</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>作為 Git 的 .gitignore 替代品</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看「它是什麼、放哪裡」段落</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-claudesettingsjson的p" data-quiz-answer="1">
+      <div class="quiz-q">`.claude/settings.json` 的 permissions 設定應該 commit 進 repo 讓團隊共用？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>permissions 是個人本地設定</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -907,6 +1082,20 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
       <p>如果某個工作流你已經對 AI 解釋過 3 次以上，且每次解釋都長得很像 — 它就是 Skill。</p>
       <p style="margin-top:.5rem">Skill 的價值不是「省字」，而是讓你的團隊每個人、每台機器、每次對話，都使用同一份標準作業流程。離職的人留下的不只是程式碼，更是制度化的工程習慣。</p>
     </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Skill 設計的黃金法則</div>
+    <ul><li><strong>一個 Skill 只做一件事</strong>：不要把 git workflow、PR review、deploy 全塞進同一個 Skill</li><li><strong>明確的觸發條件</strong>：description 要寫清楚「什麼時候該用這個 Skill」</li><li><strong>工具白名單</strong>：在 SKILL.md 中列出允許使用的工具，避免 Skill 執行危險操作</li><li><strong>版本控制</strong>：把 <code>.agents/skills/</code> commit 進 repo，團隊共用同一份定義</li></ul>
+  </div>
+</div>
+        <button class="bonus-btn" data-bonus-title="延伸閱讀：如何測試你的 Skill？" data-bonus-content="Skill 寫好後，務必做以下測試：
+- 在新專案中第一次觸發，觀察 AI 是否正確判斷
+- 檢查 Skill 是否使用了未授權的工具
+- 測試邊界情境：當條件不明確時，AI 是否仍然觸發
+- 請團隊成員試用，收集反饋並調整 description">
+      延伸閱讀：如何測試你的 Skill？
+    </button>
       </div>
     </div>
   </div>
@@ -976,6 +1165,26 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 找出整個 repo 中所有使用 useEffect 處理 data fetching 的地方，
 回報檔案、行號、用途分類，最多 30 筆。
 你（主對話）不需要讀檔，等子代理結果就好。</div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-什麼時候應該使用subagent" data-quiz-answer="1">
+      <div class="quiz-q">什麼時候應該使用 Subagent？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>需要跟使用者持續互動的對話任務</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>獨立的探索任務，結果可平行執行</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>修改單一檔案的簡單任務</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>需要即時決策的任務</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看「呼叫 Subagent 的時機」流程</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-subagent的探索任務會污染主對話的" data-quiz-answer="1">
+      <div class="quiz-q">Subagent 的探索任務會污染主對話的 context？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>Subagent 的核心價值就是「隔離 context」</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -1055,6 +1264,13 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
       <p>與其設一個 hook 在 AI 寫錯時噴錯誤訊息，不如直接讓 hook 幫它修好。</p>
       <p style="margin-top:.5rem">例如：每次 Write/Edit 後自動跑 prettier、自動補 license header、自動執行 typecheck。AI 能透過 hook 結果學習你的規範，下次產出就會更接近期望。</p>
     </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Hook 的潛在風險</div>
+    <ul><li>無限循環：PostToolUse hook 觸發 Edit，Edit 又觸發 PostToolUse</li><li>效能影響：每個 hook 都會增加執行時間，避免設定過多 hook</li><li>除錯困難：hook 是隱式執行，新成員可能不知道某些行為是自動的</li><li>建議：每新增一個 hook，都要寫清楚「這個 hook 做了什麼」的註解</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1105,6 +1321,38 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
       <span class="tag orange">需要嚴格權限：付款 API、deploy 流程</span>
       <span class="tag purple">不建議：高頻寫入操作（成本與風險都高）</span>
     </div>
+        <ol class="timeline">
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">第一階段</div>
+        <div class="tl-title">手動操作</div>
+        <div class="tl-desc">每次都要人輸入指令，最容易出錯</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">第二階段</div>
+        <div class="tl-title">Slash Commands</div>
+        <div class="tl-desc">團隊共用標準流程，降低人為差異</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">第三階段</div>
+        <div class="tl-title">Hooks 自動化</div>
+        <div class="tl-desc">工具自己呼叫工具，減少重複確認</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">第四階段</div>
+        <div class="tl-title">MCP 整合</div>
+        <div class="tl-desc">連外部資源都成為 AI 可直接操作的工具</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">第五階段</div>
+        <div class="tl-title">完全自動化</div>
+        <div class="tl-desc">從需求到部署，AI 全程自主執行，人只做審核</div>
+      </li>
+    </ol>
       </div>
     </div>
   </div>
@@ -1166,6 +1414,26 @@ claude</div>
         </div>
       </div>
     </div>
+        <div class="quiz-block" data-quiz-id="q-mcp最適合接入哪種外部資源" data-quiz-answer="1">
+      <div class="quiz-q">MCP 最適合接入哪種外部資源？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>高頻寫入操作的資料庫</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>唯讀查詢（如 DB schema、錯誤日誌）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>需要人類審核的 deploy 流程</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>即時通訊訊息傳送</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看「MCP 適合接什麼」標籤</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-gitworktree可以讓同一個rep" data-quiz-answer="0">
+      <div class="quiz-q">Git Worktree 可以讓同一個 repo 的多個分支同時開發而不互相干擾？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>每個 worktree 有獨立的 node_modules、dev server 和 AI 對話</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -1187,6 +1455,29 @@ claude</div>
     <div class="group-block">
       <div class="group-header">不要讓 AI 亂猜，給它證據</div>
       <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">猜錯型</div>
+          <div class="ss-desc">直接叫 AI 修 bug，不提供任何脈絡</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">證據型</div>
+          <div class="ss-desc">提供 stack trace 和重現步驟，等 AI 分析後驗證</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">系統型</div>
+          <div class="ss-desc">先用 git bisect 定位 commit，再蒐集證據、提出假設、逐一驗證</div>
+        </div>
+      </li>
+    </ol>
         <div class="flow">
       <div class="flow-step">
         <div class="step-num">1</div>
@@ -1299,10 +1590,44 @@ claude</div>
         </div>
       </div>
     </div>
+        <div class="accordion">
+      <details class="acc-item">
+        <summary>團隊導入 Claude Code 的推薦起步方式？</summary>
+        <div class="acc-body"><p>建議從以下三步驟開始：</p><ul><li>先寫好 CLAUDE.md，讓 AI 和新人有共同的 onboarding 文件</li><li>建立 1-2 個最常用的 Slash Command（如 <code>/review</code>），讓大家有統一體驗</li><li>設定合理的 auto-allow 規則，降低日常摩擦</li></ul></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何說服團隊成員使用 Claude Code？</summary>
+        <div class="acc-body"><p>最好的方式是讓它幫團隊「做一件真正痛的事情」：</p><ul><li>找出大家每天都抱怨的重複工作（如 commit message、PR description）</li><li>寫成 Skill 或 Slash Command，讓大家第一次就感受到價值</li><li>讓價值自己說話，比任何 push 都有效</li></ul></div>
+      </details>
+      <details class="acc-item">
+        <summary>Claude Code 會不會取代工程師？</summary>
+        <div class="acc-body"><p>不會。它取代的是「打字」這個動作，但取代不了「設計規格」、「驗證結果」、「做商業判斷」這些工程師的核心能力。</p><ul><li>真正危險的是「只會打字、不會思考」的開發者</li><li>有價值的反而是「能用 AI 交付更多、更好產品」的人</li></ul></div>
+      </details>
+    </div>
         <div class="insight">
       <div class="insight-title">真正的精通：讓你的工作可以被別人接手</div>
       <p>工具的終點不是個人英雄主義，而是團隊韌性。當你的工作流被寫進 CLAUDE.md、Skill、Hook、Slash Command — 任何一位同事（或未來的你）都能無痛接手。</p>
       <p style="margin-top:.5rem">Claude Code 最終要解決的不是「我寫得多快」，而是「我們團隊能多有韌性地交付產品」。</p>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-系統化debug的第一步應該是什麼" data-quiz-answer="0">
+      <div class="quiz-q">系統化 Debug 的第一步應該是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>建立穩定的重現步驟</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>直接開始看程式碼找 bug</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>叫 AI 立刻修好</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>先用 git push 把變更推上遠端</span></button>
+      </div>
+      <div class="quiz-hint" hidden>查看系統化 Debug 的流程，第一步是「重現」</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-當ai提出bug的可能原因時應該要求它至" data-quiz-answer="0">
+      <div class="quiz-q">當 AI 提出 bug 的可能原因時，應該要求它至少列出 2 個以上假設？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>好的 debug 實踐是提出多個假設再逐一驗證</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>

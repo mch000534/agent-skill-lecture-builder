@@ -9,6 +9,16 @@
 - Git（用於版本控制與 GitHub Pages 部署）
 - Claude Code CLI（AI 驅動的核心引擎）
 
+### 傳統課程開發 vs Agent Skill 開發
+
+[compare label-left="傳統課程開發" label-right="Agent Skill 開發"]
+- 手動寫 HTML / CSS / JS | 用 content.md 描述內容，AI 自動建置
+- 每次風格不一致 | 所有課程共用同一模板與設計語言
+- 修改樣式要逐頁調整 | 改 base.html / course.css 一次，全部套用
+- 產 OG 圖需要設計軟體 | Puppeteer 自動截取 Hero 區，零設計成本
+- 版本差異難以審查 | git diff 清晰可讀，只看內容變化
+[/compare]
+
 ### 取得專案
 
 ```prompt [label="Terminal"]
@@ -18,6 +28,10 @@ npm install
 ```
 
 `npm install` 只需執行一次。唯一的外部相依套件是 Puppeteer，用於自動產生 OG 縮圖。
+
+[callout type="tip" title="提示"]
+如果你只是要快速試用，可以先跳過 `npm install`——build 和 dev 都能正常運作。只有在第一次產 OG 縮圖時才需要 Puppeteer。
+[/callout]
 
 ## 第一次生成課程頁
 
@@ -51,12 +65,37 @@ AI 會依序完成所有步驟，完全不需要手動干預：
 
 AI 會萃取重點、重新結構化，轉為 Markdown 格式並建置頁面。
 
+[reveal title="想一想：為什麼用 Markdown 而不是直接寫 HTML？"]
+- 內容與樣式分離，改模板自動套用所有課程
+- git diff 清晰可讀，只顯示內容變化
+- AI 生成的 Markdown 結構一致，可預期
+- 非技術背景的人也能直接編輯內容
+[/reveal]
+
+[quiz type="single"]
+Q: 第一次建置課程頁面，最少的必要指令是哪幾個？
+- [x] build.mjs + generate-og.mjs
+- [ ] validate.mjs + dev.mjs
+- [ ] build-index.mjs + build-vote.mjs
+Hint: build 產出 HTML，generate-og 產出縮圖，這兩步就能上線。
+[/quiz]
+
+[quiz type="bool"]
+Q: npm install 每次 build 前都需要執行？
+- [ ] 是
+- [x] 否
+Hint: npm install 只需執行一次，安裝 Puppeteer 後即可反覆 build。
+[/quiz]
+
 ---
 
 # 專案架構：了解每個部分的角色
 > 整個系統只有一個 HTML 模板，所有課程共用同一套設計語言
 
 ## 目錄總覽
+
+> **核心概念**
+> 整個專案只依賴三個核心要素：[?Markdown|一種輕量級標記語言，用簡單的符號表示標題、清單、程式碼等格式] 寫內容、[?YAML|一種人類可讀的資料序列化格式，常用於設定檔] 管設定、[?Puppeteer|Google 開頭的無頭瀏覽器自動化工具，這裡用於自動截取網頁畫面產生 OG 縮圖] 產圖片。
 
 ```prompt [label="專案結構"]
 agent-skill-lecture-builder/
@@ -95,6 +134,10 @@ agent-skill-lecture-builder/
 > socials、nav 等陣列欄位若在課程 config 中定義，會整體取代全域設定，不做合併。
 >
 > nav（Hero 導覽按鈕）預設從 content.md 的主章節（`#`）自動產生，通常不需手動設定。
+
+[reveal title="想一想：為什麼不直接合併陣列欄位？"]
+如果課程 config 定義了 2 個 nav 按鈕，全域有 5 個——合併後變成 7 個，但講者可能只想顯示自己的 2 個。整體取代讓課程有完全的控制權，避免不相關的按鈕混入。
+[/reveal]
 
 ---
 
@@ -164,6 +207,14 @@ quotes:
 
 依序執行以下指令：
 
+[steps-status]
+- [done] 環境設定 | 確認 Node.js、Git、Claude Code 已安裝
+- [done] 建立課程目錄 | mkdir -p lectures/my-course/assets
+- [doing] 撰寫 content.md + config.yaml | 用 AI 生成或手動編寫
+- [todo] 執行 build + generate-og | 產出 index.html 和 OG 縮圖
+- [todo] 更新索引 + commit + push | build-index.mjs 後部署到 GitHub Pages
+[/steps-status]
+
 ```prompt [label="Terminal — 建置流程"]
 # 1. 建置課程頁
 node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
@@ -185,12 +236,48 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course
 > - lectures/my-course/assets/og-image.jpg（OG 縮圖）
 > - lectures/manifest.js（課程索引）
 
+[callout type="warning" title="注意"]
+content.md 和 config.yaml 是**原始檔**，index.html 和 og-image.jpg 是**建置產物**。兩者都需要 commit，因為 GitHub Pages 需要靜態檔案才能正確展示。不要把 index.html 加入 .gitignore。
+[/callout]
+
+[quiz type="single"]
+Q: 新增課程後，哪一步能讓課程出現在根目錄的索引頁？
+- [ ] build.mjs
+- [ ] generate-og.mjs
+- [x] build-index.mjs
+- [ ] dev.mjs
+Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁依賴此檔案。
+[/quiz]
+
 ---
 
 # Markdown 語法：課程內容的積木
 > 所有元件都是純 Markdown 語法，AI 可以直接生成，你也可以手寫
 
+## Agent Skill 技術演進
+
+[timeline]
+- 2023 | ChatGPT Plugins | AI 首次能呼叫外部 API，但依賴單一平台
+- 2024 | Claude Projects | 上傳文件作為知識庫，但仍是被動問答
+- 2025 | Claude Code | 終端機原生 AI 編程助手，能讀寫檔案、執行指令
+- 2025 | Claude Skills | 可封裝、可分享的自訂工作流，AI 能力可組合
+- 2026 | Agent Skill Ecosystem | 社群共享 Skill，一鍵安裝複雜工作流
+[/timeline]
+
+> **從「對話」到「技能」的關鍵轉變**
+> 過去我們用自然語言跟 AI 對話，每次結果都不同。Skill 把成功的工作流封裝起來，讓任何人都能重現一致的產出——這才是可規模化的教學工具。
+
 ## 結構元件
+
+### 內容輸入方式比較
+
+[compare-table headers="方式 | **推薦：AI 生成** | 手動編寫"]
+- 速度 | 幾秒內產出完整草稿 | 需要熟悉語法與排版
+- 一致性 | AI 自動遵循 components.md 規範 | 容易遺漏元件語法
+- 適合場景 | 新課程快速起步 | 現有課程精修調整
+- 門檻 | 只需會下 Prompt | 需要了解 Markdown 擴充語法
+- 維護性 | 生成的內容可手動二次編輯 | 完全掌控每個細節
+[/compare-table]
 
 ### 主章節與子章節
 
@@ -533,6 +620,31 @@ console.log(`5! = ${result}`); // 120
 - SDD | Spec-Driven Development，規格驅動開發
 [/dl]
 
+[callout type="tip" title="小技巧：如何快速記住常用語法？]
+- 結構用 `#` 和 `##`：跟一般 Markdown 一樣
+- 互動元件用 `[xxx]`：方括號包起來的都是進階元件
+- 程式碼用 ```：跟 GitHub Flavored Markdown 一樣
+- 其餘都是「自然語言延伸」：像是 `> ` 引言、`- ` 清單
+[/callout]
+
+[quiz type="single"]
+Q: 在 content.md 中，哪種語法會渲染為帶顏色的標籤？
+- [ ] `- 標籤文字`
+- [x] `[tags]- [green] 文字[/tags]`
+- [ ] `## 標籤：文字`
+- [ ] `[label color="green"]文字[/label]`
+Hint: `[tags]` 區塊內使用 `- [color] 文字` 格式才能套用顏色。
+[/quiz]
+
+[quiz type="single"]
+Q: 想要學生先思考再看到答案，應該用哪個元件？
+- [ ] [bonus]
+- [ ] [callout]
+- [x] [reveal]
+- [ ] [summary]
+Hint: [reveal] 渲染為 `<details>` 元素，點擊才會展開內容。
+[/quiz]
+
 ---
 
 # OG Image：讓分享連結更專業
@@ -557,6 +669,13 @@ OG 是 Open Graph 的縮寫，是 Facebook 在 2010 年提出、現已成為網�
 [/flow]
 
 完全不需要設計軟體——課程頁面的 Hero 區就是 OG 圖的設計稿。
+
+[callout type="tip" title="為什麼用 Puppeteer 而不是手動做圖？"]
+- 每次改 Hero 標題不用重新設計：截圖自動同步
+- 品牌一致性：配色、字型、排版全部來自課程頁面本身
+- 零學習成本：不需要會用 Figma、Photoshop 等設計工具
+- 可自動化：CI/CD 流程中可以自動產生最新 OG 圖
+[/callout]
 
 ## 執行與設定
 
@@ -818,6 +937,38 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 
 ## 自訂與擴展
 
+### FAQ 常見問題
+
+[accordion]
+[item title="Skill 應該放在哪個目錄？" open]
+專案層級：`.agents/skills/<skill-name>/`（只有這個專案可用）。
+全域層級：`~/.claude/skills/<skill-name>/`（所有 Claude Code 專案皆可用）。
+建議先在專案層級測試，確認無誤後再考慮移至全域。
+[/item]
+[item title="怎麼讓 Claude 自動偵測到我的 Skill？"]
+只要把 Skill 資料夾放到 `.agents/skills/` 或 `~/.claude/skills/`，Claude Code 啟動時會自動掃描。SKILL.md 中的觸發條件（trigger keywords）會決定何時自動套用。
+[/item]
+[item title="SKILL.md 必須寫什麼？"]
+最低限度：Skill 的描述和觸發時機。建議包含：工作流程步驟、參考檔案路徑、輸出格式範例。越詳細，AI 執行越準確。
+[/item]
+[item title="可以一個 Skill 呼叫另一個 Skill 嗎？"]
+可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 就是串聯三個 Skill 的範例。
+[/item]
+[item title="怎麼知道目前有哪些 Skill 被啟用了？"]
+在 Claude Code 中輸入 `/skills` 或類似指令（取決於版本），可以列出所有已偵測到的 Skill。也可以在 `~/.claude/` 或專案的 `.agents/skills/` 目錄下直接查看資料夾。
+[/item]
+[/accordion]
+
+### Skill 建立流程
+
+[steps-status]
+- [done] 環境準備 | 確認 Claude Code 已安裝，找到 `.agents/skills/` 目錄
+- [done] 建立模板 | 用 `skill-creator` Skill 生成 SKILL.md 骨架
+- [doing] 撰寫工作流 | 定義觸發條件、執行步驟、參考檔案
+- [todo] 測試與除錯 | 用真實 Prompt 觸發，驗證 AI 是否正確執行
+- [todo] 發佈與分享 | 推到 GitHub 或放到團隊共用全域 Skills 目錄
+[/steps-status]
+
 ### 修改全域樣式
 
 `assets/course.css` 是所有課程共用的 CSS，修改後**不需重新 build**，直接更新所有課程頁面。
@@ -835,6 +986,24 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 - 透過 Claude Code 說自然語言就能觸發完整工作流
 - GitHub Pages 自動部署，commit 後即上線
 [/summary]
+
+[quiz type="single"]
+Q: 想要讓其他團隊成員也能使用你建立的 Skill，應該放在哪裡？
+- [x] ~/.claude/skills/（全域 Skill）
+- [ ] 只有你的 .agents/skills/（專案 Skill）
+- [ ] 上傳到 Claude 雲端
+- [ ] 寄給對方 SKILL.md 檔案
+Hint: 全域 Skill 放在 ~/.claude/skills/，所有 Claude Code 專案都能使用。
+[/quiz]
+
+[quiz type="single"]
+Q: 修改了 assets/course.css 後需要執行什麼指令？
+- [ ] build.mjs 重新建置
+- [ ] generate-og.mjs 重新產圖
+- [x] 不需要，直接重新整理瀏覽器即可
+- [ ] dev.mjs 重新啟動伺服器
+Hint: course.css 和 course.js 是外部引用檔案，瀏覽器每次載入都會讀取最新版本。
+[/quiz]
 
 [bonus title="為什麼用 Markdown 而非直接生成 HTML？"]
 純 HTML 的問題：

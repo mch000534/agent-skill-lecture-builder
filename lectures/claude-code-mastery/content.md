@@ -26,6 +26,25 @@
 - [purple] 風險：它會自信地產生看似正確、實則錯誤的程式碼，務必要驗證
 [/tags]
 
+[dl]
+- Copilot | 補完型 AI 工具，在游標處預測下一行程式碼，上下文限於目前檔案
+- Agent AI（代理型 AI）| 能自主規劃多步驟、讀檔、改檔、跑指令的 AI 系統
+- Claude Code | Anthropic 的代理型程式設計工具，透過終端機介面與 repo 互動
+- Context Window | AI 模型的上下文視窗，決定它能「記住」多少資訊
+[/dl]
+
+[callout type="tip" title="建立正確心智模型的捷徑"]
+- 每次對話都當成你正在跟一位新同事講解需求
+- 不要說「請教我 X」，改說「請用 X 完成 Y，條件是 Z」
+- 把 AI 的每個產出都當成 pull request 來審核，而不是 final answer
+[/callout]
+
+[reveal title="什麼樣的 prompt 最讓 Claude Code 發揮價值？"]
+最優秀的 prompt 格式：「專案背景 + 明確目標 + 邊界條件 + 驗證方式」
+
+例如：「這是一個 Next.js 14 的電商前台（背景），請把商品列表改為 SSR（目標），不要改 CSS 和路由（邊界），完成後跑 `npm run build` 確認無 error（驗證）。」
+[/reveal]
+
 ## 課程地圖
 
 ### 你會學到什麼
@@ -41,6 +60,21 @@
 
 > **本章為背景鋪陳**
 > 第 1 章只提供心智模型，沒有實作步驟。下一章開始我們會打開終端機，一行一行驗證每個概念。
+
+[quiz type="single"]
+Q: Claude Code 與 Copilot 最根本的差異是什麼？
+- [ ] Claude Code 的模型參數更大
+- [x] Claude Code 是代理型 AI，能自主讀檔、改檔、跑指令
+- [ ] Claude Code 支援更多程式語言
+Hint: 回想本章「補完型」與「代理型」的比較
+[/quiz]
+
+[quiz type="bool"]
+Q: AI 產生的程式碼若沒有測試驗證，就可以先 commit？
+- [ ] 是
+- [x] 否
+Hint: 代理型工具的產出是真實的檔案異動，必須驗證
+[/quiz]
 
 ---
 
@@ -72,6 +106,12 @@ claude
 - 設定會寫到 `~/.claude/`，包含 token、模型偏好、權限快取
 - 退出對話：在 prompt 輸入 `/exit` 或按兩次 Ctrl+C
 
+[callout type="warning" title="API Key 安全提醒"]
+- 切勿將 API Key commit 進 Git repo 或貼到社群
+- 建議使用 `~/.claude/` 下的設定檔管理，而非環境變數
+- 公司提供的 API Key 請遵循內部資安規範
+[/callout]
+
 ### 安裝驗證 checklist
 
 - [x] `claude --version` 回傳版本號而非 command not found
@@ -101,6 +141,13 @@ claude
 >
 > Claude Code 的價值在於它能讀你的 repo、改你的檔案、跑你的測試。把它當成「願意幫你做事的工程同事」，每次對話都要包含明確的目標與邊界。
 
+[reveal title="第一次對話最容易犯的錯誤"]
+- 錯誤一：什麼都不說，直接丟一個需求 — AI 缺少專案背景，會憑空想像
+- 錯誤二：一次給 10 個需求 — blast radius 太大，AI 很難同時做好每件事
+- 錯誤三：沒有設定邊界 — AI 可能改到你不想動的測試檔或設定檔
+- 正確做法：「背景 + 目標 + 邊界」三句話，讓 AI 像真正的同事一樣開工
+[/reveal]
+
 ### 常用 Slash Commands
 
 [tags]
@@ -111,10 +158,31 @@ claude
 - [blue] /cost — 查看本次對話累計 token 用量
 [/tags]
 
+[quiz type="single"]
+Q: 安裝 Claude Code 後，第一次執行 `claude` 時會發生什麼事？
+- [ ] 自動建立 CLAUDE.md 檔案
+- [x] 引導完成 OAuth 授權或貼上 API Key
+- [ ] 直接開始對話，不需要任何設定
+Hint: 查看「安裝指令」段落的說明
+[/quiz]
+
+[quiz type="bool"]
+Q: `/compact` 指令的用途是壓縮對話歷史以節省 context？
+- [x] 是
+- [ ] 否
+Hint: 查看常用 Slash Commands 列表
+[/quiz]
+
 ---
 
 # 核心工作流：Plan、Edit、Verify
 > 任何複雜任務都拆成三段：先規劃、再動手、最後驗證 — 這是把 Claude Code 從玩具變成生產力工具的關鍵
+
+[steps-status]
+- [todo] 初學者 | 只會下單一指令，沒有規劃與驗證
+- [doing] 進階 | 會使用 Plan 模式，但 Edit 與 Verify 偶爾省略
+- [done] 精通 | 每輪都嚴格遵循 Plan → Edit → Verify，自動驗證每步
+[/steps-status]
 
 ## Plan 階段：先想清楚再動手
 
@@ -144,6 +212,13 @@ claude
 > 計畫的真正價值在於「你能不能讀懂並挑出問題」。如果計畫看起來都對，但你看不懂某個步驟，那就是該追問的時候。
 >
 > 別假裝看懂後就 approve — 一旦 AI 開始動手，你損失的是後續每一步的審核機會。
+
+[callout type="tip" title="Plan 模式的實用技巧"]
+- 要求 AI 以條列式呈現，不要長篇大論
+- 明確指出「不要動程式碼」，避免它直接開幹
+- 如果計畫有風險，要求它標出「如果做錯，影響範圍多大」
+- 對複雜任務，要求它先列出「需要讀哪些檔案才能開始規劃」
+[/callout]
 
 ## Edit 階段：讓它一次只做一件事
 
@@ -187,6 +262,30 @@ claude
 >
 > 沒看到綠色的測試結果之前，沒有任何任務算完成。
 
+[callout type="warning" title="常見錯誤：一次改太多"]
+- 當 AI 在同一輪中改了 3 個以上的 feature，出錯機率會大幅增加
+- 正確做法：每次只要求一個明確的變更，改完即 commit，再進行下一步
+- 若發現 AI 開始「順便也修了 X」，立刻停下，逐一檢查每項變更
+[/callout]
+
+[quiz type="single"]
+Q: 在 Plan 階段最重要的動作是什麼？
+- [ ] 讓 AI 直接開始改程式碼以節省時間
+- [ ] 提供盡可能長的背景說明，讓 AI 充分理解
+- [x] 要求 AI 列出計畫、標出風險，並明確指示「先不要動程式碼」
+- [ ] 讓 AI 自行決定最優的實作方式
+Hint: Plan 的真正價值在於「你能不能讀懂並挑出問題」
+[/quiz]
+
+[quiz type="single"]
+Q: Verify 階段應該驗證哪些項目？
+- [x] Type check、Lint、Test、手動驗證關鍵路徑
+- [ ] 只跑測試就足夠
+- [ ] 只看 lint 結果即可
+- [ ] 由 AI 自行決定驗證方式
+Hint: 查看「驗證的最小單位」流程
+[/quiz]
+
 ---
 
 # 專案規範：CLAUDE.md、Permissions、Slash Commands
@@ -220,11 +319,11 @@ claude
 
 ### 三種權限模式
 
-[tags]
-- [green] Ask — 每個寫檔/執行指令都要你按 yes（最安全，最慢）
-- [orange] Auto-allow rules — 對特定指令類別預先授權（推薦）
-- [purple] Bypass — 完全不問，全自動（只在沙盒環境使用）
-[/tags]
+[compare-table headers="模式 | 說明 | 推薦場景"]
+- **Ask** | 每個寫檔/執行都要確認 | 剛開始使用、高風險 repo
+- Auto-allow | 對特定指令類別預先授權 | **日常開發（推薦）**
+- Bypass | 完全不問，全自動執行 | 沙盒環境、CI/CD 流程
+[/compare-table]
 
 ```prompt [label="在 .claude/settings.json 設定預授權"]
 {
@@ -248,6 +347,28 @@ claude
 >
 > 但 `git push`、`rm`、`migrate down`、`prisma db push` 這類具破壞性或對外可見的指令，永遠保留人工確認 — 哪怕你今天信任它 100 次。
 
+[reveal title="什麼樣的 auto-allow 規則最安全？"]
+最安全的 auto-allow 規則遵循三個原則：
+- **唯讀操作**：`git status`、`git diff`、`cat`、`ls` 永遠安全
+- **可逆操作**：跑測試、lint、typecheck 即使跑壞了也可以重新執行
+- **有明確 pattern**：用 `npm test:*` 比單純 `npm test:*` 更精確，避免意外匹配
+[/reveal]
+
+[accordion]
+[item title="CLAUDE.md 應該放在哪裡？"]
+推薦放在 repo 根目錄。也支援 `~/.claude/CLAUDE.md`（全域套用所有專案）與子目錄局部覆寫。
+- 根目錄：團隊共用，commit 進 repo
+- 全域：個人偏好，不 commit
+- 子目錄：特定模組有特殊規範時
+[/item]
+[item title="Permissions 設定會影響團隊其他人嗎？"]
+不會。`.claude/settings.json` 是個人本地設定，不會 commit 進 repo。但 CLAUDE.md、Slash Commands、Skills 可以 commit 共用。
+[/item]
+[item title="Slash Command 跟 Skill 應該同時存在嗎？"]
+可以。Slash Command 適合「人類主動觸發的標準流程」，Skill 適合「AI 自行判斷該用哪套專業知識」。兩者互補而非互斥。
+[/item]
+[/accordion]
+
 ## Slash Commands：把重複指令變成快捷鍵
 
 ### 自訂專案 Slash Command
@@ -270,6 +391,22 @@ description: 對當前 branch 的變更做一次 code review
 3. 在對話輸入 `/review` 即觸發
 4. 團隊共用 — 把 `.claude/commands/` commit 進 repo
 [/flow]
+
+[quiz type="single"]
+Q: CLAUDE.md 的主要用途是什麼？
+- [ ] 讓 Claude Code 的 UI 變得更漂亮
+- [ ] 設定 API Key 和認證資訊
+- [x] 提供專案規範給 AI 讀取，等同 onboarding 文件
+- [ ] 作為 Git 的 .gitignore 替代品
+Hint: 查看「它是什麼、放哪裡」段落
+[/quiz]
+
+[quiz type="bool"]
+Q: `.claude/settings.json` 的 permissions 設定應該 commit 進 repo 讓團隊共用？
+- [ ] 是
+- [x] 否
+Hint: permissions 是個人本地設定
+[/quiz]
 
 ---
 
@@ -312,6 +449,21 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 >
 > Skill 的價值不是「省字」，而是讓你的團隊每個人、每台機器、每次對話，都使用同一份標準作業流程。離職的人留下的不只是程式碼，更是制度化的工程習慣。
 
+[callout type="tip" title="Skill 設計的黃金法則"]
+- **一個 Skill 只做一件事**：不要把 git workflow、PR review、deploy 全塞進同一個 Skill
+- **明確的觸發條件**：description 要寫清楚「什麼時候該用這個 Skill」
+- **工具白名單**：在 SKILL.md 中列出允許使用的工具，避免 Skill 執行危險操作
+- **版本控制**：把 `.agents/skills/` commit 進 repo，團隊共用同一份定義
+[/callout]
+
+[bonus title="延伸閱讀：如何測試你的 Skill？"]
+Skill 寫好後，務必做以下測試：
+- 在新專案中第一次觸發，觀察 AI 是否正確判斷
+- 檢查 Skill 是否使用了未授權的工具
+- 測試邊界情境：當條件不明確時，AI 是否仍然觸發
+- 請團隊成員試用，收集反饋並調整 description
+[/bonus]
+
 ## Subagents：把長任務丟給隔離脈絡
 
 ### 為什麼要用 Subagent？
@@ -338,6 +490,22 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 回報檔案、行號、用途分類，最多 30 筆。
 你（主對話）不需要讀檔，等子代理結果就好。
 ```
+
+[quiz type="single"]
+Q: 什麼時候應該使用 Subagent？
+- [ ] 需要跟使用者持續互動的對話任務
+- [x] 獨立的探索任務，結果可平行執行
+- [ ] 修改單一檔案的簡單任務
+- [ ] 需要即時決策的任務
+Hint: 查看「呼叫 Subagent 的時機」流程
+[/quiz]
+
+[quiz type="bool"]
+Q: Subagent 的探索任務會污染主對話的 context？
+- [ ] 是
+- [x] 否
+Hint: Subagent 的核心價值就是「隔離 context」
+[/quiz]
 
 ---
 
@@ -375,6 +543,13 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 >
 > 例如：每次 Write/Edit 後自動跑 prettier、自動補 license header、自動執行 typecheck。AI 能透過 hook 結果學習你的規範，下次產出就會更接近期望。
 
+[callout type="warning" title="Hook 的潛在風險"]
+- 無限循環：PostToolUse hook 觸發 Edit，Edit 又觸發 PostToolUse
+- 效能影響：每個 hook 都會增加執行時間，避免設定過多 hook
+- 除錯困難：hook 是隱式執行，新成員可能不知道某些行為是自動的
+- 建議：每新增一個 hook，都要寫清楚「這個 hook 做了什麼」的註解
+[/callout]
+
 ## MCP：把外部工具接進對話
 
 ### MCP（Model Context Protocol）是什麼
@@ -404,6 +579,14 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 - [purple] 不建議：高頻寫入操作（成本與風險都高）
 [/tags]
 
+[timeline]
+- 第一階段 | 手動操作 | 每次都要人輸入指令，最容易出錯
+- 第二階段 | Slash Commands | 團隊共用標準流程，降低人為差異
+- 第三階段 | Hooks 自動化 | 工具自己呼叫工具，減少重複確認
+- 第四階段 | MCP 整合 | 連外部資源都成為 AI 可直接操作的工具
+- 第五階段 | 完全自動化 | 從需求到部署，AI 全程自主執行，人只做審核
+[/timeline]
+
 ## Git Worktree：多任務並行的關鍵
 
 ### 為什麼要用 Worktree？
@@ -426,6 +609,22 @@ claude
 4. 完成後合併回主分支，刪除 worktree
 [/flow]
 
+[quiz type="single"]
+Q: MCP 最適合接入哪種外部資源？
+- [ ] 高頻寫入操作的資料庫
+- [x] 唯讀查詢（如 DB schema、錯誤日誌）
+- [ ] 需要人類審核的 deploy 流程
+- [ ] 即時通訊訊息傳送
+Hint: 查看「MCP 適合接什麼」標籤
+[/quiz]
+
+[quiz type="bool"]
+Q: Git Worktree 可以讓同一個 repo 的多個分支同時開發而不互相干擾？
+- [x] 是
+- [ ] 否
+Hint: 每個 worktree 有獨立的 node_modules、dev server 和 AI 對話
+[/quiz]
+
 ---
 
 # 精通心法：迭代、Debug 與團隊協作
@@ -434,6 +633,12 @@ claude
 ## 系統化 Debugging
 
 ### 不要讓 AI 亂猜，給它證據
+
+[steps-status]
+- [todo] 猜錯型 | 直接叫 AI 修 bug，不提供任何脈絡
+- [doing] 證據型 | 提供 stack trace 和重現步驟，等 AI 分析後驗證
+- [done] 系統型 | 先用 git bisect 定位 commit，再蒐集證據、提出假設、逐一驗證
+[/steps-status]
 
 [flow]
 1. 重現 — 先有穩定的重現步驟，再開始修
@@ -479,10 +684,48 @@ claude
 - 離職造成知識斷層 | 規範與 Skill 留在 repo，不依賴單一個人
 [/compare]
 
+[accordion]
+[item title="團隊導入 Claude Code 的推薦起步方式？"]
+建議從以下三步驟開始：
+- 先寫好 CLAUDE.md，讓 AI 和新人有共同的 onboarding 文件
+- 建立 1-2 個最常用的 Slash Command（如 `/review`），讓大家有統一體驗
+- 設定合理的 auto-allow 規則，降低日常摩擦
+[/item]
+[item title="如何說服團隊成員使用 Claude Code？"]
+最好的方式是讓它幫團隊「做一件真正痛的事情」：
+- 找出大家每天都抱怨的重複工作（如 commit message、PR description）
+- 寫成 Skill 或 Slash Command，讓大家第一次就感受到價值
+- 讓價值自己說話，比任何 push 都有效
+[/item]
+[item title="Claude Code 會不會取代工程師？"]
+不會。它取代的是「打字」這個動作，但取代不了「設計規格」、「驗證結果」、「做商業判斷」這些工程師的核心能力。
+- 真正危險的是「只會打字、不會思考」的開發者
+- 有價值的反而是「能用 AI 交付更多、更好產品」的人
+[/item]
+[/accordion]
+
 > **真正的精通：讓你的工作可以被別人接手**
 > 工具的終點不是個人英雄主義，而是團隊韌性。當你的工作流被寫進 CLAUDE.md、Skill、Hook、Slash Command — 任何一位同事（或未來的你）都能無痛接手。
 >
 > Claude Code 最終要解決的不是「我寫得多快」，而是「我們團隊能多有韌性地交付產品」。
+
+[quiz type="single"]
+Q: 系統化 Debug 的第一步應該是什麼？
+- [x] 建立穩定的重現步驟
+- [ ] 直接開始看程式碼找 bug
+- [ ] 叫 AI 立刻修好
+- [ ] 先用 git push 把變更推上遠端
+Hint: 查看系統化 Debug 的流程，第一步是「重現」
+[/quiz]
+
+[quiz type="bool"]
+Q: 當 AI 提出 bug 的可能原因時，應該要求它至少列出 2 個以上假設？
+- [x] 是
+- [ ] 否
+Hint: 好的 debug 實踐是提出多個假設再逐一驗證
+[/quiz]
+
+---
 
 ---
 

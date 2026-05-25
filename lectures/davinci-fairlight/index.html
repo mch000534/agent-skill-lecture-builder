@@ -198,6 +198,23 @@
   <li>專業製作中，音頻後製佔整體後期工作量將近一半</li>
   <li>聲音決定了影片的情緒氛圍：懸疑、溫馨、緊張，關鍵都在聲音設計</li>
 </ul>
+        <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">70%</div>
+        <div class="stat-title">觀眾容忍度</div>
+        <div class="stat-desc">觀眾對不良音質的容忍度比不良畫面低 70%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">50%</div>
+        <div class="stat-title">後製工時</div>
+        <div class="stat-desc">專業音頻後製佔整體後期工作量約一半</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3 倍</div>
+        <div class="stat-title">棄觀率</div>
+        <div class="stat-desc">音質不佳的影片，觀眾棄觀率是畫面不佳的 3 倍</div>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -234,6 +251,13 @@
       <li>位元深度越高，動態範圍越大，雜訊底層越低</li>
       <li>DaVinci Resolve 專案預設使用 48kHz / 24-bit，符合廣播標準</li>
     </ul>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">取樣率與位元深度速查</div>
+    <ul><li>44.1kHz / 16-bit：CD 音質標準</li><li>48kHz / 24-bit：影片與廣播專業標準（DaVinci Resolve 預設）</li><li>96kHz / 32-bit：超高解析錄音，檔案體積大幅增加</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -298,6 +322,13 @@
       <div class="insight-title">組織軌道是高效混音的基礎</div>
       <p>收到素材的第一件事不是動手調音量，而是把軌道分類整理。對白歸對白、音樂歸音樂、音效歸音效——軌道越整齊，混音效率越高，出錯的機會也越低。</p>
     </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">軌道命名建議</div>
+    <ul><li>使用明確的前綴：DX（對白）、MX（音樂）、SFX（音效）、AMB（環境）</li><li>範例：<code>DX_01_Main</code>、<code>MX_01_BG</code>、<code>SFX_01_Foley</code></li><li>好的命名讓你在混音器中一眼就能找到目標軌道</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -363,6 +394,30 @@
   <li>關鍵參數：降噪量（Reduction）與保留量（Retention），兩者需平衡</li>
   <li>過度降噪會產生「水下聲」效果，比原本的噪音更難聽</li>
 </ul>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">降噪前</div>
+        <div class="compare-label compare-label--new">降噪後</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">持續性的冷氣嗡嗡聲</div>
+          <div class="compare-cell compare-cell--new">背景安靜乾淨，對白清晰浮出</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">人聲被噪音掩蓋，聽不清楚</div>
+          <div class="compare-cell compare-cell--new">人聲輪廓分明，每個字都可辨識</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">低頻轟鳴與高頻嘶嘶共存</div>
+          <div class="compare-cell compare-cell--new">僅保留自然的房間殘響</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">觀眾需要「努力聽」才能理解內容</div>
+          <div class="compare-cell compare-cell--new">觀眾自然沉浸，不需費力</div>
+        </div>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -377,6 +432,13 @@
   <li>搭配 Spectral Display 觀察頻譜，精確判斷噪音分布範圍</li>
   <li>多段輕量降噪通常優於一次大量降噪</li>
 </ul>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">常見降噪錯誤</div>
+    <ul><li>選取噪音區域時混入人聲，導致 Learn 結果不純淨</li><li>降噪量（Reduction）拉到最大，產生明顯的「水下聲」 artifact</li><li>忽略輸出電平監測，降噪後整體音量大幅下降</li><li>沒有做 A/B 比對，僅憑主觀聽感就決定參數</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -407,6 +469,10 @@
   <li>Fairlight 提供 ADR 工具：標記需要替換的片段、播放參考音、循環錄製</li>
   <li>適用於現場收音品質太差、無法透過修復挽救的對白</li>
 </ul>
+        <details class="spoiler">
+      <summary>什麼時候該用 ADR 而不是修復？</summary>
+      <div class="spoiler-body"><p>當原始錄音同時出現以下情況時，直接走 ADR 路線會比反覆修復更有效率：</p><ul><li>現場噪音過大且複雜（施工現場、鬧區），降噪無法分離人聲</li><li>對白片段斷續嚴重，修復後語句不連貫</li><li>錄製時麥克風距離太遠，訊號雜訊比（SNR）過低</li><li>客戶或導演要求「錄音室等級」的乾淨對白品質</li></ul></div>
+    </details>
         <div class="insight">
       <div class="insight-title">修復的底線是自然</div>
       <p>修復的目標是讓聲音聽起來「沒有修過」。如果觀眾注意到降噪痕跡、感覺聲音不自然，那修復就失敗了。永遠以 A/B 比對來確認修復結果——切換處理前後，確保改善大於副作用。</p>
@@ -445,11 +511,22 @@
     <div class="group-block">
       <div class="group-header">Fairlight EQ 工具</div>
       <div class="group-body">
-        <ul>
-  <li><strong>參數式 EQ</strong>：可自由設定頻率、增益與 Q 值（頻寬），精確度最高</li>
-  <li><strong>圖形式 EQ</strong>：視覺化操作，適合快速調整大範圍頻率</li>
-  <li>內建 EQ 預設：人聲增強、低頻切除、電話效果等常見設定</li>
-</ul>
+        <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">參數式 EQ</button>
+    <button class="tab-btn" data-tab="1">圖形式 EQ</button>
+    <button class="tab-btn" data-tab="2">內建預設</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>可自由設定頻率、增益與 Q 值（頻寬），精確度最高</li><li>適合精確雕塑特定頻率，如切除某個共振峰</li><li>Fairlight 內建 6 段參數式 EQ，支援高通/低通濾波</li><li>進階使用者首選，靈活性最高</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>視覺化操作，拉桿上下調整各頻段增益</li><li>適合快速調整大範圍頻率分布</li><li>直覺但不如參數式精確，Q 值固定</li><li>適合快速預覽或粗調</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="2">
+    <ul><li>人聲增強、低頻切除、電話效果等常見設定</li><li>一鍵套用，快速起點</li><li>建議套用後再手動微調，不要直接使用預設值</li><li>適合新手快速上手或時間緊迫時</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -481,10 +558,28 @@
         </div>
       </div>
     </div>
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>處理目標</th><th class="is-highlight">衰減（Cut）</th><th>增益（Boost）</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">低頻轟鳴</th><td>HPF 80Hz</td><td class="is-highlight">非必要不提升低頻</td></tr>
+          <tr><th class="row-label">人聲渾濁</th><td>-3dB @ 250Hz, Q=1.4</td><td class="is-highlight">保持原樣或微調</td></tr>
+          <tr><th class="row-label">清晰度不足</th><td>保持原樣</td><td class="is-highlight">+2dB @ 4kHz, Q=1.0</td></tr>
+          <tr><th class="row-label">刺耳高頻</th><td>-4dB @ 8kHz, Q=2.0</td><td class="is-highlight">非必要不提升高頻</td></tr>
+        </tbody>
+      </table>
+    </div>
         <ul class="loose-list">
       <li>每條軌道都應加入高通濾波器，移除不必要的低頻</li>
       <li>避讓（Carving）是混音的核心概念：不需要每個聲音都飽滿，而是整體聽起來清晰</li>
     </ul>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">EQ 實用技巧</div>
+    <ul><li>先切後補：先切除不需要的頻率，再考慮是否要增益</li><li>窄 Q 用於切除（精確移除問題頻率），寬 Q 用於增益（自然提升）</li><li>每次調整幅度不超過 3dB，除非有特殊需求</li><li>調整時 Solo 該軌道聽細節，再放回混音中聽整體</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -501,11 +596,22 @@
   <li>壓縮器控制動態範圍：把大聲的部分壓小，讓整體音量更平均</li>
   <li>關鍵參數：Threshold（啟動門檻）、Ratio（壓縮比）、Attack/Release（反應速度）</li>
 </ul>
-        <div class="tags">
-      <span class="tag green">對白壓縮 — Ratio 3:1~4:1，讓對白在混音中穩定可聽</span>
-      <span class="tag blue">音樂壓縮 — Ratio 2:1~3:1，保留動態感同時控制峰值</span>
-      <span class="tag orange">限制器 — Ratio 無限大，硬性限制音量不超過設定值</span>
-    </div>
+        <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">對白壓縮</button>
+    <button class="tab-btn" data-tab="1">音樂壓縮</button>
+    <button class="tab-btn" data-tab="2">限制器</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>建議 Ratio：3:1 ~ 4:1</li><li>目標：讓對白在混音中穩定可聽，不會忽大忽小</li><li>Attack 設中慢速（20-40ms）保留自然起音</li><li>Release 配合語速設定（100-200ms）</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>建議 Ratio：2:1 ~ 3:1</li><li>目標：保留音樂的動態感，同時控制峰值不超標</li><li>Attack 可稍快（5-20ms）以控制瞬態</li><li>Release 配合節拍設定，讓壓縮有呼吸感</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="2">
+    <ul><li>Ratio：無限大（硬性限制）</li><li>目標：確保輸出音量絕不超過設定值</li><li>永遠放在效果鏈的最末端</li><li>Threshold 設在目標峰值電平（如 -1 dBTP）</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -519,6 +625,30 @@
   <li><strong>Expander</strong>：閘門的柔性版本，小聲的部分不是靜音而是漸漸壓低，聽感更自然</li>
   <li>Gate 太激進會讓對白聽起來被「切斷」，Expander 更適合大多數情境</li>
 </ul>
+        <div class="compare">
+      <div class="compare-header">
+        <div class="compare-label compare-label--old">Noise Gate</div>
+        <div class="compare-label compare-label--new">Expander</div>
+      </div>
+      <div class="compare-body">
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">低於門檻：完全靜音</div>
+          <div class="compare-cell compare-cell--new">低於門檻：漸進衰減</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">效果明確但可能生硬</div>
+          <div class="compare-cell compare-cell--new">效果柔和自然</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">適合去除明確的間隙噪音</div>
+          <div class="compare-cell compare-cell--new">適合降低背景噪音同時保留細節</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">容易產生「切斷」聽感</div>
+          <div class="compare-cell compare-cell--new">不容易察覺處理痕跡</div>
+        </div>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -535,6 +665,16 @@
         <div class="insight">
       <div class="insight-title">壓縮是藝術，不是工程</div>
       <p>壓縮器的參數沒有標準答案，只有適合當下素材的選擇。同一組參數套在不同人的聲音上，效果天差地遠。多聽、多比較、多嘗試——耳朵比數字重要。</p>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-壓縮器的attack時間設得太快例如1m" data-quiz-answer="0">
+      <div class="quiz-q">壓縮器的 Attack 時間設得太快（例如 1ms），對人聲會造成什麼影響？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>壓掉自然的起音，人聲聽起來扁平無力</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>讓低頻更飽滿</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>完全沒有影響</span></button>
+      </div>
+      <div class="quiz-hint" hidden>Attack 控制壓縮器對訊號突變的反應速度</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -558,7 +698,7 @@
       <div class="group-header">混音的核心原則</div>
       <div class="group-body">
         <ul>
-  <li><strong>對白為王</strong>：在絕大多數影片中，對白是最重要的元素，必須永遠清晰可聽</li>
+  <li><strong>對白為王</strong>：在絕多數影片中，對白是最重要的元素，必須永遠清晰可聽</li>
   <li>音樂與音效為對白服務，不搶、不壓、不遮蔽</li>
   <li>動態對比是關鍵：安靜的地方真的安靜，才能讓高潮的地方真正震撼</li>
 </ul>
@@ -589,6 +729,65 @@
   <li><strong>Read 模式</strong>：只播放已錄製的自動化資料，不寫入新動作</li>
   <li>關鍵場景的音量調整一定要用自動化：對白被音樂蓋住時手動拉低音樂</li>
 </ul>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">自動化混音注意事項</div>
+    <ul><li>使用 Write 模式前務必先備份——它會覆蓋已有的自動化資料</li><li>Touch 模式適合微調，Write 模式適合從頭建立</li><li>寫入自動化後切到 Read 模式播放，確認結果符合預期</li><li>重要場景的手動自動化比全域壓縮更能精準控制聽感</li></ul>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">混音檢查清單</div>
+      <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">軌道分類與命名</div>
+          <div class="ss-desc">對白、音樂、音效分軌，命名清晰</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">降噪與清理</div>
+          <div class="ss-desc">各軌噪音已處理，人聲乾淨</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">音量平衡</div>
+          <div class="ss-desc">對白穩定可聽，音樂與音效不干擾</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">聲像定位</div>
+          <div class="ss-desc">各聲音在左右聲道有明確位置</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">空間效果</div>
+          <div class="ss-desc">Reverb / Delay 已適當加入</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">響度檢查</div>
+          <div class="ss-desc">整體 LUFS 與 True Peak 符合交付標準</div>
+        </div>
+      </li>
+    </ol>
       </div>
     </div>
   </div>
@@ -620,9 +819,22 @@
   <li>殘響的關鍵參數：Pre-Delay、Decay、Wet/Dry 比例</li>
   <li>對白加微弱殘響可以增加空間感，但太多會讓聲音模糊</li>
 </ul>
+        <details class="spoiler">
+      <summary>Reverb 與 Delay 什麼時候該用？</summary>
+      <div class="spoiler-body"><ul><li><strong>Reverb 適合</strong>：對白需要融入空間感、音樂需要深度與寬度、音效需要環境融合</li><li><strong>Delay 適合</strong>：創造回聲效果、節奏感音效、特殊氛圍營造</li><li><strong>兩者都避免</strong>：對白已經夠清晰且空間感足夠時，不需要額外添加</li><li>黃金法則：加了效果後，把 Wet/Dry 比例調到「剛剛好聽得到」然後再減一半</li></ul></div>
+    </details>
         <div class="insight">
       <div class="insight-title">混音的本質是取捨</div>
       <p>每個聲音都想被聽見，但同時大聲等於沒有重點。混音師的工作就是決定什麼時候誰該被聽見——這是選擇的藝術，不是音量的競賽。</p>
+    </div>
+        <div class="quiz-block" data-quiz-id="q-混音時應該先把所有軌道的音量推到最大再逐" data-quiz-answer="1">
+      <div class="quiz-q">混音時應該先把所有軌道的音量推到最大，再逐一調低？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>混音的起點應該是以對白為基準，其他元素圍繞對白建立平衡</div>
+      <div class="quiz-fb" hidden></div>
     </div>
       </div>
     </div>
@@ -772,6 +984,18 @@
         </div>
       </div>
     </div>
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>格式</th><th class="is-highlight">立體聲</th><th>5.1 環繞聲</th><th>7.1.4 Atmos</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">聲道數</th><td>2</td><td class="is-highlight">6</td><td>12</td></tr>
+          <tr><th class="row-label">適用場景</th><td>網路影片、Podcast</td><td class="is-highlight">電視廣播、藍光</td><td>電影院、串流旗艦</td></tr>
+          <tr><th class="row-label">空間感</th><td>左右平面</td><td class="is-highlight">360 度平面</td><td>三維立體（含高度）</td></tr>
+          <tr><th class="row-label">製作門檻</th><td>最低</td><td class="is-highlight">中等</td><td>最高，需專用監聽環境</td></tr>
+          <tr><th class="row-label">檔案大小</th><td>基準</td><td class="is-highlight">約 3 倍</td><td>約 6 倍</td></tr>
+        </tbody>
+      </table>
+    </div>
       </div>
     </div>
   </div>
@@ -846,10 +1070,39 @@
         </div>
       </div>
     </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">輸出前最終檢查</div>
+    <ul><li>在不同設備上試聽：耳機、喇叭、手機喇叭——確保都能清晰播放</li><li>檢查 True Peak 是否超過 -1 dBTP，超過可能被平台壓縮或削波</li><li>確認各平台響度標準，避免上傳後被平台自動調整音量</li><li>保留未壓縮的 WAV 母檔，作為未來重新輸出的來源</li></ul>
+  </div>
+</div>
         <div class="insight">
       <div class="insight-title">響度標準不是限制，是共通語言</div>
       <p>當所有節目都遵循同一個響度標準時，觀眾切換頻道不需要調整音量。這是對觀眾體驗的尊重，也是專業製作的基本素養。</p>
     </div>
+        <div class="quiz-block" data-quiz-id="q-針對youtube平台輸出時目標響度應該" data-quiz-answer="1">
+      <div class="quiz-q">針對 YouTube 平台輸出時，目標響度應該設定在什麼範圍？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>-24 LUFS（廣播標準）</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>-14 至 -16 LUFS（串流平台標準）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>-8 LUFS（越響越好）</span></button>
+      </div>
+      <div class="quiz-hint" hidden>不同平台有不同的響度規範，YouTube 採用的是 -14 LUFS 標準</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
+        <button class="bonus-btn" data-bonus-title="延伸閱讀：完整音訊處理工作流程" data-bonus-content="完整的音訊處理應遵循以下順序：
+1. **錄製/匯入**：收集所有原始音訊素材
+2. **軌道組織**：分類、命名、排列軌道
+3. **降噪修復**：清理噪音、雜訊、問題音頻
+4. **EQ 處理**：雕塑各軌道頻率輪廓
+5. **動態處理**：壓縮、閘門、限制器
+6. **音量平衡**：推桿調整與自動化
+7. **空間效果**：Reverb、Delay、聲像定位
+8. **響度檢查**：確認符合交付標準
+9. **最終輸出**：選擇正確格式與編碼">
+      延伸閱讀：完整音訊處理工作流程
+    </button>
       </div>
     </div>
   </div>

@@ -1,6 +1,37 @@
 # 概念入門：Git 是什麼？為什麼需要版本控制
 > 沒有版本控制，你只是在賭——賭自己永遠不會犯錯、永遠不需要回頭
 
+## 集中式 vs 分散式版本控制
+
+在了解 Git 之前，先知道版本控制系統的兩種主要架構：
+
+[compare label-left="集中式（SVN / CVS）" label-right="分散式（Git / Mercurial）"]
+- 只有一台中央伺服器存有完整歷史 | 每個人的電腦都有完整歷史備份
+- 斷網就無法提交、無法查看歷史 | 斷網也能正常 commit，有網路再同步
+- 伺服器掛掉，所有歷史消失 | 任一台電腦都能還原整個專案
+- 操作速度慢，需要網路 | 操作速度快，本機執行
+- 適合：集中管控的大型企業 | 適合：開源專案、敏捷開發團隊
+[/compare]
+
+> **Git 是分散式的**
+> 這代表你每次 clone 專案，都是一次完整的備份。即使中央伺服器消失，任何一台電腦都能還原全部歷史。這就是 Git 強大的核心設計。
+
+## 版本控制的演進歷程
+
+Git 並非憑空出現，它是數十年版本控制經驗的結晶：
+
+[timeline]
+- 1990 | CVS | 第一代分散式版本控制，支援並行開發
+- 2000 | SVN（Subversion） | 集中式版本控制的巔峰，成為業界標準
+- 2002 | BitKeeper | Linux 核心採用，首次大規模分散式 VCS
+- 2005 | Git 誕生 | Linus Torvalds 為 Linux 核心開發，因 BitKeeper 授權終止而自行打造
+- 2008 | GitHub 上線 | 讓 Git 和開源協作變得觸手可及
+- 2026 | 至今 | Git 已是全球開發者的標準工具，GitHub 超過 1 億用戶
+[/timeline]
+
+> **為什麼 Git 會成功？**
+> 速度、簡單、分散式、分支與合併強大——這些都是 Linus 從 Linux 核心開發經驗中總結的需求。Git 不是為了「好用」而設計，是為了「必要」而設計。
+
 ## 從生活出發：你一定有過這種經驗
 
 ### 沒有版本控制的世界
@@ -33,6 +64,26 @@
 4. git push — 把存檔點上傳到雲端（GitHub）
 [/flow]
 
+## Git 完整工作流一覽
+
+以下是在真實團隊開發中，你會走過的完整循環：
+
+[flow]
+1. git pull origin main — 從遠端取得最新程式碼
+2. git checkout -b feature/new-login — 建立功能分支
+3. 編輯程式碼 — 撰寫新功能或修正
+4. git add . — 加入所有改動到暫存區
+5. git commit -m "feat: 新增登入功能" — 建立存檔點
+6. git push origin feature/new-login — 推送分支到遠端
+7. 在 GitHub 建立 Pull Request — 請求合併
+8. Code Review — 隊友審查你的程式碼
+9. git merge feature/new-login — 合併到 main 分支
+10. git branch -d feature/new-login — 刪除已合併的分支
+[/flow]
+
+> **不需要一次記起來**
+> 前四步（pull → branch → edit → add → commit）是每天的重複操作。後面幾步（push → PR → merge）是在功能完成時才需要。先掌握基礎的 add/commit/push，再慢慢學習分支和 PR 流程。
+
 ## 版本控制的核心價值
 
 ### 獨自開發時
@@ -51,6 +102,18 @@
 - [orange] 追溯：每次改動都有紀錄可查
 - [purple] 備份：程式碼同步在雲端，不怕電腦掛掉
 [/tags]
+
+## 本課程學習路徑
+
+[steps-status]
+- [done] 版本控制概念 | 理解什麼是版本控制、為什麼需要 Git
+- [doing] 環境安裝與設定 | 安裝 Git、設定身份，準備好開發環境
+- [todo] 核心操作 | init、add、commit、status 建立本地存檔點
+- [todo] 歷史與還原 | 用 log 查看、diff 比較、checkout 回到過去
+- [todo] 遠端協作 | 連接 GitHub、push 推送、pull 同步
+- [todo] 分支策略 | branch、checkout -b、merge 安全開發新功能
+- [todo] 開源流程 | Fork → Clone → PR → Code Review → Merge
+[/steps-status]
 
 > **本節學會了什麼**
 > Git 是一套版本控制系統，讓你能夠記錄每次程式碼的修改、隨時回到過去的版本，並支援多人協作不互相干擾。它解決的核心問題是：「改壞了怎麼辦」和「多人協作怎麼不亂」。
@@ -103,6 +166,11 @@ git --version
 - macOS：重新開啟 Terminal 再試，或執行 `xcode-select --install`
 - Windows：確認是在 Git Bash 中執行，不是在 cmd 或 PowerShell
 
+[callout type="tip" title="實用技巧"]
+- 安裝完成後，關閉所有已開啟的 Terminal 視窗，重新開啟一個新的，確保環境變數生效
+- Windows 用戶建議使用 Git Bash 而非 PowerShell，指令行為與教學內容一致
+[/callout]
+
 ## git config：告訴 Git 你是誰
 
 ### 為什麼要設定身份？
@@ -125,6 +193,10 @@ git config --global --list
 user.name=你的名字
 user.email=your@email.com
 ```
+
+[callout type="warning" title="注意"]
+這裡設定的 Email 會公開顯示在你的 commit 歷史中。如果你使用 GitHub，建議設定成與 GitHub 帳號相同的 Email，這樣你的 commit 才會正確關聯到你的 GitHub 帳號。使用 `--global` 參數代表這個設定對這台電腦的所有 Git 專案都有效。
+[/callout]
 
 ### 設定預設分支名稱（建議執行）
 
@@ -406,6 +478,10 @@ git reset --hard a1b2c3d
 
 這個指令會丟棄該 commit 之後的所有改動，謹慎使用。
 
+[callout type="warning" title="危險操作警告"]
+`git reset --hard` 會**永久丟棄**所有未 commit 的改動，且無法用 Ctrl+Z 恢復。執行前建議先用 `git diff` 確認要丟棄的內容，或使用 `git stash` 暫時備份改動。只有在你確定「這些改動完全不要了」的情況下才使用。
+[/callout]
+
 > **本節學會了什麼**
 > `git log` 查看完整修改歷史，`git log --oneline` 看精簡版；`git diff` 查看目前未 commit 的具體改動；`git checkout` 可以切換到過去某個存檔點，或配合 `--` 還原單一檔案。掌握這些工具，你就有了完整的「後悔藥」。
 
@@ -491,6 +567,10 @@ git pull
 5. git push — 推送到 GitHub
 [/flow]
 
+[callout type="tip" title="每日工作好習慣"]
+每次開始工作前先 `git pull`，是避免衝突的最佳實踐。即使目前只有你一個人在開發，養成這個習慣也能避免未來「推送被拒絕」的問題。
+[/callout]
+
 ### 常見錯誤：推送被拒絕
 
 ```prompt [label="推送被拒絕的錯誤訊息"]
@@ -501,6 +581,10 @@ hint: not have locally.
 ```
 
 這代表遠端有別人新增的 commit 你還沒拉取。解法：先執行 `git pull`，再執行 `git push`。
+
+[callout type="warning" title="不要使用 git push --force"]
+初學者推送被拒絕時，可能會查到 `git push --force` 這個指令。**絕對不要**在共用分支（如 main）上使用它，因為會**覆蓋並丟失別人的 commit**。只有在你完全確定「遠端版本可以整個丟棄」（例如個人分支且只有自己使用）的情況下，才能使用 `--force`。
+[/callout]
 
 > **本節學會了什麼**
 > `git remote add origin <url>` 連接本地與遠端倉庫；`git push` 上傳本地的 commit；`git pull` 下載遠端的最新改動。這三個指令讓你的程式碼同時存在本地和雲端，也讓多人協作成為可能。
@@ -633,6 +717,40 @@ print('Hello, World!')
 4. git add 標記衝突已解決
 5. git commit 完成合併
 [/flow]
+
+[callout type="tip" title="避免衝突的最佳實踐"]
+- 經常執行 `git pull`，不要累積太多改動才合併
+- 開分支時取名要明確，如 `feature/login` 而非 `new-branch`，減少同名衝突
+- 修改前先用 `git diff` 看清楚改了什麼
+- 如果真的遇到衝突，不要慌張，按照上面的五個步驟一步步解決即可
+[/callout]
+
+[reveal title="查看：衝突解決完整範例"]
+假設你的 main 和 feature 分支都修改了 `hello.py` 的第一行：
+
+**衝突時的檔案內容：**
+```
+<<<<<<< HEAD
+print('Hello, GitHub!')
+=======
+print('Hello, World! Welcome to Git!')
+>>>>>>> feature/add-greeting
+```
+
+**解決後的結果**（假設你決定兩個都要）：
+```
+print('Hello, GitHub!')
+print('Hello, World! Welcome to Git!')
+```
+
+**解決步驟：**
+1. 手動編輯檔案，保留想要的內容
+2. 刪除所有 `<<<<<<<`、`=======`、`>>>>>>>` 標記
+3. 執行 `git add hello.py` 標記已解決
+4. 執行 `git commit` 完成合併
+
+> 你也可以只保留其中一個版本，完全取決於你的需求。重點是：Git 不知道哪個是「正確」的版本，需要**你**來做決定。
+[/reveal]
 
 ### 完成後刪除已合併的分支
 
@@ -843,6 +961,95 @@ a1b2c3d feat: 初始化專案，建立首頁框架
 - **分支策略** | 每個功能開一個分支，開發完再 merge，main 永遠保持乾淨可用
 - **Pull Request** | Fork → branch → PR → Review → Merge，這是開源與團隊協作的標準流程
 [/summary]
+
+## 小測驗：檢驗你的 Git 基礎知識
+
+完成本課程後，試試看你能答對幾題：
+
+[quiz type="single"]
+Q: 以下哪個指令會將改動加入「暫存區」（staging area）？
+- [ ] git commit
+- [x] git add
+- [ ] git push
+- [ ] git status
+Hint: 這個指令的比喻是「把東西放進行李箱」。
+[/quiz]
+
+[quiz type="bool"]
+Q: `git commit` 會自動把改動上傳到 GitHub 嗎？
+- [ ] 是
+- [x] 否
+Hint: commit 只是在本地建立存檔點，上傳需要另一個指令。
+[/quiz]
+
+[quiz type="single"]
+Q: 在分支上開發完成後，用哪個指令把分支合併回 main？
+- [ ] git checkout main
+- [x] git merge <branch-name>
+- [ ] git pull <branch-name>
+- [ ] git add main
+Hint: 這個指令的字面意思是「合併」。
+[/quiz]
+
+[quiz type="single"]
+Q: 當推送被拒絕，提示「remote contains work that you do not have locally」，正確的解法是？
+- [x] 先執行 git pull，再執行 git push
+- [ ] 執行 git push --force 強制推送
+- [ ] 執行 git reset --hard 重置本地
+- [ ] 關閉 Terminal 重試
+Hint: 遠端有你本地沒有的 commit，你需要先把它們拉下來。
+[/quiz]
+
+## 常見問題 FAQ
+
+以下是一些學員常問的問題，點擊展開查看答案：
+
+[accordion]
+[item title="merge 和 rebase 有什麼不同？" open]
+兩者都是用來合併分支，但歷史記錄的呈現方式不同：
+
+- **git merge**：保留完整的分支歷史，會產生一個「merge commit」。適合團隊協作，因為保留了真實的開發過程。
+- **git rebase**：將分支的 commit「重新播放」到目標分支上，歷史呈現線性。適合個人分支整理歷史，但**不應該在共用分支使用**，因為會改寫歷史。
+
+初學者建議：先用 merge，熟悉 Git 後再學習 rebase。
+[/item]
+[item title="什麼情況下會用到 git push --force？"]
+`git push --force` 會用本地的歷史**覆蓋**遠端的歷史。常見場景：
+
+- 你在個人分支上使用 `git rebase` 整理了 commit，需要強制推送更新
+- 你不小心 commit 了敏感資料（密碼、token），需要用 `git reset` 退回
+
+**警告：絕對不要在 main 或團隊共用的分支上使用 --force**，因為會丟失別人的 commit。
+[/item]
+[item title="commit 後發現訊息寫錯，可以修改嗎？"]
+可以。使用以下指令修改最後一個 commit 的訊息：
+
+```prompt [label="修改最新 commit 訊息"]
+git commit --amend -m "新的正確訊息"
+```
+
+注意：這只會修改**最後一個** commit。如果要修改更早的，需要使用 `git rebase -i`（進階操作）。
+[/item]
+[item title="不小心 commit 到 main 分支，應該要開分支的怎麼辦？"]
+如果 commit 還沒有 push，可以用以下步驟補救：
+
+1. 建立新分支並保留目前的改動：`git branch feature/my-work`
+2. 退回 main 分支到 commit 之前：`git reset --hard HEAD~1`
+3. 切換到新分支繼續工作：`git checkout feature/my-work`
+
+如果已經 push 到遠端，請聯繫團隊成員協助處理，不要自行 reset。
+[/item]
+[item title=".gitignore 是什麼？為什麼需要它？"]
+`.gitignore` 是一個設定檔，告訴 Git「哪些檔案不要追蹤」。常見應該忽略的檔案：
+
+- 編譯產物（`__pycache__/`、`*.pyc`、`dist/`）
+- 環境變數和密鑰（`.env`、`*.key`）
+- 作業系統產生的隱藏檔案（`.DS_Store`、`Thumbs.db`）
+- 編輯器暫存檔（`.vscode/`、`.idea/`）
+
+在專案根目錄建立 `.gitignore` 檔案，一行寫一個要忽略的檔名或 pattern。
+[/item]
+[/accordion]
 
 > **本節學會了什麼**
 > 完整走過了一次真實的團隊協作流程：建立專案、分工開發、提交 PR、Code Review、合併主線、同步最新版本。這八個步驟是每一位軟體工程師每天在做的事，從今天起你也掌握了這套能力。

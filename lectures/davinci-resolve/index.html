@@ -131,6 +131,7 @@
       <ul class="toc-sub">
         <li><a href="#sub-8-1-deliver-30">8-1 Deliver 交付設定（30 分鐘）</a></li>
         <li><a href="#sub-summary">8-2 課程總結與下一步（30 分鐘）</a></li>
+        <li><a href="#sub-8-3-faq">8-3 常見問題 FAQ</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="summary-2">
@@ -335,6 +336,32 @@
   </div>
 
   <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">版本功能比較</div>
+      <div class="group-body">
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>功能項目</th><th class="is-highlight">Free 免費版</th><th>Studio 付費版</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">價格</th><td>$0</td><td class="is-highlight">$295（一次性買斷）</td></tr>
+          <tr><th class="row-label">解析度支援</th><td>最高 Ultra HD（4K）</td><td class="is-highlight">最高 32K</td></tr>
+          <tr><th class="row-label">色彩位元深度</th><td>8bit / 10bit</td><td class="is-highlight">8bit / 10bit / 12bit</td></tr>
+          <tr><th class="row-label">AI 語音轉字幕</th><td>不支援</td><td class="is-highlight">支援（自動生成 SRT）</td></tr>
+          <tr><th class="row-label">AI 人聲分離</th><td>不支援</td><td class="is-highlight">支援</td></tr>
+          <tr><th class="row-label">雜訊消除</th><td>基本版</td><td class="is-highlight">進階 AI 版</td></tr>
+          <tr><th class="row-label">多 GPU 支援</th><td>不支援</td><td class="is-highlight">支援（最多 4 顆）</td></tr>
+          <tr><th class="row-label">Resolve FX 特效</th><td>部分可用</td><td class="is-highlight">全部可用</td></tr>
+          <tr><th class="row-label">輸出格式</th><td>H.264 / H.265</td><td class="is-highlight">全部格式 + DNxHR / ProRes</td></tr>
+          <tr><th class="row-label">協同作業</th><td>不支援</td><td class="is-highlight">支援（多人同時編輯）</td></tr>
+          <tr><th class="row-label">HDR 調色</th><td>不支援</td><td class="is-highlight">支援（HDR10 / Dolby Vision）</td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
     <div class="sub-title" id="sub-1-2-30"><span class="bar"></span>1-2 安裝與系統設定（30 分鐘）</div>
   </div>
 
@@ -413,50 +440,34 @@
     <div class="group-block">
       <div class="group-header">六大工作頁面</div>
       <div class="group-body">
-        <div class="flow">
-      <div class="flow-step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-title">Cut（快剪）— 雙時間軸設計，適合快速粗剪與社群短片</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-title">Edit（精剪）— 傳統 NLE 介面，完整多軌道剪輯控制</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-title">Fusion（特效）— 節點式視覺特效，動態圖形、合成、3D</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <div class="step-title">Color（調色）— 業界頂級調色工具，節點式色彩管理</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-title">Fairlight（音頻）— 專業音頻混音後製，支援 DAW 插件</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">6</div>
-        <div class="step-content">
-          <div class="step-title">Deliver（交付）— 輸出設定，支援批次渲染多種格式</div>
-          <div class="step-desc"></div>
-        </div>
-      </div>
-    </div>
+        <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">Cut（快剪）</button>
+    <button class="tab-btn" data-tab="1">Edit（精剪）</button>
+    <button class="tab-btn" data-tab="2">Fusion（特效）</button>
+    <button class="tab-btn" data-tab="3">Color（調色）</button>
+    <button class="tab-btn" data-tab="4">Fairlight（音頻）</button>
+    <button class="tab-btn" data-tab="5">Deliver（交付）</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <ul><li>雙時間軸設計：上方全片縮略圖 + 下方精確剪輯區</li><li>適合快速粗剪與社群短片</li><li>智慧插入自動對齊最近剪輯點</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <ul><li>傳統 NLE 完整多軌道剪輯控制</li><li>支援所有剪輯工具：Ripple、Roll、Slip、Slide</li><li>三點剪輯、精確轉場與效果控制</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="2">
+    <ul><li>節點式視覺特效合成系統</li><li>動態圖形、3D 合成、VFX 追蹤</li><li>與 Photoshop 圖層邏輯不同，改用節點串接</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="3">
+    <ul><li>業界頂級調色工具，節點式色彩管理</li><li>四種示波器：Waveform、Parade、Vectorscope、Histogram</li><li>一級 + 二級調色、LUT 套用、限定器</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="4">
+    <ul><li>專業音頻混音後製介面</li><li>支援 DAW 插件、VST 效果</li><li>降噪、EQ、壓縮器、音量自動化</li></ul>
+  </div>
+  <div class="tab-panel" data-panel="5">
+    <ul><li>輸出設定與批次渲染</li><li>支援 H.264/H.265/DNxHR/ProRes 等格式</li><li>YouTube、Vimeo 等平台預設一鍵套用</li></ul>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -471,6 +482,17 @@
   <li><strong>Inspector（檢查器）</strong>：選取素材的屬性與效果設定</li>
   <li><strong>時間軸</strong>：剪輯的核心工作區</li>
 </ul>
+        <div class="quiz-block" data-quiz-id="q-以下哪個頁面是davinciresolv" data-quiz-answer="2">
+      <div class="quiz-q">以下哪個頁面是 DaVinci Resolve 業界最知名的頂級功能？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>Cut（快剪）</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>Deliver（交付）</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>Color（調色）</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>Fairlight（音頻）</span></button>
+      </div>
+      <div class="quiz-hint" hidden>這個功能最初是 Blackmagic Design 的核心產品，好萊塢電影均在使用。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -525,11 +547,13 @@
       <span class="tag green">色彩空間：Rec.709（一般攝影機）/ DCI-P3（電影院標準）</span>
       <span class="tag purple">音頻：48kHz / 24-bit（廣播電視標準）</span>
     </div>
-        <div class="insight">
-      <div class="insight-title">幀率一旦設定不要中途更改</div>
-      <p>如果時間軸幀率與素材幀率不同，DaVinci 會做轉換，但可能造成動作不自然或影格重複。</p>
-      <p style="margin-top:.5rem">拍攝前就確認好目標幀率，剪輯開始時就設定正確，可以避免很多後期問題。</p>
-    </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">幀率不可中途更改</div>
+    <p>幀率一旦設定不要中途更改。如果時間軸幀率與素材幀率不同，DaVinci 會做轉換，但可能造成動作不自然或影格重複。</p><p>拍攝前就確認好目標幀率，剪輯開始時就設定正確，可以避免很多後期問題。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -597,6 +621,51 @@
   </div>
 
   <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">專案工作流程進度</div>
+      <div class="group-body">
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">建立專案資料夾結構</div>
+          <div class="ss-desc">按 01_素材、02_DaVinci 專案、03_輸出、04_備份 分類</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">設定時間軸規格</div>
+          <div class="ss-desc">解析度、幀率、色彩空間、音頻格式</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">導入與整理素材</div>
+          <div class="ss-desc">顏色標記、旗標、關鍵字分類</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">生成代理媒體</div>
+          <div class="ss-desc">4K 素材轉 1/4 解析度，剪輯更流暢</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">開始剪輯</div>
+          <div class="ss-desc">進入 Cut / Edit 頁面進行粗剪與精剪</div>
+        </div>
+      </li>
+    </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
     <div class="sub-title" id="sub-2-3-30"><span class="bar"></span>2-3 代理媒體工作流程（30 分鐘）</div>
   </div>
 
@@ -635,6 +704,13 @@
         </div>
       </div>
     </div>
+        <div class="callout callout--info">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">為什麼要用代理媒體？</div>
+    <p>代理媒體不是「降低品質妥協」，而是「智慧工作流程」。好萊塢電影後製也使用類似的概念（稱為 Offline/Online Editing）。剪輯時使用低解析度檔案，最後輸出時換回原始素材，能大幅提升操作流暢度。</p>
+  </div>
+</div>
         <div class="prompt-block">
       <div class="prompt-header">
         <div class="dots"><span></span><span></span><span></span></div>
@@ -770,11 +846,13 @@ J-Cut             ：下一個鏡頭的音頻先出現，再切入畫面
 L-Cut             ：上一個鏡頭的音頻延伸到下一個鏡頭畫面
 Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">剪輯的「三秒法則」</div>
-      <p>靜態鏡頭平均時長不超過三秒，動態鏡頭可適當延長。</p>
-      <p style="margin-top:.5rem">超過三秒的靜態鏡頭，觀眾會開始注意到「這個鏡頭很長」，注意力從故事轉移到鏡頭本身——這是你不想要的。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">剪輯的「三秒法則」</div>
+    <p>靜態鏡頭平均時長不超過三秒，動態鏡頭可適當延長。</p><p>超過三秒的靜態鏡頭，觀眾會開始注意到「這個鏡頭很長」，注意力從故事轉移到鏡頭本身——這是你不想要的。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -814,6 +892,17 @@ Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
         </div>
       </div>
     </div>
+        <div class="quiz-block" data-quiz-id="q-jcut的特徵是什麼" data-quiz-answer="1">
+      <div class="quiz-q">J-Cut 的特徵是什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>畫面先切換，聲音再跟著切換</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>下一個鏡頭的聲音先出現，再切入畫面</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>畫面與聲音同時切換到下一個鏡頭</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>兩個畫面重疊溶解在一起</span></button>
+      </div>
+      <div class="quiz-hint" hidden>J-Cut 的「J」形狀來自時間軸上音頻提前於畫面的剪輯點。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -828,8 +917,9 @@ Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
       <div class="group-body">
         <div class="tags">
       <span class="tag green">適合使用：章節切換、時間跳躍、情緒轉換</span>
+      <span class="tag orange">避免過度使用：每個剪輯點都加轉場，會讓影片顯得廉價</span>
       <span class="tag blue">最佳轉場長度：0.5-1 秒（太長轉場喧賓奪主）</span>
-      <span class="tag orange">最常用轉場：溶解（Dissolve）、Cross Fade、Dip to Black</span>
+      <span class="tag purple">最常用轉場：溶解（Dissolve）、Cross Fade、Dip to Black</span>
     </div>
       </div>
     </div>
@@ -964,11 +1054,13 @@ Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
         </div>
       </div>
     </div>
-        <div class="insight">
-      <div class="insight-title">打板（Clapper Board）的重要性</div>
-      <p>打板的聲音是最清晰的同步點。即使沒有正式打板，拍攝開始時拍一下手或做任何清晰的聲音動作，都能讓聲音同步更容易。</p>
-      <p style="margin-top:.5rem">若現場條件不允許，DaVinci 的聲音波形自動同步功能已相當準確，但偶爾仍需手動微調。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">打板（Clapper Board）的重要性</div>
+    <p>打板的聲音是最清晰的同步點。即使沒有正式打板，拍攝開始時拍一下手或做任何清晰的聲音動作，都能讓聲音同步更容易。</p><p>若現場條件不允許，DaVinci 的聲音波形自動同步功能已相當準確，但偶爾仍需手動微調。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1198,6 +1290,15 @@ Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
         </div>
       </div>
     </div>
+        <div class="quiz-block" data-quiz-id="q-一級調色主要解決的是風格問題而不是技術問" data-quiz-answer="1">
+      <div class="quiz-q">一級調色主要解決的是風格問題，而不是技術問題。</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>是</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>否</span></button>
+      </div>
+      <div class="quiz-hint" hidden>一級調色（Primary Grading）解決的是曝光、白平衡、對比度等技術問題，風格問題留給二級調色處理。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
         <div class="prompt-block">
       <div class="prompt-header">
         <div class="dots"><span></span><span></span><span></span></div>
@@ -1374,11 +1475,13 @@ Match Cut         ：利用相似構圖或動作連接兩個不同場景</div>
   ↓
 節點 4（二級調色）：局部精調膚色、特定顏色</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">LUT 強度建議控制在 50% 以下</div>
-      <p>直接以 100% 強度套用創意 LUT，通常效果過於突兀。</p>
-      <p style="margin-top:.5rem">在節點的「Opacity（不透明度）」調低到 30-70%，讓 LUT 的效果融合進你的一級調色，才是專業的使用方式。</p>
-    </div>
+        <div class="callout callout--warning">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">LUT 強度建議控制在 50% 以下</div>
+    <p>直接以 100% 強度套用創意 LUT，通常效果過於突兀。</p><p>在節點的「Opacity（不透明度）」調低到 30-70%，讓 LUT 的效果融合進你的一級調色，才是專業的使用方式。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1532,6 +1635,17 @@ Release（釋音時間）：60-100ms
 Make-up Gain：補回 3-5 dB
   → 補償壓縮損失的整體音量</div>
     </div>
+        <div class="quiz-block" data-quiz-id="q-youtube影片的推薦音頻lufs值是" data-quiz-answer="2">
+      <div class="quiz-q">YouTube 影片的推薦音頻 LUFS 值是多少？</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" data-idx="0"><span class="quiz-key">A</span><span>-6 dB</span></button>
+        <button class="quiz-btn" data-idx="1"><span class="quiz-key">B</span><span>-23 dB</span></button>
+        <button class="quiz-btn" data-idx="2"><span class="quiz-key">C</span><span>-14 dB</span></button>
+        <button class="quiz-btn" data-idx="3"><span class="quiz-key">D</span><span>-30 dB</span></button>
+      </div>
+      <div class="quiz-hint" hidden>廣播電視標準是 -23 LUFS，YouTube 則使用較寬鬆的標準。</div>
+      <div class="quiz-fb" hidden></div>
+    </div>
       </div>
     </div>
   </div>
@@ -1593,11 +1707,13 @@ Make-up Gain：補回 3-5 dB
 4. DaVinci 自動記錄所有推桿動作為關鍵影格
 5. 之後可在時間軸的音量包絡線直接調整</div>
     </div>
-        <div class="insight">
-      <div class="insight-title">免版權音樂的合法來源</div>
-      <p>常見錯誤：從 YouTube 抓取背景音樂使用，即使是「免費分享」的音樂也可能有版權問題。</p>
-      <p style="margin-top:.5rem">合法免費來源：YouTube Audio Library（YouTube 直接提供）、Pixabay Music、Free Music Archive。付費但版稅免除（Royalty-free）：Artlist、Epidemic Sound，適合商業影片。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">免版權音樂的合法來源</div>
+    <p>常見錯誤：從 YouTube 抓取背景音樂使用，即使是「免費分享」的音樂也可能有版權問題。</p><p>合法免費來源：YouTube Audio Library（YouTube 直接提供）、Pixabay Music、Free Music Archive。付費但版稅免除（Royalty-free）：Artlist、Epidemic Sound，適合商業影片。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1723,11 +1839,13 @@ MediaOut → 輸出到時間軸</div>
       <span class="tag green">縮放強調：Scale 從 1.0 → 1.05 → 1.0 的彈跳效果</span>
       <span class="tag purple">打字機效果：Text+ 的 End 屬性從 0 → 1，字母逐個顯示</span>
     </div>
-        <div class="insight">
-      <div class="insight-title">Fusion 特效的學習路徑建議</div>
-      <p>Fusion 的功能非常深，完整學習需要額外的專門課程。本模組的目標是讓你能製作常用的動態字幕和簡單圖形。</p>
-      <p style="margin-top:.5rem">進階方向：學習 Fusion 的粒子系統、3D 合成、VFX 追蹤等功能，可以參考 Blackmagic Design 官方的免費認證課程。</p>
-    </div>
+        <div class="callout callout--tip">
+  <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
+  <div class="callout-body">
+    <div class="callout-title">Fusion 特效的學習路徑建議</div>
+    <p>Fusion 的功能非常深，完整學習需要額外的專門課程。本模組的目標是讓你能製作常用的動態字幕和簡單圖形。</p><p>進階方向：學習 Fusion 的粒子系統、3D 合成、VFX 追蹤等功能，可以參考 Blackmagic Design 官方的免費認證課程。</p>
+  </div>
+</div>
       </div>
     </div>
   </div>
@@ -1893,6 +2011,52 @@ MediaOut → 輸出到時間軸</div>
       </div>
     </div>
       </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-8-3-faq"><span class="bar"></span>8-3 常見問題 FAQ</div>
+  </div>
+
+  <div class="reveal">
+    <details class="spoiler">
+      <summary>免費版可以輸出 4K 影片嗎？</summary>
+      <div class="spoiler-body"><p>可以。DaVinci Resolve 免費版支援最高 Ultra HD（3840×2160）輸出，包含 H.264 和 H.265 格式。只有超過 4K 的解析度（如 8K）或某些專業格式（DNxHR、ProRes）才需要 Studio 版。</p></div>
+    </details>
+  </div>
+
+  <div class="reveal">
+    <details class="spoiler">
+      <summary>DaVinci Resolve 和 Premiere Pro 哪個比較好學？</summary>
+      <div class="spoiler-body"><p>這取決於你的背景。如果你已經熟悉 Adobe 生態系統，Premiere Pro 的介面會比較親切。但 DaVinci Resolve 的頁面分工更清晰（Cut 給新手、Edit 給專業），而且免費版功能已經非常完整。對於完全從零開始的新手，DaVinci Resolve 的學習曲線其實更平緩。</p></div>
+    </details>
+  </div>
+
+  <div class="reveal">
+    <details class="spoiler">
+      <summary>為什麼我的影片在 DaVinci 裡很卡？</summary>
+      <div class="spoiler-body"><p>最常見的原因是沒有使用代理媒體（Proxy）。4K 素材對大多數電腦來說都太重，建議：</p><p>1. 右鍵素材 → 生成代理媒體</p><p>2. 播放時切換為 Proxy 模式</p><p>3. 調色和輸出時再切換回原始素材</p><p>另外，確認 GPU 加速已在專案設定中啟用。</p></div>
+    </details>
+  </div>
+
+  <div class="reveal">
+    <div class="accordion">
+      <details class="acc-item" open>
+        <summary>電腦規格不夠，可以用 DaVinci Resolve 嗎？</summary>
+        <div class="acc-body"><p>最低 16GB RAM 可以跑 1080p 剪輯。如果只有 8GB，建議：</p><ul><li>使用代理媒體工作流程</li><li>關閉背景程式</li><li>在偏好設定中降低播放解析度到 1/4</li></ul><p>升級 RAM 到 32GB 是剪輯 4K 最值得的投資。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何從 Premiere Pro 轉移專案到 DaVinci？</summary>
+        <div class="acc-body"><p>可以使用 EDL 或 XML 格式交換剪輯資料：</p><p>1. 在 Premiere 中匯出 XML / EDL</p><p>2. 在 DaVinci 的媒體資料庫中載入該檔案</p><p>3. 時間軸會自動重建（轉場和效果需要重新套用）</p><p>注意：調色、Fusion 特效、Fairlight 混音無法轉移，需重新製作。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>Studio 版值得買嗎？</summary>
+        <div class="acc-body"><p>如果你需要以下任一功能，Studio 版非常值得：</p><ul><li>AI 自動語音轉字幕（省下大量手打字幕時間）</li><li>多 GPU 支援（渲染速度倍增）</li><li>所有 Resolve FX 特效</li><li>HDR 調色（HDR10 / Dolby Vision）</li></ul><p>一次性 $295 買斷，沒有月費。對於接案工作者來說，一支案子的收入就足以回本。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何備份 DaVinci 專案？</summary>
+        <div class="acc-body"><p>最保險的方式：</p><p>1. 使用「匯出專案」（.drp 格式）定期備份</p><p>2. 將整個專案資料夾（含原始素材）複製到外接硬碟</p><p>3. 可搭配雲端儲存服務（Google Drive、Dropbox）做遠端備份</p><p>切記：.dra 自動儲存檔不等於備份，它只是防當機。</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -2247,7 +2411,7 @@ MediaOut → 輸出到時間軸</div>
 
   <script>
     window.__sectionIds__ = ["instructor","20","1","2","3","4","5","6fairlight","7fusion","summary","summary-2"];
-    window.__allAnchorIds__ = ["instructor","20","sub-section-1","1","sub-1-1-davinci-resolve30","sub-1-2-30","sub-1-3-1","2","sub-2-1-45","sub-2-2-45","sub-2-3-30","3","sub-3-1-cut-1","sub-3-2-edit-15","sub-3-3-1","sub-3-4-30","4","sub-4-1-multicam1","sub-4-2-1","sub-4-3-1","5","sub-5-1-1","sub-5-2-1","sub-5-3-15","sub-5-4-lut-30","6fairlight","sub-6-1-45","sub-6-2-1","sub-6-3-45","7fusion","sub-7-1-fusion-45","sub-7-2-45","summary","sub-8-1-deliver-30","sub-summary","summary-2"];
+    window.__allAnchorIds__ = ["instructor","20","sub-section-1","1","sub-1-1-davinci-resolve30","sub-1-2-30","sub-1-3-1","2","sub-2-1-45","sub-2-2-45","sub-2-3-30","3","sub-3-1-cut-1","sub-3-2-edit-15","sub-3-3-1","sub-3-4-30","4","sub-4-1-multicam1","sub-4-2-1","sub-4-3-1","5","sub-5-1-1","sub-5-2-1","sub-5-3-15","sub-5-4-lut-30","6fairlight","sub-6-1-45","sub-6-2-1","sub-6-3-45","7fusion","sub-7-1-fusion-45","sub-7-2-45","summary","sub-8-1-deliver-30","sub-summary","sub-8-3-faq","summary-2"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>
