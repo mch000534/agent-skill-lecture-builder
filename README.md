@@ -70,11 +70,28 @@
 **課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁，支援分類篩選、搜尋、格狀/列表切換。
 
 **教學內容元件**（已上線）：
+
+*基礎排版*
 - `[compare]...[/compare]`：左右並排對比卡（舊做法 vs 新做法），紅綠色區分
+- `[compare-table headers="A | **B** | C"]...[/compare-table]`：三欄以上多方案比較表，`**` 包住的欄位自動加上「推薦」徽章
 - `[tabs][tab label="..."]...[/tab][/tabs]`：分頁切換卡，適合多語言或多方案範例對照
 - `[callout type="info|warning|tip"]...[/callout]`：左邊框三色標注框，可選 title
 - Flow 展開動畫：步驟逐一滑入，純 CSS + IntersectionObserver，無外部依賴
-- 程式碼語法高亮：Terminal 識別指令/旗標/字串/變數，Prompt 識別 backtick code 與 YAML key/value
+
+*教學節奏*
+- `[accordion][item title="..." open]...[/item][/accordion]`：FAQ 摺疊區塊，純 `<details>` 零 JS
+- `[reveal title="..."]...[/reveal]`：點擊揭曉答案 / Spoiler，適合練習題
+- `[timeline]` + `- 時間 | 標題 | 描述`：時間軸（技術演進、學習路徑）
+- `[steps-status]` + `- [done|doing|todo] 標題 | 描述`：帶進度狀態的步驟列表
+
+*內容呈現*
+- `` ```js / py / ts / bash / json / yaml / html / css / go / rust [label="..."] ``：fenced code block 自動語法高亮（build-time tokenizer，無 runtime JS）
+- `` ```diff [label="..."] ``：Diff 區塊，`+` 綠 / `-` 紅
+- `[stats]` + `- 數字 | 標題 | 描述`：大字數據卡片格網
+- `[?術語|定義]`：行內 Glossary Tooltip，hover 顯示定義（純 CSS）
+- `[dl]` + `- 詞 | 解釋`：Definition List 名詞解釋對照
+
+*程式碼語法高亮*：Terminal 識別指令/旗標/字串/變數，Prompt 識別 backtick code 與 YAML key/value
 
 **課堂互動工具**：
 - 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
@@ -420,6 +437,16 @@ quotes:
 | `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式） |
 | `[tabs][tab label="..."]...[/tab][/tabs]` | 分頁切換卡（多語言／多方案範例對照） |
 | `[callout type="info\|warning\|tip" title="..."]...[/callout]` | 標注框（藍／橙／綠三色，可選 title） |
+| `[accordion][item title="..." open]...[/item][/accordion]` | FAQ 摺疊區塊（純 `<details>`，零 JS） |
+| `[reveal title="..."]...[/reveal]` | 點擊揭曉答案 / Spoiler |
+| `[timeline]` + `- 時間 \| 標題 \| 描述` + `[/timeline]` | 時間軸（技術演進、學習路徑） |
+| `[steps-status]` + `- [done\|doing\|todo] 標題 \| 描述` + `[/steps-status]` | 帶 done / doing / todo 狀態的步驟列表 |
+| `` ```js [label="..."] `` | 程式碼區塊（自動高亮，支援 js / ts / py / bash / json / yaml / html / css / go / rust 等） |
+| `` ```diff [label="..."] `` | Diff 對比區塊（`+` 綠 / `-` 紅） |
+| `[compare-table headers="A \| **B** \| C"]` + `- 列 \| 1 \| 2 \| 3` | 多欄比較表（`**` 包住的欄位高亮為推薦） |
+| `[stats]` + `- 數字 \| 標題 \| 描述` + `[/stats]` | 大字數據卡片格網 |
+| `[?term\|定義]` | 行內術語 tooltip（hover 顯示定義） |
+| `[dl]` + `- 詞 \| 解釋` + `[/dl]` | 名詞解釋對照（`<dl>`） |
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 [`components.md`](./.agents/skills/course-page-generator/reference/components.md)。

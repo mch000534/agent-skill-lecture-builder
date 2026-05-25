@@ -540,16 +540,368 @@ Q: build.mjs 會自動讀取 global.yaml？
 
 ---
 
-## 19. Inline Elements
+## 19. Accordion / FAQ 摺疊區塊
+
+**Markdown：**
+```markdown
+[accordion]
+[item title="什麼是 Agent Skill？" open]
+Agent Skill 是讓 Claude Code 學會新能力的設定包。
+- 包含一份 SKILL.md
+- 可選 scripts/ 與 reference/
+[/item]
+[item title="如何啟用 Skill？"]
+把 skill 放到 `.agents/skills/` 或 `~/.claude/skills/` 即可被偵測。
+[/item]
+[/accordion]
+```
+
+**HTML：**
+```html
+<div class="accordion">
+  <details class="acc-item" open>
+    <summary>什麼是 Agent Skill？</summary>
+    <div class="acc-body">
+      <p>Agent Skill 是讓 Claude Code 學會新能力的設定包。</p>
+      <ul><li>包含一份 SKILL.md</li><li>可選 scripts/ 與 reference/</li></ul>
+    </div>
+  </details>
+  <details class="acc-item">
+    <summary>如何啟用 Skill？</summary>
+    <div class="acc-body"><p>把 skill 放到 <code>.agents/skills/</code> 或 <code>~/.claude/skills/</code> 即可被偵測。</p></div>
+  </details>
+</div>
+```
+
+規則：
+- `[accordion]...[/accordion]` 包多個 `[item]`
+- `[item title="..."]`：必填 title
+- `[item title="..." open]`：加 `open` 則預設展開
+- 內容支援 `- 項目`（轉為 `<ul><li>`）與一般段落
+- 純 `<details>/<summary>`，零 JS
+
+適用場景：FAQ、進階補充、延伸閱讀、分類收合的長條列。
+
+---
+
+## 20. Reveal / Spoiler 點擊揭曉
+
+**Markdown：**
+```markdown
+[reveal title="點擊查看解答"]
+答案：useEffect 配合 cleanup function 即可避免 memory leak。
+- 在 effect 內回傳一個函式
+- 函式內取消訂閱 / 清除 timer
+[/reveal]
+```
+
+**HTML：**
+```html
+<details class="spoiler">
+  <summary>點擊查看解答</summary>
+  <div class="spoiler-body">
+    <p>答案：useEffect 配合 cleanup function 即可避免 memory leak。</p>
+    <ul><li>在 effect 內回傳一個函式</li><li>函式內取消訂閱 / 清除 timer</li></ul>
+  </div>
+</details>
+```
+
+規則：
+- `title` 選填，省略則預設「點擊查看解答」
+- 內容支援列表與段落（與 accordion 同）
+- 樣式為虛線框 + 居中文字，展開後變實線框
+
+適用場景：開放式問題答案、需要學員先思考再揭曉的內容、隱藏 spoiler。
+
+---
+
+## 21. Timeline 時間軸
+
+**Markdown：**
+```markdown
+[timeline]
+- 2020 | GPT-3 發布 | OpenAI 正式公開 API，AI 寫程式雛形
+- 2022/11 | ChatGPT 問世 | 全民 AI 元年，產業認知大幅轉變
+- 2024 | Claude 3 系列 | Anthropic 進入第一梯隊
+- 2026 | Agent Skills | AI 開始具備可組合的能力
+[/timeline]
+```
+
+**HTML：**
+```html
+<ol class="timeline">
+  <li>
+    <div class="tl-dot"></div>
+    <div class="tl-time">2020</div>
+    <div class="tl-title">GPT-3 發布</div>
+    <div class="tl-desc">OpenAI 正式公開 API，AI 寫程式雛形</div>
+  </li>
+  <!-- ... -->
+</ol>
+```
+
+規則：
+- 每項格式：`- 時間 | 標題 | 描述`
+- 描述（第三欄）可省略：`- 2020 | GPT-3 發布`
+- 純 CSS 直線軸 + 圓點，無 JS
+
+適用場景：技術演進、版本變遷、學習路徑、專案里程碑。
+
+---
+
+## 22. Steps with Status 帶狀態步驟
+
+**Markdown：**
+```markdown
+[steps-status]
+- [done] 環境設定 | 安裝 Node.js 與 Claude Code
+- [done] 建立第一個 Skill | 用 skill-creator 生成模板
+- [doing] 撰寫 CI workflow | 接 GitHub Action 自動跑測試
+- [todo] 部署到 production | 觀察一週後決定是否擴大導入
+[/steps-status]
+```
+
+**HTML：**
+```html
+<ol class="steps-status">
+  <li class="is-done">
+    <div class="ss-icon"><!-- check SVG --></div>
+    <div>
+      <div class="ss-title">環境設定</div>
+      <div class="ss-desc">安裝 Node.js 與 Claude Code</div>
+    </div>
+  </li>
+  <li class="is-doing">
+    <div class="ss-icon"><!-- pulsing dot --></div>
+    <div>
+      <div class="ss-title">撰寫 CI workflow</div>
+      <div class="ss-desc">接 GitHub Action 自動跑測試</div>
+    </div>
+  </li>
+  <!-- ... -->
+</ol>
+```
+
+規則：
+- 每項格式：`- [status] 標題 | 描述`
+- `status` 三種值：
+  - `done` — 綠勾、綠左邊框
+  - `doing` — 藍色脈動圓、藍左邊框
+  - `todo` — 灰空圓、灰左邊框（透明度降低）
+- 描述可省略：`- [done] 環境設定`
+
+適用場景：進度追蹤、學習路徑（已學完/正在學/還沒學）、專案狀態看板、Sprint 任務清單。
+
+差別於 `[flow]`：`[flow]` 是線性流程的「步驟說明」，`[steps-status]` 額外帶執行狀態。
+
+---
+
+## 23. Code Block 與語法高亮
+
+**Markdown：**
+~~~markdown
+```js [label="範例：階乘函式"]
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+```
+~~~
+
+支援語言：`js / javascript / ts / typescript / jsx / tsx / py / python / bash / sh / shell / zsh / json / yaml / yml / html / xml / css / scss / go / rust / rs / java / kotlin / swift / rb / ruby / php / sql`。其他語言會以 plain code-block 呈現（無上色）。
+
+**HTML：**
+```html
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">js</span>
+    <span class="code-label">範例：階乘函式</span>
+    <button class="copy-btn" ...>...</button>
+  </div>
+  <pre class="code-body"><code class="lang-js"><span class="tok-kw">function</span> <span class="tok-fn">factorial</span>(n) {
+  <span class="tok-kw">if</span> (n &lt;= <span class="tok-num">1</span>) <span class="tok-kw">return</span> <span class="tok-num">1</span>;
+  <span class="tok-kw">return</span> n * <span class="tok-fn">factorial</span>(n - <span class="tok-num">1</span>);
+}</code></pre>
+</div>
+```
+
+規則：
+- 建置時 tokenize（無 runtime JS）；token 類別：`tok-kw / tok-str / tok-num / tok-com / tok-fn`
+- 自動深淺色切換（沿用 `data-mode="light"`）
+- 與 `[prompt]/[terminal]` 區塊分離，UI 略不同（顯示語言徽章而非 mac dots）
+
+---
+
+## 24. Code Diff
+
+**Markdown：**
+~~~markdown
+```diff [label="重構 useState callback"]
+- const inc = () => setCount(count + 1);
++ const inc = () => setCount(c => c + 1);
+  return <button onClick={inc}>{count}</button>;
+```
+~~~
+
+**HTML：**
+```html
+<div class="code-block code-block--diff">
+  <div class="code-header">
+    <span class="code-lang">diff</span>
+    ...
+  </div>
+  <pre class="code-body"><code>
+<span class="diff-del">- const inc = () =&gt; setCount(count + 1);</span>
+<span class="diff-add">+ const inc = () =&gt; setCount(c =&gt; c + 1);</span>
+<span class="diff-eq">  return &lt;button onClick={inc}&gt;{count}&lt;/button&gt;;</span>
+  </code></pre>
+</div>
+```
+
+規則：
+- 每行第一個字元決定樣式：`+` 綠（新增）、`-` 紅（刪除）、其他（含空白）為不變
+- 不做語法高亮，整行染色避免視覺混亂
+
+---
+
+## 25. Comparison Table 多欄比較
+
+**Markdown：**
+```markdown
+[compare-table headers="免費版 | **Pro 版** | 企業版"]
+- 月費 | $0 | $10 | 客制
+- 用戶數 | 1 | 10 | 無限
+- 技術支援 | 社群 | Email | 24/7
+[/compare-table]
+```
+
+**HTML：**
+```html
+<div class="compare-table-wrap">
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>免費版</th>
+        <th class="is-highlight">Pro 版</th>
+        <th>企業版</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="row-label">月費</th>
+        <td>$0</td>
+        <td class="is-highlight">$10</td>
+        <td>客制</td>
+      </tr>
+      <!-- ... -->
+    </tbody>
+  </table>
+</div>
+```
+
+規則：
+- `headers="A | B | C"` 定義欄位名
+- 用 `**...**` 包住的 header 會加上「推薦」徽章與背景色，整欄資料也跟著上色
+- 每列：`- 列標題 | 欄1 | 欄2 | 欄3`
+- 比 `[compare]`（僅 2 欄）更適合多方案 / 多版本對照
+
+---
+
+## 26. Stats / Metric 數據卡
+
+**Markdown：**
+```markdown
+[stats]
+- 80% | 節省時間 | 從 5 小時降至 1 小時
+- 3x | 開發速度 | 平均 PR 完成時間
+- 99.9% | 服務可用性 | 過去 12 個月統計
+[/stats]
+```
+
+**HTML：**
+```html
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value">80%</div>
+    <div class="stat-title">節省時間</div>
+    <div class="stat-desc">從 5 小時降至 1 小時</div>
+  </div>
+  <!-- ... -->
+</div>
+```
+
+規則：
+- 每項格式：`- 數字 | 標題 | 描述`，標題與描述皆選用
+- 自動 grid 排列，最小 180px 寬，自動換行
+- 數字以 accent 色大字呈現，搭配 hover 上浮動畫
+
+適用：成效呈現、效能指標、覆蓋率、用量統計。
+
+---
+
+## 27. Glossary Tooltip 行內術語
+
+**Markdown：**
+```markdown
+這個專案使用 [?RAG|Retrieval-Augmented Generation，透過向量檢索增強模型生成] 概念。
+```
+
+**HTML：**
+```html
+這個專案使用 <span class="gloss" tabindex="0" data-tip="Retrieval-Augmented Generation，透過向量檢索增強模型生成">RAG</span> 概念。
+```
+
+規則：
+- 行內語法 `[?術語|定義]`，加在任何段落、列表項、卡片內皆可
+- hover 或 focus（鍵盤 Tab）即顯示定義
+- 純 CSS tooltip（`::after` + `data-tip`），無 JS
+- 術語下方虛線提示可互動
+
+適用場景：行內首次出現的縮寫、專有名詞、需要簡短解釋的概念。
+
+---
+
+## 28. Definition List 名詞解釋對照
+
+**Markdown：**
+```markdown
+[dl]
+- RAG | Retrieval-Augmented Generation，透過向量檢索增強模型生成
+- LLM | Large Language Model，大型語言模型
+- MCP | Model Context Protocol，Anthropic 的工具協定
+[/dl]
+```
+
+**HTML：**
+```html
+<dl class="definition-list">
+  <dt>RAG</dt>
+  <dd>Retrieval-Augmented Generation，透過向量檢索增強模型生成</dd>
+  <dt>LLM</dt>
+  <dd>Large Language Model，大型語言模型</dd>
+  <!-- ... -->
+</dl>
+```
+
+規則：
+- 每項格式：`- 術語 | 定義`
+- 兩欄 CSS Grid 對齊；術語以 accent 色 chip 樣式呈現
+- 適用於一次列出多項術語（章末名詞表、附錄）；行內單一術語請用 §27 Glossary Tooltip
+
+---
+
+## 29. Inline Elements
 
 | Markdown | HTML | 說明 |
 |---|---|---|
 | `**bold**` | `<strong>` | 粗體 |
 | `` `code` `` | `<code>` | 行內程式碼 |
 | `[text](url)` | `<a href="url">text</a>` | 連結 |
+| `[?term\|定義]` | `<span class="gloss" data-tip="...">term</span>` | 行內術語 tooltip |
 | 一般段落 | `<p>` | card 或 section 內的段落 |
 
-## 20. Wrapping Rules
+## 30. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
 - 連續的 card + prompt-block 可以在同一個 reveal wrapper 中

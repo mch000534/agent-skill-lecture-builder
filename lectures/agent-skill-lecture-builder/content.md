@@ -374,6 +374,165 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 
 學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 `config/global.yaml` 設定 `vote.gas_url`（見後續章節）。
 
+### Accordion / FAQ 摺疊
+
+```prompt [label="語法"]
+[accordion]
+[item title="什麼是 Agent Skill？" open]
+讓 Claude Code 學會新能力的設定包。
+[/item]
+[item title="如何啟用 Skill？"]
+放到 .agents/skills/ 即可被偵測。
+[/item]
+[/accordion]
+```
+
+實際呈現：
+
+[accordion]
+[item title="什麼是 Agent Skill？" open]
+Agent Skill 是讓 Claude Code 學會新能力的設定包，由一份 `SKILL.md` 與可選的 `scripts/` / `reference/` 組成。
+- 描述觸發時機與工作流程
+- 可附帶腳本與參考文件
+[/item]
+[item title="如何啟用 Skill？"]
+把 skill 資料夾放到 `.agents/skills/`（專案層）或 `~/.claude/skills/`（全域）即可被自動偵測。
+[/item]
+[item title="Skill 跟 Slash Command 有什麼差別？"]
+Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意自動判斷是否套用。
+[/item]
+[/accordion]
+
+### Reveal 點擊揭曉
+
+```prompt [label="語法"]
+[reveal title="點擊查看解答"]
+答案：useEffect 配合 cleanup function。
+[/reveal]
+```
+
+實際呈現：
+
+[reveal title="點擊查看解答：base.html 為什麼不能放 CDN？"]
+因為課程頁需在離線、無網路、或網路慢的環境也能完整呈現。
+- CDN 失效會導致樣式崩壞
+- 學員下載 HTML 後仍可獨立閱讀
+- 列印模式不依賴外部資源
+[/reveal]
+
+### Timeline 時間軸
+
+```prompt [label="語法"]
+[timeline]
+- 2020 | GPT-3 發布 | OpenAI 公開 API
+- 2022/11 | ChatGPT 問世 | 全民 AI 元年
+- 2026 | Agent Skills | AI 能力可組合
+[/timeline]
+```
+
+實際呈現：
+
+[timeline]
+- 2020 | GPT-3 發布 | OpenAI 正式公開 API，AI 寫程式雛形浮現
+- 2022/11 | ChatGPT 問世 | 全民 AI 元年，產業認知大幅轉變
+- 2024 | Claude 3 系列 | Anthropic 進入第一梯隊，長文本能力大幅躍進
+- 2025 | Claude Code | 終端機原生 AI 編程助手登場
+- 2026 | Agent Skills | AI 開始具備可組合、可分享的能力包
+[/timeline]
+
+### Steps with Status 帶狀態步驟
+
+```prompt [label="語法"]
+[steps-status]
+- [done] 環境設定 | 安裝 Node.js 與 Claude Code
+- [doing] 撰寫第一個 Skill | 跟著範例操作
+- [todo] 接 GitHub Action | 自動化測試
+[/steps-status]
+```
+
+實際呈現：
+
+[steps-status]
+- [done] 環境設定 | 安裝 Node.js 與 Claude Code，確認 `claude --version` 可執行
+- [done] 建立第一個 Skill | 用 `skill-creator` 生成模板，閱讀 SKILL.md 結構
+- [doing] 撰寫 CI workflow | 接 GitHub Action 自動跑測試，目前 PR Review 已上線
+- [todo] 部署到 production | 觀察一週後決定是否擴大導入到全團隊
+- [todo] 整理內部教學材料 | 預計下個月開內訓
+[/steps-status]
+
+差別於 `[flow]`：flow 是「線性步驟說明」，steps-status 多了「進度狀態」語意，適合 sprint 看板、學習路徑追蹤。
+
+### Code 高亮 與 Diff
+
+`` ```語言 `` 開頭的 fenced block 會自動上色（支援 js / ts / jsx / tsx / py / bash / json / yaml / html / css / go / rust 等）。`` ```diff `` 則渲染為 `+` 綠 / `-` 紅的差異對比。
+
+實際呈現（JS 高亮）：
+
+```js [label="範例：階乘函式"]
+// 計算 n 的階乘
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+const result = factorial(5);
+console.log(`5! = ${result}`); // 120
+```
+
+實際呈現（Diff 對比）：
+
+```diff [label="重構 useState callback"]
+- const [count, setCount] = useState(0);
+- const inc = () => setCount(count + 1);
++ const [count, setCount] = useState(0);
++ const inc = () => setCount(c => c + 1);
+  return <button onClick={inc}>{count}</button>;
+```
+
+### Comparison Table 多欄比較
+
+`[compare]` 只能兩欄；多方案比較用 `[compare-table]`。`headers` 中以 `**粗體**` 標記的欄位會自動加上「推薦」徽章與背景色。
+
+實際呈現：
+
+[compare-table headers="免費版 | **Pro 版** | 企業版"]
+- 月費 | $0 | $10 | 客制
+- 用戶數 | 1 | 10 | 無限
+- 技術支援 | 社群 | Email | 24/7
+- API 存取 | 無 | 1k/天 | 無限
+- SLA 保證 | — | 99.5% | 99.9%
+[/compare-table]
+
+### Stats 數據卡
+
+醒目地呈現關鍵數字，例如成效、效能、覆蓋率。
+
+實際呈現：
+
+[stats]
+- 80% | 節省時間 | 從 5 小時降至 1 小時
+- 3x | 開發速度 | 平均 PR 完成時間
+- 99.9% | 服務可用性 | 過去 12 個月統計
+[/stats]
+
+### Glossary Tooltip 行內術語
+
+語法 `[?術語|定義]`，hover 或 focus 顯示完整定義；無需 JS、純 CSS 實作。
+
+範例：這個專案運用 [?RAG|Retrieval-Augmented Generation，透過向量檢索把外部知識注入 LLM 的生成過程] 概念，把 [?MCP|Model Context Protocol，Anthropic 設計的標準化工具協定] 串成完整知識管線。
+
+### Definition List 名詞解釋
+
+用於名詞對照表，比 Glossary Tooltip 更適合一次列出多項。
+
+實際呈現：
+
+[dl]
+- RAG | Retrieval-Augmented Generation，透過向量檢索增強模型生成
+- LLM | Large Language Model，大型語言模型，例如 GPT、Claude
+- MCP | Model Context Protocol，Anthropic 設計的工具協定
+- SDD | Spec-Driven Development，規格驅動開發
+[/dl]
+
 ---
 
 # OG Image：讓分享連結更專業

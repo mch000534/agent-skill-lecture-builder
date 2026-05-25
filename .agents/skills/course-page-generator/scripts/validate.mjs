@@ -17,14 +17,23 @@ import { resolve, join } from 'path';
 
 // Paired block tags that must be explicitly closed
 const BLOCK_TAGS = [
-  { open: /^\[flow\]$/,        close: /^\[\/flow\]$/,       name: '[flow]' },
-  { open: /^\[tags\]$/,        close: /^\[\/tags\]$/,       name: '[tags]' },
-  { open: /^\[summary\]$/,     close: /^\[\/summary\]$/,    name: '[summary]' },
-  { open: /^\[bonus\b/,        close: /^\[\/bonus\]$/,      name: '[bonus]' },
-  { open: /^\[compare\b/,      close: /^\[\/compare\]$/,    name: '[compare]' },
-  { open: /^\[vote\b/,         close: /^\[\/vote\]$/,       name: '[vote]' },
-  { open: /^\[quiz\b/,         close: /^\[\/quiz\]$/,       name: '[quiz]' },
-  { open: /^\[image-text\b/,   close: /^\[\/image-text\]$/, name: '[image-text]' },
+  { open: /^\[flow\]$/,             close: /^\[\/flow\]$/,          name: '[flow]' },
+  { open: /^\[tags\]$/,             close: /^\[\/tags\]$/,          name: '[tags]' },
+  { open: /^\[summary\]$/,          close: /^\[\/summary\]$/,       name: '[summary]' },
+  { open: /^\[bonus\b/,             close: /^\[\/bonus\]$/,         name: '[bonus]' },
+  { open: /^\[compare(\s|\])/,      close: /^\[\/compare\]$/,       name: '[compare]' },
+  { open: /^\[compare-table\b/,     close: /^\[\/compare-table\]$/, name: '[compare-table]' },
+  { open: /^\[vote\b/,              close: /^\[\/vote\]$/,          name: '[vote]' },
+  { open: /^\[quiz\b/,              close: /^\[\/quiz\]$/,          name: '[quiz]' },
+  { open: /^\[image-text\b/,        close: /^\[\/image-text\]$/,    name: '[image-text]' },
+  { open: /^\[tabs\]$/,             close: /^\[\/tabs\]$/,          name: '[tabs]' },
+  { open: /^\[callout\b/,           close: /^\[\/callout\]$/,       name: '[callout]' },
+  { open: /^\[accordion\]$/,        close: /^\[\/accordion\]$/,     name: '[accordion]' },
+  { open: /^\[reveal\b/,            close: /^\[\/reveal\]$/,        name: '[reveal]' },
+  { open: /^\[timeline\]$/,         close: /^\[\/timeline\]$/,      name: '[timeline]' },
+  { open: /^\[steps-status\]$/,     close: /^\[\/steps-status\]$/,  name: '[steps-status]' },
+  { open: /^\[stats\]$/,            close: /^\[\/stats\]$/,         name: '[stats]' },
+  { open: /^\[dl\]$/,               close: /^\[\/dl\]$/,            name: '[dl]' },
 ];
 
 function validateContent(contentPath) {

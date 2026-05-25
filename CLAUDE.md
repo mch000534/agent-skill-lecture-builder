@@ -119,6 +119,16 @@ agent-skill-lecture-builder/
 | `[youtube id="..." title="..."]` | YouTube 嵌入（16:9 響應式） |
 | `[tabs][tab label="..."]...[/tab][/tabs]` | 分頁切換卡（多語言範例對照） |
 | `[callout type="info\|warning\|tip" title="..."]...[/callout]` | 標注框（藍/橙/綠三色） |
+| `[accordion][item title="..." open]...[/item][/accordion]` | FAQ 摺疊區塊（純 `<details>`） |
+| `[reveal title="..."]...[/reveal]` | 點擊揭曉答案 / Spoiler |
+| `[timeline]` + `- 時間 \| 標題 \| 描述` + `[/timeline]` | 時間軸（技術演進、學習路徑） |
+| `[steps-status]` + `- [done\|doing\|todo] 標題 \| 描述` + `[/steps-status]` | 帶狀態的步驟列表 |
+| `` ```js [label="..."] `` | 程式碼區塊（自動語法高亮，支援 js/ts/py/bash/json/yaml/html/css/go/rust 等） |
+| `` ```diff [label="..."] `` | Diff 對比區塊（`+` 綠 / `-` 紅） |
+| `[compare-table headers="A \| **B** \| C"]` + `- 列 \| 1 \| 2 \| 3` | 多欄比較表（`**` 包住的欄位高亮為推薦） |
+| `[stats]` + `- 數字 \| 標題 \| 描述` + `[/stats]` | 大字數據卡片格網 |
+| `[?term\|定義]` | 行內術語 tooltip（hover 顯示定義） |
+| `[dl]` + `- 詞 \| 解釋` + `[/dl]` | 名詞解釋對照（`<dl>`） |
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 `.agents/skills/course-page-generator/reference/components.md`。

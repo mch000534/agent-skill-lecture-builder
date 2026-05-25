@@ -1692,7 +1692,7 @@
         });
 
         deck.addEventListener('click', function (e) {
-          if (e.target.closest('a, button, input, textarea, .prompt-block, iframe')) return;
+          if (e.target.closest('a, button, input, textarea, .prompt-block, iframe, summary, details, .accordion, .spoiler, .tabs-block, .gloss, .code-block')) return;
           goSlide(slideIdx + (e.clientX / window.innerWidth < 0.25 ? -1 : 1));
         });
       }
@@ -1720,6 +1720,7 @@
       function presKeyHandler(e) {
         if (!document.body.classList.contains('pres-active')) return;
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.target.tagName === 'SUMMARY' && (e.key === ' ' || e.key === 'Enter')) return;
         switch (e.key) {
           case 'ArrowRight': case 'ArrowDown': case ' ':
             e.preventDefault(); goSlide(slideIdx + 1); break;

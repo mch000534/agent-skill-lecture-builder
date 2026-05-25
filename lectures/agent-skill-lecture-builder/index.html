@@ -893,9 +893,16 @@ console.log('hello');</div>
     </div>
         <p class="loose-text">[/tab]</p>
         <p class="loose-text">[tab label="Python"]</p>
-        <p class="loose-text">```py</p>
-        <p class="loose-text">print('hello')</p>
-        <p class="loose-text">```</p>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">py</span>
+        <span class="code-label"></span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <pre class="code-body"><code class="lang-py"><span class="tok-fn">print</span>(<span class="tok-str">'hello'</span>)</code></pre>
+    </div>
         <p class="loose-text">[/tab]</p>
         <p class="loose-text">[/tabs]</p>
         <p class="loose-text">```</p>
@@ -973,6 +980,311 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 [/vote]</div>
     </div>
         <p class="loose-text">學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 <code>config/global.yaml</code> 設定 <code>vote.gas_url</code>（見後續章節）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Accordion / FAQ 摺疊</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[accordion]
+[item title=&quot;什麼是 Agent Skill？&quot; open]
+讓 Claude Code 學會新能力的設定包。
+[/item]
+[item title=&quot;如何啟用 Skill？&quot;]
+放到 .agents/skills/ 即可被偵測。
+[/item]
+[/accordion]</div>
+    </div>
+        <p class="loose-text">實際呈現：</p>
+        <div class="accordion">
+      <details class="acc-item" open>
+        <summary>什麼是 Agent Skill？</summary>
+        <div class="acc-body"><p>Agent Skill 是讓 Claude Code 學會新能力的設定包，由一份 <code>SKILL.md</code> 與可選的 <code>scripts/</code> / <code>reference/</code> 組成。</p><ul><li>描述觸發時機與工作流程</li><li>可附帶腳本與參考文件</li></ul></div>
+      </details>
+      <details class="acc-item">
+        <summary>如何啟用 Skill？</summary>
+        <div class="acc-body"><p>把 skill 資料夾放到 <code>.agents/skills/</code>（專案層）或 <code>~/.claude/skills/</code>（全域）即可被自動偵測。</p></div>
+      </details>
+      <details class="acc-item">
+        <summary>Skill 跟 Slash Command 有什麼差別？</summary>
+        <div class="acc-body"><p>Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意自動判斷是否套用。</p></div>
+      </details>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Reveal 點擊揭曉</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[reveal title=&quot;點擊查看解答&quot;]
+答案：useEffect 配合 cleanup function。
+[/reveal]</div>
+    </div>
+        <p class="loose-text">實際呈現：</p>
+        <details class="spoiler">
+      <summary>點擊查看解答：base.html 為什麼不能放 CDN？</summary>
+      <div class="spoiler-body"><p>因為課程頁需在離線、無網路、或網路慢的環境也能完整呈現。</p><ul><li>CDN 失效會導致樣式崩壞</li><li>學員下載 HTML 後仍可獨立閱讀</li><li>列印模式不依賴外部資源</li></ul></div>
+    </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Timeline 時間軸</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[timeline]
+- 2020 | GPT-3 發布 | OpenAI 公開 API
+- 2022/11 | ChatGPT 問世 | 全民 AI 元年
+- 2026 | Agent Skills | AI 能力可組合
+[/timeline]</div>
+    </div>
+        <p class="loose-text">實際呈現：</p>
+        <ol class="timeline">
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2020</div>
+        <div class="tl-title">GPT-3 發布</div>
+        <div class="tl-desc">OpenAI 正式公開 API，AI 寫程式雛形浮現</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2022/11</div>
+        <div class="tl-title">ChatGPT 問世</div>
+        <div class="tl-desc">全民 AI 元年，產業認知大幅轉變</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2024</div>
+        <div class="tl-title">Claude 3 系列</div>
+        <div class="tl-desc">Anthropic 進入第一梯隊，長文本能力大幅躍進</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2025</div>
+        <div class="tl-title">Claude Code</div>
+        <div class="tl-desc">終端機原生 AI 編程助手登場</div>
+      </li>
+      <li>
+        <div class="tl-dot"></div>
+        <div class="tl-time">2026</div>
+        <div class="tl-title">Agent Skills</div>
+        <div class="tl-desc">AI 開始具備可組合、可分享的能力包</div>
+      </li>
+    </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Steps with Status 帶狀態步驟</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[steps-status]
+- [done] 環境設定 | 安裝 Node.js 與 Claude Code
+- [doing] 撰寫第一個 Skill | 跟著範例操作
+- [todo] 接 GitHub Action | 自動化測試
+[/steps-status]</div>
+    </div>
+        <p class="loose-text">實際呈現：</p>
+        <ol class="steps-status">
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">環境設定</div>
+          <div class="ss-desc">安裝 Node.js 與 Claude Code，確認 <code>claude --version</code> 可執行</div>
+        </div>
+      </li>
+      <li class="is-done">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="ss-title">建立第一個 Skill</div>
+          <div class="ss-desc">用 <code>skill-creator</code> 生成模板，閱讀 SKILL.md 結構</div>
+        </div>
+      </li>
+      <li class="is-doing">
+        <div class="ss-icon"></div>
+        <div>
+          <div class="ss-title">撰寫 CI workflow</div>
+          <div class="ss-desc">接 GitHub Action 自動跑測試，目前 PR Review 已上線</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">部署到 production</div>
+          <div class="ss-desc">觀察一週後決定是否擴大導入到全團隊</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
+          <div class="ss-title">整理內部教學材料</div>
+          <div class="ss-desc">預計下個月開內訓</div>
+        </div>
+      </li>
+    </ol>
+        <p class="loose-text">差別於 <code>[flow]</code>：flow 是「線性步驟說明」，steps-status 多了「進度狀態」語意，適合 sprint 看板、學習路徑追蹤。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Code 高亮 與 Diff</div>
+      <div class="group-body">
+        <p>`<code> </code>`<code>語言 </code><code> 開頭的 fenced block 會自動上色（支援 js / ts / jsx / tsx / py / bash / json / yaml / html / css / go / rust 等）。</code><code> </code>`<code>diff </code><code> 則渲染為 </code>+<code> 綠 / </code>-` 紅的差異對比。</p>
+        <p class="loose-text">實際呈現（JS 高亮）：</p>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">js</span>
+        <span class="code-label">範例：階乘函式</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <pre class="code-body"><code class="lang-js"><span class="tok-com">// 計算 n 的階乘</span>
+<span class="tok-kw">function</span> <span class="tok-fn">factorial</span>(n) {
+  <span class="tok-kw">if</span> (n &lt;= <span class="tok-num">1</span>) <span class="tok-kw">return</span> <span class="tok-num">1</span>;
+  <span class="tok-kw">return</span> n * <span class="tok-fn">factorial</span>(n - <span class="tok-num">1</span>);
+}
+<span class="tok-kw">const</span> result = <span class="tok-fn">factorial</span>(<span class="tok-num">5</span>);
+console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</span>); <span class="tok-com">// 120</span></code></pre>
+    </div>
+        <p class="loose-text">實際呈現（Diff 對比）：</p>
+        <div class="code-block code-block--diff">
+      <div class="code-header">
+        <span class="code-lang">diff</span>
+        <span class="code-label">重構 useState callback</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <pre class="code-body"><code><span class="diff-del">- const [count, setCount] = useState(0);</span>
+<span class="diff-del">- const inc = () =&gt; setCount(count + 1);</span>
+<span class="diff-add">+ const [count, setCount] = useState(0);</span>
+<span class="diff-add">+ const inc = () =&gt; setCount(c =&gt; c + 1);</span>
+<span class="diff-eq">  return &lt;button onClick={inc}&gt;{count}&lt;/button&gt;;</span></code></pre>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Comparison Table 多欄比較</div>
+      <div class="group-body">
+        <p><code>[compare]</code> 只能兩欄；多方案比較用 <code>[compare-table]</code>。<code>headers</code> 中以 <code><strong>粗體</strong></code> 標記的欄位會自動加上「推薦」徽章與背景色。</p>
+        <p class="loose-text">實際呈現：</p>
+        <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th><th>免費版</th><th class="is-highlight">Pro 版</th><th>企業版</th></tr></thead>
+        <tbody>
+          <tr><th class="row-label">月費</th><td>$0</td><td class="is-highlight">$10</td><td>客制</td></tr>
+          <tr><th class="row-label">用戶數</th><td>1</td><td class="is-highlight">10</td><td>無限</td></tr>
+          <tr><th class="row-label">技術支援</th><td>社群</td><td class="is-highlight">Email</td><td>24/7</td></tr>
+          <tr><th class="row-label">API 存取</th><td>無</td><td class="is-highlight">1k/天</td><td>無限</td></tr>
+          <tr><th class="row-label">SLA 保證</th><td>—</td><td class="is-highlight">99.5%</td><td>99.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Stats 數據卡</div>
+      <div class="group-body">
+        <p>醒目地呈現關鍵數字，例如成效、效能、覆蓋率。</p>
+        <p class="loose-text">實際呈現：</p>
+        <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">80%</div>
+        <div class="stat-title">節省時間</div>
+        <div class="stat-desc">從 5 小時降至 1 小時</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3x</div>
+        <div class="stat-title">開發速度</div>
+        <div class="stat-desc">平均 PR 完成時間</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">99.9%</div>
+        <div class="stat-title">服務可用性</div>
+        <div class="stat-desc">過去 12 個月統計</div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Glossary Tooltip 行內術語</div>
+      <div class="group-body">
+        <p>語法 <code><span class="gloss" tabindex="0" data-tip="定義">術語</span></code>，hover 或 focus 顯示完整定義；無需 JS、純 CSS 實作。</p>
+        <p class="loose-text">範例：這個專案運用 <span class="gloss" tabindex="0" data-tip="Retrieval-Augmented Generation，透過向量檢索把外部知識注入 LLM 的生成過程">RAG</span> 概念，把 <span class="gloss" tabindex="0" data-tip="Model Context Protocol，Anthropic 設計的標準化工具協定">MCP</span> 串成完整知識管線。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Definition List 名詞解釋</div>
+      <div class="group-body">
+        <p>用於名詞對照表，比 Glossary Tooltip 更適合一次列出多項。</p>
+        <p class="loose-text">實際呈現：</p>
+        <dl class="definition-list">
+      <dt>RAG</dt>
+      <dd>Retrieval-Augmented Generation，透過向量檢索增強模型生成</dd>
+      <dt>LLM</dt>
+      <dd>Large Language Model，大型語言模型，例如 GPT、Claude</dd>
+      <dt>MCP</dt>
+      <dd>Model Context Protocol，Anthropic 設計的工具協定</dd>
+      <dt>SDD</dt>
+      <dd>Spec-Driven Development，規格驅動開發</dd>
+    </dl>
       </div>
     </div>
   </div>
