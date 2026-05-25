@@ -16,6 +16,14 @@ window.__courses__ = [
     "category": "設計印刷"
   },
   {
+    "title": "讓 AI 重啟學習",
+    "badge": "AI 素養",
+    "subtitle": "AI 時代的學習不是「學更多」，而是「學得更深、產出更快」。透過四步框架打造你的個人知識飛輪。",
+    "ogImage": "lectures/ai-restart-learning/assets/og-image.jpg",
+    "href": "lectures/ai-restart-learning/",
+    "category": "AI & 程式設計"
+  },
+  {
     "title": "Claude Code 由入門到精通",
     "badge": "AI Coding",
     "subtitle": "從心智模型、核心工作流（Plan / Edit / Verify）、CLAUDE.md 規範、Skills、Subagents、Hooks、MCP，到團隊協作心法的 180 分鐘完整課程。",

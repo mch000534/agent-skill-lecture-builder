@@ -1,0 +1,21 @@
+page:
+  title: "讓 AI 重啟學習"
+  badge: "AI 素養"
+  category: "AI & 程式設計"
+  hero_title: "讓 AI 重啟學習<br>從外包大腦到知識飛輪"
+  subtitle: "第一性原理、蘇格拉底提問、雙向費曼、作品導向 — 四步打造 AI 時代的學習系統"
+
+seo:
+  title: "讓 AI 重啟學習｜第一性原理 × 蘇格拉底提問 × 雙向費曼 × 作品導向"
+  description: "AI 時代的學習不是「學更多」，而是「學得更深、產出更快」。透過四步框架打造你的個人知識飛輪。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-restart-learning/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-restart-learning/"
+
+quotes:
+  opening:
+    text: "AI 讓答案變得廉價，讓問題變得珍貴。<br>學習的本質，從「懂不懂」轉向了「知不知」。"
+  closing:
+    text: >
+      第一性原理確保方向正確，蘇格拉底提問確保理解深入，<br>
+      雙向費曼確保知識可靠，作品導向確保能力落地。<br><br>
+      不要讓 AI 成為你的答案機器，讓它成為你製造工具的工具。
