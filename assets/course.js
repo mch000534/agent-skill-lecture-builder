@@ -2573,11 +2573,54 @@
     document.body.appendChild(overlay);
 
     window.__spotlightActive = false;
+    var MIN_R = 60;
+    var MAX_R = 600;
+    var STEP = 18;
+    var EASE = 0.18;
+    var targetR = 190;
+    var currentR = 190;
+    var rafId = null;
+
+    function applyRadius() {
+      overlay.style.setProperty('--sl-r', currentR.toFixed(1) + 'px');
+    }
+    applyRadius();
+
+    function animate() {
+      var diff = targetR - currentR;
+      if (Math.abs(diff) < 0.3) {
+        currentR = targetR;
+        applyRadius();
+        rafId = null;
+        return;
+      }
+      currentR += diff * EASE;
+      applyRadius();
+      rafId = requestAnimationFrame(animate);
+    }
+
+    function setTarget(v) {
+      targetR = Math.min(MAX_R, Math.max(MIN_R, v));
+      if (rafId == null) rafId = requestAnimationFrame(animate);
+    }
 
     document.addEventListener('mousemove', function (e) {
       if (!window.__spotlightActive) return;
       overlay.style.setProperty('--sl-x', e.clientX + 'px');
       overlay.style.setProperty('--sl-y', e.clientY + 'px');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!window.__spotlightActive) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key === '[') {
+        setTarget(targetR - STEP);
+        e.preventDefault();
+      } else if (e.key === ']') {
+        setTarget(targetR + STEP);
+        e.preventDefault();
+      }
     });
 
     window.__toggleSpotlight = function () {

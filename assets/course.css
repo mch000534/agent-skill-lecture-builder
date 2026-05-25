@@ -4972,7 +4972,7 @@
     rgba(0, 0, 0, .82) 100%
   );
   pointer-events: none;
-  z-index: 9990;
+  z-index: 10050;
   opacity: 0;
   transition: opacity .3s;
 }

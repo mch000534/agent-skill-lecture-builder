@@ -61,15 +61,18 @@
 
 ### 新增功能
 
-**Agent Skills**：三個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
+**Agent Skills**：四個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
 - `course-page-generator`：講稿 / 主題 → 完整 HTML 課程頁
 - `content-drafting`：給定主題、受眾、時長，自動生成有實質內容的 `content.md` 草稿
 - `content-review`：分析 `content.md` 的「說明→範例→實作」教學節奏，輸出改善建議
+- `topic-to-page`：從主題到頁面的完整工作流，依序串聯前三個 Skill，每個 Phase 結束暫停確認
 
 **課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁，支援分類篩選、搜尋、格狀/列表切換。
 
 **教學內容元件**（已上線）：
 - `[compare]...[/compare]`：左右並排對比卡（舊做法 vs 新做法），紅綠色區分
+- `[tabs][tab label="..."]...[/tab][/tabs]`：分頁切換卡，適合多語言或多方案範例對照
+- `[callout type="info|warning|tip"]...[/callout]`：左邊框三色標注框，可選 title
 - Flow 展開動畫：步驟逐一滑入，純 CSS + IntersectionObserver，無外部依賴
 - 程式碼語法高亮：Terminal 識別指令/旗標/字串/變數，Prompt 識別 backtick code 與 YAML key/value
 
@@ -81,11 +84,13 @@
 - `[quiz]` 即時測驗：選擇題 / 是非題，點選即時回饋，結果存 localStorage（無需後端）
 - 章節進度追蹤：TOC 每個章節旁顯示已讀圓點，捲動過即自動標記，localStorage 持久化
 
-**鍵盤快捷鍵**：完整的快捷鍵支援（`P` 簡報模式、`T` 計時器、`R` 抽籤器、`V` 投票、`B` 主題切換等，詳見[鍵盤快捷鍵](#鍵盤快捷鍵)）。
+**鍵盤快捷鍵**：完整的快捷鍵支援（`P` 簡報模式、`T` 計時器、`R` 抽籤器、`V` 投票、`S` 聚光燈、`B` 主題切換等，詳見[鍵盤快捷鍵](#鍵盤快捷鍵)）。
 
 **設定面板**：點左下角齒輪圖示開啟，集中管理字體大小、深淺色主題、色票、QR Code 分享、各工具入口。
 
 **新增腳本**：
+- `new-lecture.mjs`：一行指令建立新課程目錄與模板檔案（含 GitHub Pages SEO URL 偵測）
+- `validate.mjs`：build 前驗證 `content.md` 與 `config.yaml` 常見錯誤（未閉合標籤、全形冒號、`seo.url` 格式）
 - `build-vote.mjs`：將 Google Apps Script URL 注入 `vote/index.html`（投票學生端）
 - `build-index.mjs`：掃描 `lectures/` 產生 `manifest.js`，供索引頁動態讀取
 
@@ -122,7 +127,7 @@ AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml`
 
 ## Agent Skills
 
-三個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
+四個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
 
 ### course-page-generator
 
@@ -150,9 +155,15 @@ AI 依時長推算章節數（90 分鐘 → 4–5 個主章節），依受眾調
 
 分析現有 `content.md`，對每個主章節輸出節奏診斷表（說明/範例/實作各欄 ✅ / ⚠️ / ❌），並附具體改善建議與時間估算。詳見 [SKILL.md](.agents/skills/content-review/SKILL.md)。
 
+### topic-to-page
+
+**觸發詞**：「從主題到頁面」、「完整流程」、「一鍵生成課程」、「幫我完整做一個課程」
+
+把上述三個 Skill 串成一條完整工作流：Phase 1 用 `content-drafting` 起草 → Phase 2 用 `content-review` 診斷 → Phase 3 用 `course-page-generator` build 成頁面。每個 Phase 結束會暫停詢問，使用者可手動修改 `content.md` 後說「繼續 Phase N」恢復。詳見 [SKILL.md](.agents/skills/topic-to-page/SKILL.md)。
+
 ---
 
-三個 Skill 的典型使用流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。
+三個工序 Skill 可獨立使用，也可改用 `topic-to-page` 一次串完整流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。
 
 ## 專案結構
 
@@ -173,7 +184,9 @@ agent-skill-lecture-builder/
 │       │       └── config-example.yaml
 │       ├── content-drafting/        # 主題+受眾+時長 → content.md 草稿
 │       │   └── SKILL.md
-│       └── content-review/          # 分析教學節奏，輸出改善建議
+│       ├── content-review/          # 分析教學節奏，輸出改善建議
+│       │   └── SKILL.md
+│       └── topic-to-page/           # 串接三階段的完整工作流
 │           └── SKILL.md
 ├── assets/
 │   ├── course.css           # 所有課程共用 CSS（外部引用，改動免 rebuild）
@@ -405,6 +418,8 @@ quotes:
 | `![alt](src)` | 獨立圖片（置中、含說明文字） |
 | `[image-text]...[/image-text]` | 圖文並排（圖片＋文字左右排列，預設圖片佔 40%） |
 | `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式） |
+| `[tabs][tab label="..."]...[/tab][/tabs]` | 分頁切換卡（多語言／多方案範例對照） |
+| `[callout type="info\|warning\|tip" title="..."]...[/callout]` | 標注框（藍／橙／綠三色，可選 title） |
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 [`components.md`](./.agents/skills/course-page-generator/reference/components.md)。
@@ -536,6 +551,50 @@ Q: build.mjs 會自動讀取 global.yaml？
 - 點擊遮罩或右上角 ✕ 可關閉
 - 按 `Esc` 亦可關閉
 
+### Tabs 分頁切換卡
+
+適合多語言、多方案的範例對照，第一個分頁預設顯示，點擊標籤帶淡入動畫切換。
+
+```markdown
+[tabs]
+[tab label="Python"]
+- 第一種寫法
+- 適合初學者
+[/tab]
+[tab label="JavaScript"]
+- 另一種寫法
+- 適合前端開發者
+[/tab]
+[/tabs]
+```
+
+- `[tab label="..."]` 定義每個分頁的標籤名稱
+- 內容支援 `- 項目`（轉為 `<ul><li>`）與一般段落
+- 可放置多個分頁，無數量上限
+
+### Callout 標注框
+
+左邊框三色提示框，純 CSS 無需 JS：
+
+```markdown
+[callout type="info"]
+這是一個提示訊息,說明某個重要概念。
+[/callout]
+
+[callout type="warning" title="注意"]
+此操作無法還原,請謹慎執行。
+[/callout]
+
+[callout type="tip" title="實用技巧"]
+- 技巧一:簡短有力
+- 技巧二:配合實例
+[/callout]
+```
+
+- `type` 三種值：`info`(藍)、`warning`(橙)、`tip`(綠),預設 `info`
+- `title` 選填,省略則無標題列
+- 內容支援 `- 項目` 與一般段落
+
 ## 課堂互動工具
 
 本 Fork 新增一套完整的課堂互動工具，全部整合於課程頁面中，無需額外安裝。
@@ -637,11 +696,13 @@ TOC（左側邊欄）每個章節標題旁顯示小圓點，捲動過該章節�
 | `T` | 切換計時器顯示/隱藏（不影響計時狀態，簡報模式亦可用） |
 | `R` | 切換抽籤器顯示/隱藏 |
 | `V` | 切換投票 Widget 顯示/隱藏 |
+| `S` | 切換聚光燈模式（滑鼠追蹤圓形透明區域，簡報模式亦可用） |
+| `[` / `]` | 聚光燈圓形縮小 / 放大（僅在聚光燈開啟時生效，範圍 60–600px） |
 | `B` | 切換暗色/亮色主題 |
 | `C` | 輪迴切換色彩主題（循環所有色票） |
 | `=` / `+` | 增大文字 |
 | `-` / `_` | 縮小文字 |
-| `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票） |
+| `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票、聚光燈） |
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |
 
 ## 未來開發方向
