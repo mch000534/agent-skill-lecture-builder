@@ -103,8 +103,9 @@
       <ul class="toc-sub">
         <li><a href="#sub-section-17">設定面板</a></li>
         <li><a href="#sub-section-18">鍵盤快捷鍵</a></li>
-        <li><a href="#sub-section-19">浮動計時器</a></li>
-        <li><a href="#sub-section-20">抽籤器</a></li>
+        <li><a href="#sub-section-19">聚光燈與放大鏡</a></li>
+        <li><a href="#sub-section-20">浮動計時器</a></li>
+        <li><a href="#sub-section-21">抽籤器</a></li>
         <li><a href="#sub-widget">課堂投票 Widget</a></li>
       </ul>
     </li>
@@ -113,9 +114,9 @@
         <span class="toc-num">7</span> 擴展小工具<span class="toc-read-dot" data-for="section-7"></span>
       </a>
       <ul class="toc-sub">
-        <li><a href="#sub-section-22">小工具的共用架構</a></li>
-        <li><a href="#sub-section-23">新增小工具的步驟</a></li>
-        <li><a href="#sub-section-24">實際案例：計時器的實作參考</a></li>
+        <li><a href="#sub-section-23">小工具的共用架構</a></li>
+        <li><a href="#sub-section-24">新增小工具的步驟</a></li>
+        <li><a href="#sub-section-25">實際案例：計時器的實作參考</a></li>
       </ul>
     </li>
     <li class="toc-group" data-section="agent-skill">
@@ -126,7 +127,7 @@
         <li><a href="#sub-agent-skill">什麼是 Agent Skill？</a></li>
         <li><a href="#sub-skill">Skill 的觸發與執行</a></li>
         <li><a href="#sub-skill-2">Skill 檔案結構</a></li>
-        <li><a href="#sub-section-28">自訂與擴展</a></li>
+        <li><a href="#sub-section-29">自訂與擴展</a></li>
       </ul>
     </li>
 
@@ -871,6 +872,110 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
       </div>
     </div>
   </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Tabs 分頁切換</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[tabs]
+[tab label=&quot;JavaScript&quot;]
+```js
+console.log('hello');</div>
+    </div>
+        <p class="loose-text">[/tab]</p>
+        <p class="loose-text">[tab label="Python"]</p>
+        <p class="loose-text">```py</p>
+        <p class="loose-text">print('hello')</p>
+        <p class="loose-text">```</p>
+        <p class="loose-text">[/tab]</p>
+        <p class="loose-text">[/tabs]</p>
+        <p class="loose-text">```</p>
+        <p class="loose-text">適合放多語言範例、不同情境對照。預設第一個 tab 顯示，點擊上方標籤切換。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">Callout 標注框</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[callout type=&quot;info&quot; title=&quot;提醒&quot;]
+type 可為 info（藍）、warning（橙）、tip（綠）。內文支援多段與清單。
+[/callout]</div>
+    </div>
+        <p class="loose-text">比 Insight Box 更醒目，且分顏色語意：info 一般說明、warning 注意事項、tip 小撇步。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">即時測驗 Quiz</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[quiz type=&quot;single&quot;]
+Q: 哪個檔案是唯一的 HTML 模板？
+- [x] reference/base.html
+- [ ] assets/course.css
+- [ ] content.md
+Hint: 在 reference/ 目錄下，所有課程共用。
+[/quiz]</div>
+    </div>
+        <p class="loose-text">純前端即時判題，學生點選後即顯示對錯與提示，作答結果存 localStorage（重整不重置）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="group-block">
+      <div class="group-header">課堂投票</div>
+      <div class="group-body">
+        <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Prompt
+        <span class="label">語法</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">[vote id=&quot;q1&quot; title=&quot;你最常用哪種輸入法？&quot;]
+- 注音
+- 倉頡
+- 行列
+- 速成
+[/vote]</div>
+    </div>
+        <p class="loose-text">學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 <code>config/global.yaml</code> 設定 <code>vote.gas_url</code>（見後續章節）。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -1017,7 +1122,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <p class="loose-text">點擊頁面<strong>左下角齒輪圖示</strong>開啟設定面板，提供以下快捷功能：</p>
+    <p class="loose-text">點擊頁面<strong>左下角齒輪圖示</strong>開啟設定面板，圖示分兩列：</p>
   </div>
 
   <div class="reveal">
@@ -1025,42 +1130,56 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
       <table class="content-table">
         <thead>
           <tr>
+            <th class="align-left">列</th>
             <th class="align-left">圖示</th>
             <th class="align-left">功能</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td class="align-left">第一列</td>
             <td class="align-left">A</td>
             <td class="align-left">切換字體大小（三段循環）</td>
           </tr>
           <tr>
-            <td class="align-left">月亮</td>
+            <td class="align-left">第一列</td>
+            <td class="align-left">月亮 / 太陽</td>
             <td class="align-left">切換深色 / 淺色主題</td>
           </tr>
           <tr>
+            <td class="align-left">第一列</td>
             <td class="align-left">QR</td>
             <td class="align-left">顯示課程分享 QR Code</td>
           </tr>
           <tr>
-            <td class="align-left">計時器</td>
+            <td class="align-left">第一列</td>
+            <td class="align-left">時鐘</td>
             <td class="align-left">開啟浮動倒數計時器</td>
           </tr>
           <tr>
-            <td class="align-left">電視機</td>
+            <td class="align-left">第二列</td>
+            <td class="align-left">螢幕</td>
             <td class="align-left">進入簡報模式（全頁輪播）</td>
           </tr>
           <tr>
-            <td class="align-left">打印機</td>
+            <td class="align-left">第二列</td>
+            <td class="align-left">印表機</td>
             <td class="align-left">匯出 PDF（投影片版）</td>
           </tr>
           <tr>
+            <td class="align-left">第二列</td>
             <td class="align-left">骰子</td>
             <td class="align-left">開啟抽籤器</td>
           </tr>
           <tr>
+            <td class="align-left">第二列</td>
             <td class="align-left">勾選框</td>
             <td class="align-left">開啟課堂投票 Widget</td>
+          </tr>
+          <tr>
+            <td class="align-left">第二列</td>
+            <td class="align-left">同心圓</td>
+            <td class="align-left">開啟聚光燈 / 放大鏡</td>
           </tr>
         </tbody>
       </table>
@@ -1068,7 +1187,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <p class="loose-text">面板底部的色票可即時切換課程主題配色（預設正紅，共五種）。</p>
+    <p class="loose-text">面板中段的色票可即時切換課程主題配色（共八種），下方還可開啟「快捷鍵說明」Modal 速查所有按鍵。</p>
   </div>
 
   <div class="reveal">
@@ -1118,28 +1237,40 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
             <td class="align-left">顯示 / 隱藏投票 Widget</td>
           </tr>
           <tr>
+            <td class="align-left">S</td>
+            <td class="align-left">切換聚光燈模式</td>
+          </tr>
+          <tr>
+            <td class="align-left"><code>[</code> / <code>]</code></td>
+            <td class="align-left">聚光燈圓形縮小 / 放大</td>
+          </tr>
+          <tr>
+            <td class="align-left"><code>{</code> / <code>}</code></td>
+            <td class="align-left">放大鏡倍率縮小 / 放大（聚光燈開啟時生效）</td>
+          </tr>
+          <tr>
             <td class="align-left">B</td>
-            <td class="align-left">切換暗色 / 亮色主題</td>
+            <td class="align-left">切換深色 / 淺色主題</td>
           </tr>
           <tr>
             <td class="align-left">C</td>
-            <td class="align-left">輪迴切換色彩主題</td>
+            <td class="align-left">循環切換色彩主題</td>
           </tr>
           <tr>
             <td class="align-left">= / +</td>
-            <td class="align-left">增大文字</td>
+            <td class="align-left">放大字型</td>
           </tr>
           <tr>
-            <td class="align-left">-</td>
-            <td class="align-left">縮小文字</td>
+            <td class="align-left">- / _</td>
+            <td class="align-left">縮小字型</td>
           </tr>
           <tr>
             <td class="align-left">X</td>
-            <td class="align-left">關閉所有已顯示的小工具</td>
+            <td class="align-left">關閉所有已顯示的小工具與聚光燈</td>
           </tr>
           <tr>
             <td class="align-left">Esc</td>
-            <td class="align-left">關閉目前彈窗</td>
+            <td class="align-left">關閉目前彈窗 / 設定面板</td>
           </tr>
         </tbody>
       </table>
@@ -1147,7 +1278,55 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-19"><span class="bar"></span>浮動計時器</div>
+    <div class="sub-title" id="sub-section-19"><span class="bar"></span>聚光燈與放大鏡</div>
+  </div>
+
+  <div class="reveal">
+    <p class="loose-text">按 <code>S</code> 啟動聚光燈，畫面以游標為中心挖出一個透明圓，其餘區域以半透明黑色遮住，協助學生鎖定講解位置。</p>
+  </div>
+
+  <div class="reveal">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">按 <code>S</code> 啟動聚光燈（再次按 <code>S</code> 或按 <code>X</code> 關閉）</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title"><code>[</code> / <code>]</code> 即時調整圓形半徑</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title"><code>{</code> / <code>}</code> 改變放大倍率（1× ~ 5×，1× 等於純聚光燈）</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">倍率大於 1 時圓內自動切換為放大鏡模式，內容平滑縮放</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="insight">
+      <div class="insight-title">何時用聚光燈、何時用放大鏡</div>
+      <p>聚光燈：純粹聚焦視線、避免分心，適合朗讀段落、解釋流程圖。<br>放大鏡：圓內內容會放大顯示，適合 demo 程式碼、看清小字、檢視截圖細節。</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sub-title" id="sub-section-20"><span class="bar"></span>浮動計時器</div>
   </div>
 
   <div class="reveal">
@@ -1161,7 +1340,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-20"><span class="bar"></span>抽籤器</div>
+    <div class="sub-title" id="sub-section-21"><span class="bar"></span>抽籤器</div>
   </div>
 
   <div class="reveal">
@@ -1258,7 +1437,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-22"><span class="bar"></span>小工具的共用架構</div>
+    <div class="sub-title" id="sub-section-23"><span class="bar"></span>小工具的共用架構</div>
   </div>
 
   <div class="reveal">
@@ -1299,7 +1478,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-23"><span class="bar"></span>新增小工具的步驟</div>
+    <div class="sub-title" id="sub-section-24"><span class="bar"></span>新增小工具的步驟</div>
   </div>
 
   <div class="reveal">
@@ -1404,7 +1583,7 @@ function toggleMyTool() {
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-24"><span class="bar"></span>實際案例：計時器的實作參考</div>
+    <div class="sub-title" id="sub-section-25"><span class="bar"></span>實際案例：計時器的實作參考</div>
   </div>
 
   <div class="reveal">
@@ -1526,7 +1705,7 @@ function toggleMyTool() {
   </div>
 
   <div class="reveal">
-    <div class="sub-title" id="sub-section-28"><span class="bar"></span>自訂與擴展</div>
+    <div class="sub-title" id="sub-section-29"><span class="bar"></span>自訂與擴展</div>
   </div>
 
   <div class="reveal">
@@ -1784,6 +1963,7 @@ Markdown + 模板的優勢：
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
             <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
           </table>
@@ -1878,7 +2058,7 @@ Markdown + 模板的優勢：
 
   <script>
     window.__sectionIds__ = ["instructor","section-1","section-2","section-3","markdown","og-image","section-6","section-7","agent-skill"];
-    window.__allAnchorIds__ = ["instructor","section-1","sub-section-1","sub-section-2","section-2","sub-section-3","sub-section-4","section-3","sub-section-5","sub-contentmd","sub-configyaml","sub-section-8","markdown","sub-section-9","sub-prompt","sub-section-11","sub-section-12","og-image","sub-og-image","sub-og-image-2","sub-section-15","sub-section-16","section-6","sub-section-17","sub-section-18","sub-section-19","sub-section-20","sub-widget","section-7","sub-section-22","sub-section-23","sub-section-24","agent-skill","sub-agent-skill","sub-skill","sub-skill-2","sub-section-28"];
+    window.__allAnchorIds__ = ["instructor","section-1","sub-section-1","sub-section-2","section-2","sub-section-3","sub-section-4","section-3","sub-section-5","sub-contentmd","sub-configyaml","sub-section-8","markdown","sub-section-9","sub-prompt","sub-section-11","sub-section-12","og-image","sub-og-image","sub-og-image-2","sub-section-15","sub-section-16","section-6","sub-section-17","sub-section-18","sub-section-19","sub-section-20","sub-section-21","sub-widget","section-7","sub-section-23","sub-section-24","sub-section-25","agent-skill","sub-agent-skill","sub-skill","sub-skill-2","sub-section-29"];
     window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
   </script>
   <script src="../../assets/course.js"></script>

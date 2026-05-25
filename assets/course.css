@@ -1977,6 +1977,8 @@
       display: flex;
       align-items: center;
       gap: .45rem;
+      flex-wrap: wrap;
+      row-gap: .5rem;
     }
 
     .settings-controls-row + .settings-controls-row {
@@ -4692,6 +4694,32 @@
       color: var(--accent);
     }
 
+    .spotlight-settings-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .18s;
+      flex-shrink: 0;
+      padding: 0;
+      color: var(--text-dim);
+    }
+    .spotlight-settings-btn:hover {
+      background: rgba(var(--accent-rgb), .12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .spotlight-settings-btn.active {
+      background: rgba(var(--accent-rgb), .18);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* ===== SETTINGS SHORTCUT BUTTON ===== */
     .settings-shortcut-btn {
       width: 100%;
@@ -4990,6 +5018,30 @@
 }
 #spotlight-overlay.active { opacity: 1; }
 
+/* ─── Magnifier (built on spotlight) ──────────────────────── */
+#magnifier-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10060;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-clip-path: circle(var(--mg-r, 190px) at var(--mg-x, 50%) var(--mg-y, 50%));
+  clip-path: circle(var(--mg-r, 190px) at var(--mg-x, 50%) var(--mg-y, 50%));
+  transition: opacity .2s;
+  background: var(--bg);
+}
+#magnifier-overlay.active { opacity: 1; }
+#magnifier-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  transition: transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* ─── Tabs Block ──────────────────────────────────────────── */
 .tabs-block { margin: 1.5rem 0; }
 .tabs-nav {
@@ -5067,5 +5119,6 @@
 @media print {
   #print-slides .inline-vote,
   #print-slides .quiz-block { page-break-inside: avoid; }
-  #spotlight-overlay { display: none !important; }
+  #spotlight-overlay,
+  #magnifier-overlay { display: none !important; }
 }
