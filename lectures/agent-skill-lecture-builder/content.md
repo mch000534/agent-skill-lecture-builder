@@ -419,6 +419,11 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 - 重點三
 [/summary]
 ```
+[summary]
+- 重點一
+- 重點二
+- 重點三
+[/summary]
 
 ### Bonus 彈窗
 
@@ -429,6 +434,11 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 - 項目二
 [/bonus]
 ```
+[bonus title="幕後花絮"]
+彈窗內容，支援 **粗體**、清單、`程式碼`。
+- 項目一
+- 項目二
+[/bonus]
 
 點擊按鈕開啟 Modal 彈窗，適合放延伸閱讀、製作心得或額外資料。
 
@@ -436,19 +446,30 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ```prompt [label="語法"]
 [tabs]
-[tab label="JavaScript"]
-```js
-console.log('hello');
-```
-[/tab]
-[tab label="Python"]
-```py
-print('hello')
-```
-[/tab]
+  [tab label="JavaScript"]
+    
+    console.log('hello');
+    
+  [/tab]
+  [tab label="Python"]
+    
+    print('hello')
+    
+  [/tab]
 [/tabs]
 ```
-
+[tabs]
+  [tab label="JavaScript"]
+  ```prompt [label="JavaScript"]
+    console.log('hello');
+  ```
+  [/tab]
+  [tab label="Python"]
+  ```prompt [label="Python"]
+    print('hello')
+  ```
+  [/tab]
+[/tabs]
 適合放多語言範例、不同情境對照。預設第一個 tab 顯示，點擊上方標籤切換。
 
 ### Callout 標注框
