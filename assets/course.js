@@ -1681,6 +1681,7 @@
         document.body.appendChild(deck);
         document.body.classList.add('pres-active');
         updateProgress();
+        if (window.__invalidateMagnifierClone) window.__invalidateMagnifierClone();
 
         document.addEventListener('keydown', presKeyHandler);
 
@@ -1703,6 +1704,7 @@
         document.body.classList.remove('pres-active');
         var deck = document.getElementById('pres-deck');
         if (deck) deck.remove();
+        if (window.__invalidateMagnifierClone) window.__invalidateMagnifierClone();
         document.removeEventListener('keydown', presKeyHandler);
         if (document.fullscreenElement) document.exitFullscreen();
         slides = [];
@@ -1751,6 +1753,7 @@
         var pc = slides[slideIdx].querySelector('.pres-content');
         if (pc) pc.scrollTop = 0;
         updateProgress();
+        if (window.__invalidateMagnifierClone) window.__invalidateMagnifierClone();
       }
 
       function updateProgress() {
@@ -2632,17 +2635,42 @@
 
     function rebuildMagnifierClone() {
       magContent.innerHTML = '';
-      document.querySelectorAll('body > header, body > section, body > footer, body > hr').forEach(function (el) {
+      var presActive = document.body.classList.contains('pres-active');
+      var sourceEls;
+      if (presActive) {
+        var deck = document.getElementById('pres-deck');
+        sourceEls = deck ? [deck] : [];
+      } else {
+        sourceEls = Array.from(document.querySelectorAll('body > header, body > section, body > footer, body > hr'));
+      }
+      sourceEls.forEach(function (el) {
         var c = el.cloneNode(true);
         if (c.id) c.removeAttribute('id');
         if (c.querySelectorAll) {
           c.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
           c.querySelectorAll('iframe, video').forEach(function (n) { n.remove(); });
         }
+        if (presActive) {
+          // The cloned deck loses its #pres-deck id (so the `body.pres-active #pres-deck`
+          // display rule no longer applies) and its fixed positioning would otherwise
+          // pin it to the viewport. Force a normal-flow block so it renders inside
+          // magnifier-content and scales with the magnifier transform.
+          c.style.display = 'block';
+          c.style.position = 'relative';
+          c.style.inset = 'auto';
+          c.style.width = '100vw';
+          c.style.height = '100vh';
+          c.style.background = 'var(--bg)';
+        }
         magContent.appendChild(c);
       });
       cloneDirty = false;
     }
+
+    window.__invalidateMagnifierClone = function () {
+      cloneDirty = true;
+      if (window.__spotlightActive && window.__magnifierZoom > 1) updateMagnifier();
+    };
 
     function updateMagnifier() {
       var active = window.__spotlightActive && window.__magnifierZoom > 1;
