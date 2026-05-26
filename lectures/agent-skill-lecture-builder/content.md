@@ -255,6 +255,15 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 > 所有元件都是純 Markdown 語法，AI 可以直接生成，你也可以手寫
 
 ## Agent Skill 技術演進
+```prompt [label="語法"]
+[timeline]
+- 2023 | ChatGPT Plugins | AI 首次能呼叫外部 API，但依賴單一平台
+- 2024 | Claude Projects | 上傳文件作為知識庫，但仍是被動問答
+- 2025 | Claude Code | 終端機原生 AI 編程助手，能讀寫檔案、執行指令
+- 2025 | Claude Skills | 可封裝、可分享的自訂工作流，AI 能力可組合
+- 2026 | Agent Skill Ecosystem | 社群共享 Skill，一鍵安裝複雜工作流
+[/timeline]
+```
 
 [timeline]
 - 2023 | ChatGPT Plugins | AI 首次能呼叫外部 API，但依賴單一平台
@@ -270,6 +279,16 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 ## 結構元件
 
 ### 內容輸入方式比較
+
+```prompt [label="語法"]
+[compare-table headers="方式 | **推薦：AI 生成** | 手動編寫"]
+- 速度 | 幾秒內產出完整草稿 | 需要熟悉語法與排版
+- 一致性 | AI 自動遵循 components.md 規範 | 容易遺漏元件語法
+- 適合場景 | 新課程快速起步 | 現有課程精修調整
+- 門檻 | 只需會下 Prompt | 需要了解 Markdown 擴充語法
+- 維護性 | 生成的內容可手動二次編輯 | 完全掌控每個細節
+[/compare-table]
+```
 
 [compare-table headers="方式 | **推薦：AI 生成** | 手動編寫"]
 - 速度 | 幾秒內產出完整草稿 | 需要熟悉語法與排版
@@ -355,6 +374,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 ```prompt [label="語法"]
 ![圖片說明文字](images/filename.png)
 ```
+![og-image](assets/og-image.jpg)
 
 alt 文字自動成為圖片下方的 figcaption 說明。
 
@@ -368,6 +388,12 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 - 項目二
 [/image-text]
 ```
+[image-text position="left" width="40"]
+![og-image](assets/og-image.jpg)
+文字段落，支援 **粗體**、`程式碼`、清單。
+- 項目一
+- 項目二
+[/image-text]
 
 - position：left（圖左文右）或 right（圖右文左）
 - width：圖片佔比百分比（預設 40）
@@ -378,6 +404,7 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 ```prompt [label="語法"]
 [youtube id="影片ID" title="說明文字"]
 ```
+[youtube id="0pZri5f_tfk" title="原始repo的youtueb介紹"]
 
 影片 ID 為 YouTube 網址中 `v=` 後的字串。以 16:9 響應式嵌入，列印時自動顯示連結。
 
@@ -445,6 +472,13 @@ Q: 哪個檔案是唯一的 HTML 模板？
 Hint: 在 reference/ 目錄下，所有課程共用。
 [/quiz]
 ```
+[quiz type="single"]
+Q: 哪個檔案是唯一的 HTML 模板？
+- [x] reference/base.html
+- [ ] assets/course.css
+- [ ] content.md
+Hint: 在 reference/ 目錄下，所有課程共用。
+[/quiz]
 
 純前端即時判題，學生點選後即顯示對錯與提示，作答結果存 localStorage（重整不重置）。
 
@@ -458,7 +492,12 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 - 速成
 [/vote]
 ```
-
+[vote id="q1" title="你最常用哪種輸入法？"]
+- 注音
+- 倉頡
+- 行列
+- 速成
+[/vote]
 學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 `config/global.yaml` 設定 `vote.gas_url`（見後續章節）。
 
 ### Accordion / FAQ 摺疊
