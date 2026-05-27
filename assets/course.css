@@ -3805,7 +3805,7 @@
     }
 
     .pres-content .youtube-wrapper {
-      width: min(100%, calc(55vh * 16 / 9));
+      width: min(100%, calc(75vh * 16 / 9));
     }
 
     .pres-content .sub-title {
