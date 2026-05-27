@@ -1,10 +1,12 @@
     // Reveal on scroll (with flow-step stagger)
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var revealObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         e.target.classList.add('visible');
+        if (reduceMotion) return;
         e.target.querySelectorAll('.flow-step').forEach(function (step, idx) {
-          var delay = (.6 + idx * .15).toFixed(2);
+          var delay = (.1 + idx * .08).toFixed(2);
           step.style.transitionDelay = delay + 's,' + delay + 's,0s';
         });
       });

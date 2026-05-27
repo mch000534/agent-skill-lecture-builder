@@ -680,6 +680,20 @@
       transform: none;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .flow-step {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .reveal,
+      .reveal>* {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
     .flow-step:hover {
       border-color: rgb(var(--accent-rgb) / .3);
     }
