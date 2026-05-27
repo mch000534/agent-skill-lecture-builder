@@ -3752,11 +3752,6 @@
       padding: .5rem 0;
     }
 
-    .pres-content > * {
-      margin-top: auto;
-      margin-bottom: auto;
-    }
-
     .pres-content .reveal {
       opacity: 1 !important;
       transform: none !important;
