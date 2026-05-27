@@ -1118,6 +1118,8 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
 - 重點三
 [/summary]</div>
     </div>
+        <div class="summary-grid">
+    </div>
       </div>
     </div>
   </div>
@@ -1141,6 +1143,11 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
 - 項目二
 [/bonus]</div>
     </div>
+        <button class="bonus-btn" data-bonus-title="幕後花絮" data-bonus-content="彈窗內容，支援 **粗體**、清單、`程式碼`。
+- 項目一
+- 項目二">
+      幕後花絮
+    </button>
         <p class="loose-text">點擊按鈕開啟 Modal 彈窗，適合放延伸閱讀、製作心得或額外資料。</p>
       </div>
     </div>
@@ -1160,25 +1167,30 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</di
         </button>
       </div>
       <div class="prompt-body">[tabs]
-[tab label=&quot;JavaScript&quot;]
-```js
-console.log('hello');</div>
+  [tab label=&quot;JavaScript&quot;]
+    
+    console.log('hello');
+    
+  [/tab]
+  [tab label=&quot;Python&quot;]
+    
+    print('hello')
+    
+  [/tab]
+[/tabs]</div>
     </div>
-        <p class="loose-text">[/tab]</p>
-        <p class="loose-text">[tab label="Python"]</p>
-        <div class="code-block">
-      <div class="code-header">
-        <span class="code-lang">py</span>
-        <span class="code-label"></span>
-        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-      </div>
-      <pre class="code-body"><code class="lang-py"><span class="tok-fn">print</span>(<span class="tok-str">'hello'</span>)</code></pre>
-    </div>
-        <p class="loose-text">[/tab]</p>
-        <p class="loose-text">[/tabs]</p>
-        <p class="loose-text">```</p>
+        <div class="tabs-block">
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="0">JavaScript</button>
+    <button class="tab-btn" data-tab="1">Python</button>
+  </div>
+  <div class="tab-panel active" data-panel="0">
+    <p>```prompt [label="JavaScript"]</p><p>console.log('hello');</p><p>```</p>
+  </div>
+  <div class="tab-panel" data-panel="1">
+    <p>```prompt [label="Python"]</p><p>print('hello')</p><p>```</p>
+  </div>
+</div>
         <p class="loose-text">適合放多語言範例、不同情境對照。預設第一個 tab 顯示，點擊上方標籤切換。</p>
       </div>
     </div>
