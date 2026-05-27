@@ -3750,6 +3750,8 @@
       font-size: 1.1rem;
       line-height: 1.85;
       padding: .5rem 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .pres-content > * {
