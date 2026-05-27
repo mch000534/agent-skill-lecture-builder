@@ -1,16 +1,11 @@
-    // Reveal on scroll (with flow-step stagger)
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Reveal on scroll (flow-step entry animation is CSS-driven; JS only adds .visible)
     var revealObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         e.target.classList.add('visible');
-        if (reduceMotion) return;
-        e.target.querySelectorAll('.flow-step').forEach(function (step, idx) {
-          var delay = (.1 + idx * .08).toFixed(2);
-          step.style.transitionDelay = delay + 's,' + delay + 's,0s';
-        });
+        revealObs.unobserve(e.target);
       });
-    }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0, rootMargin: '200px 0px 0px 0px' });
     document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el) });
 
     // Sidebar / Hamburger
