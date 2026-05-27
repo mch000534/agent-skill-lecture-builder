@@ -21,7 +21,7 @@
 
 ### 取得專案
 
-```prompt [label="Terminal"]
+```Terminal [label="Terminal"]
 git clone https://github.com/mch000534/agent-skill-lecture-builder.git
 cd agent-skill-lecture-builder
 npm install
@@ -97,7 +97,7 @@ Hint: npm install 只需執行一次，安裝 Puppeteer 後即可反覆 build。
 > **核心概念**
 > 整個專案只依賴三個核心要素：[?Markdown|一種輕量級標記語言，用簡單的符號表示標題、清單、程式碼等格式] 寫內容、[?YAML|一種人類可讀的資料序列化格式，常用於設定檔] 管設定、[?Puppeteer|Google 開頭的無頭瀏覽器自動化工具，這裡用於自動截取網頁畫面產生 OG 縮圖] 產圖片。
 
-```prompt [label="專案結構"]
+```text [label="專案結構"]
 agent-skill-lecture-builder/
 ├── .agents/skills/course-page-generator/
 │   ├── scripts/
@@ -146,7 +146,7 @@ agent-skill-lecture-builder/
 
 ## 步驟一：建立課程目錄
 
-```prompt [label="Terminal"]
+```terminal [label="Terminal"]
 mkdir -p lectures/my-course/assets
 ```
 
@@ -156,7 +156,7 @@ mkdir -p lectures/my-course/assets
 
 在 `lectures/my-course/content.md` 寫入結構化內容（或直接交給 AI 生成）：
 
-```prompt [label="content.md 基本結構"]
+```markdown [label="content.md 基本結構"]
 # 章節標題：章節副標題
 > 章節引言文字
 
@@ -182,7 +182,7 @@ mkdir -p lectures/my-course/assets
 
 在 `lectures/my-course/config.yaml` 填入課程基本資訊：
 
-```prompt [label="config.yaml 最小設定"]
+```yaml [label="config.yaml 最小設定"]
 page:
   title: "課程名稱"
   badge: "關鍵字 · 標籤"
@@ -215,7 +215,7 @@ quotes:
 - [todo] 更新索引 + commit + push | build-index.mjs 後部署到 GitHub Pages
 [/steps-status]
 
-```prompt [label="Terminal — 建置流程"]
+```Terminal [label="Terminal — 建置流程"]
 # 1. 建置課程頁
 node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
 
@@ -255,7 +255,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 > 所有元件都是純 Markdown 語法，AI 可以直接生成，你也可以手寫
 
 ## Agent Skill 技術演進
-```prompt [label="語法"]
+```markdown [label="語法"]
 [timeline]
 - 2023 | ChatGPT Plugins | AI 首次能呼叫外部 API，但依賴單一平台
 - 2024 | Claude Projects | 上傳文件作為知識庫，但仍是被動問答
@@ -280,7 +280,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### 內容輸入方式比較
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [compare-table headers="方式 | **推薦：AI 生成** | 手動編寫"]
 - 速度 | 幾秒內產出完整草稿 | 需要熟悉語法與排版
 - 一致性 | AI 自動遵循 components.md 規範 | 容易遺漏元件語法
@@ -300,7 +300,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### 主章節與子章節
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 # LABEL：TITLE         ← 主章節（全形冒號）
 > 緊接 # 的引言文字    ← 章節引言（自動套用 lead 樣式）
 
@@ -311,7 +311,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### 流程步驟
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [flow]
 1. 第一步驟
 2. 第二步驟
@@ -327,7 +327,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### 標籤區塊
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [tags]
 - [green] 成功 / 完成類
 - [orange] 警告 / 注意類
@@ -346,7 +346,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### Insight Box（洞察框）
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 > **粗體標題**
 > 內文說明，支援多行。
 > 第二行繼續。
@@ -357,8 +357,8 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ## 終端機 / Prompt 區塊
 
-````prompt [label="語法"]
-```prompt [label="自訂標籤"]
+````markdown [label="語法"]
+```markdown [label="自訂標籤"]
 指令或程式碼內容
 ```
 ````
@@ -371,7 +371,7 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 ### 圖片（獨立置中）
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 ![圖片說明文字](images/filename.png)
 ```
 ![og-image](assets/og-image.jpg)
@@ -380,7 +380,7 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ### 圖文並排
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [image-text position="left" width="40"]
 ![圖片說明](images/screenshot.png)
 文字段落，支援 **粗體**、`程式碼`、清單。
@@ -401,7 +401,7 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ### YouTube 影片
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [youtube id="影片ID" title="說明文字"]
 ```
 [youtube id="0pZri5f_tfk" title="原始repo的youtueb介紹"]
@@ -412,22 +412,22 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ### 總結卡片
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [summary]
-- 重點一
-- 重點二
-- 重點三
+- **標題一** | 描述文字
+- **標題二** | 描述文字
+- **標題三** | 描述文字
 [/summary]
 ```
 [summary]
-- 重點一
-- 重點二
-- 重點三
+- **重點一** | 簡述本章核心觀念
+- **重點二** | 補充應用情境
+- **重點三** | 指出下一步行動
 [/summary]
 
 ### Bonus 彈窗
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [bonus title="幕後花絮"]
 彈窗內容，支援 **粗體**、清單、`程式碼`。
 - 項目一
@@ -444,29 +444,29 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ### Tabs 分頁切換
 
-```prompt [label="語法"]
+````markdown [label="語法"]
 [tabs]
   [tab label="JavaScript"]
-    
-    console.log('hello');
-    
-  [/tab]
-  [tab label="Python"]
-    
-    print('hello')
-    
-  [/tab]
-[/tabs]
-```
-[tabs]
-  [tab label="JavaScript"]
-  ```prompt [label="JavaScript"]
-    console.log('hello');
+  ```js [label="hello.js"]
+  console.log('hello');
   ```
   [/tab]
   [tab label="Python"]
-  ```prompt [label="Python"]
-    print('hello')
+  ```python [label="hello.py"]
+  print('hello')
+  ```
+  [/tab]
+[/tabs]
+````
+[tabs]
+  [tab label="JavaScript"]
+  ```js [label="hello.js"]
+  console.log('hello');
+  ```
+  [/tab]
+  [tab label="Python"]
+  ```python [label="hello.py"]
+  print('hello')
   ```
   [/tab]
 [/tabs]
@@ -474,17 +474,27 @@ alt 文字自動成為圖片下方的 figcaption 說明。
 
 ### Callout 標注框
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [callout type="info" title="提醒"]
 type 可為 info（藍）、warning（橙）、tip（綠）。內文支援多段與清單。
 [/callout]
 ```
 
+[callout type="info" title="資訊"]
+type 可為 info（藍）、warning（橙）、tip（綠）。內文支援多段與清單。
+[/callout]
+[callout type="warning" title="警告"]
+type 可為 info（藍）、warning（橙）、tip（綠）。內文支援多段與清單。
+[/callout]
+[callout type="tip" title="貼士"]
+type 可為 info（藍）、warning（橙）、tip（綠）。內文支援多段與清單。
+[/callout]
+
 比 Insight Box 更醒目，且分顏色語意：info 一般說明、warning 注意事項、tip 小撇步。
 
 ### 即時測驗 Quiz
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [quiz type="single"]
 Q: 哪個檔案是唯一的 HTML 模板？
 - [x] reference/base.html
@@ -505,7 +515,7 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 
 ### 課堂投票
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [vote id="q1" title="你最常用哪種輸入法？"]
 - 注音
 - 倉頡
@@ -523,7 +533,7 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 
 ### Accordion / FAQ 摺疊
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [accordion]
 [item title="什麼是 Agent Skill？" open]
 讓 Claude Code 學會新能力的設定包。
@@ -552,7 +562,7 @@ Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意�
 
 ### Reveal 點擊揭曉
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [reveal title="點擊查看解答"]
 答案：useEffect 配合 cleanup function。
 [/reveal]
@@ -569,7 +579,7 @@ Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意�
 
 ### Timeline 時間軸
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [timeline]
 - 2020 | GPT-3 發布 | OpenAI 公開 API
 - 2022/11 | ChatGPT 問世 | 全民 AI 元年
@@ -589,7 +599,7 @@ Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意�
 
 ### Steps with Status 帶狀態步驟
 
-```prompt [label="語法"]
+```markdown [label="語法"]
 [steps-status]
 - [done] 環境設定 | 安裝 Node.js 與 Claude Code
 - [doing] 撰寫第一個 Skill | 跟著範例操作
@@ -613,6 +623,15 @@ Slash Command 是「使用者主動觸發」；Skill 則由 Claude 根據語意�
 
 `` ```語言 `` 開頭的 fenced block 會自動上色（支援 js / ts / jsx / tsx / py / bash / json / yaml / html / css / go / rust 等）。`` ```diff `` 則渲染為 `+` 綠 / `-` 紅的差異對比。
 
+````markdown [label="語法"]
+```js [label="範例：階乘函式"]
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+```
+````
+
 實際呈現（JS 高亮）：
 
 ```js [label="範例：階乘函式"]
@@ -624,6 +643,14 @@ function factorial(n) {
 const result = factorial(5);
 console.log(`5! = ${result}`); // 120
 ```
+
+````markdown [label="語法"]
+```diff [label="重構 useState callback"]
+- 舊版程式碼（紅色）
++ 新版程式碼（綠色）
+  未變動的行（灰色）
+```
+````
 
 實際呈現（Diff 對比）：
 
@@ -639,6 +666,16 @@ console.log(`5! = ${result}`); // 120
 
 `[compare]` 只能兩欄；多方案比較用 `[compare-table]`。`headers` 中以 `**粗體**` 標記的欄位會自動加上「推薦」徽章與背景色。
 
+````markdown [label="語法"]
+[compare-table headers="免費版 | **Pro 版** | 企業版"]
+- 月費 | $0 | $10 | 客制
+- 用戶數 | 1 | 10 | 無限
+- 技術支援 | 社群 | Email | 24/7
+- API 存取 | 無 | 1k/天 | 無限
+- SLA 保證 | — | 99.5% | 99.9%
+[/compare-table]
+````
+
 實際呈現：
 
 [compare-table headers="免費版 | **Pro 版** | 企業版"]
@@ -653,6 +690,14 @@ console.log(`5! = ${result}`); // 120
 
 醒目地呈現關鍵數字，例如成效、效能、覆蓋率。
 
+````markdown [label="語法"]
+[stats]
+- 80% | 節省時間 | 從 5 小時降至 1 小時
+- 3x | 開發速度 | 平均 PR 完成時間
+- 99.9% | 服務可用性 | 過去 12 個月統計
+[/stats]
+````
+
 實際呈現：
 
 [stats]
@@ -665,11 +710,24 @@ console.log(`5! = ${result}`); // 120
 
 語法 `[?術語|定義]`，hover 或 focus 顯示完整定義；無需 JS、純 CSS 實作。
 
+````text [label="語法"]
+這個專案運用 [?RAG|Retrieval-Augmented Generation，透過向量檢索把外部知識注入 LLM 的生成過程] 概念，把 [?MCP|Model Context Protocol，Anthropic 設計的標準化工具協定] 串成完整知識管線。
+````
+
 範例：這個專案運用 [?RAG|Retrieval-Augmented Generation，透過向量檢索把外部知識注入 LLM 的生成過程] 概念，把 [?MCP|Model Context Protocol，Anthropic 設計的標準化工具協定] 串成完整知識管線。
 
 ### Definition List 名詞解釋
 
 用於名詞對照表，比 Glossary Tooltip 更適合一次列出多項。
+
+````markdown [label="語法"]
+[dl]
+- RAG | Retrieval-Augmented Generation，透過向量檢索增強模型生成
+- LLM | Large Language Model，大型語言模型，例如 GPT、Claude
+- MCP | Model Context Protocol，Anthropic 設計的工具協定
+- SDD | Spec-Driven Development，規格驅動開發
+[/dl]
+````
 
 實際呈現：
 
@@ -680,12 +738,16 @@ console.log(`5! = ${result}`); // 120
 - SDD | Spec-Driven Development，規格驅動開發
 [/dl]
 
-[callout type="tip" title="小技巧：如何快速記住常用語法？]
+
+### 小技巧
+[callout type="tip" title="小技巧：如何快速記住常用語法？"]
 - 結構用 `#` 和 `##`：跟一般 Markdown 一樣
 - 互動元件用 `[xxx]`：方括號包起來的都是進階元件
-- 程式碼用 ```：跟 GitHub Flavored Markdown 一樣
+- 程式碼用三個反引號圍欄：跟 GitHub Flavored Markdown 一樣
 - 其餘都是「自然語言延伸」：像是 `> ` 引言、`- ` 清單
 [/callout]
+
+### 小測驗：你記住了幾個語法？
 
 [quiz type="single"]
 Q: 在 content.md 中，哪種語法會渲染為帶顏色的標籤？
@@ -698,11 +760,11 @@ Hint: `[tags]` 區塊內使用 `- [color] 文字` 格式才能套用顏色。
 
 [quiz type="single"]
 Q: 想要學生先思考再看到答案，應該用哪個元件？
-- [ ] [bonus]
-- [ ] [callout]
-- [x] [reveal]
-- [ ] [summary]
-Hint: [reveal] 渲染為 `<details>` 元素，點擊才會展開內容。
+- [ ] `[bonus]`
+- [ ] `[callout]`
+- [x] `[reveal]`
+- [ ] `[summary]`
+Hint: `[reveal]` 渲染為 `<details>` 元素，點擊才會展開內容。
 [/quiz]
 
 ---
@@ -739,7 +801,7 @@ OG 是 Open Graph 的縮寫，是 Facebook 在 2010 年提出、現已成為網�
 
 ## 執行與設定
 
-```prompt [label="Terminal"]
+```terminal [label="Terminal"]
 node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course
 ```
 
@@ -747,7 +809,7 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-co
 
 在 `config.yaml` 的 `seo` 欄位填入絕對 URL，平台才能抓到圖片：
 
-```prompt [label="config.yaml"]
+```yaml [label="config.yaml"]
 seo:
   image: "https://your-account.github.io/repo/lectures/my-course/assets/og-image.jpg"
   url: "https://your-account.github.io/repo/lectures/my-course/"
@@ -857,7 +919,7 @@ seo:
 5. 重新 build 並執行 build-vote.mjs
 [/flow]
 
-```prompt [label="config/global.yaml"]
+```yaml [label="config/global.yaml"]
 vote:
   # 填入 Google Apps Script Web App URL
   gas_url: "https://script.google.com/macros/s/YOUR_ID/exec"
@@ -890,7 +952,7 @@ vote:
 
 找到工具容器區（搜尋 `id="tools-container"`），加入你的工具面板 HTML：
 
-```prompt [label="base.html — 工具 HTML 範例"]
+```html [label="base.html — 工具 HTML 範例"]
 <div id="my-tool" class="tool-panel" style="display:none;">
   <div class="tool-header">
     <span>工具名稱</span>
@@ -906,7 +968,7 @@ vote:
 
 找到設定面板的按鈕列（搜尋 `class="settings-tools"`），加入觸發按鈕：
 
-```prompt [label="base.html — 設定面板按鈕"]
+```html [label="base.html — 設定面板按鈕"]
 <button class="tool-btn" onclick="toggleMyTool()" title="我的工具">
   <!-- SVG 圖示 -->
 </button>
@@ -914,7 +976,7 @@ vote:
 
 ### 步驟三：在 course.js 加入邏輯
 
-```prompt [label="assets/course.js — 基本框架"]
+```js [label="assets/course.js — 基本框架"]
 // 初始化（在 DOMContentLoaded 中呼叫）
 function initMyTool() {
   // 建立狀態、綁定事件
@@ -932,7 +994,7 @@ function toggleMyTool() {
 
 在 `course.js` 的 `keydown` 事件監聽器中加入：
 
-```prompt [label="assets/course.js — 快捷鍵"]
+```js [label="assets/course.js — 快捷鍵"]
 case 'M':  // 選擇一個未使用的按鍵
   toggleMyTool();
   break;
@@ -985,7 +1047,7 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 
 ## Skill 檔案結構
 
-```prompt [label="Skill 目錄結構"]
+```text [label="Skill 目錄結構"]
 .agents/skills/course-page-generator/
 ├── SKILL.md           # Skill 定義（觸發條件、執行步驟、規範）
 ├── scripts/           # 建置腳本

@@ -223,10 +223,10 @@
       overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
-      document.querySelectorAll('.bonus-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          openModal(btn.dataset.bonusTitle || '', btn.dataset.bonusContent || '');
-        });
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.bonus-btn');
+        if (!btn) return;
+        openModal(btn.dataset.bonusTitle || '', btn.dataset.bonusContent || '');
       });
     })();
 

@@ -3590,9 +3590,12 @@
     body.pres-active>section.section,
     body.pres-active>hr.divider,
     body.pres-active>footer.footer,
-    body.pres-active .settings-panel,
-    body.pres-active .bonus-overlay {
+    body.pres-active .settings-panel {
       display: none !important;
+    }
+
+    body.pres-active .bonus-overlay {
+      z-index: 11000;
     }
 
     #pres-deck {
@@ -5455,7 +5458,7 @@
   background: var(--bg-card-alt);
 }
 .compare-table thead th {
-  padding: .85rem 1rem;
+  padding: 1.9rem 1rem .85rem;
   background: rgba(var(--accent-rgb), .06);
   color: var(--text);
   font-weight: 700;
@@ -5475,15 +5478,17 @@
 .compare-table thead th.is-highlight::after {
   content: '推薦';
   position: absolute;
-  top: -8px;
+  top: .5rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
   color: white;
   font-size: .6rem;
-  padding: .1rem .45rem;
+  line-height: 1;
+  padding: .25rem .5rem;
   border-radius: 8px;
   letter-spacing: .05em;
+  white-space: nowrap;
 }
 .compare-table tbody td,
 .compare-table tbody th {

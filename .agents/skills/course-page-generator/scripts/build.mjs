@@ -499,7 +499,7 @@ function parseContent(md) {
       while (i < lines.length) {
         const cl = lines[i];
         if (/^#{1,3} /.test(cl) || /^---\s*$/.test(cl.trim())) break;
-        if (/^```\w/.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl) || /^\[vote/.test(cl) || /^\[quiz/.test(cl) || /^\[tabs\]/.test(cl) || /^\[callout/.test(cl) || /^\[accordion\]/.test(cl) || /^\[reveal/.test(cl) || /^\[timeline\]/.test(cl) || /^\[steps-status\]/.test(cl) || /^\[compare-table/.test(cl) || /^\[stats\]/.test(cl) || /^\[dl\]/.test(cl)) break;
+        if (/^`{3,}\w/.test(cl) || /^\[flow\]/.test(cl) || /^\[tags\]/.test(cl) || /^\[summary\]/.test(cl) || /^\[bonus/.test(cl) || /^> \*\*/.test(cl) || /^\[image-text/.test(cl) || /^\[youtube/.test(cl) || /^\[compare/.test(cl) || /^\[vote/.test(cl) || /^\[quiz/.test(cl) || /^\[tabs\]/.test(cl) || /^\[callout/.test(cl) || /^\[accordion\]/.test(cl) || /^\[reveal/.test(cl) || /^\[timeline\]/.test(cl) || /^\[steps-status\]/.test(cl) || /^\[compare-table/.test(cl) || /^\[stats\]/.test(cl) || /^\[dl\]/.test(cl)) break;
         if (/^- \[x\]/.test(cl) || /^!\[/.test(cl)) break;
         if (isMarkdownTableHeader(cl, lines[i + 1])) break;
 
@@ -527,14 +527,16 @@ function parseContent(md) {
       continue;
     }
 
-    if (/^```(\w+)/.test(line)) {
-      const langMatch = line.match(/^```(\w+)/);
-      const lang = langMatch ? langMatch[1].toLowerCase() : '';
+    if (/^(`{3,})(\w+)/.test(line)) {
+      const fenceMatch = line.match(/^(`{3,})(\w+)/);
+      const fence = fenceMatch[1];
+      const lang = fenceMatch[2].toLowerCase();
       const labelMatch = line.match(/\[label="([^"]+)"\]/);
       const label = labelMatch ? labelMatch[1] : '';
+      const closeRe = new RegExp('^' + fence + '\\s*$');
       let body = '';
       i++;
-      while (i < lines.length && lines[i].trim() !== '```') {
+      while (i < lines.length && !closeRe.test(lines[i].trim())) {
         body += (body ? '\n' : '') + lines[i];
         i++;
       }
@@ -989,6 +991,8 @@ function inlineFormat(text) {
   return text
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="inline-image">')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(?<!`)``(?!`)([\s\S]+?)(?<!`)``(?!`)/g, (_, c) =>
+      `<code>${esc(c.replace(/^ | $/g, '')).replace(/`/g, '&#96;')}</code>`)
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\[\?([^\]|]+)\|([^\]]+)\]/g, (_, term, def) =>
       `<span class="gloss" tabindex="0" data-tip="${esc(def.trim())}">${esc(term.trim())}</span>`)
@@ -1118,12 +1122,41 @@ function groupBlocks(blocks) {
   return result;
 }
 
-// Shared helper: render an array of raw lines into <p> / <ul><li> HTML
+// Shared helper: render an array of raw lines into <p> / <ul><li> HTML.
+// Also handles ``` fenced code/prompt blocks so syntax highlighting works
+// inside containers like [tabs], [callout], [accordion], [reveal].
 function renderSimpleLines(lines) {
   let html = '';
   let inList = false;
-  for (const ln of lines) {
-    if (ln.trim() === '') {
+  for (let i = 0; i < lines.length; i++) {
+    const ln = lines[i];
+    const trimmed = ln.trim();
+    const fence = trimmed.match(/^(`{3,})(\w+)(?:\s+\[label="([^"]+)"\])?/);
+    if (fence) {
+      if (inList) { html += '</ul>'; inList = false; }
+      const fenceMark = fence[1];
+      const lang = fence[2];
+      const label = fence[3] || '';
+      const closeRe = new RegExp('^' + fenceMark + '\\s*$');
+      const codeLines = [];
+      i++;
+      while (i < lines.length && !closeRe.test(lines[i].trim())) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      const body = codeLines.join('\n');
+      if (lang === 'prompt' || lang === 'terminal') {
+        const isTerminal = lang === 'terminal' ||
+          /^(npm |npx |openspec |git |docker |curl |brew |apt |pip |cargo |\/init)/.test(body.trim());
+        html += renderBlockBody({ type: 'prompt', label, body, headerType: isTerminal ? 'Terminal' : 'Prompt' });
+      } else if (lang === 'diff') {
+        html += renderBlockBody({ type: 'diff', label, body });
+      } else {
+        html += renderBlockBody({ type: 'code', label, body, lang });
+      }
+      continue;
+    }
+    if (trimmed === '') {
       if (inList) { html += '</ul>'; inList = false; }
       continue;
     }
@@ -1132,7 +1165,7 @@ function renderSimpleLines(lines) {
       html += `<li>${inlineFormat(ln.replace(/^- /, '').trim())}</li>`;
     } else {
       if (inList) { html += '</ul>'; inList = false; }
-      html += `<p>${inlineFormat(ln.trim())}</p>`;
+      html += `<p>${inlineFormat(trimmed)}</p>`;
     }
   }
   if (inList) html += '</ul>';
