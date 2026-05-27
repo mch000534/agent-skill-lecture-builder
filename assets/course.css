@@ -873,8 +873,8 @@
 
     .youtube-wrapper {
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
+      aspect-ratio: 16 / 9;
+      width: 100%;
       overflow: hidden;
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -912,9 +912,7 @@
     }
 
     html[data-local-preview="true"] .youtube-wrapper {
-      height: auto;
-      min-height: 240px;
-      padding-bottom: 0;
+      max-height: 400px;
     }
 
     html[data-local-preview="true"] .youtube-wrapper iframe {
@@ -2915,7 +2913,7 @@
     }
 
     #print-slides .youtube-wrapper {
-      padding-bottom: 0;
+      aspect-ratio: auto;
       height: auto;
       padding: 2rem;
       text-align: center;
