@@ -53,7 +53,8 @@ agent-skill-lecture-builder/
 │   │       └── config-example.yaml
 │   ├── content-drafting/SKILL.md   # 主題+受眾+時長 → content.md 草稿
 │   ├── content-review/SKILL.md     # 分析教學節奏，輸出改善建議
-│   └── topic-to-page/SKILL.md      # 完整工作流（drafting → review → build）
+│   ├── topic-to-page/SKILL.md      # 完整工作流（drafting → review → build）
+│   └── widget-builder/SKILL.md     # 浮動 widget 建置規範（HTML/CSS/JS/z-index）
 ├── assets/
 │   ├── course.css                  # 所有課程共用 CSS（外部引用，改動免 rebuild）
 │   └── course.js                   # 計時器、抽籤、投票等互動功能
@@ -164,6 +165,12 @@ agent-skill-lecture-builder/
 從主題到課程頁面的完整工作流，依序串聯 content-drafting → content-review → course-page-generator 三個階段。每個 Phase 結束後暫停確認，使用者可插入修改後說「繼續 Phase N」恢復。工作流程定義在 `.agents/skills/topic-to-page/SKILL.md`。
 
 當使用者說「從主題到頁面」「完整流程」「一鍵生成課程」「幫我完整做一個課程」時，請讀取該檔案並執行。
+
+### widget-builder
+
+浮動 widget 的完整建置規範，涵蓋 HTML 結構（拖曳把手、關閉按鈕）、CSS 樣式（半透明毛玻璃背景、`.open` 切換）、JS IIFE 模式（z-index 管理、拖曳邏輯、鍵盤快捷鍵）、settings panel 整合。工作流程定義在 `.agents/skills/widget-builder/SKILL.md`。
+
+當使用者說「新增 widget」「建立浮動面板」「加一個 widget」時，請讀取該檔案並依循規範產生程式碼。
 
 ## 關鍵慣例
 

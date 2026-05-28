@@ -154,6 +154,12 @@ agent-skill-lecture-builder/
 
 當使用者說「從主題到頁面」「完整流程」「一鍵生成課程」「幫我完整做一個課程」時，請讀取該檔案並執行。
 
+### widget-builder
+
+建立新浮動 widget 的完整規範。涵蓋 HTML 結構、CSS 樣式、JS IIFE 模式、z-index 管理、拖曳邏輯、鍵盤快捷鍵、settings panel 整合。新增 widget 時依此文件產生符合規範的程式碼。工作流程定義在 `.agents/skills/widget-builder/SKILL.md`。
+
+當使用者說「新增 widget」「建立浮動面板」「加一個 widget」時，請讀取該檔案並依循規範產生程式碼。
+
 ## 課堂互動工具
 
 課程頁內建互動功能，由 `assets/course.js` 提供，完整使用說明見 `README.md`：

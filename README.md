@@ -61,11 +61,12 @@
 
 ### 新增功能
 
-**Agent Skills**：四個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
+**Agent Skills**：五個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
 - `course-page-generator`：講稿 / 主題 → 完整 HTML 課程頁
 - `content-drafting`：給定主題、受眾、時長，自動生成有實質內容的 `content.md` 草稿
 - `content-review`：分析 `content.md` 的「說明→範例→實作」教學節奏，輸出改善建議
 - `topic-to-page`：從主題到頁面的完整工作流，依序串聯前三個 Skill，每個 Phase 結束暫停確認
+- `widget-builder`：浮動 widget 的完整建置規範（HTML / CSS / JS / z-index / 拖曳 / 快捷鍵）
 
 **課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁，支援分類篩選、搜尋、格狀/列表切換。
 
@@ -96,7 +97,7 @@
 **課堂互動工具**：
 - 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
 - 抽籤器：支援學號範圍、人名清單、分組、計分板
-- 課堂投票 Widget：學生掃 QR Code 即時投票，教師頁每 5 秒自動更新長條圖（需 Google Apps Script 後端）
+- 課堂投票 Widget：學生掃一次 QR Code，整堂跟隨教師切換題目，教師頁每 5 秒自動更新長條圖（需 Google Apps Script 後端）
 - `[vote]` 投票嵌入：將投票卡片直接嵌入課程內容，學員在頁面內作答並即時看到橫條圖結果
 - `[quiz]` 即時測驗：選擇題 / 是非題，點選即時回饋，結果存 localStorage（無需後端）
 - 章節進度追蹤：TOC 每個章節旁顯示已讀圓點，捲動過即自動標記，localStorage 持久化
@@ -144,7 +145,7 @@ AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml`
 
 ## Agent Skills
 
-四個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
+五個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
 
 ### course-page-generator
 
@@ -178,9 +179,15 @@ AI 依時長推算章節數（90 分鐘 → 4–5 個主章節），依受眾調
 
 把上述三個 Skill 串成一條完整工作流：Phase 1 用 `content-drafting` 起草 → Phase 2 用 `content-review` 診斷 → Phase 3 用 `course-page-generator` build 成頁面。每個 Phase 結束會暫停詢問，使用者可手動修改 `content.md` 後說「繼續 Phase N」恢復。詳見 [SKILL.md](.agents/skills/topic-to-page/SKILL.md)。
 
+### widget-builder
+
+**觸發詞**：「新增 widget」「建立浮動面板」「加一個 widget」
+
+浮動 widget 的完整建置規範，涵蓋 HTML 結構（拖曳把手、關閉按鈕）、CSS 樣式（半透明毛玻璃背景、`.open` 切換）、JS IIFE 模式（z-index 管理、拖曳邏輯、鍵盤快捷鍵）、settings panel 整合。新增 widget 時 AI 依此文件產生符合規範的程式碼。詳見 [SKILL.md](.agents/skills/widget-builder/SKILL.md)。
+
 ---
 
-三個工序 Skill 可獨立使用，也可改用 `topic-to-page` 一次串完整流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。
+前四個工序 Skill 可獨立使用，也可改用 `topic-to-page` 一次串完整流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。`widget-builder` 為純參考規範，供新增 widget 時查閱。
 
 ## 專案結構
 
@@ -203,7 +210,9 @@ agent-skill-lecture-builder/
 │       │   └── SKILL.md
 │       ├── content-review/          # 分析教學節奏，輸出改善建議
 │       │   └── SKILL.md
-│       └── topic-to-page/           # 串接三階段的完整工作流
+│       ├── topic-to-page/           # 串接三階段的完整工作流
+│       │   └── SKILL.md
+│       └── widget-builder/          # 浮動 widget 建置規範（HTML/CSS/JS/z-index）
 │           └── SKILL.md
 ├── assets/
 │   ├── course.css           # 所有課程共用 CSS（外部引用，改動免 rebuild）
@@ -662,7 +671,7 @@ Q: build.mjs 會自動讀取 global.yaml？
 
 ### 課堂投票 Widget
 
-學生掃 QR Code 用手機即時投票，教師頁面每 5 秒自動更新長條圖。
+學生掃一次 QR Code，整堂課不用重掃。教師切換題目時，學生手機自動跟隨顯示新題目。教師頁面每 5 秒自動更新長條圖。
 
 #### 一次性設定（需 Google 帳號）
 
@@ -687,15 +696,16 @@ node .agents/skills/course-page-generator/scripts/build-vote.mjs
 #### 課堂使用流程
 
 1. 開啟課程頁，點設定齒輪 → 投票圖示（或按 `V`）
-2. 在 Widget 中輸入題目和 2-4 個選項（可勾選「標記正確答案」）
-3. 點「開始投票」— Widget 切換為 QR Code + 加入碼顯示
-4. 學生掃 QR Code → 選擇選項 → 看到目前投票結果
+2. Widget 自動產生本堂課的固定 Session ID，投影 QR Code 讓學生掃描一次
+3. 在 Picker 中選擇題目（或手動輸入新題目），點「啟動投票」
+4. 學生手機自動顯示目前題目 → 選擇選項 → 看到投票結果
 5. 教師頁面長條圖每 5 秒自動更新，顯示各選項票數與百分比
-6. 點「結束投票」顯示最終統計，點「重新出題」繼續下一題
+6. 點「切換題目」回 Picker 選下一題，學生手機自動跟隨換題（已投過的題顯示「你已投票」）
+7. 點「暫停投票」停用目前題目，點「重置投票」清空本堂課所有投票紀錄
 
 #### 課程頁嵌入投票
 
-除了 Widget 浮動面板，也可將投票直接嵌入 content.md 中（見 [Vote 投票嵌入](#vote-投票嵌入)）。兩種方式共用同一個 GAS 後端和試算表。
+除了 Widget 浮動面板，也可將投票直接嵌入 content.md 中（見 [Vote 投票嵌入](#vote-投票嵌入)）。嵌入的 `[vote]` 區塊獨立於課堂 Session 之外，適合課後自學使用。
 
 #### 安全說明
 
