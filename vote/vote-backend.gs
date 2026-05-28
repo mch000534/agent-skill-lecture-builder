@@ -220,6 +220,13 @@ function submitVote(data) {
     var qid = data.qid;
     if (!sid || !qid) return { ok: false, error: 'sessionId and qid required' };
 
+    // 拒絕「已暫停」或「已切到別題」的遲到投票：以 session.currentQid 為準。
+    var sess = findRow(sessionsSheet(), [{ col: 0, eq: sid }]);
+    if (!sess) return { ok: false, error: 'session not found' };
+    var currentQid = sess.data[3];
+    if (!currentQid) return { ok: false, paused: true, qid: qid };
+    if (currentQid !== qid) return { ok: false, paused: true, qid: qid, currentQid: currentQid };
+
     var sheet = votesSheet();
     var hash = data.hash || '';
     if (hash) {

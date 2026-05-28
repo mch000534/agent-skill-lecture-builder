@@ -61,6 +61,7 @@
       animation: spin .8s linear infinite;
       margin: 1rem auto;
     }
+    .spinner.warn { border-top-color: #f59e0b; }
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -315,7 +316,9 @@
 
   <script>
     // 教師可將 GAS URL 直接寫在此常數以產生較短 QR Code；留空時改用 URL 參數 ep=。
-    var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby2xMJX4a1oM0hhaNCrvPOgljl1YMlGqBnsCV85lYnV_D4He29QfyBCVcl8P_V2t9RDcw/exec';
+    var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz3mPP9ErnZioQSZb2W4E0NBDBIbQcR_aTdkRwT_AFk_Pa33Zet7qyaAjX0cETrXzwuTA/exec';
+    
+    
     
     
 
@@ -422,8 +425,10 @@
     function handleCurrent(data) {
       if (!data || !data.ok) return;
 
-      // 老師尚未啟動題目 → waiting
+      // 老師尚未啟動題目 / 已暫停 → waiting，並禁用所有選項按鈕防止遲到投票
       if (!data.qid) {
+        var optBtns = document.querySelectorAll('#options-list .option-btn');
+        optBtns.forEach(function (b) { b.disabled = true; });
         if (lastQid !== null) setState('waiting');
         lastQid = null;
         return;
@@ -436,6 +441,7 @@
 
       // 題目改變（包含從 waiting → 第一題、從 A 題 → B 題） → 重置狀態
       if (data.qid !== lastQid) {
+        resetWaitingText();
         lastQid = data.qid;
         currentQuestion = data.question;
         currentOptions = data.options || [];
@@ -500,6 +506,28 @@
         .catch(function () {});
     }
 
+    // 投票被 server 拒絕（老師已暫停 / 已切到別題）：顯示橙色 spinner + 暫停訊息
+    function showPaused() {
+      var spinner = document.querySelector('#state-waiting .spinner');
+      if (spinner) spinner.classList.add('warn');
+      var title = document.querySelector('#state-waiting .loading-text');
+      if (title) title.textContent = '老師已暫停投票';
+      var hint = document.querySelector('#state-waiting .waiting-hint');
+      if (hint) hint.textContent = '等待老師重新啟動題目...';
+      setState('waiting');
+      lastQid = null;
+    }
+
+    // 下一次正常 polling 時把 waiting 文案回復為預設
+    function resetWaitingText() {
+      var spinner = document.querySelector('#state-waiting .spinner');
+      if (spinner) spinner.classList.remove('warn');
+      var title = document.querySelector('#state-waiting .loading-text');
+      if (title) title.textContent = '等待老師啟動題目...';
+      var hint = document.querySelector('#state-waiting .waiting-hint');
+      if (hint) hint.textContent = '請保持此頁面開啟，題目會自動出現';
+    }
+
     function submitVote(choiceIdx) {
       var qid = lastQid;
       fetch(ep, {
@@ -515,6 +543,11 @@
       })
         .then(function (r) { return r.json(); })
         .then(function (res) {
+          // 老師已暫停或切到別題 → 不記為已投，顯示 paused 提示並回到 waiting
+          if (res && res.paused) {
+            showPaused();
+            return;
+          }
           markVotedQid(qid);
           if (res && res.duplicate) {
             showAlreadyVoted(qid);
