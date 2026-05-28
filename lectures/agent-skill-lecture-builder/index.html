@@ -1302,14 +1302,13 @@ Hint: 在 reference/ 目錄下，所有課程共用。
     </div>
         <div class="inline-vote" data-vote-id="q1" data-vote-options="[&quot;注音&quot;,&quot;倉頡&quot;,&quot;行列&quot;,&quot;速成&quot;]">
       <div class="inline-vote-q">你最常用哪種輸入法？</div>
-      <div class="inline-vote-opts">
-        <button class="inline-vote-btn" data-idx="0"><span class="inline-vote-key">A</span><span>注音</span></button>
-        <button class="inline-vote-btn" data-idx="1"><span class="inline-vote-key">B</span><span>倉頡</span></button>
-        <button class="inline-vote-btn" data-idx="2"><span class="inline-vote-key">C</span><span>行列</span></button>
-        <button class="inline-vote-btn" data-idx="3"><span class="inline-vote-key">D</span><span>速成</span></button>
-      </div>
-      <div class="inline-vote-results" hidden></div>
-      <div class="inline-vote-status"></div>
+      <ul class="inline-vote-opts">
+        <li><span class="inline-vote-key">A</span><span>注音</span></li>
+        <li><span class="inline-vote-key">B</span><span>倉頡</span></li>
+        <li><span class="inline-vote-key">C</span><span>行列</span></li>
+        <li><span class="inline-vote-key">D</span><span>速成</span></li>
+      </ul>
+      <button type="button" class="inline-vote-launch-btn" data-vote-id="q1">開啟投票</button>
     </div>
         <p class="loose-text">學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 <code>config/global.yaml</code> 設定 <code>vote.gas_url</code>（見後續章節）。</p>
       </div>
@@ -2884,14 +2883,9 @@ Markdown + 模板的優勢：
       </div>
 
             <div class="vote-panel" id="vote-panel-active" style="display:none">
-        <div class="vote-session-badge">
-          <span class="vote-session-label">課堂代碼</span>
-          <span class="vote-session-code" id="vote-session-code">------</span>
-        </div>
         <div class="vote-qr-wrap">
           <div class="vote-qr-container" id="vote-qr-container"></div>
         </div>
-        <p class="vote-qr-hint" id="vote-qr-hint">學生 scan 一次，整堂課不用重掃</p>
         <div class="vote-current-q" id="vote-current-q"></div>
         <div class="vote-count-label" id="vote-count-label">等待投票中...</div>
         <div class="vote-bars" id="vote-bars"></div>

@@ -4586,29 +4586,6 @@
 
     .vote-start-btn:hover { opacity: .85; }
 
-    .vote-session-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .6rem;
-      padding: .4rem .8rem;
-      background: var(--bg-card);
-      border-radius: 8px;
-    }
-
-    .vote-session-label {
-      font-size: .72rem;
-      color: var(--text-dim);
-    }
-
-    .vote-session-code {
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      letter-spacing: .12em;
-    }
-
     .vote-qr-wrap {
       display: flex;
       justify-content: center;
@@ -4625,14 +4602,6 @@
       font-size: .78rem;
       color: var(--text-dim);
       text-align: center;
-    }
-
-    .vote-qr-hint {
-      font-size: .68rem;
-      color: var(--text-dim);
-      text-align: center;
-      margin-top: -.4rem;
-      letter-spacing: .02em;
     }
 
     .vote-current-q {
@@ -5083,7 +5052,7 @@
     [data-theme="light"] .toc-read-dot { border-color: rgba(0,0,0,.2); }
     .toc-read-dot.read { background: #4ade80; border-color: #4ade80; }
 
-/* ─── Inline Vote Widget ──────────────────────────────────── */
+/* ─── Inline Vote (display-only) ──────────────────────────── */
     .inline-vote {
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -5095,53 +5064,54 @@
       font-size: 1rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 1rem;
+      margin-bottom: .9rem;
       line-height: 1.5;
     }
-    .inline-vote-opts { display: flex; flex-direction: column; gap: .55rem; }
-    .inline-vote-btn {
-      width: 100%;
+    .inline-vote-opts {
+      list-style: none;
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .inline-vote-opts li {
+      list-style: none;
       display: flex;
       align-items: center;
-      gap: .8rem;
-      padding: .7rem 1rem;
-      background: transparent;
-      border: 2px solid var(--border);
+      gap: .75rem;
+      padding: .55rem .9rem;
+      border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text);
-      font-size: .95rem;
-      text-align: left;
-      cursor: pointer;
-      transition: border-color .15s, background .15s;
-      -webkit-tap-highlight-color: transparent;
+      font-size: .93rem;
+      background: transparent;
     }
-    .inline-vote-btn:hover:not(:disabled) { border-color: var(--accent); background: rgb(var(--accent-rgb)/.06); }
-    .inline-vote-btn:disabled { cursor: default; opacity: .65; }
-    .inline-vote-btn.selected { border-color: var(--accent); background: rgb(var(--accent-rgb)/.1); }
+    .inline-vote-opts li::marker { content: ""; }
     .inline-vote-key {
-      font-size: .8rem; font-weight: 700; color: var(--accent);
-      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      font-size: .78rem; font-weight: 700; color: var(--accent);
+      width: 1.4rem; height: 1.4rem; border-radius: 50%;
       border: 2px solid var(--accent);
       display: inline-flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .inline-vote-status { margin-top: .7rem; font-size: .82rem; color: var(--text-dim); }
-    .inline-vote-results { margin-top: 1rem; }
-    .inline-vote-bars { display: flex; flex-direction: column; gap: .45rem; }
-    .inline-vote-bar-row { display: flex; align-items: center; gap: .55rem; }
-    .ivb-key {
-      font-size: .75rem; font-weight: 700; color: var(--accent);
-      width: 1.3rem; height: 1.3rem; border-radius: 50%;
-      border: 2px solid var(--accent);
-      display: inline-flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    .inline-vote-launch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .55rem 1.1rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s, transform .1s;
     }
-    .ivb-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .15rem; }
-    .ivb-label { font-size: .78rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ivb-track { height: 7px; background: rgba(255,255,255,.06); border-radius: 4px; overflow: hidden; }
-    [data-theme="light"] .ivb-track { background: rgba(0,0,0,.07); }
-    .ivb-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .5s ease; }
-    .ivb-stat { font-size: .75rem; color: var(--text-dim); white-space: nowrap; width: 3.5rem; text-align: right; flex-shrink: 0; }
+    .inline-vote-launch-btn:hover { opacity: .88; }
+    .inline-vote-launch-btn:active { transform: translateY(1px); }
 
 /* ─── Quiz Block ──────────────────────────────────────────── */
     .quiz-block {

@@ -1323,13 +1323,12 @@ ${childrenHtml}
       const optsJson = JSON.stringify(block.options).replace(/"/g, '&quot;');
       let s = `<div class="inline-vote" data-vote-id="${esc(block.voteId)}" data-vote-options="${optsJson}">\n`;
       s += `      <div class="inline-vote-q">${esc(block.voteTitle)}</div>\n`;
-      s += `      <div class="inline-vote-opts">\n`;
+      s += `      <ul class="inline-vote-opts">\n`;
       block.options.forEach((opt, idx) => {
-        s += `        <button class="inline-vote-btn" data-idx="${idx}"><span class="inline-vote-key">${String.fromCharCode(65 + idx)}</span><span>${esc(opt)}</span></button>\n`;
+        s += `        <li><span class="inline-vote-key">${String.fromCharCode(65 + idx)}</span><span>${esc(opt)}</span></li>\n`;
       });
-      s += `      </div>\n`;
-      s += `      <div class="inline-vote-results" hidden></div>\n`;
-      s += `      <div class="inline-vote-status"></div>\n`;
+      s += `      </ul>\n`;
+      s += `      <button type="button" class="inline-vote-launch-btn" data-vote-id="${esc(block.voteId)}">開啟投票</button>\n`;
       s += `    </div>`;
       return s;
     }

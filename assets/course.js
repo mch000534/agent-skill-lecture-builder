@@ -2317,29 +2317,31 @@
         return m ? m[1] : (document.title || 'lecture').slice(0, 40);
       }
 
-      // 確保 lecture session 已建立：第一次呼叫時產生 sessionId 並呼叫 GAS open，
-      // 同時把頁面上所有 [vote] 題本 register 進去。後續呼叫為 no-op。
+      // 確保 lecture session 已建立：第一次呼叫時同步指派 sessionId，並在背景並行
+      // 呼叫 GAS open 與 register（不阻塞 caller）。後續呼叫為 no-op。
       function ensureLectureSession() {
         if (lectureSessionId || !gasEndpoint) return Promise.resolve(false);
         lectureSessionId = genSessionId();
         var slug = lectureSlugOf();
         var votes = getPageVotes();
-        return fetch(gasEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({ action: 'open', sessionId: lectureSessionId, lectureSlug: slug })
-        }).then(function () {
-          return Promise.all(votes.map(function (v) {
-            return fetch(gasEndpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'text/plain' },
-              body: JSON.stringify({
-                action: 'register', sessionId: lectureSessionId, qid: v.id,
-                question: v.title, options: v.options, answerId: null
-              })
-            }).catch(function () {});
-          }));
-        }).then(function () { return true; }).catch(function () { return false; });
+        var calls = [
+          fetch(gasEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'open', sessionId: lectureSessionId, lectureSlug: slug })
+          }).catch(function () {})
+        ].concat(votes.map(function (v) {
+          return fetch(gasEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              action: 'register', sessionId: lectureSessionId, qid: v.id,
+              question: v.title, options: v.options, answerId: null
+            })
+          }).catch(function () {});
+        }));
+        Promise.all(calls).catch(function () {});
+        return Promise.resolve(true);
       }
 
       // 整堂課只渲染一次 lecture session 的 QR Code（URL 只帶 session，不帶題目）。
@@ -2349,7 +2351,7 @@
         qrContainer.innerHTML = '';
         new QRCode(qrContainer, {
           text: getVotePageUrl(lectureSessionId),
-          width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M
+          width: 240, height: 240, correctLevel: QRCode.CorrectLevel.M
         });
         lectureQrRendered = true;
       }
@@ -2374,8 +2376,6 @@
           showPanel('active');
           renderLectureQr();
 
-          var codeEl = document.getElementById('vote-session-code');
-          if (codeEl) codeEl.textContent = lectureSessionId;
           var curQEl = document.getElementById('vote-current-q');
           if (curQEl) curQEl.textContent = title || qid;
 
@@ -2580,6 +2580,22 @@
         }
       });
 
+      // 接住頁面 [vote] 區塊「開啟投票」按鈕派发的自訂事件：開 widget 並直接啟動該題。
+      document.addEventListener('lecture-vote-launch', function (e) {
+        var qid = (e.detail || {}).qid;
+        if (!qid) return;
+        widget.classList.add('open');
+        ensureLectureSession().then(function () {
+          var match = getPageVotes().filter(function (v) { return v.id === qid; })[0];
+          if (match) startQuestion(match.id, match.title, match.options, null);
+          else {
+            var votes = getPageVotes();
+            if (votes.length > 0) { renderPicker(); showPanel('picker'); }
+            else { showPanel('setup'); }
+          }
+        });
+      });
+
       var voteBtn = document.createElement('button');
       voteBtn.className = 'vote-settings-btn';
       voteBtn.setAttribute('aria-label', '投票');
@@ -2684,80 +2700,15 @@
       } catch (e) { }
     })();
 
-  // ─── Inline Vote Widget ────────────────────────────────────
+  // ─── Inline Vote Launch Button ─────────────────────────────
+  // 頁面上的 [vote] 區塊改為純展示（題目 + 選項 + 「開啟投票」按鈕）。
+  // 按下按鈕時派发自訂事件，由 Vote Widget IIFE 接住後開 widget 並直接啟動該題。
   (function () {
-    var ep = (window.__voteGasUrl__ || '').trim();
-    var VOTED_KEY = 'votedSessions';
-
-    function getVoted() { try { return JSON.parse(localStorage.getItem(VOTED_KEY) || '{}'); } catch (e) { return {}; } }
-    function markVoted(s) { var v = getVoted(); v[s] = true; localStorage.setItem(VOTED_KEY, JSON.stringify(v)); }
-    function softHash(str) { var h = 0; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xffffffff; return Math.abs(h).toString(36); }
-    function escH(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
-    document.querySelectorAll('.inline-vote').forEach(function (widget) {
-      var sid = widget.dataset.voteId;
-      var opts; try { opts = JSON.parse(widget.dataset.voteOptions); } catch (e) { opts = []; }
-      var stEl = widget.querySelector('.inline-vote-status');
-      var resEl = widget.querySelector('.inline-vote-results');
-
-      if (!ep) {
-        widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
-        if (stEl) stEl.textContent = '（請在 config.yaml 設定 vote.gas_url）';
-        return;
-      }
-
-      var voteHash = softHash(sid + (navigator.userAgent || '').slice(0, 40));
-
-      function buildBars(counts, total) {
-        var html = '<div class="inline-vote-bars">';
-        opts.forEach(function (opt, i) {
-          var c = counts[i] || 0, pct = total > 0 ? Math.round(c / total * 100) : 0;
-          html += '<div class="inline-vote-bar-row">'
-            + '<span class="ivb-key">' + String.fromCharCode(65 + i) + '</span>'
-            + '<div class="ivb-wrap"><span class="ivb-label">' + escH(opt) + '</span>'
-            + '<div class="ivb-track"><div class="ivb-fill" style="width:' + pct + '%"></div></div></div>'
-            + '<span class="ivb-stat">' + c + ' (' + pct + '%)</span></div>';
-        });
-        return html + '</div>';
-      }
-
-      function fetchResults() {
-        fetch(ep + '?action=results&s=' + encodeURIComponent(sid))
-          .then(function (r) { return r.json(); })
-          .then(function (data) {
-            var counts = (data && data.counts) ? data.counts : new Array(opts.length).fill(0);
-            var total = counts.reduce(function (a, b) { return a + b; }, 0);
-            if (resEl) { resEl.innerHTML = buildBars(counts, total); resEl.removeAttribute('hidden'); }
-            if (stEl) stEl.textContent = '目前共 ' + total + ' 人投票';
-          }).catch(function () {});
-      }
-
-      // Auto-create session (idempotent on server side)
-      fetch(ep, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'create', sessionId: sid,
-          question: widget.querySelector('.inline-vote-q') ? widget.querySelector('.inline-vote-q').textContent : '',
-          options: opts }) }).catch(function () {});
-
-      if (getVoted()[sid]) {
-        widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
-        if (stEl) stEl.textContent = '你已投票';
-        fetchResults();
-        return;
-      }
-
-      widget.querySelectorAll('.inline-vote-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          widget.querySelectorAll('.inline-vote-btn').forEach(function (b) { b.disabled = true; });
-          btn.classList.add('selected');
-          fetch(ep, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({ action: 'vote', sessionId: sid, choice: parseInt(btn.dataset.idx), hash: voteHash }) })
-            .then(function (r) { return r.json(); })
-            .then(function () {
-              markVoted(sid);
-              if (stEl) stEl.textContent = '投票成功，感謝參與！';
-              fetchResults();
-            }).catch(function () { markVoted(sid); });
-        });
+    document.querySelectorAll('.inline-vote-launch-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var voteId = btn.getAttribute('data-vote-id');
+        if (!voteId) return;
+        document.dispatchEvent(new CustomEvent('lecture-vote-launch', { detail: { qid: voteId } }));
       });
     });
   })();

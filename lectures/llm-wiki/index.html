@@ -379,14 +379,13 @@
     </div>
         <div class="inline-vote" data-vote-id="llm-wiki-starting-point" data-vote-options="[&quot;個人學習筆記太分散&quot;,&quot;研究資料無法累積&quot;,&quot;團隊文件過時且難找&quot;,&quot;想讓 AI 更懂特定領域&quot;]">
       <div class="inline-vote-q">你最想用 LLM Wiki 解決哪一類問題？</div>
-      <div class="inline-vote-opts">
-        <button class="inline-vote-btn" data-idx="0"><span class="inline-vote-key">A</span><span>個人學習筆記太分散</span></button>
-        <button class="inline-vote-btn" data-idx="1"><span class="inline-vote-key">B</span><span>研究資料無法累積</span></button>
-        <button class="inline-vote-btn" data-idx="2"><span class="inline-vote-key">C</span><span>團隊文件過時且難找</span></button>
-        <button class="inline-vote-btn" data-idx="3"><span class="inline-vote-key">D</span><span>想讓 AI 更懂特定領域</span></button>
-      </div>
-      <div class="inline-vote-results" hidden></div>
-      <div class="inline-vote-status"></div>
+      <ul class="inline-vote-opts">
+        <li><span class="inline-vote-key">A</span><span>個人學習筆記太分散</span></li>
+        <li><span class="inline-vote-key">B</span><span>研究資料無法累積</span></li>
+        <li><span class="inline-vote-key">C</span><span>團隊文件過時且難找</span></li>
+        <li><span class="inline-vote-key">D</span><span>想讓 AI 更懂特定領域</span></li>
+      </ul>
+      <button type="button" class="inline-vote-launch-btn" data-vote-id="llm-wiki-starting-point">開啟投票</button>
     </div>
       </div>
     </div>
@@ -1164,14 +1163,13 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
     </div>
         <div class="inline-vote" data-vote-id="llm-wiki-education-use" data-vote-options="[&quot;課程講義與補充資料 wiki&quot;,&quot;學生問答與常見錯誤 wiki&quot;,&quot;專題研究資料 wiki&quot;,&quot;校內教學資源共用 wiki&quot;]">
       <div class="inline-vote-q">如果用在課程中，你最想先建立哪一種 wiki？</div>
-      <div class="inline-vote-opts">
-        <button class="inline-vote-btn" data-idx="0"><span class="inline-vote-key">A</span><span>課程講義與補充資料 wiki</span></button>
-        <button class="inline-vote-btn" data-idx="1"><span class="inline-vote-key">B</span><span>學生問答與常見錯誤 wiki</span></button>
-        <button class="inline-vote-btn" data-idx="2"><span class="inline-vote-key">C</span><span>專題研究資料 wiki</span></button>
-        <button class="inline-vote-btn" data-idx="3"><span class="inline-vote-key">D</span><span>校內教學資源共用 wiki</span></button>
-      </div>
-      <div class="inline-vote-results" hidden></div>
-      <div class="inline-vote-status"></div>
+      <ul class="inline-vote-opts">
+        <li><span class="inline-vote-key">A</span><span>課程講義與補充資料 wiki</span></li>
+        <li><span class="inline-vote-key">B</span><span>學生問答與常見錯誤 wiki</span></li>
+        <li><span class="inline-vote-key">C</span><span>專題研究資料 wiki</span></li>
+        <li><span class="inline-vote-key">D</span><span>校內教學資源共用 wiki</span></li>
+      </ul>
+      <button type="button" class="inline-vote-launch-btn" data-vote-id="llm-wiki-education-use">開啟投票</button>
     </div>
       </div>
     </div>
@@ -1875,14 +1873,9 @@ LLM Wiki 是一種由 AI Agent 協助維護的 Markdown 知識庫工作法。
       </div>
 
             <div class="vote-panel" id="vote-panel-active" style="display:none">
-        <div class="vote-session-badge">
-          <span class="vote-session-label">課堂代碼</span>
-          <span class="vote-session-code" id="vote-session-code">------</span>
-        </div>
         <div class="vote-qr-wrap">
           <div class="vote-qr-container" id="vote-qr-container"></div>
         </div>
-        <p class="vote-qr-hint" id="vote-qr-hint">學生 scan 一次，整堂課不用重掃</p>
         <div class="vote-current-q" id="vote-current-q"></div>
         <div class="vote-count-label" id="vote-count-label">等待投票中...</div>
         <div class="vote-bars" id="vote-bars"></div>
