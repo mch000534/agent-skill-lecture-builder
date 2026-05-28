@@ -3372,82 +3372,77 @@
       }
     }
 
-    /* ===== SHARE MODAL ===== */
-    .share-overlay {
+    /* ===== SHARE WIDGET ===== */
+    .share-widget {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .65);
-      z-index: 10500;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .share-overlay.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .share-modal {
-      background: color-mix(in srgb, var(--bg-card) 82%, transparent);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
       width: 90vw;
       height: 90vh;
-      min-width: 0;
-      display: flex;
+      min-width: 300px;
+      min-height: 280px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg-widget);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+      z-index: 10500;
+      display: none;
       flex-direction: column;
-      transform: translateY(24px);
-      transition: transform .3s;
+      user-select: none;
       overflow: hidden;
+      resize: both;
     }
-    .share-overlay.visible .share-modal {
-      transform: translateY(0);
-    }
-    .share-modal-header {
+
+    .share-widget.open { display: flex; }
+
+    .share-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.1rem 1.5rem;
+      padding: .55rem .9rem;
       border-bottom: 1px solid var(--border);
+      background: var(--bg-card-alt);
+      border-radius: 14px 14px 0 0;
+      cursor: grab;
       flex-shrink: 0;
     }
-    .share-modal-header h3 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .share-modal-close {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: none;
-      background: transparent;
-      color: var(--text-dim);
-      cursor: pointer;
-      font-size: 1rem;
+
+    .share-title {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: background .2s, color .2s;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--text-dim);
     }
-    .share-modal-close:hover {
-      background: var(--bg-card-alt);
-      color: var(--text);
+
+    .share-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dim);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      transition: color .2s;
     }
-    .share-modal-body {
+
+    .share-close:hover { color: var(--text); }
+
+    .share-body {
       flex: 1;
       min-height: 0;
       display: flex;
       flex-direction: row;
       gap: 1.2rem;
-      padding: 1.5rem;
+      padding: .85rem .9rem;
       overflow: hidden;
       align-items: flex-start;
+      box-sizing: border-box;
     }
     .share-qr-wrap {
       display: flex;
@@ -3559,16 +3554,13 @@
       opacity: 0.85;
     }
     @media (max-width: 600px) {
-      .share-modal {
+      .share-widget {
         width: 95vw;
         height: 95vh;
       }
-      .share-modal-body {
+      .share-body {
         flex-direction: column;
         align-items: center;
-      }
-      .share-qr-wrap {
-        flex-shrink: 0;
       }
       .share-right {
         width: 100%;
@@ -4604,13 +4596,18 @@
     .vote-qr-wrap {
       display: flex;
       justify-content: center;
-      padding: .2rem;
+      align-items: center;
+      flex: 1;
+      min-height: 120px;
+      padding: .4rem;
     }
 
     .vote-qr-container {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      height: 100%;
     }
 
     .vote-count-label {

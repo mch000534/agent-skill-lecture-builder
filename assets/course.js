@@ -1,3 +1,7 @@
+    // Widget z-index stacking: most recently opened / clicked widget stays on top.
+    var __widgetZ = 10500;
+    function __bringToTop(el) { el.style.zIndex = ++__widgetZ; }
+
     // Reveal on scroll (flow-step entry animation is CSS-driven; JS only adds .visible)
     var revealObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -230,21 +234,28 @@
       });
     })();
 
-    // Share modal (Q key)
+    // Share widget (Q key)
     (function () {
-      var shareOverlay = document.getElementById('share-overlay');
-      var shareClose = document.getElementById('share-modal-close');
+      var widget = document.getElementById('share-widget');
+      if (!widget) return;
+      var dragHandle = document.getElementById('share-drag-handle');
+      var closeBtn = document.getElementById('share-widget-close');
       var shareQrContainer = document.getElementById('share-qr-container');
       var shareOgImg = document.getElementById('share-og-img');
       var shareUrlLink = document.getElementById('share-url-link');
       var shareCopyBtn = document.getElementById('share-copy-btn');
 
-      function openShare() {
+      new MutationObserver(function () {
+        if (widget.classList.contains('open')) __bringToTop(widget);
+      }).observe(widget, { attributes: true, attributeFilter: ['class'] });
+      widget.addEventListener('mousedown', function () { __bringToTop(widget); });
+
+      function renderContent() {
         var url = window.location.href;
         var ogMeta = document.querySelector('meta[property="og:image"]');
         var ogImgUrl = ogMeta ? ogMeta.getAttribute('content') : '';
-        var qrSize = Math.floor(Math.min(window.innerWidth, window.innerHeight) * 0.9 * 0.55);
-        qrSize = Math.max(200, Math.min(700, qrSize));
+        var qrSize = Math.floor(widget.clientWidth / 3);
+        qrSize = Math.max(120, Math.min(qrSize, 400));
         shareQrContainer.style.width = qrSize + 'px';
         shareQrContainer.style.height = qrSize + 'px';
         shareQrContainer.innerHTML = '';
@@ -266,31 +277,63 @@
         }
         shareUrlLink.href = url;
         shareUrlLink.textContent = url;
-        shareOverlay.classList.add('visible');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeShare() {
-        shareOverlay.classList.remove('visible');
-        document.body.style.overflow = '';
       }
 
-      shareClose.addEventListener('click', closeShare);
-      shareOverlay.addEventListener('click', function (e) { if (e.target === shareOverlay) closeShare(); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && shareOverlay.classList.contains('visible')) closeShare(); });
-      var shareToggleBtn = document.getElementById('share-toggle');
-      if (shareToggleBtn) shareToggleBtn.addEventListener('click', openShare);
+      function hideWidget() { widget.classList.remove('open'); }
+      function openWidget() {
+        widget.classList.add('open');
+        requestAnimationFrame(function () { renderContent(); });
+      }
+      function toggleWidget() {
+        if (widget.classList.contains('open')) { hideWidget(); return; }
+        openWidget();
+      }
+      window.__toggleShareWidget = toggleWidget;
 
-      shareCopyBtn.addEventListener('click', function () {
-        var url = shareUrlLink.href;
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).then(function () {
-            shareCopyBtn.textContent = '已複製！';
-            setTimeout(function () { shareCopyBtn.textContent = '複製'; }, 2000);
-          }).catch(function () { fallbackCopy(url); });
-        } else {
-          fallbackCopy(url);
-        }
+      if (closeBtn) closeBtn.addEventListener('click', hideWidget);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && widget.classList.contains('open')) hideWidget();
       });
+
+      var shareToggleBtn = document.getElementById('share-toggle');
+      if (shareToggleBtn) shareToggleBtn.addEventListener('click', openWidget);
+
+      // Drag
+      var dragging = false, dragOffX = 0, dragOffY = 0;
+      if (dragHandle) {
+        dragHandle.addEventListener('mousedown', function (e) {
+          if (e.button !== 0) return;
+          var rect = widget.getBoundingClientRect();
+          widget.style.right = 'auto'; widget.style.bottom = 'auto';
+          widget.style.transform = 'none';
+          widget.style.left = rect.left + 'px'; widget.style.top = rect.top + 'px';
+          dragging = true;
+          dragOffX = e.clientX - rect.left;
+          dragOffY = e.clientY - rect.top;
+          e.preventDefault();
+        });
+      }
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        var x = Math.max(0, Math.min(e.clientX - dragOffX, window.innerWidth - widget.offsetWidth));
+        var y = Math.max(0, Math.min(e.clientY - dragOffY, window.innerHeight - widget.offsetHeight));
+        widget.style.left = x + 'px'; widget.style.top = y + 'px';
+      });
+      document.addEventListener('mouseup', function () { dragging = false; });
+
+      if (shareCopyBtn) {
+        shareCopyBtn.addEventListener('click', function () {
+          var url = shareUrlLink.href;
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(function () {
+              shareCopyBtn.textContent = '已複製！';
+              setTimeout(function () { shareCopyBtn.textContent = '複製'; }, 2000);
+            }).catch(function () { fallbackCopy(url); });
+          } else {
+            fallbackCopy(url);
+          }
+        });
+      }
       function fallbackCopy(text) {
         var ta = document.createElement('textarea');
         ta.value = text;
@@ -300,13 +343,6 @@
         try { document.execCommand('copy'); shareCopyBtn.textContent = '已複製！'; setTimeout(function () { shareCopyBtn.textContent = '複製'; }, 2000); } catch (e) { }
         document.body.removeChild(ta);
       }
-
-      window.__openShareModal = openShare;
-      window.__closeShareModal = closeShare;
-      window.__toggleShareModal = function () {
-        if (shareOverlay.classList.contains('visible')) closeShare();
-        else openShare();
-      };
     })();
 
 
@@ -496,6 +532,12 @@
     (function () {
       var widget = document.getElementById('timer-widget');
       var dragHandle = document.getElementById('timer-drag-handle');
+      if (widget) {
+        new MutationObserver(function () {
+          if (widget.classList.contains('open')) __bringToTop(widget);
+        }).observe(widget, { attributes: true, attributeFilter: ['class'] });
+        widget.addEventListener('mousedown', function () { __bringToTop(widget); });
+      }
       var closeBtn = document.getElementById('timer-widget-close');
       var displayEl = document.getElementById('timer-display');
       var progressFill = document.getElementById('timer-progress-fill');
@@ -1451,7 +1493,7 @@
           }
         }
         if ((e.key === 'q' || e.key === 'Q') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          if (window.__toggleShareModal) window.__toggleShareModal();
+          if (window.__toggleShareWidget) window.__toggleShareWidget();
         }
         if ((e.key === 't' || e.key === 'T') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__toggleTimerWidget) window.__toggleTimerWidget();
@@ -1479,6 +1521,8 @@
             var el = document.getElementById(id);
             if (el) el.classList.remove('open');
           });
+          var shareW = document.getElementById('share-widget');
+          if (shareW) shareW.classList.remove('open');
           var sl = document.getElementById('spotlight-overlay');
           if (sl) { sl.classList.remove('active'); window.__spotlightActive = false; }
           if (window.__hideMagnifier) window.__hideMagnifier();
@@ -1824,6 +1868,12 @@
     (function () {
       var widget = document.getElementById('lottery-widget');
       var dragHandle = document.getElementById('lottery-drag-handle');
+      if (widget) {
+        new MutationObserver(function () {
+          if (widget.classList.contains('open')) __bringToTop(widget);
+        }).observe(widget, { attributes: true, attributeFilter: ['class'] });
+        widget.addEventListener('mousedown', function () { __bringToTop(widget); });
+      }
       var closeBtn = document.getElementById('lottery-widget-close');
       var modeNumberPanel = document.getElementById('lottery-mode-number');
       var modeNamePanel = document.getElementById('lottery-mode-name');
@@ -2150,6 +2200,10 @@
     (function () {
       var widget = document.getElementById('vote-widget');
       if (!widget) return;
+      new MutationObserver(function () {
+        if (widget.classList.contains('open')) __bringToTop(widget);
+      }).observe(widget, { attributes: true, attributeFilter: ['class'] });
+      widget.addEventListener('mousedown', function () { __bringToTop(widget); });
 
       var GAS_KEY = 'voteGasEndpoint';
       var gasEndpoint = (window.__voteGasUrl__ || '') || localStorage.getItem(GAS_KEY) || '';
@@ -2159,7 +2213,6 @@
       var isStopped = true;
       // Lecture session：widget 首次開啟時產生，整堂課固定。學生掃一次 QR 就能跟隨老師切換題目。
       var lectureSessionId = null;
-      var lectureQrRendered = false;
 
       var dragHandle = document.getElementById('vote-drag-handle');
       var closeBtn = document.getElementById('vote-widget-close');
@@ -2344,16 +2397,31 @@
         return Promise.resolve(true);
       }
 
-      // 整堂課只渲染一次 lecture session 的 QR Code（URL 只帶 session，不帶題目）。
+      // 根據容器當下寬度渲染 / 重繪 QR Code（canvas 圖素對齊，避免 CSS 縮放模糊）。
+      // 整堂課 URL 不變，故 ResizeObserver 只改尺寸、不重新產生 sessionId。
+      var lectureQrUrl = null;
+      var lectureQrObs = null;
       function renderLectureQr() {
         var qrContainer = document.getElementById('vote-qr-container');
-        if (!qrContainer || typeof QRCode === 'undefined' || lectureQrRendered) return;
+        if (!qrContainer || typeof QRCode === 'undefined') return;
+        if (!lectureQrUrl) lectureQrUrl = getVotePageUrl(lectureSessionId);
+
+        var wrap = qrContainer.parentElement;
+        var wrapStyle = wrap ? getComputedStyle(wrap) : null;
+        var padX = wrapStyle ? (parseFloat(wrapStyle.paddingLeft) || 0) + (parseFloat(wrapStyle.paddingRight) || 0) : 0;
+        var availW = (wrap ? wrap.clientWidth : qrContainer.clientWidth) - padX;
+        var side = Math.max(100, Math.floor(availW));
+
         qrContainer.innerHTML = '';
         new QRCode(qrContainer, {
-          text: getVotePageUrl(lectureSessionId),
-          width: 240, height: 240, correctLevel: QRCode.CorrectLevel.M
+          text: lectureQrUrl,
+          width: side, height: side, correctLevel: QRCode.CorrectLevel.M
         });
-        lectureQrRendered = true;
+
+        if (!lectureQrObs && typeof ResizeObserver !== 'undefined' && wrap) {
+          lectureQrObs = new ResizeObserver(function () { renderLectureQr(); });
+          lectureQrObs.observe(wrap);
+        }
       }
 
       // 統一處理「啟動一題」：register（冪等）→ setCurrent → 切到 active → 渲染 QR → 開始 polling。
@@ -2384,7 +2452,7 @@
           }).catch(function () {});
 
           showPanel('active');
-          renderLectureQr();
+          requestAnimationFrame(function () { renderLectureQr(); });
 
           var curQEl = document.getElementById('vote-current-q');
           if (curQEl) curQEl.textContent = title || qid;
