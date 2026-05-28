@@ -12,7 +12,7 @@
       --bg: #0f1117;
       --bg-card: #181b25;
       --bg-card-alt: #1e2130;
-      --bg-widget: rgba(24, 27, 37, 0.5);
+      --bg-widget: rgba(24, 27, 37, 0.82);
       --text: #e4e4e7;
       --text-dim: #8b8d9a;
       --accent: #e03040;
@@ -30,7 +30,7 @@
       --bg: #f5f5f7;
       --bg-card: #ffffff;
       --bg-card-alt: #f0f0f3;
-      --bg-widget: rgba(255, 255, 255, 0.5);
+      --bg-widget: rgba(255, 255, 255, 0.7);
       --text: #1a1a2e;
       --text-dim: #5a5b6a;
       --accent: #b01828;
@@ -4417,6 +4417,11 @@
       overflow: hidden;
       right: 9rem;
       bottom: 5rem;
+    }
+
+    [data-theme="light"] .vote-widget {
+      box-shadow: 0 10px 30px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
+      border-color: #c8c8cf;
     }
 
     .vote-widget.open { display: flex; }
