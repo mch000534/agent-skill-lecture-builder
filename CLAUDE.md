@@ -106,7 +106,8 @@ agent-skill-lecture-builder/
 | `> text`（緊接 `#`） | 章節引言（`.lead`），非一般 blockquote |
 | `## Title` | 子章節 |
 | `### Title` | 卡片 |
-| `` ```prompt [label="..."] `` | 終端機/Prompt 區塊 |
+| `` ```prompt [label="..."] `` | 程式碼區塊（無高亮，text） |
+| `` ```terminal [label="..."] `` | 程式碼區塊（bash 高亮） |
 | `> **Bold Title**` | Insight Box |
 | `[flow]...[/flow]` | 流程步驟 |
 | `[tags]...[/tags]` | 標籤（`green/orange/purple/blue`） |

@@ -77,34 +77,38 @@ Markdown 語法 → HTML 元件的完整對照。產生 HTML 時依此規則轉�
 - 底下的段落 → card 內的 `<p>`
 - 整個 card 包在 `<div class="reveal">` 中
 
-## 4. Prompt Block（終端機提示塊）
+## 4. Prompt / Terminal Block（提示區塊）
 
 **Markdown：**
 ~~~markdown
-```prompt [label="安裝指令"]
-npm install -g @fission-ai/openspec@latest
-openspec init
+```prompt [label="Claude Code"]
+扮演一位擅長用實際案例解說的資安專家，
+設計「生成式 AI 資訊安全」的講義並生成網頁
+```
+
+```terminal [label="Terminal"]
+mkdir -p lectures/my-course/assets
 ```
 ~~~
 
-**HTML：**
+**HTML（兩者皆渲染為一般 .code-block）：**
 ```html
-<div class="prompt-block">
-  <div class="prompt-header">
-    <div class="dots"><span></span><span></span><span></span></div>
-    Terminal
-    <span class="label">安裝指令</span>
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">text</span>
+    <span class="code-label">Claude Code</span>
+    <button class="copy-btn" ...>...</button>
   </div>
-  <div class="prompt-body">npm install -g @fission-ai/openspec@latest
-openspec init</div>
+  <pre class="code-body"><code class="lang-text">扮演一位擅長用實際案例解說的資安專家，
+設計「生成式 AI 資訊安全」的講義並生成網頁</code></pre>
 </div>
 ```
 
 規則：
-- 用 `prompt` 作為 fenced code block 的語言標記
-- `[label="..."]` 可選，顯示在右上角
-- header 中間文字預設為 "Prompt"，若內容是 shell 指令則用 "Terminal"
-- body 內容保持原樣（`white-space: pre-wrap`）
+- ````prompt` 渲染為 `.code-block`，語言標示為 `text`（無語法高亮）
+- ````terminal` 渲染為 `.code-block`，語言標示為 `bash`（bash 語法高亮）
+- `[label="..."]` 可選，顯示在 header 右側
+- 與 `js`、`yaml` 等程式碼區塊共用 `.code-block` 樣式
 
 ## 5. Insight Box（洞察框）
 
@@ -727,8 +731,8 @@ function factorial(n) {
 
 規則：
 - 建置時 tokenize（無 runtime JS）；token 類別：`tok-kw / tok-str / tok-num / tok-com / tok-fn`
-- 自動深淺色切換（沿用 `data-mode="light"`）
-- 與 `[prompt]/[terminal]` 區塊分離，UI 略不同（顯示語言徽章而非 mac dots）
+- 自動深淺色切換（沿用 `data-theme="light"`）
+- `[prompt]` / `[terminal]` 區塊也使用 `.code-block`（見 Section 4）
 
 ---
 
@@ -904,7 +908,7 @@ function factorial(n) {
 ## 30. Wrapping Rules
 
 - 每個獨立元件都包在 `<div class="reveal">` 中以啟動滾動動畫
-- 連續的 card + prompt-block 可以在同一個 reveal wrapper 中
+- 連續的 card + code-block 可以在同一個 reveal wrapper 中
 - insight box 通常獨立一個 reveal wrapper
 
 ## Social Link SVG Icons

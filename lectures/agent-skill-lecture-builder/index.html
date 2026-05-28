@@ -268,18 +268,17 @@
     <div class="group-block">
       <div class="group-header">取得專案</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Terminal</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">bash</span>
+        <span class="code-label">Terminal</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git clone https://github.com/mch000534/agent-skill-lecture-builder.git
+      <pre class="code-body"><code class="lang-bash">git clone https://github.com/mch000534/agent-skill-lecture-builder.git
 cd agent-skill-lecture-builder
-npm install</div>
+npm install</code></pre>
     </div>
         <p class="loose-text"><code>npm install</code> 只需執行一次。唯一的外部相依套件是 Puppeteer，用於自動產生 OG 縮圖。</p>
         <div class="callout callout--tip">
@@ -302,17 +301,16 @@ npm install</div>
       <div class="group-header">方式一：給主題，讓 AI 從零生成</div>
       <div class="group-body">
         <p>在 Claude Code 對話窗輸入（自然語言即可）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Claude Code</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Claude Code</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">扮演一位擅長用實際案例解說的資安專家，
-設計「生成式 AI 資訊安全」的講義並生成網頁，完成後直接啟動</div>
+      <pre class="code-body"><code class="lang-text">扮演一位擅長用實際案例解說的資安專家，
+設計「生成式 AI 資訊安全」的講義並生成網頁，完成後直接啟動</code></pre>
     </div>
         <p class="loose-text">AI 會依序完成所有步驟，完全不需要手動干預：</p>
         <div class="flow">
@@ -354,18 +352,17 @@ npm install</div>
       <div class="group-header">方式二：給講稿，AI 輔助轉換</div>
       <div class="group-body">
         <p>已有現成講稿、筆記或投影片大綱？直接貼上：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Claude Code</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Claude Code</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">幫我把這份講稿轉成課程頁面：
+      <pre class="code-body"><code class="lang-text">幫我把這份講稿轉成課程頁面：
 
-（貼上你的講稿內容）</div>
+（貼上你的講稿內容）</code></pre>
     </div>
         <p class="loose-text">AI 會萃取重點、重新結構化，轉為 Markdown 格式並建置頁面。</p>
         <details class="spoiler">
@@ -511,16 +508,15 @@ npm install</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Terminal</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">bash</span>
+        <span class="code-label">Terminal</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">mkdir -p lectures/my-course/assets</div>
+      <pre class="code-body"><code class="lang-bash">mkdir -p lectures/my-course/assets</code></pre>
     </div>
   </div>
 
@@ -656,26 +652,25 @@ quotes:
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Terminal — 建置流程</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">bash</span>
+        <span class="code-label">Terminal — 建置流程</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 1. 建置課程頁
+      <pre class="code-body"><code class="lang-bash"><span class="tok-com"># 1. 建置課程頁</span>
 node .agents/skills/course-page-generator/scripts/build.mjs lectures/my-course
 
-# 2. 產生 OG 縮圖（1200x630 px）
+<span class="tok-com"># 2. 產生 OG 縮圖（1200x630 px）</span>
 node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course
 
-# 3. 更新根目錄課程索引
+<span class="tok-com"># 3. 更新根目錄課程索引</span>
 node build-index.mjs
 
-# 4. 本機預覽確認
-node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</div>
+<span class="tok-com"># 4. 本機預覽確認</span>
+node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</code></pre>
     </div>
   </div>
 
@@ -1839,16 +1834,15 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Terminal</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">bash</span>
+        <span class="code-label">Terminal</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course</div>
+      <pre class="code-body"><code class="lang-bash">node .agents/skills/course-page-generator/scripts/generate-og.mjs lectures/my-course</code></pre>
     </div>
   </div>
 

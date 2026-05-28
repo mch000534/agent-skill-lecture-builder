@@ -542,15 +542,10 @@ function parseContent(md) {
       }
       i++;
 
-      if (lang === 'prompt' || lang === 'terminal') {
-        let headerType;
-        if (lang === 'terminal') {
-          headerType = 'Terminal';
-        } else {
-          const isTerminal = /^(npm |npx |openspec |git |docker |curl |brew |apt |pip |cargo |\/init)/.test(body.trim());
-          headerType = isTerminal ? 'Terminal' : 'Prompt';
-        }
-        if (current) current.blocks.push({ type: 'prompt', label, body, headerType });
+      if (lang === 'prompt') {
+        if (current) current.blocks.push({ type: 'code', label, body, lang: 'text' });
+      } else if (lang === 'terminal') {
+        if (current) current.blocks.push({ type: 'code', label, body, lang: 'bash' });
       } else if (lang === 'diff') {
         if (current) current.blocks.push({ type: 'diff', label, body });
       } else if (HIGHLIGHT_LANGS.has(lang)) {
@@ -1145,10 +1140,10 @@ function renderSimpleLines(lines) {
         i++;
       }
       const body = codeLines.join('\n');
-      if (lang === 'prompt' || lang === 'terminal') {
-        const isTerminal = lang === 'terminal' ||
-          /^(npm |npx |openspec |git |docker |curl |brew |apt |pip |cargo |\/init)/.test(body.trim());
-        html += renderBlockBody({ type: 'prompt', label, body, headerType: isTerminal ? 'Terminal' : 'Prompt' });
+      if (lang === 'prompt') {
+        html += renderBlockBody({ type: 'code', label, body, lang: 'text' });
+      } else if (lang === 'terminal') {
+        html += renderBlockBody({ type: 'code', label, body, lang: 'bash' });
       } else if (lang === 'diff') {
         html += renderBlockBody({ type: 'diff', label, body });
       } else {
@@ -1208,19 +1203,6 @@ ${childrenHtml}
       </div>
     </div>`;
     }
-
-    case 'prompt':
-      return `<div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        ${block.headerType}
-        <span class="label">${esc(block.label)}</span>
-        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-      </div>
-      <div class="prompt-body">${esc(block.body)}</div>
-    </div>`;
 
     case 'diff': {
       const bodyHtml = block.body.split('\n').map(line => {
