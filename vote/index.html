@@ -317,6 +317,7 @@
     // 教師可將 GAS URL 直接寫在此常數以產生較短 QR Code；留空時改用 URL 參數 ep=。
     var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby2xMJX4a1oM0hhaNCrvPOgljl1YMlGqBnsCV85lYnV_D4He29QfyBCVcl8P_V2t9RDcw/exec';
     
+    
 
     var VOTED_KEY = 'votedSessionsV2';
 
@@ -344,6 +345,12 @@
     function markVotedQid(qid) {
       var v = getVotedQids();
       v[qid] = true;
+      localStorage.setItem(VOTED_KEY + ':' + sessionId, JSON.stringify(v));
+    }
+    function clearVotedQid(qid) {
+      var v = getVotedQids();
+      if (!v[qid]) return;
+      delete v[qid];
       localStorage.setItem(VOTED_KEY + ':' + sessionId, JSON.stringify(v));
     }
 
@@ -422,6 +429,11 @@
         return;
       }
 
+      // server 說未投但本地快取還記著 → 老師已重置，清掉快取讓學生重投
+      if (!data.votedByMe && getVotedQids()[data.qid]) {
+        clearVotedQid(data.qid);
+      }
+
       // 題目改變（包含從 waiting → 第一題、從 A 題 → B 題） → 重置狀態
       if (data.qid !== lastQid) {
         lastQid = data.qid;
@@ -429,7 +441,7 @@
         currentOptions = data.options || [];
         currentAnswerId = data.answerId;
 
-        if (data.votedByMe || getVotedQids()[data.qid]) {
+        if (data.votedByMe) {
           showAlreadyVoted(data.qid);
         } else {
           showQuestion();
@@ -441,6 +453,14 @@
       if (data.votedByMe && !getVotedQids()[data.qid]) {
         markVotedQid(data.qid);
         showAlreadyVoted(data.qid);
+      }
+      // 同一題、server 說未投（老師重置）、目前停留在「已投票」畫面 → 切回投票畫面
+      else if (!data.votedByMe) {
+        var curState = document.querySelector('[id^="state-"]:not(.hidden)');
+        var curId = curState ? curState.id.replace('state-', '') : '';
+        if (curId === 'duplicate' || curId === 'submitted') {
+          showQuestion();
+        }
       }
     }
 
