@@ -255,6 +255,36 @@
 
     /* Hidden */
     .hidden { display: none !important; }
+
+    /* Persistent refresh button */
+    .refresh-btn {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .55rem .9rem;
+      background: var(--bg-card);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,.35);
+      transition: color .15s, border-color .15s, transform .15s;
+      font-family: inherit;
+      z-index: 10;
+    }
+    .refresh-btn:hover,
+    .refresh-btn:active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .refresh-btn.spinning svg {
+      animation: spin .8s linear infinite;
+    }
   </style>
 </head>
 <body>
@@ -314,9 +344,15 @@
     </div>
   </div>
 
+  <button type="button" class="refresh-btn" id="refresh-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    重新整理
+  </button>
+
   <script>
     // 教師可將 GAS URL 直接寫在此常數以產生較短 QR Code；留空時改用 URL 參數 ep=。
     var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz3mPP9ErnZioQSZb2W4E0NBDBIbQcR_aTdkRwT_AFk_Pa33Zet7qyaAjX0cETrXzwuTA/exec';
+    
     
     
     
@@ -408,6 +444,18 @@
       setState('loading');
       tick();
       pollingTimer = setInterval(tick, 3000);
+
+      var refreshBtn = document.getElementById('refresh-btn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+          refreshBtn.classList.add('spinning');
+          lastQid = null;
+          resetWaitingText();
+          setState('loading');
+          tick();
+          setTimeout(function () { refreshBtn.classList.remove('spinning'); }, 700);
+        });
+      }
     }
 
     function tick() {
