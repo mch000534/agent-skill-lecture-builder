@@ -2514,7 +2514,13 @@
       var restartBtn = document.getElementById('vote-restart-btn');
       if (restartBtn) {
         restartBtn.addEventListener('click', function () {
-          currentSessionId = null;
+          if (gasEndpoint && lectureSessionId) {
+            fetch(gasEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({ action: 'setCurrent', sessionId: lectureSessionId, qid: null })
+            }).catch(function () {});
+          }
           currentQuestion = null;
           isStopped = true;
           if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
@@ -2527,12 +2533,20 @@
         });
       }
 
-      // 「切換題目」：單純回 picker 選下一題，不變更目前 setCurrent（學生端停留在上一題的已投票畫面）。
+      // 「切換題目」：先通知 server 停用目前題目（學生端 polling 收到 qid=null → 等待），再回 picker 選下一題。
       var switchBtn = document.getElementById('vote-switch-btn');
       if (switchBtn) {
         switchBtn.addEventListener('click', function () {
+          if (gasEndpoint && lectureSessionId) {
+            fetch(gasEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({ action: 'setCurrent', sessionId: lectureSessionId, qid: null })
+            }).catch(function () {});
+          }
           isStopped = true;
           if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          currentQuestion = null;
           if (panelPicker) { renderPicker(); showPanel('picker'); }
           else { showPanel('setup'); }
         });
