@@ -2712,7 +2712,17 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
       </details>
       <details class="acc-item">
         <summary>commit 後發現訊息寫錯，可以修改嗎？</summary>
-        <div class="acc-body"><p>可以。使用以下指令修改最後一個 commit 的訊息：</p><p>```prompt [label="修改最新 commit 訊息"]</p><p>git commit --amend -m "新的正確訊息"</p><p>```</p><p>注意：這只會修改<strong>最後一個</strong> commit。如果要修改更早的，需要使用 <code>git rebase -i</code>（進階操作）。</p></div>
+        <div class="acc-body"><p>可以。使用以下指令修改最後一個 commit 的訊息：</p><div class="prompt-block">
+      <div class="prompt-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Terminal
+        <span class="label">修改最新 commit 訊息</span>
+        <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+      <div class="prompt-body">git commit --amend -m &quot;新的正確訊息&quot;</div>
+    </div><p>注意：這只會修改<strong>最後一個</strong> commit。如果要修改更早的，需要使用 <code>git rebase -i</code>（進階操作）。</p></div>
       </details>
       <details class="acc-item">
         <summary>不小心 commit 到 main 分支，應該要開分支的怎麼辦？</summary>
@@ -2980,7 +2990,15 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
       <button class="vote-close" id="vote-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="vote-body">
-            <div class="vote-panel" id="vote-panel-setup">
+            <div class="vote-panel" id="vote-panel-picker" style="display:none">
+        <div class="vote-picker-header">頁面上的投票</div>
+        <div class="vote-picker-list" id="vote-picker-list"></div>
+        <div class="vote-picker-footer">
+          <button class="vote-picker-manual" id="vote-picker-manual" type="button">＋ 手動建立新投票</button>
+        </div>
+      </div>
+
+            <div class="vote-panel" id="vote-panel-setup" style="display:none">
         <div class="vote-ep-row" id="vote-ep-row">
           <input type="text" class="vote-ep-input" id="vote-ep-input" placeholder="GAS Web App URL（設定一次即可）">
           <button class="vote-ep-save-btn" id="vote-ep-save-btn">儲存</button>
@@ -2999,15 +3017,21 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
 
             <div class="vote-panel" id="vote-panel-active" style="display:none">
         <div class="vote-session-badge">
-          <span class="vote-session-label">加入碼</span>
+          <span class="vote-session-label">課堂代碼</span>
           <span class="vote-session-code" id="vote-session-code">------</span>
         </div>
         <div class="vote-qr-wrap">
           <div class="vote-qr-container" id="vote-qr-container"></div>
         </div>
+        <p class="vote-qr-hint" id="vote-qr-hint">學生 scan 一次，整堂課不用重掃</p>
+        <div class="vote-current-q" id="vote-current-q"></div>
         <div class="vote-count-label" id="vote-count-label">等待投票中...</div>
         <div class="vote-bars" id="vote-bars"></div>
-        <button class="vote-stop-btn" id="vote-stop-btn">結束投票</button>
+        <div class="vote-active-actions">
+          <button class="vote-switch-btn" id="vote-switch-btn" type="button">切換題目</button>
+          <button class="vote-stop-btn" id="vote-stop-btn" type="button">暫停投票</button>
+          <button class="vote-reset-btn" id="vote-reset-btn" type="button">重置投票</button>
+        </div>
       </div>
 
             <div class="vote-panel" id="vote-panel-results" style="display:none">
@@ -3050,7 +3074,7 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
   <script>
     window.__sectionIds__ = ["instructor","git","git-2","repository-init-commit","section-4","github","section-6","pull-request","section-8"];
     window.__allAnchorIds__ = ["instructor","git","sub-vs","sub-section-2","sub-section-3","sub-git","sub-git-2","sub-section-6","sub-section-7","git-2","sub-git-3","sub-git-config-git","repository-init-commit","sub-git-4","sub-git-status","sub-git-add","sub-git-commit","section-4","sub-git-log","sub-git-diff","sub-git-checkout","github","sub-github-repository","sub-git-remote","sub-git-push-commit-github","sub-git-pull-github","section-6","sub-section-21","sub-git-branch","sub-section-23","sub-git-merge","sub-merge-conflict","pull-request","sub-fork","sub-section-27","sub-fork-pull-request","sub-code-review","section-8","sub-section-30","sub-section-31","sub-section-32","sub-section-33","sub-pull-request-code-review","sub-section-35","sub-section-36","sub-git-5","sub-faq"];
-    window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec";
+    window.__voteGasUrl__ = "https://script.google.com/macros/s/AKfycby2xMJX4a1oM0hhaNCrvPOgljl1YMlGqBnsCV85lYnV_D4He29QfyBCVcl8P_V2t9RDcw/exec";
   </script>
   <script src="../../assets/course.js"></script>
 

@@ -45,8 +45,8 @@ let html = readFileSync(votePath, 'utf8');
 const before = html;
 
 html = html.replace(
-  /var GAS_ENDPOINT\s*=\s*['"][^'"]*['"]\s*;/,
-  `var GAS_ENDPOINT = '${gasUrl}';`
+  /var GAS_ENDPOINT\s*=\s*['"][^'"]*['"][^\S\r\n]*;?[^\S\r\n]*/,
+  `var GAS_ENDPOINT = '${gasUrl}';\n    `
 );
 
 if (html === before) {

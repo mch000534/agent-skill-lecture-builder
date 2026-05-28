@@ -51,7 +51,7 @@
       gap: 1.2rem;
     }
 
-    /* Loading */
+    /* Loading / waiting */
     .spinner {
       width: 36px;
       height: 36px;
@@ -68,6 +68,14 @@
       text-align: center;
       color: var(--text-dim);
       font-size: .9rem;
+    }
+
+    .waiting-hint {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: .78rem;
+      opacity: .7;
+      margin-top: .3rem;
     }
 
     /* Question */
@@ -252,19 +260,26 @@
   <div class="brand">課堂互動</div>
 
   <div class="card">
-    <!-- Loading -->
+    <!-- Loading (初始) -->
     <div id="state-loading">
       <div class="spinner"></div>
       <p class="loading-text">載入中...</p>
     </div>
 
-    <!-- Ready: show question -->
+    <!-- Waiting: 老師尚未啟動題目 -->
+    <div id="state-waiting" class="hidden">
+      <div class="spinner"></div>
+      <p class="loading-text">等待老師啟動題目...</p>
+      <p class="waiting-hint">請保持此頁面開啟，題目會自動出現</p>
+    </div>
+
+    <!-- Ready: 顯示題目與選項（可投票） -->
     <div id="state-ready" class="hidden">
       <p class="question-text" id="question-text"></p>
       <div class="options-list" id="options-list"></div>
     </div>
 
-    <!-- Submitted: show result -->
+    <!-- Submitted: 剛剛投完票 -->
     <div id="state-submitted" class="hidden">
       <div class="success-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50c878" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -276,13 +291,16 @@
       <div class="result-bars" id="result-bars"></div>
     </div>
 
-    <!-- Already voted -->
+    <!-- Already voted: polling 發現已投過這題（包含重新進入頁面、老師切回已投票的題） -->
     <div id="state-duplicate" class="hidden">
       <div class="success-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50c878" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <p class="success-title">你已投過此題</p>
-      <p class="success-sub">每個裝置只能投票一次</p>
+      <p class="success-sub" id="duplicate-hint">每個裝置同一題只能投票一次</p>
+      <div class="divider"></div>
+      <p class="result-total" id="dup-result-total"></p>
+      <div class="result-bars" id="dup-result-bars"></div>
     </div>
 
     <!-- Error -->
@@ -296,11 +314,11 @@
   </div>
 
   <script>
-    // 教師可將 GAS URL 填入此常數以產生更短的 QR Code。
-    // 留空時改用 URL 參數 ep= 取得。
-    var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec';
+    // 教師可將 GAS URL 直接寫在此常數以產生較短 QR Code；留空時改用 URL 參數 ep=。
+    var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby2xMJX4a1oM0hhaNCrvPOgljl1YMlGqBnsCV85lYnV_D4He29QfyBCVcl8P_V2t9RDcw/exec';
+    
 
-    var VOTED_KEY = 'votedSessions';
+    var VOTED_KEY = 'votedSessionsV2';
 
     function getParam(name) {
       var m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -310,8 +328,28 @@
     var sessionId = getParam('s');
     var ep = GAS_ENDPOINT || getParam('ep');
 
+    // softHash：以 sessionId + UA 產生 device fingerprint，作單題單裝置去重。
+    function softHash(str) {
+      var h = 0;
+      for (var i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) & 0xffffffff; }
+      return Math.abs(h).toString(36);
+    }
+    var voteHash = softHash(sessionId + (navigator.userAgent || '').slice(0, 40));
+
+    // localStorage 紀錄已投過的 qid（避免重複 POST，作為 server 端去重的快取）。
+    function getVotedQids() {
+      try { return JSON.parse(localStorage.getItem(VOTED_KEY + ':' + sessionId) || '{}'); }
+      catch (e) { return {}; }
+    }
+    function markVotedQid(qid) {
+      var v = getVotedQids();
+      v[qid] = true;
+      localStorage.setItem(VOTED_KEY + ':' + sessionId, JSON.stringify(v));
+    }
+
+    var STATES = ['loading', 'waiting', 'ready', 'submitted', 'duplicate', 'error'];
     function setState(id) {
-      ['loading', 'ready', 'submitted', 'duplicate', 'error'].forEach(function (s) {
+      STATES.forEach(function (s) {
         var el = document.getElementById('state-' + s);
         if (el) el.classList.toggle('hidden', s !== id);
       });
@@ -340,97 +378,153 @@
       container.innerHTML = html;
     }
 
-    function softHash(str) {
-      var h = 0;
-      for (var i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) & 0xffffffff; }
-      return Math.abs(h).toString(36);
+    // --- Follow-teacher 模式 -------------------------------------------------
+    // polling GET ?action=current 每 3 秒；老師切換題目（qid 改變）時自動換題。
+
+    var lastQid = null;        // 目前顯示中的 qid（null = waiting）
+    var currentQuestion = null;
+    var currentOptions = null;
+    var currentAnswerId = null;
+    var pollingTimer = null;
+    var inFlight = false;
+
+    function init() {
+      if (!sessionId || !ep) {
+        setState('error');
+        document.getElementById('error-title').textContent = '連結無效';
+        document.getElementById('error-sub').textContent = '請重新掃描 QR Code';
+        return;
+      }
+      setState('loading');
+      tick();
+      pollingTimer = setInterval(tick, 3000);
     }
 
-    var voteHash = softHash(sessionId + (navigator.userAgent || '').slice(0, 40));
-
-    function getVoted() {
-      try { return JSON.parse(localStorage.getItem(VOTED_KEY) || '{}'); } catch (e) { return {}; }
-    }
-
-    function markVoted(sid) {
-      var v = getVoted();
-      v[sid] = true;
-      localStorage.setItem(VOTED_KEY, JSON.stringify(v));
-    }
-
-    if (!sessionId || !ep) {
-      setState('error');
-      document.getElementById('error-title').textContent = '連結無效';
-      document.getElementById('error-sub').textContent = '請重新掃描 QR Code';
-    } else if (getVoted()[sessionId]) {
-      setState('duplicate');
-    } else {
-      fetch(ep + '?action=question&s=' + encodeURIComponent(sessionId))
+    function tick() {
+      if (inFlight) return;
+      inFlight = true;
+      var url = ep + '?action=current&s=' + encodeURIComponent(sessionId)
+              + '&hash=' + encodeURIComponent(voteHash);
+      fetch(url)
         .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (!data || !data.ok) {
-            setState('error');
-            return;
-          }
-          var options = data.options || [];
-          document.getElementById('question-text').textContent = data.question || '';
-
-          var list = document.getElementById('options-list');
-          list.innerHTML = '';
-          options.forEach(function (opt, i) {
-            var btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerHTML = '<span class="option-key">' + String.fromCharCode(65 + i) + '</span><span class="option-text">' + escHtml(opt) + '</span>';
-            btn.addEventListener('click', function () {
-              list.querySelectorAll('.option-btn').forEach(function (b) { b.disabled = true; });
-              btn.classList.add('selected');
-              submitVote(i, data, options);
-            });
-            list.appendChild(btn);
-          });
-
-          setState('ready');
-        })
-        .catch(function () { setState('error'); });
+        .then(handleCurrent)
+        .catch(function () { /* 靜默失敗，下次 polling 再試 */ })
+        .then(function () { inFlight = false; });
     }
 
-    function submitVote(choiceIdx, questionData, options) {
+    function handleCurrent(data) {
+      if (!data || !data.ok) return;
+
+      // 老師尚未啟動題目 → waiting
+      if (!data.qid) {
+        if (lastQid !== null) setState('waiting');
+        lastQid = null;
+        return;
+      }
+
+      // 題目改變（包含從 waiting → 第一題、從 A 題 → B 題） → 重置狀態
+      if (data.qid !== lastQid) {
+        lastQid = data.qid;
+        currentQuestion = data.question;
+        currentOptions = data.options || [];
+        currentAnswerId = data.answerId;
+
+        if (data.votedByMe || getVotedQids()[data.qid]) {
+          showAlreadyVoted(data.qid);
+        } else {
+          showQuestion();
+        }
+        return;
+      }
+
+      // 同一題，但 server 端回報已投（可能來自其他分頁 / 裝置） → 切到已投票
+      if (data.votedByMe && !getVotedQids()[data.qid]) {
+        markVotedQid(data.qid);
+        showAlreadyVoted(data.qid);
+      }
+    }
+
+    function showQuestion() {
+      document.getElementById('question-text').textContent = currentQuestion || '';
+      var list = document.getElementById('options-list');
+      list.innerHTML = '';
+      currentOptions.forEach(function (opt, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn';
+        btn.innerHTML = '<span class="option-key">' + String.fromCharCode(65 + i) + '</span>'
+                      + '<span class="option-text">' + escHtml(opt) + '</span>';
+        btn.addEventListener('click', function () {
+          list.querySelectorAll('.option-btn').forEach(function (b) { b.disabled = true; });
+          btn.classList.add('selected');
+          submitVote(i);
+        });
+        list.appendChild(btn);
+      });
+      setState('ready');
+    }
+
+    function showAlreadyVoted(qid) {
+      setState('duplicate');
+      // 拉一次該題的結果以顯示長條圖
+      fetch(ep + '?action=results&s=' + encodeURIComponent(sessionId) + '&qid=' + encodeURIComponent(qid))
+        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          var counts = (r && r.counts) ? r.counts : [];
+          var total = counts.reduce(function (a, b) { return a + b; }, 0);
+          var tEl = document.getElementById('dup-result-total');
+          if (tEl) tEl.textContent = '目前共 ' + total + ' 人投票';
+          renderResultBars(currentOptions || [], counts, total, currentAnswerId || '',
+            document.getElementById('dup-result-bars'));
+        })
+        .catch(function () {});
+    }
+
+    function submitVote(choiceIdx) {
+      var qid = lastQid;
       fetch(ep, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'vote', sessionId: sessionId, choice: choiceIdx, hash: voteHash })
+        body: JSON.stringify({
+          action: 'vote',
+          sessionId: sessionId,
+          qid: qid,
+          choice: choiceIdx,
+          hash: voteHash
+        })
       })
         .then(function (r) { return r.json(); })
-        .then(function (voteResult) {
-          if (voteResult && voteResult.duplicate) {
-            setState('duplicate');
+        .then(function (res) {
+          markVotedQid(qid);
+          if (res && res.duplicate) {
+            showAlreadyVoted(qid);
             return;
           }
-          markVoted(sessionId);
-          document.getElementById('voted-option').textContent = '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + options[choiceIdx];
+          document.getElementById('voted-option').textContent =
+            '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + (currentOptions[choiceIdx] || '');
           setState('submitted');
-          fetchFinalResults(questionData, options);
+          // 拉一次該題結果顯示長條圖
+          fetch(ep + '?action=results&s=' + encodeURIComponent(sessionId) + '&qid=' + encodeURIComponent(qid))
+            .then(function (r) { return r.json(); })
+            .then(function (r) {
+              var counts = (r && r.counts) ? r.counts : [];
+              var total = counts.reduce(function (a, b) { return a + b; }, 0);
+              var tEl = document.getElementById('result-total');
+              if (tEl) tEl.textContent = '目前共 ' + total + ' 人投票';
+              renderResultBars(currentOptions || [], counts, total, currentAnswerId || '',
+                document.getElementById('result-bars'));
+            })
+            .catch(function () {});
         })
         .catch(function () {
-          markVoted(sessionId);
-          document.getElementById('voted-option').textContent = '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + options[choiceIdx];
+          markVotedQid(qid);
+          document.getElementById('voted-option').textContent =
+            '你選擇了：' + String.fromCharCode(65 + choiceIdx) + '. ' + (currentOptions[choiceIdx] || '');
           setState('submitted');
         });
     }
 
-    function fetchFinalResults(questionData, options) {
-      fetch(ep + '?action=results&s=' + encodeURIComponent(sessionId))
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          var counts = (data && data.counts) ? data.counts : [];
-          var total = counts.reduce(function (a, b) { return a + b; }, 0);
-          var container = document.getElementById('result-bars');
-          var totalEl = document.getElementById('result-total');
-          if (totalEl) totalEl.textContent = '目前共 ' + total + ' 人投票';
-          renderResultBars(options, counts, total, questionData.answerId || '', container);
-        })
-        .catch(function () {});
-    }
+    init();
   </script>
 </body>
 </html>

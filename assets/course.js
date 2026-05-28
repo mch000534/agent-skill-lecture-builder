@@ -2157,12 +2157,18 @@
       var pollInterval = null;
       var currentQuestion = null;
       var isStopped = true;
+      // Lecture session：widget 首次開啟時產生，整堂課固定。學生掃一次 QR 就能跟隨老師切換題目。
+      var lectureSessionId = null;
+      var lectureQrRendered = false;
 
       var dragHandle = document.getElementById('vote-drag-handle');
       var closeBtn = document.getElementById('vote-widget-close');
       var panelSetup = document.getElementById('vote-panel-setup');
       var panelActive = document.getElementById('vote-panel-active');
       var panelResults = document.getElementById('vote-panel-results');
+      var panelPicker = document.getElementById('vote-panel-picker');
+      // 新版 base.html 的 setup 設為 display:none（由 JS 決定初始面板）；舊版仍維持預設顯示。
+      if (panelSetup && panelPicker && !panelSetup.style.display) panelSetup.style.display = 'none';
       var epInput = document.getElementById('vote-ep-input');
       var epSaveBtn = document.getElementById('vote-ep-save-btn');
       var epStatus = document.getElementById('vote-ep-status');
@@ -2214,6 +2220,186 @@
         return url;
       }
 
+      // 統一管理 4 個面板（picker / setup / active / results）的顯示。
+      // 舊版 base.html 沒有 panelPicker 節點，此處對 null 做保護。
+      function showPanel(name) {
+        if (panelPicker)  panelPicker.style.display  = name === 'picker'  ? 'flex' : 'none';
+        if (panelSetup)   panelSetup.style.display   = name === 'setup'   ? 'flex' : 'none';
+        if (panelActive)  panelActive.style.display  = name === 'active'  ? 'flex' : 'none';
+        if (panelResults) panelResults.style.display = name === 'results' ? 'flex' : 'none';
+      }
+
+      // 蒐集目前頁面上所有 [vote] 區塊，依 data-vote-id 去重。
+      function getPageVotes() {
+        var els = document.querySelectorAll('.inline-vote');
+        var seen = {};
+        var votes = [];
+        els.forEach(function (el) {
+          var id = el.getAttribute('data-vote-id');
+          if (!id || seen[id]) return;
+          seen[id] = true;
+          var qEl = el.querySelector('.inline-vote-q');
+          var title = qEl ? qEl.textContent.trim() : id;
+          var opts = [];
+          try { opts = JSON.parse(el.getAttribute('data-vote-options') || '[]'); } catch (e) { opts = []; }
+          votes.push({ id: id, title: title, options: opts, el: el });
+        });
+        return votes;
+      }
+
+      function renderPicker() {
+        var list = document.getElementById('vote-picker-list');
+        if (!list) return;
+        var votes = getPageVotes();
+        list.innerHTML = '';
+        if (votes.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'vote-picker-empty';
+          empty.innerHTML = '此頁面沒有投票題目<br><button class="vote-picker-empty-btn" id="vote-picker-empty-btn" type="button">手動建立投票</button>';
+          list.appendChild(empty);
+          var eb = document.getElementById('vote-picker-empty-btn');
+          if (eb) eb.addEventListener('click', function () { showPanel('setup'); });
+          return;
+        }
+        votes.forEach(function (v) {
+          var item = document.createElement('div');
+          item.className = 'vote-picker-item';
+          item.setAttribute('data-pick-id', v.id);
+
+          var optHtml = (v.options || []).map(function (o, i) {
+            return '<li><span class="vote-picker-opt-key">' + String.fromCharCode(65 + i) + '</span>'
+              + '<span class="vote-picker-opt-text">' + escHtml(o) + '</span></li>';
+          }).join('');
+
+          item.innerHTML =
+            '<div class="vote-picker-main">' +
+              '<div class="vote-picker-title">' + escHtml(v.title) + '</div>' +
+              (optHtml ? '<ul class="vote-picker-options">' + optHtml + '</ul>' : '') +
+            '</div>' +
+            '<button type="button" class="vote-picker-launch-btn">啟動</button>';
+
+          var btn = item.querySelector('.vote-picker-launch-btn');
+          if (btn) btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            ensureLectureSession().then(function () {
+              startQuestion(v.id, v.title, null, null);
+            });
+          });
+          list.appendChild(item);
+        });
+      }
+
+      // 將選到的頁面 [vote] 題本預填進 setup 表單，切到 setup 面板讓講者檢視/微調後按「開始投票」。
+      // 不在此處啟動投票（不產生 sessionId、不呼叫 GAS、不繪 QR、不 polling），保持單一啟動入口。
+      function prefillSetup(vote) {
+        var qInput = document.getElementById('vote-question-input');
+        if (qInput) qInput.value = vote.title;
+        var optInputs = document.querySelectorAll('.vote-option-input');
+        optInputs.forEach(function (inp) { inp.value = ''; });
+        (vote.options || []).forEach(function (opt, i) { if (optInputs[i]) optInputs[i].value = opt; });
+        if (hasAnswerCb) {
+          hasAnswerCb.checked = false;
+          if (answerChoice) answerChoice.style.display = 'none';
+        }
+        showPanel('setup');
+        if (!gasEndpoint) {
+          if (epRow) epRow.style.display = 'flex';
+          if (epInput) epInput.focus();
+        } else {
+          if (qInput) qInput.focus();
+        }
+      }
+
+      // --- Lecture session helpers -----------------------------------------
+      // 從頁面 title 或 pathname 推斷一個穩定的 lecture slug，作為 session 的識別（僅供紀錄用）。
+      function lectureSlugOf() {
+        var m = window.location.pathname.match(/\/lectures\/([^/]+)/);
+        return m ? m[1] : (document.title || 'lecture').slice(0, 40);
+      }
+
+      // 確保 lecture session 已建立：第一次呼叫時產生 sessionId 並呼叫 GAS open，
+      // 同時把頁面上所有 [vote] 題本 register 進去。後續呼叫為 no-op。
+      function ensureLectureSession() {
+        if (lectureSessionId || !gasEndpoint) return Promise.resolve(false);
+        lectureSessionId = genSessionId();
+        var slug = lectureSlugOf();
+        var votes = getPageVotes();
+        return fetch(gasEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ action: 'open', sessionId: lectureSessionId, lectureSlug: slug })
+        }).then(function () {
+          return Promise.all(votes.map(function (v) {
+            return fetch(gasEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({
+                action: 'register', sessionId: lectureSessionId, qid: v.id,
+                question: v.title, options: v.options, answerId: null
+              })
+            }).catch(function () {});
+          }));
+        }).then(function () { return true; }).catch(function () { return false; });
+      }
+
+      // 整堂課只渲染一次 lecture session 的 QR Code（URL 只帶 session，不帶題目）。
+      function renderLectureQr() {
+        var qrContainer = document.getElementById('vote-qr-container');
+        if (!qrContainer || typeof QRCode === 'undefined' || lectureQrRendered) return;
+        qrContainer.innerHTML = '';
+        new QRCode(qrContainer, {
+          text: getVotePageUrl(lectureSessionId),
+          width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M
+        });
+        lectureQrRendered = true;
+      }
+
+      // 統一處理「啟動一題」：register（冪等）→ setCurrent → 切到 active → 渲染 QR → 開始 polling。
+      // qid 為題目標識；options 可為 null 表示沿用已 register 的版本（頁面 [vote]）。
+      function startQuestion(qid, title, options, answerId) {
+        if (!gasEndpoint) { prefillSetup({ title: title, options: options }); return; }
+        if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+
+        var doStart = function () {
+          currentSessionId = lectureSessionId;
+          currentQuestion = { qid: qid, question: title, options: options || [], answerId: answerId };
+          isStopped = false;
+
+          fetch(gasEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'setCurrent', sessionId: lectureSessionId, qid: qid })
+          }).catch(function () {});
+
+          showPanel('active');
+          renderLectureQr();
+
+          var codeEl = document.getElementById('vote-session-code');
+          if (codeEl) codeEl.textContent = lectureSessionId;
+          var curQEl = document.getElementById('vote-current-q');
+          if (curQEl) curQEl.textContent = title || qid;
+
+          renderBars(document.getElementById('vote-bars'), options || [], [], 0, null);
+          var labelEl = document.getElementById('vote-count-label');
+          if (labelEl) labelEl.textContent = '等待投票中...';
+
+          if (pollInterval) clearInterval(pollInterval);
+          pollInterval = setInterval(fetchResults, 5000);
+        };
+
+        var registerPromise = options
+          ? fetch(gasEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({
+                action: 'register', sessionId: lectureSessionId, qid: qid,
+                question: title, options: options, answerId: answerId
+              })
+            }).catch(function () {})
+          : Promise.resolve();
+        registerPromise.then(doStart);
+      }
+
       function escHtml(s) {
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
@@ -2255,41 +2441,18 @@
           var hasAns = hasAnswerCb && hasAnswerCb.checked;
           var answerId = (hasAns && answerChoice) ? answerChoice.value : null;
 
-          currentSessionId = genSessionId();
-          currentQuestion = { question: question, options: options, answerId: answerId };
-          isStopped = false;
-
-          fetch(gasEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({ action: 'create', sessionId: currentSessionId, question: question, options: options, answerId: answerId })
-          }).catch(function () {});
-
-          panelSetup.style.display = 'none';
-          panelActive.style.display = 'flex';
-          panelResults.style.display = 'none';
-
-          var codeEl = document.getElementById('vote-session-code');
-          if (codeEl) codeEl.textContent = currentSessionId;
-
-          var qrContainer = document.getElementById('vote-qr-container');
-          if (qrContainer && typeof QRCode !== 'undefined') {
-            qrContainer.innerHTML = '';
-            new QRCode(qrContainer, { text: getVotePageUrl(currentSessionId), width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M });
-          }
-
-          renderBars(document.getElementById('vote-bars'), options, [], 0, answerId);
-          var labelEl = document.getElementById('vote-count-label');
-          if (labelEl) labelEl.textContent = '等待投票中...';
-
-          if (pollInterval) clearInterval(pollInterval);
-          pollInterval = setInterval(fetchResults, 5000);
+          ensureLectureSession().then(function () {
+            startQuestion('adhoc-' + Date.now(), question, options, answerId);
+          });
         });
       }
 
       function fetchResults() {
         if (!gasEndpoint || !currentSessionId || isStopped) return;
-        fetch(gasEndpoint + '?action=results&s=' + currentSessionId)
+        var qid = (currentQuestion && currentQuestion.qid) ? currentQuestion.qid : '';
+        var url = gasEndpoint + '?action=results&s=' + encodeURIComponent(currentSessionId);
+        if (qid) url += '&qid=' + encodeURIComponent(qid);
+        fetch(url)
           .then(function (r) { return r.json(); })
           .then(function (data) {
             if (!data || !currentQuestion) return;
@@ -2305,16 +2468,19 @@
       var stopBtn = document.getElementById('vote-stop-btn');
       if (stopBtn) {
         stopBtn.addEventListener('click', function () {
+          // 暫停目前題目：學生端 polling 會收到 qid=null → 顯示「等待老師啟動題目」。
+          if (gasEndpoint && lectureSessionId) {
+            fetch(gasEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({ action: 'setCurrent', sessionId: lectureSessionId, qid: null })
+            }).catch(function () {});
+          }
           isStopped = true;
           if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-          if (gasEndpoint && currentSessionId) {
-            fetch(gasEndpoint + '?action=results&s=' + currentSessionId)
-              .then(function (r) { return r.json(); })
-              .then(showResults)
-              .catch(function () { showResults(null); });
-          } else {
-            showResults(null);
-          }
+          currentQuestion = null;
+          if (panelPicker && getPageVotes().length > 0) { renderPicker(); showPanel('picker'); }
+          else { showPanel('setup'); }
         });
       }
 
@@ -2324,9 +2490,7 @@
         renderBars(document.getElementById('vote-results-bars'), currentQuestion ? currentQuestion.options : [], counts, total, currentQuestion ? currentQuestion.answerId : null);
         var totalEl = document.getElementById('vote-results-total');
         if (totalEl) totalEl.textContent = '共 ' + total + ' 人參與投票';
-        panelSetup.style.display = 'none';
-        panelActive.style.display = 'none';
-        panelResults.style.display = 'flex';
+        showPanel('results');
       }
 
       var restartBtn = document.getElementById('vote-restart-btn');
@@ -2336,16 +2500,78 @@
           currentQuestion = null;
           isStopped = true;
           if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-          panelSetup.style.display = 'flex';
-          panelActive.style.display = 'none';
-          panelResults.style.display = 'none';
+          if (panelPicker && getPageVotes().length > 0) {
+            renderPicker();
+            showPanel('picker');
+          } else {
+            showPanel('setup');
+          }
+        });
+      }
+
+      // 「切換題目」：單純回 picker 選下一題，不變更目前 setCurrent（學生端停留在上一題的已投票畫面）。
+      var switchBtn = document.getElementById('vote-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function () {
+          isStopped = true;
+          if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          if (panelPicker) { renderPicker(); showPanel('picker'); }
+          else { showPanel('setup'); }
+        });
+      }
+
+      // 「重置投票」：清掉本 lecture session 的所有投票紀錄，需二次確認。
+      var resetBtn = document.getElementById('vote-reset-btn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          if (!confirm('確定要清空本堂課所有投票紀錄嗎？此操作無法復原。')) return;
+          if (!gasEndpoint || !lectureSessionId) return;
+          isStopped = true;
+          if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+          fetch(gasEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'reset', sessionId: lectureSessionId })
+          }).then(function () {
+            renderBars(document.getElementById('vote-bars'), currentQuestion ? currentQuestion.options : [], [], 0, null);
+            var labelEl = document.getElementById('vote-count-label');
+            if (labelEl) labelEl.textContent = '已重置，等待投票中...';
+            // 重新啟動 polling 以便繼續接收新投票
+            isStopped = false;
+            if (pollInterval) clearInterval(pollInterval);
+            pollInterval = setInterval(fetchResults, 5000);
+          }).catch(function () {
+            alert('重置失敗，請檢查網路連線。');
+          });
         });
       }
 
       function hideWidget() { widget.classList.remove('open'); }
-      function toggleWidget() { widget.classList.toggle('open'); }
+      // 開啟 widget 並依目前狀態決定初始面板：
+      //   - 已有進行中 session → 保留目前面板（active 或 results）
+      //   - 否則，先確保 lecture session 存在，再依頁面 [vote] 有無顯示 picker 或 setup
+      function openWidgetSmartly() {
+        widget.classList.add('open');
+        if (!isStopped || currentSessionId) return;
+        ensureLectureSession().then(function () {
+          if (panelPicker) {
+            var votes = getPageVotes();
+            if (votes.length > 0) { renderPicker(); showPanel('picker'); }
+            else { showPanel('setup'); }
+          } else {
+            showPanel('setup');
+          }
+        });
+      }
+      function toggleWidget() {
+        if (widget.classList.contains('open')) { widget.classList.remove('open'); return; }
+        openWidgetSmartly();
+      }
       window.__toggleVoteWidget = toggleWidget;
       closeBtn.addEventListener('click', hideWidget);
+
+      var pickerManualBtn = document.getElementById('vote-picker-manual');
+      if (pickerManualBtn) pickerManualBtn.addEventListener('click', function () { showPanel('setup'); });
 
       document.addEventListener('keydown', function (e) {
         if (e.key === 'v' || e.key === 'V') {
@@ -2363,7 +2589,7 @@
         if (sp) sp.classList.remove('open');
         var st = document.getElementById('settings-toggle');
         if (st) st.classList.remove('active');
-        widget.classList.add('open');
+        openWidgetSmartly();
       });
       var targetRow = window.__settingsRow2 || document.querySelectorAll('.settings-controls-row')[1];
       if (targetRow) targetRow.appendChild(voteBtn);

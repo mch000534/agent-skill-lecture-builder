@@ -46,4 +46,4 @@ footer:
 
 vote:
   # 填入 Google Apps Script Web App URL
-  gas_url: "https://script.google.com/macros/s/AKfycbw44AIQ8v4wgaG9QnFlIm264Bj6cHS5kgV5kqft_Wqst8r6c9uacU9Uz5kgLS8LlMGN-A/exec"
+  gas_url: "https://script.google.com/macros/s/AKfycby2xMJX4a1oM0hhaNCrvPOgljl1YMlGqBnsCV85lYnV_D4He29QfyBCVcl8P_V2t9RDcw/exec"
