@@ -1677,6 +1677,11 @@
 
         document.body.appendChild(deck);
         document.body.classList.add('pres-active');
+        deck.querySelectorAll('iframe[src*="youtube.com/embed"]').forEach(function (f) {
+          if (f.src.indexOf('enablejsapi') === -1) {
+            f.src += (f.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+          }
+        });
         updateProgress();
         if (window.__invalidateMagnifierClone) window.__invalidateMagnifierClone();
 
