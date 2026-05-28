@@ -1519,7 +1519,7 @@ ${childrenHtml}
     case 'youtube':
       return `<div class="youtube-embed">
       <div class="youtube-wrapper" data-id="${esc(block.id)}">
-        <iframe src="https://www.youtube.com/embed/${esc(block.id)}" title="${esc(block.caption || 'YouTube video')}" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.youtube.com/embed/${esc(block.id)}?enablejsapi=1" title="${esc(block.caption || 'YouTube video')}" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         <div class="youtube-local-notice">
           <p>本機直接開啟 HTML 時，YouTube 可能因缺少 HTTP referrer 而拒絕播放。請改用本機伺服器預覽，或直接前往 <a href="https://www.youtube.com/watch?v=${esc(block.id)}" target="_blank" rel="noopener">YouTube 觀看影片</a>。</p>
         </div>

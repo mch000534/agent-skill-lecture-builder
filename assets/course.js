@@ -1697,6 +1697,7 @@
 
       function exitPresentation() {
         var curSlide = slides[slideIdx];
+        if (curSlide) pauseYouTubeInSlide(curSlide);
         var targetId = curSlide ? (curSlide.dataset.anchorId || curSlide.dataset.sourceId) : '';
         document.body.classList.remove('pres-active');
         var deck = document.getElementById('pres-deck');
@@ -1740,10 +1741,17 @@
         }
       }
 
+      function pauseYouTubeInSlide(slide) {
+        slide.querySelectorAll('iframe[src*="youtube.com/embed"]').forEach(function (f) {
+          f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        });
+      }
+
       function goSlide(n) {
         if (!slides.length) return;
         n = Math.max(0, Math.min(n, slides.length - 1));
         if (n === slideIdx) return;
+        pauseYouTubeInSlide(slides[slideIdx]);
         slides[slideIdx].classList.remove('active');
         slideIdx = n;
         slides[slideIdx].classList.add('active');
