@@ -3809,6 +3809,9 @@
 
     .pres-content .youtube-wrapper {
       width: min(100%, calc(75vh * 16 / 9));
+      padding-bottom: 0;
+      height: auto;
+      aspect-ratio: 16 / 9;
     }
 
     .pres-content .sub-title {
