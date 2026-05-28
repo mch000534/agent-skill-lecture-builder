@@ -2182,8 +2182,8 @@
       function updateEpDisplay() {
         if (epRow) epRow.style.display = gasEndpoint ? 'none' : 'flex';
         if (epStatus) {
-          epStatus.textContent = gasEndpoint ? '已設定 GAS 後端連線' : '尚未設定後端 URL';
-          epStatus.className = 'vote-ep-status ' + (gasEndpoint ? 'ok' : 'warn');
+          epStatus.className = 'vote-ep-dot ' + (gasEndpoint ? 'ok' : 'warn');
+          epStatus.title = gasEndpoint ? '已設定 GAS 後端連線' : '尚未設定後端 URL';
         }
       }
 
@@ -2590,6 +2590,12 @@
 
       var pickerManualBtn = document.getElementById('vote-picker-manual');
       if (pickerManualBtn) pickerManualBtn.addEventListener('click', function () { showPanel('setup'); });
+
+      var setupBackBtn = document.getElementById('vote-setup-back-btn');
+      if (setupBackBtn) setupBackBtn.addEventListener('click', function () {
+        if (panelPicker) { renderPicker(); showPanel('picker'); }
+        else { showPanel('setup'); }
+      });
 
       document.addEventListener('keydown', function (e) {
         if (e.key === 'v' || e.key === 'V') {

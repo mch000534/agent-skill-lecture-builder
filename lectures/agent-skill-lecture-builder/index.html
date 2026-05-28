@@ -1310,6 +1310,16 @@ Hint: 在 reference/ 目錄下，所有課程共用。
       </div>
       <button type="button" class="inline-vote-launch-btn" data-vote-id="q1">開啟投票</button>
     </div>
+        <div class="inline-vote" data-vote-id="q2" data-vote-options="[&quot;紅色&quot;,&quot;綠色&quot;,&quot;藍色&quot;,&quot;黃色&quot;]">
+      <div class="inline-vote-q">你最喜歡的顏色？</div>
+      <div class="inline-vote-opts">
+        <div class="inline-vote-opt"><span class="inline-vote-key">A</span><span>紅色</span></div>
+        <div class="inline-vote-opt"><span class="inline-vote-key">B</span><span>綠色</span></div>
+        <div class="inline-vote-opt"><span class="inline-vote-key">C</span><span>藍色</span></div>
+        <div class="inline-vote-opt"><span class="inline-vote-key">D</span><span>黃色</span></div>
+      </div>
+      <button type="button" class="inline-vote-launch-btn" data-vote-id="q2">開啟投票</button>
+    </div>
         <p class="loose-text">學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 <code>config/global.yaml</code> 設定 <code>vote.gas_url</code>（見後續章節）。</p>
       </div>
     </div>
@@ -2853,7 +2863,7 @@ Markdown + 模板的優勢：
 
     <div class="vote-widget" id="vote-widget">
     <div class="vote-header" id="vote-drag-handle">
-      <span class="vote-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>投票</span>
+      <span class="vote-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>投票<span class="vote-ep-dot" id="vote-ep-status" title="尚未設定後端 URL"></span></span>
       <button class="vote-close" id="vote-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="vote-body">
@@ -2866,11 +2876,13 @@ Markdown + 模板的優勢：
       </div>
 
             <div class="vote-panel" id="vote-panel-setup" style="display:none">
+        <div class="vote-setup-back-row">
+          <button class="vote-setup-back-btn" id="vote-setup-back-btn" type="button">&larr; 返回</button>
+        </div>
         <div class="vote-ep-row" id="vote-ep-row">
           <input type="text" class="vote-ep-input" id="vote-ep-input" placeholder="GAS Web App URL（設定一次即可）">
           <button class="vote-ep-save-btn" id="vote-ep-save-btn">儲存</button>
         </div>
-        <div class="vote-ep-status" id="vote-ep-status"></div>
         <textarea class="vote-question-input" id="vote-question-input" placeholder="輸入問題..." rows="2"></textarea>
         <div class="vote-options-config">
           <div class="vote-option-row"><span class="vote-option-label">A</span><input type="text" class="vote-option-input" data-idx="0" placeholder="選項 A"></div>

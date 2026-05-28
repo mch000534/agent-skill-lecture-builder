@@ -1596,7 +1596,7 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
 
     <div class="vote-widget" id="vote-widget">
     <div class="vote-header" id="vote-drag-handle">
-      <span class="vote-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>投票</span>
+      <span class="vote-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>投票<span class="vote-ep-dot" id="vote-ep-status" title="尚未設定後端 URL"></span></span>
       <button class="vote-close" id="vote-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="vote-body">
@@ -1609,11 +1609,13 @@ model = AutoModel.from_pretrained(&quot;random_user/suspicious_model&quot;)
       </div>
 
             <div class="vote-panel" id="vote-panel-setup" style="display:none">
+        <div class="vote-setup-back-row">
+          <button class="vote-setup-back-btn" id="vote-setup-back-btn" type="button">&larr; 返回</button>
+        </div>
         <div class="vote-ep-row" id="vote-ep-row">
           <input type="text" class="vote-ep-input" id="vote-ep-input" placeholder="GAS Web App URL（設定一次即可）">
           <button class="vote-ep-save-btn" id="vote-ep-save-btn">儲存</button>
         </div>
-        <div class="vote-ep-status" id="vote-ep-status"></div>
         <textarea class="vote-question-input" id="vote-question-input" placeholder="輸入問題..." rows="2"></textarea>
         <div class="vote-options-config">
           <div class="vote-option-row"><span class="vote-option-label">A</span><input type="text" class="vote-option-input" data-idx="0" placeholder="選項 A"></div>

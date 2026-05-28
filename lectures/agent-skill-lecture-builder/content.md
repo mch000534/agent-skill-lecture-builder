@@ -529,6 +529,13 @@ Hint: 在 reference/ 目錄下，所有課程共用。
 - 行列
 - 速成
 [/vote]
+
+[vote id="q2" title="你最喜歡的顏色？"]
+- 紅色
+- 綠色
+- 藍色
+- 黃色
+[/vote]
 學生掃 QR Code 用手機投票，教師端即時顯示長條圖。需先在 `config/global.yaml` 設定 `vote.gas_url`（見後續章節）。
 
 ### Accordion / FAQ 摺疊

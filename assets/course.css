@@ -4404,6 +4404,7 @@
       position: fixed;
       width: 280px;
       min-width: 240px;
+      min-height: 240px;
       background: var(--bg-widget);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -4415,6 +4416,7 @@
       flex-direction: column;
       user-select: none;
       overflow: hidden;
+      resize: both;
       right: 9rem;
       bottom: 5rem;
     }
@@ -4472,6 +4474,10 @@
       flex-direction: column;
       gap: .5rem;
     }
+    #vote-panel-picker {
+      flex: 1;
+      min-height: 0;
+    }
 
     .vote-ep-row { display: flex; gap: .4rem; }
 
@@ -4501,14 +4507,18 @@
       font-weight: 600;
     }
 
-    .vote-ep-status {
-      font-size: .72rem;
-      padding: .2rem .5rem;
-      border-radius: 4px;
+    .vote-ep-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-left: .35rem;
+      background: #888;
+      vertical-align: middle;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.15);
     }
-
-    .vote-ep-status.ok { color: #50c878; background: rgba(80,200,120,.12); }
-    .vote-ep-status.warn { color: #f0b840; background: rgba(240,184,64,.12); }
+    .vote-ep-dot.ok { background: #50c878; box-shadow: 0 0 6px rgba(80,200,120,.6); }
+    .vote-ep-dot.warn { background: #f0b840; box-shadow: 0 0 6px rgba(240,184,64,.55); }
 
     .vote-question-input {
       width: 100%;
@@ -4736,7 +4746,8 @@
       display: flex;
       flex-direction: column;
       gap: .35rem;
-      max-height: 200px;
+      flex: 1;
+      min-height: 0;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -4835,6 +4846,22 @@
     }
     .vote-picker-manual:hover,
     .vote-picker-empty-btn:hover { text-decoration: underline; }
+
+    .vote-setup-back-row {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: .4rem;
+    }
+    .vote-setup-back-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      padding: .2rem .3rem;
+      font: inherit;
+      font-size: .72rem;
+    }
+    .vote-setup-back-btn:hover { text-decoration: underline; }
 
     .vote-settings-btn {
       width: 32px;
