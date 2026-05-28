@@ -2282,7 +2282,7 @@
           if (btn) btn.addEventListener('click', function (e) {
             e.stopPropagation();
             ensureLectureSession().then(function () {
-              startQuestion(v.id, v.title, null, null);
+              startQuestion(v.id, v.title, v.options || [], null);
             });
           });
           list.appendChild(item);
@@ -2357,10 +2357,20 @@
       }
 
       // 統一處理「啟動一題」：register（冪等）→ setCurrent → 切到 active → 渲染 QR → 開始 polling。
-      // qid 為題目標識；options 可為 null 表示沿用已 register 的版本（頁面 [vote]）。
+      // qid 為題目標識；options 可為 null/空 表示沿用頁面 [vote] 的題本（自動查表補齊）。
       function startQuestion(qid, title, options, answerId) {
         if (!gasEndpoint) { prefillSetup({ title: title, options: options }); return; }
         if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+
+        if (!options || !options.length) {
+          var pageMatch = getPageVotes().filter(function (v) { return v.id === qid; })[0];
+          if (pageMatch) {
+            options = pageMatch.options || [];
+            if (!title) title = pageMatch.title;
+          } else {
+            options = options || [];
+          }
+        }
 
         var doStart = function () {
           currentSessionId = lectureSessionId;
@@ -2458,7 +2468,15 @@
             if (!data || !currentQuestion) return;
             var counts = data.counts || [];
             var total = counts.reduce(function (a, b) { return a + b; }, 0);
-            renderBars(document.getElementById('vote-bars'), currentQuestion.options, counts, total, currentQuestion.answerId);
+            var opts = currentQuestion.options || [];
+            if (!opts.length && qid) {
+              var pageMatch = getPageVotes().filter(function (v) { return v.id === qid; })[0];
+              if (pageMatch) {
+                opts = pageMatch.options || [];
+                currentQuestion.options = opts;
+              }
+            }
+            renderBars(document.getElementById('vote-bars'), opts, counts, total, currentQuestion.answerId);
             var labelEl = document.getElementById('vote-count-label');
             if (labelEl) labelEl.textContent = '已有 ' + total + ' 人投票';
           })
