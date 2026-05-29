@@ -42,6 +42,7 @@
 - [新增一門課程](#新增一門課程)
 - [課程目錄索引頁](#課程目錄索引頁)
 - [開發伺服器](#開發伺服器)
+- [npm scripts](#npm-scripts)
 - [Config 機制](#config-機制)
 - [Markdown 語法](#markdown-語法)
 - [課堂互動工具](#課堂互動工具)
@@ -59,58 +60,17 @@
 | 課程目錄 | 根目錄下（`my-course/`） | 統一放在 `lectures/`（`lectures/my-course/`） |
 | 多課程管理 | 無索引頁 | 自動掃描產生課程目錄首頁 |
 
-### 新增功能
+### 新增功能一覽
 
-**Agent Skills**：五個 AI 工作流 Skill（詳見 [Agent Skills](#agent-skills)）：
-- `course-page-generator`：講稿 / 主題 → 完整 HTML 課程頁
-- `content-drafting`：給定主題、受眾、時長，自動生成有實質內容的 `content.md` 草稿
-- `content-review`：分析 `content.md` 的「說明→範例→實作」教學節奏，輸出改善建議
-- `topic-to-page`：從主題到頁面的完整工作流，依序串聯前三個 Skill，每個 Phase 結束暫停確認
-- `widget-builder`：浮動 widget 的完整建置規範（HTML / CSS / JS / z-index / 拖曳 / 快捷鍵）
+本 Fork 在原版基礎上擴充五大面向，詳細語法與用法請見各對應段落：
 
-**課程目錄索引頁**：根目錄新增 `index.html`，執行 `build-index.mjs` 後自動掃描 `lectures/` 下所有課程，產生含縮圖、標題、Badge 的課程清單頁，支援分類篩選、搜尋、格狀/列表切換。
-
-**教學內容元件**（已上線）：
-
-*基礎排版*
-- `[compare]...[/compare]`：左右並排對比卡（舊做法 vs 新做法），紅綠色區分
-- `[compare-table headers="A | **B** | C"]...[/compare-table]`：三欄以上多方案比較表，`**` 包住的欄位自動加上「推薦」徽章
-- `[tabs][tab label="..."]...[/tab][/tabs]`：分頁切換卡，適合多語言或多方案範例對照
-- `[callout type="info|warning|tip"]...[/callout]`：左邊框三色標注框，可選 title
-- Flow 展開動畫：步驟逐一滑入，純 CSS + IntersectionObserver，無外部依賴
-
-*教學節奏*
-- `[accordion][item title="..." open]...[/item][/accordion]`：FAQ 摺疊區塊，純 `<details>` 零 JS
-- `[reveal title="..."]...[/reveal]`：點擊揭曉答案 / Spoiler，適合練習題
-- `[timeline]` + `- 時間 | 標題 | 描述`：時間軸（技術演進、學習路徑）
-- `[steps-status]` + `- [done|doing|todo] 標題 | 描述`：帶進度狀態的步驟列表
-
-*內容呈現*
-- `` ```js / py / ts / bash / json / yaml / html / css / go / rust [label="..."] ``：fenced code block 自動語法高亮（build-time tokenizer，無 runtime JS）
-- `` ```diff [label="..."] ``：Diff 區塊，`+` 綠 / `-` 紅
-- `[stats]` + `- 數字 | 標題 | 描述`：大字數據卡片格網
-- `[?術語|定義]`：行內 Glossary Tooltip，hover 顯示定義（純 CSS）
-- `[dl]` + `- 詞 | 解釋`：Definition List 名詞解釋對照
-
-*程式碼語法高亮*：Terminal 識別指令/旗標/字串/變數，Prompt 識別 backtick code 與 YAML key/value
-
-**課堂互動工具**：
-- 浮動計時器：可拖曳、點擊輸入時間（MMSS 格式）、計時中顯示進度條
-- 抽籤器：支援學號範圍、人名清單、分組、計分板
-- 課堂投票 Widget：學生掃一次 QR Code，整堂跟隨教師切換題目，教師頁每 5 秒自動更新長條圖（需 Google Apps Script 後端）
-- `[vote]` 投票嵌入：將投票卡片直接嵌入課程內容，學員在頁面內作答並即時看到橫條圖結果
-- `[quiz]` 即時測驗：選擇題 / 是非題，點選即時回饋，結果存 localStorage（無需後端）
-- 章節進度追蹤：TOC 每個章節旁顯示已讀圓點，捲動過即自動標記，localStorage 持久化
-
-**鍵盤快捷鍵**：完整的快捷鍵支援（`P` 簡報模式、`T` 計時器、`R` 抽籤器、`V` 投票、`B` 塗鴉筆、`S` 聚光燈、`[` / `]` 筆刷/聚光燈大小、`{` / `}` 放大鏡倍率、`C`（Shift+c）主題切換等，詳見[鍵盤快捷鍵](#鍵盤快捷鍵)）。
-
-**設定面板**：點左下角齒輪圖示開啟，集中管理字體大小、深淺色主題、色票、QR Code 分享、各工具入口。
-
-**新增腳本**：
-- `new-lecture.mjs`：一行指令建立新課程目錄與模板檔案（含 GitHub Pages SEO URL 偵測）
-- `validate.mjs`：build 前驗證 `content.md` 與 `config.yaml` 常見錯誤（未閉合標籤、全形冒號、`seo.url` 格式）
-- `build-vote.mjs`：將 Google Apps Script URL 注入 `vote/index.html`（投票學生端）
-- `build-index.mjs`：掃描 `lectures/` 產生 `manifest.js`，供索引頁動態讀取
+| 類別 | 重點 | 詳見 |
+|------|------|------|
+| AI 工作流 | 五個 Agent Skills（生成 / 起草 / 審閱 / 全流程 / widget 規範） | [Agent Skills](#agent-skills) |
+| 多課程管理 | `lectures/` 統一擺放，`build-index.mjs` 自動掃描產生目錄首頁 | [課程目錄索引頁](#課程目錄索引頁) |
+| 教學元件 | 30+ 種 Markdown 自訂語法（對比、分頁、callout、quiz、timeline 等） | [Markdown 語法](#markdown-語法) |
+| 課堂互動 | 計時器、抽籤、投票、測驗、塗鴉筆、聚光燈 / 放大鏡 | [課堂互動工具](#課堂互動工具) |
+| 開發工具 | `new-lecture.mjs` / `validate.mjs` / `dev.mjs` / `build-vote.mjs` | [新增一門課程](#新增一門課程)、[npm scripts](#npm-scripts) |
 
 ---
 
@@ -338,6 +298,23 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course --p
 - 監看 `content.md`、`config.yaml`、`config/global.yaml`、`reference/base.html`
 - 存檔後自動重建並重新整理瀏覽器
 
+## npm scripts
+
+`package.json` 提供 6 個快捷指令，省去輸入冗長路徑：
+
+| 指令 | 用途 | 範例 |
+|------|------|------|
+| `npm run build -- <course-dir>` | Build 任意課程 | `npm run build -- lectures/my-course` |
+| `npm run dev -- <course-dir> [--port N]` | 啟動本機預覽含 live reload | `npm run dev -- lectures/my-course --port 8080` |
+| `npm run og -- <course-dir>` | 產生 OG 縮圖 | `npm run og -- lectures/my-course` |
+| `npm run build:example` | Build `example/` 範例課程 | `npm run build:example` |
+| `npm run dev:example` | 預覽 `example/` 範例課程 | `npm run dev:example` |
+| `npm run og:example` | 產生 `example/` 的 OG 縮圖 | `npm run og:example` |
+
+> **注意**：使用通用指令（`build` / `dev` / `og`）時，必須用 `--` 分隔 npm 與後續參數，否則課程路徑無法傳入 script。`:example` 變體已綁定路徑，不需要 `--`。
+
+其他腳本（`new-lecture.mjs` / `validate.mjs` / `build-index.mjs` / `build-vote.mjs`）因使用頻率低或無需參數，未包裝為 npm script，請直接用 `node` 執行。
+
 ## Config 機制
 
 兩層設定，deep merge：
@@ -358,6 +335,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course --p
 ```yaml
 page:
   lang: zh-TW
+  favicon: "config/assets/favicon.ico"   # 選填，網站 icon
 
 instructor:
   name: "講者名稱"
@@ -369,16 +347,20 @@ instructor:
   stats:
     - text: "代表作品或經歷 X 項"
       url: "https://example.com/books"
-  socials:
+  socials:                         # 支援平台：Medium / Facebook / Threads / YouTube / GitHub / LinkedIn / Email
     - platform: "YouTube"
       url: "https://youtube.com/@your-channel"
+    - platform: "Email"
+      url: "mailto:you@example.com"
 
 quotes:
   opening:
     text: "課程開場金句"
+    author: "作者名稱"            # 選填，不填則不顯示
   closing:
     text: >
       課程結尾金句
+    author: "作者名稱"            # 選填
 
 footer:
   cta: "頁尾行動呼籲"
@@ -386,13 +368,15 @@ footer:
   show_socials: true
 
 seo:
+  site_name: "網站名稱"           # 選填，OG site_name
+  type: "article"                 # 選填，預設 article
   title: "預設 SEO 標題"
   description: "預設 SEO 描述"
-  image: "https://your-domain.example/lectures/example/assets/og-image.jpg"
-  url: "https://your-domain.example/lectures/example/"
+  image: "https://<user>.github.io/<repo>/lectures/<course>/assets/og-image.jpg"
+  url: "https://<user>.github.io/<repo>/lectures/<course>/"
 
 vote:
-  # 填入 Google Apps Script Web App URL（課堂投票功能必填）
+  # 填入 Google Apps Script Web App URL（課堂投票功能必填，見「課堂投票 Widget」段落）
   gas_url: ""
 ```
 
@@ -431,8 +415,10 @@ quotes:
 | `> lead text`（緊接 `#`） | 章節引言 |
 | `## Title` | 子章節 |
 | `### Title` | 卡片 |
-| `` ```prompt [label="..."] `` | 終端機 / Prompt 區塊 |
-| `> **Bold Title**` | 洞察框 |
+| `#### Title` | 小標題（minor title） |
+| `` ```prompt [label="..."] `` | Prompt 區塊（無高亮，header 顯示 label 或 "Prompt"） |
+| `` ```terminal [label="..."] `` | Terminal 區塊（bash 高亮，header 顯示 "Terminal"） |
+| `> **Bold Title**` | 洞察框（Insight Box） |
 | `[flow]...[/flow]` | 流程步驟（捲動進入視窗時步驟逐一滑入） |
 | `[compare label-left="..." label-right="..."]...[/compare]` | 左右對比卡（舊做法 vs 新做法） |
 | `[vote id="..." title="..."]...[/vote]` | 投票卡片嵌入（需設定 `vote.gas_url`） |
@@ -443,19 +429,20 @@ quotes:
 | `- [x] item` | 勾選清單（僅用於已驗證/已完成的事項，不適合一般觀點條列） |
 | `![alt](src)` | 獨立圖片（置中、含說明文字） |
 | `[image-text]...[/image-text]` | 圖文並排（圖片＋文字左右排列，預設圖片佔 40%） |
-| `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式） |
+| `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式，可單行或區塊形式） |
 | `[tabs][tab label="..."]...[/tab][/tabs]` | 分頁切換卡（多語言／多方案範例對照） |
 | `[callout type="info\|warning\|tip" title="..."]...[/callout]` | 標注框（藍／橙／綠三色，可選 title） |
 | `[accordion][item title="..." open]...[/item][/accordion]` | FAQ 摺疊區塊（純 `<details>`，零 JS） |
 | `[reveal title="..."]...[/reveal]` | 點擊揭曉答案 / Spoiler |
 | `[timeline]` + `- 時間 \| 標題 \| 描述` + `[/timeline]` | 時間軸（技術演進、學習路徑） |
 | `[steps-status]` + `- [done\|doing\|todo] 標題 \| 描述` + `[/steps-status]` | 帶 done / doing / todo 狀態的步驟列表 |
-| `` ```js [label="..."] `` | 程式碼區塊（自動高亮，支援 js / ts / py / bash / json / yaml / html / css / go / rust 等） |
+| `` ```js [label="..."] `` | 程式碼區塊（自動高亮，支援 js / jsx / ts / tsx / py / bash / sh / shell / zsh / json / yaml / yml / html / xml / css / scss / go / rust / java / kotlin / swift / ruby / php / sql / c / cpp 等） |
 | `` ```diff [label="..."] `` | Diff 對比區塊（`+` 綠 / `-` 紅） |
 | `[compare-table headers="A \| **B** \| C"]` + `- 列 \| 1 \| 2 \| 3` | 多欄比較表（`**` 包住的欄位高亮為推薦） |
 | `[stats]` + `- 數字 \| 標題 \| 描述` + `[/stats]` | 大字數據卡片格網 |
 | `[?term\|定義]` | 行內術語 tooltip（hover 顯示定義） |
 | `[dl]` + `- 詞 \| 解釋` + `[/dl]` | 名詞解釋對照（`<dl>`） |
+| `\| 欄1 \| 欄2 \| 欄3 \|` | 標準 Markdown 表格 |
 | `---` | 章節分隔線 |
 
 詳細語法與 HTML 對照見 [`components.md`](./.agents/skills/course-page-generator/reference/components.md)。
@@ -637,22 +624,31 @@ Q: build.mjs 會自動讀取 global.yaml？
 
 ### 設定面板
 
-點擊左下角齒輪圖示開啟，提供兩排快捷功能：
+點擊左下角齒輪圖示開啟。面板分為三個區塊：
 
-| 列 | 圖示 | 功能 |
-|----|------|------|
-| 第一列 | A2 | 切換字體大小 |
-| 第一列 | 月亮 / 太陽 | 切換深色 / 淺色主題 |
-| 第一列 | QR | 顯示課程分享 QR Code |
-| 第一列 | 時鐘 | 開啟浮動計時器 |
-| 第二列 | 螢幕 | 進入簡報模式 |
-| 第二列 | 印表機 | 匯出 PDF（投影片版） |
-| 第二列 | 骰子 | 開啟抽籤器 |
-| 第二列 | 勾選框 | 開啟投票 Widget |
-| 第二列 | 同心圓 | 切換聚光燈 / 放大鏡 |
-| 第二列 | 鉛筆 | 開啟塗鴉筆 |
+**第一列（固定按鈕，寫在 `base.html` 模板）：**
 
-色票區可即時切換課程主題配色（共八種），下方還有「快捷鍵說明」Modal 可速查所有按鍵。
+| 圖示 | 功能 |
+|------|------|
+| A2 | 循環切換字體大小（A1 → A5 共 5 段） |
+| 月亮 / 太陽 | 切換深色 / 淺色主題 |
+| QR | 顯示課程分享 QR Code（同 `Q` 鍵） |
+| 時鐘 | 開啟浮動計時器（同 `T` 鍵） |
+
+**第二列（由各 widget 的 JS 動態注入）：**
+
+| 圖示 | 功能 |
+|------|------|
+| 螢幕 | 進入簡報模式（同 `P` 鍵） |
+| 印表機 | 匯出投影片版 PDF |
+| 骰子 | 開啟抽籤器（同 `R` 鍵） |
+| 勾選框 | 開啟投票 Widget（同 `V` 鍵） |
+| 同心圓 | 切換聚光燈 / 放大鏡（同 `S` 鍵） |
+| 鉛筆 | 開啟塗鴉筆（同 `B` 鍵） |
+
+**色票區**：八種色彩主題（正紅 / 暖陽珊瑚 / 深海藍 / 翡翠森林 / 星河紫 / 花見櫻 / ...），點擊即時切換，按 `c` 可循環。
+
+**快捷鍵說明**：面板底部「?」按鈕可開啟快捷鍵 Modal，速查所有按鍵。
 
 ### 浮動計時器
 
@@ -762,11 +758,11 @@ TOC（左側邊欄）每個章節標題旁顯示小圓點，捲動過該章節�
 | `Ctrl+Z` / `Cmd+Z` | 復原上一筆（塗鴉筆啟用時） |
 | `[` / `]` | 塗鴉筆啟用時：筆刷粗細縮小 / 放大（2–20px）；聚光燈開啟時：圓形縮小 / 放大 |
 | `{` / `}` | 放大鏡倍率縮小 / 放大（僅在聚光燈開啟時生效，範圍 1×–5×） |
-| `C`（Shift+c） | 切換暗色/亮色主題；塗鴉筆啟用時：清空畫布 |
-| `c` | 輪迴切換色彩主題；塗鴉筆啟用時：循環筆刷顏色 |
+| `C`（Shift+c） | 塗鴉筆啟用時：清空畫布；否則：切換暗色 / 亮色主題 |
+| `c` | 塗鴉筆啟用時：循環筆刷顏色（8 色）；否則：循環切換色彩主題（8 種） |
 | `=` / `+` | 增大文字 |
 | `-` / `_` | 縮小文字 |
-| `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票、塗鴉筆、聚光燈） |
+| `X` | 關閉所有已顯示的小工具（計時器、抽籤器、投票、分享 QR、塗鴉筆、聚光燈 / 放大鏡） |
 | `Esc` | 關閉目前開啟的彈窗（分享、Bonus、設定等） |
 
 ## 未來開發方向

@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # 建立新課程目錄（含 config.yaml、content.md 模板）
 node .agents/skills/course-page-generator/scripts/new-lecture.mjs lectures/<course-dir>
 
-# 建置前驗證語法（未閉合標籤、全形冒號、seo.url 格式）
+# 建置前驗證語法（建議但非必須；檢查未閉合標籤、全形冒號、seo.url 格式）
 node .agents/skills/course-page-generator/scripts/validate.mjs lectures/<course-dir>
 
 # 建置單一課程頁（從 repo 根目錄執行）
@@ -86,6 +86,15 @@ agent-skill-lecture-builder/
 5. 輸出 `<course-dir>/index.html`（完全自包含，無外部 CDN）
 
 `nav`（Hero 導覽按鈕）從 `content.md` 的 `#` 主章節自動產生，不需手動維護。
+
+### Build 行為細節
+
+- **自寫 YAML 解析器**：`build.mjs` 不用外部 YAML lib，已知限制：
+  - **不支援行內 `#` 註解**：`key: value # comment` 的 `# comment` 會被當成值的一部分。註解必須獨立成行。
+  - 複雜巢狀陣列（多層縮排）可能解析錯誤，請保持結構扁平。
+- **`validate.mjs` 退出碼**：`0` = 可繼續 build（含 warnings）；`1` = 有 errors，應先修正。**只檢查 `content.md` 與 `seo.url` / `seo.image` 格式**，不檢查 `config.yaml` 語法。
+- **本地圖片自動 base64 嵌入**：`content.md` 中引用的本機圖片會被嵌入 `index.html`，build 後不再依賴相對路徑。
+- **GitHub Pages URL 自動偵測**：從 `git remote get-url origin` 取得，失敗時 `seo.url` / `seo.image` 留空（不阻擋 build）。
 
 ### Config 合併規則
 
@@ -173,6 +182,12 @@ agent-skill-lecture-builder/
 
 當使用者說「新增 widget」「建立浮動面板」「加一個 widget」時，請讀取該檔案並依循規範產生程式碼。
 
+**Widget z-index 規則**（容易踩雷）：
+- 所有 widget 的 CSS 初始 `z-index: 10500`，由 `window.__bringToTop(widget)` 動態遞增覆寫。**直接改 CSS z-index 不會生效**，必須透過 `__bringToTop`。
+- 拖曳開始時必須將 `right: auto; bottom: auto; transform: none` 清掉，否則位置會跳動。
+- Settings 面板按鈕用 `document.createElement` 動態建立，注入 `window.__settingsRow2`（第二列），不要寫在 `base.html`。
+- 新增 widget 後，必須把 widget ID 加入 `course.js` 的 `X` 鍵關閉列表，否則按 `X` 無法關閉。
+
 ## 關鍵慣例
 
 - **禁止 Emoji**：所有課程內容、卡片標題、設定檔等一律不得使用 emoji，改用 SVG 或純文字。
@@ -187,4 +202,7 @@ agent-skill-lecture-builder/
 
   GitHub Pages base URL 可由 `git remote get-url origin` 自動偵測。
 - **HTML 編碼**：在 HTML double-quoted 屬性（如 `onerror`）中嵌入 SVG 或 HTML 片段時，所有 `"` 必須改為 `&quot;`，否則 HTML 解析器會提前結束屬性，導致剩餘字串以可見文字輸出。
-- **建置產物需 commit**：`lectures/<course-dir>/index.html` 與 `assets/og-image.jpg` 都是必要的 commit 對象。
+- **建置產物需 commit**：以下三個檔案是 GitHub Pages 部署的必要對象，build 後必須 commit：
+  - `lectures/<course-dir>/index.html`
+  - `lectures/<course-dir>/assets/og-image.jpg`
+  - `lectures/manifest.js`（`build-index.mjs` 產出）
