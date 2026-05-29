@@ -1501,11 +1501,19 @@
         if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__toggleLotteryWidget) window.__toggleLotteryWidget();
         }
-        if ((e.key === 'b' || e.key === 'B') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          window.__toggleDarkLight();
+        if (e.key === 'b' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__toggleDoodle) window.__toggleDoodle();
         }
-        if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          if (window.__cycleColorTheme) window.__cycleColorTheme();
+        if (e.key === 'B' && e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__doodleActive && window.__toggleDoodleEraser) window.__toggleDoodleEraser();
+        }
+        if (e.key === 'c' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__doodleActive && window.__doodleCycleColor) window.__doodleCycleColor();
+          else if (window.__cycleColorTheme) window.__cycleColorTheme();
+        }
+        if (e.key === 'C' && e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (window.__doodleActive && window.__clearDoodle) window.__clearDoodle();
+          else window.__toggleDarkLight();
         }
         if ((e.key === '=' || e.key === '+') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (window.__increaseFontSize) window.__increaseFontSize();
@@ -1526,6 +1534,10 @@
           var sl = document.getElementById('spotlight-overlay');
           if (sl) { sl.classList.remove('active'); window.__spotlightActive = false; }
           if (window.__hideMagnifier) window.__hideMagnifier();
+          if (window.__hideDoodle) window.__hideDoodle();
+        }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z') && !e.altKey) {
+          if (window.__doodleActive && window.__doodleUndo) { window.__doodleUndo(); e.preventDefault(); }
         }
       });
 
@@ -2999,9 +3011,14 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (!window.__spotlightActive) return;
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (window.__doodleActive && (e.key === '[' || e.key === ']')) {
+        if (window.__doodleSize) window.__doodleSize(e.key === '[' ? -2 : 2);
+        e.preventDefault();
+        return;
+      }
+      if (!window.__spotlightActive) return;
       if (e.key === '[') {
         setTarget(targetR - STEP);
         e.preventDefault();
@@ -3103,4 +3120,323 @@
     document.querySelectorAll('.section-label[id]').forEach(function (el) {
       readObs.observe(el);
     });
+  })();
+
+  // ─── Doodle Pen ──────────────────────────────────────────────
+  (function () {
+    var active = false;
+    var erasing = false;
+    var color = '#e03040';
+    var colorIdx = 0;
+    var size = 10;
+    var strokes = [];
+    var currentStroke = null;
+    var MIN_SIZE = 2, MAX_SIZE = 20;
+
+    var COLORS = ['#e03040', '#3b82f6', '#22c55e', '#eab308', '#f97316', '#a855f7', '#ffffff', '#1a1a2e'];
+
+    // --- Canvas ---
+    var canvas = document.createElement('canvas');
+    canvas.id = 'doodle-canvas';
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    function fitCanvas() {
+      var img = null;
+      if (canvas.width && canvas.height) {
+        try { img = ctx.getImageData(0, 0, canvas.width, canvas.height); } catch (e) {}
+      }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      if (img) { try { ctx.putImageData(img, 0, 0); } catch (e) {} }
+    }
+    fitCanvas();
+    window.addEventListener('resize', fitCanvas);
+
+    // --- Custom cursor ---
+    var cursor = document.createElement('div');
+    cursor.id = 'doodle-cursor';
+    document.body.appendChild(cursor);
+    var lastMX = 0, lastMY = 0;
+
+    function updateCursor(e) {
+      if (!active || !e) return;
+      lastMX = e.clientX;
+      lastMY = e.clientY;
+      applyCursorStyle();
+    }
+
+    function applyCursorStyle() {
+      var s = erasing ? size * 4 : size;
+      cursor.style.width = s + 'px';
+      cursor.style.height = s + 'px';
+      cursor.style.backgroundColor = erasing ? 'rgba(255,255,255,.7)' : color;
+      cursor.style.left = (lastMX - s / 2) + 'px';
+      cursor.style.top = (lastMY - s / 2) + 'px';
+    }
+
+    canvas.addEventListener('pointermove', function (e) { updateCursor(e); });
+    canvas.addEventListener('pointerenter', function () { if (active) cursor.classList.add('active'); });
+    canvas.addEventListener('pointerleave', function () { cursor.classList.remove('active'); });
+
+    // --- Drawing ---
+    canvas.addEventListener('pointerdown', function (e) {
+      if (!active) return;
+      canvas.setPointerCapture(e.pointerId);
+      currentStroke = { color: color, size: size, erasing: erasing, points: [{x: e.clientX, y: e.clientY}] };
+      ctx.beginPath();
+      ctx.moveTo(e.clientX, e.clientY);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      if (erasing) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = size * 4;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = size;
+      }
+    });
+
+    canvas.addEventListener('pointermove', function (e) {
+      if (!currentStroke) return;
+      currentStroke.points.push({x: e.clientX, y: e.clientY});
+      ctx.lineTo(e.clientX, e.clientY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener('pointerup', function () {
+      if (currentStroke) { strokes.push(currentStroke); currentStroke = null; }
+      ctx.globalCompositeOperation = 'source-over';
+      updateToolbar();
+    });
+
+    canvas.addEventListener('pointercancel', function () {
+      currentStroke = null;
+      ctx.globalCompositeOperation = 'source-over';
+    });
+
+    // --- Redraw ---
+    function redraw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'source-over';
+      for (var i = 0; i < strokes.length; i++) {
+        var s = strokes[i];
+        ctx.beginPath();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        if (s.erasing) {
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.lineWidth = s.size * 4;
+        } else {
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.strokeStyle = s.color;
+          ctx.lineWidth = s.size;
+        }
+        for (var j = 0; j < s.points.length; j++) {
+          if (j === 0) ctx.moveTo(s.points[j].x, s.points[j].y);
+          else ctx.lineTo(s.points[j].x, s.points[j].y);
+        }
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    // --- Widget ---
+    var widget = document.createElement('div');
+    widget.className = 'doodle-widget';
+    widget.id = 'doodle-widget';
+
+    var ERASER_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>';
+    var UNDO_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>';
+    var CLEAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+    var CLOSE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    var MINUS_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+    var PLUS_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+    var PENCIL_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>';
+
+    function buildWidget() {
+      var header = '<div class="doodle-header" id="doodle-drag-handle">';
+      header += '<span class="doodle-title">' + PENCIL_SVG + ' 塗鴉筆</span>';
+      header += '<button class="doodle-close" id="doodle-widget-close">' + CLOSE_SVG + '</button>';
+      header += '</div>';
+
+      var body = '<div class="doodle-body">';
+      // Colors
+      body += '<div class="doodle-row">';
+      COLORS.forEach(function (c, i) {
+        var sel = i === colorIdx ? ' active' : '';
+        body += '<button class="doodle-color' + sel + '" data-color="' + c + '" data-idx="' + i + '" style="background:' + c + '" aria-label="顏色"></button>';
+      });
+      body += '</div>';
+      // Size + tools
+      body += '<div class="doodle-row">';
+      body += '<button class="doodle-tool-sm" id="doodle-size-down">' + MINUS_SVG + '</button>';
+      body += '<span class="doodle-size-label" id="doodle-size-label">' + size + 'px</span>';
+      body += '<button class="doodle-tool-sm" id="doodle-size-up">' + PLUS_SVG + '</button>';
+      body += '<span class="doodle-sep"></span>';
+      body += '<button class="doodle-tool" id="doodle-eraser-btn">' + ERASER_SVG + '</button>';
+      body += '<button class="doodle-tool" id="doodle-undo-btn">' + UNDO_SVG + '</button>';
+      body += '<button class="doodle-tool" id="doodle-clear-btn">' + CLEAR_SVG + '</button>';
+      body += '</div>';
+      body += '</div>';
+
+      widget.innerHTML = header + body;
+    }
+    buildWidget();
+    document.body.appendChild(widget);
+
+    // --- Drag ---
+    var dragHandle = document.getElementById('doodle-drag-handle');
+    var dragging = false, dragOffX = 0, dragOffY = 0;
+    dragHandle.addEventListener('mousedown', function (e) {
+      if (e.target.closest('button')) return;
+      dragging = true;
+      var r = widget.getBoundingClientRect();
+      dragOffX = e.clientX - r.left;
+      dragOffY = e.clientY - r.top;
+      widget.style.right = 'auto';
+      widget.style.bottom = 'auto';
+      widget.style.transform = 'none';
+      dragHandle.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var x = Math.max(0, Math.min(window.innerWidth - widget.offsetWidth, e.clientX - dragOffX));
+      var y = Math.max(0, Math.min(window.innerHeight - widget.offsetHeight, e.clientY - dragOffY));
+      widget.style.left = x + 'px';
+      widget.style.top = y + 'px';
+    });
+    document.addEventListener('mouseup', function () {
+      dragging = false;
+      dragHandle.style.cursor = 'grab';
+    });
+
+    // --- z-index ---
+    if (widget) {
+      new MutationObserver(function () {
+        if (widget.classList.contains('open')) __bringToTop(widget);
+      }).observe(widget, { attributes: true, attributeFilter: ['class'] });
+      widget.addEventListener('mousedown', function () { __bringToTop(widget); });
+    }
+
+    function updateToolbar() {
+      var sizeLabel = document.getElementById('doodle-size-label');
+      if (sizeLabel) sizeLabel.textContent = size + 'px';
+      widget.querySelectorAll('.doodle-color').forEach(function (btn) {
+        btn.classList.toggle('active', parseInt(btn.dataset.idx) === colorIdx);
+      });
+      var eraserBtn = document.getElementById('doodle-eraser-btn');
+      if (eraserBtn) eraserBtn.classList.toggle('active', erasing);
+      var undoBtn = document.getElementById('doodle-undo-btn');
+      if (undoBtn) undoBtn.disabled = strokes.length === 0;
+    }
+
+    widget.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn) return;
+      if (btn.dataset.color !== undefined && btn.dataset.color !== '') {
+        colorIdx = parseInt(btn.dataset.idx);
+        color = COLORS[colorIdx];
+        erasing = false;
+        updateToolbar();
+      } else if (btn.id === 'doodle-size-down') {
+        changeSize(-2);
+      } else if (btn.id === 'doodle-size-up') {
+        changeSize(2);
+      } else if (btn.id === 'doodle-eraser-btn') {
+        erasing = !erasing;
+        updateToolbar();
+      } else if (btn.id === 'doodle-undo-btn') {
+        undo();
+      } else if (btn.id === 'doodle-clear-btn') {
+        clearAll();
+      } else if (btn.id === 'doodle-widget-close') {
+        hideDoodle();
+      }
+    });
+
+    function changeSize(delta) {
+      size = Math.max(MIN_SIZE, Math.min(MAX_SIZE, size + delta));
+      updateToolbar();
+      applyCursorStyle();
+    }
+
+    function cycleColor() {
+      colorIdx = (colorIdx + 1) % COLORS.length;
+      color = COLORS[colorIdx];
+      erasing = false;
+      updateToolbar();
+      applyCursorStyle();
+    }
+
+    function undo() {
+      if (strokes.length === 0) return;
+      strokes.pop();
+      redraw();
+      updateToolbar();
+    }
+
+    function clearAll() {
+      strokes = [];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      updateToolbar();
+    }
+
+    function showDoodle() {
+      active = true;
+      erasing = false;
+      canvas.classList.add('active');
+      widget.classList.add('open');
+      cursor.classList.add('active');
+      updateToolbar();
+    }
+
+    function hideDoodle() {
+      active = false;
+      erasing = false;
+      canvas.classList.remove('active');
+      widget.classList.remove('open');
+      cursor.classList.remove('active');
+    }
+
+    function toggleDoodle() {
+      if (active) hideDoodle(); else showDoodle();
+    }
+
+    function toggleEraser() {
+      erasing = !erasing;
+      updateToolbar();
+      applyCursorStyle();
+    }
+
+    window.__toggleDoodle = toggleDoodle;
+    window.__toggleDoodleEraser = toggleEraser;
+    window.__doodleSize = changeSize;
+    window.__doodleUndo = undo;
+    window.__clearDoodle = clearAll;
+    window.__hideDoodle = hideDoodle;
+    window.__doodleCycleColor = cycleColor;
+    Object.defineProperty(window, '__doodleActive', { get: function () { return active; } });
+
+    // --- Settings panel button ---
+    var settingsBtn = document.createElement('button');
+    settingsBtn.className = 'doodle-settings-btn';
+    settingsBtn.setAttribute('aria-label', '塗鴉筆');
+    settingsBtn.innerHTML = PENCIL_SVG.replace('width="14"', 'width="15"').replace('height="14"', 'height="15"');
+    settingsBtn.addEventListener('click', function () {
+      var sp = document.getElementById('settings-panel');
+      if (sp) sp.classList.remove('open');
+      var st = document.getElementById('settings-toggle');
+      if (st) st.classList.remove('active');
+      toggleDoodle();
+    });
+    (function appendBtn() {
+      var targetRow = window.__settingsRow2 || document.querySelectorAll('.settings-controls-row')[1];
+      if (targetRow) targetRow.appendChild(settingsBtn);
+      else setTimeout(appendBtn, 50);
+    })();
   })();

@@ -384,29 +384,27 @@
     <div class="group-block">
       <div class="group-header">安裝指令</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">全域安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">全域安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">npm install -g @anthropic-ai/claude-code
-claude --version</div>
+      <pre class="code-body"><code class="lang-text">npm install -g @anthropic-ai/claude-code
+claude --version</code></pre>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">首次啟動會引導登入</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">首次啟動會引導登入</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">cd ~/projects/my-app
-claude</div>
+      <pre class="code-body"><code class="lang-text">cd ~/projects/my-app
+claude</code></pre>
     </div>
         <ul class="loose-list">
       <li>第一次啟動會開瀏覽器完成 OAuth 授權，或要求貼上 API Key</li>
@@ -469,19 +467,18 @@ claude</div>
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">第一次對話的標準範本</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">第一次對話的標準範本</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">這是一個 React + TypeScript 的後台管理專案，使用 Vite。
+      <pre class="code-body"><code class="lang-text">這是一個 React + TypeScript 的後台管理專案，使用 Vite。
 請幫我把 src/pages/UserList.tsx 改為使用 react-query 抓資料，
 維持原本的 UI 不變，並加上 loading / error 狀態。
-不要改動任何測試檔，完成後告訴我哪些檔案被修改。</div>
+不要改動任何測試檔，完成後告訴我哪些檔案被修改。</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">不要把它當搜尋引擎用</div>
@@ -586,19 +583,18 @@ claude</div>
     <div class="group-block">
       <div class="group-header">進入 Plan Mode</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">顯式進入 Plan Mode</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">顯式進入 Plan Mode</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">進入 plan mode：
+      <pre class="code-body"><code class="lang-text">進入 plan mode：
 我想把目前的 useState 表單改用 react-hook-form，
 列出你計畫修改的檔案、變更摘要，以及測試該怎麼補。
-不要動程式碼，先給我計畫。</div>
+不要動程式碼，先給我計畫。</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -660,18 +656,17 @@ claude</div>
       <span class="tag orange">大型重構可分多輪：先改型別、再改實作、最後補測試</span>
       <span class="tag purple">警訊：當 AI 說「順便也修了 X」，停下來檢查它做了什麼</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">逐步推進的指令範例</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">逐步推進的指令範例</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">按照剛才的計畫，先只改 src/forms/LoginForm.tsx，
+      <pre class="code-body"><code class="lang-text">按照剛才的計畫，先只改 src/forms/LoginForm.tsx，
 改完先停，跑一次 npm run typecheck，
-把錯誤訊息貼回來，我們再決定下一步。</div>
+把錯誤訊息貼回來，我們再決定下一步。</code></pre>
     </div>
       </div>
     </div>
@@ -715,21 +710,20 @@ claude</div>
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">把驗證寫進指令</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">把驗證寫進指令</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">完成後請執行：
+      <pre class="code-body"><code class="lang-text">完成後請執行：
 1. npm run typecheck
 2. npm test -- src/forms
 3. 啟動 dev server（背景執行），告訴我 port 與要測試的路徑
 
-每一步把輸出貼給我；任何一步失敗就停下來，不要自行修復。</div>
+每一步把輸出貼給我；任何一步失敗就停下來，不要自行修復。</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">永遠不要相信「應該可以了」</div>
@@ -836,18 +830,17 @@ claude</div>
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">讓 AI 幫你寫第一版</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">讓 AI 幫你寫第一版</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">請閱讀整個 repo，幫我草擬一份 CLAUDE.md，
+      <pre class="code-body"><code class="lang-text">請閱讀整個 repo，幫我草擬一份 CLAUDE.md，
 內容包含：專案概述、建置指令、程式碼規範、已知陷阱、提交規範。
-不確定的地方標 TODO 讓我補，不要瞎掰。</div>
+不確定的地方標 TODO 讓我補，不要瞎掰。</code></pre>
     </div>
       </div>
     </div>
@@ -871,16 +864,15 @@ claude</div>
         </tbody>
       </table>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">在 .claude/settings.json 設定預授權</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">在 .claude/settings.json 設定預授權</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">{
+      <pre class="code-body"><code class="lang-text">{
   &quot;permissions&quot;: {
     &quot;allow&quot;: [
       &quot;Bash(npm test:*)&quot;,
@@ -893,7 +885,7 @@ claude</div>
       &quot;Bash(git push --force:*)&quot;
     ]
   }
-}</div>
+}</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">預授權只給「無副作用」的指令</div>
@@ -930,16 +922,15 @@ claude</div>
     <div class="group-block">
       <div class="group-header">自訂專案 Slash Command</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">.claude/commands/review.md</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">.claude/commands/review.md</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">---
+      <pre class="code-body"><code class="lang-text">---
 description: 對當前 branch 的變更做一次 code review
 ---
 
@@ -947,7 +938,7 @@ description: 對當前 branch 的變更做一次 code review
 1. 跑 git diff main...HEAD，列出所有變更檔案
 2. 對每個檔案分析：可讀性、潛在 bug、測試覆蓋
 3. 用 markdown 表格輸出建議（檔案 / 問題 / 嚴重性 / 建議修法）
-4. 不要動任何程式碼</div>
+4. 不要動任何程式碼</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -1052,16 +1043,15 @@ description: 對當前 branch 的變更做一次 code review
     <div class="group-block">
       <div class="group-header">Skill 的最小結構</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">.claude/skills/git-smart-commit/SKILL.md</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">.claude/skills/git-smart-commit/SKILL.md</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">---
+      <pre class="code-body"><code class="lang-text">---
 name: git-smart-commit
 description: 當使用者要建立 commit 時觸發，分析變更並拆成多個語意清晰的 commit
 ---
@@ -1075,7 +1065,7 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
 3. 為每組產生 commit message：第一行 type(scope): subject，
    空行後 bullet 詳述 why
 4. 依組逐一 git add 與 git commit，每次 commit 後 git status 確認
-5. 所有變更處理完才回報結果</div>
+5. 所有變更處理完才回報結果</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">好 Skill 的判斷標準</div>
@@ -1152,19 +1142,18 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">顯式委派給 Subagent</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">顯式委派給 Subagent</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">派出 explore subagent：
+      <pre class="code-body"><code class="lang-text">派出 explore subagent：
 找出整個 repo 中所有使用 useEffect 處理 data fetching 的地方，
 回報檔案、行號、用途分類，最多 30 筆。
-你（主對話）不需要讀檔，等子代理結果就好。</div>
+你（主對話）不需要讀檔，等子代理結果就好。</code></pre>
     </div>
         <div class="quiz-block" data-quiz-id="q-什麼時候應該使用subagent" data-quiz-answer="1">
       <div class="quiz-q">什麼時候應該使用 Subagent？</div>
@@ -1237,16 +1226,15 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">.claude/settings.json — 自動 format</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">.claude/settings.json — 自動 format</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">{
+      <pre class="code-body"><code class="lang-text">{
   &quot;hooks&quot;: {
     &quot;PostToolUse&quot;: [
       {
@@ -1257,7 +1245,7 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
       }
     ]
   }
-}</div>
+}</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">Hook 的設計原則：能補做就不要補罵</div>
@@ -1288,16 +1276,15 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
   <li>AI 可直接查 PostgreSQL、讀 Notion、操作 Linear，無需切換介面</li>
   <li>設定在 <code>.claude/settings.json</code> 的 <code>mcpServers</code> 區塊</li>
 </ul>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">加入 PostgreSQL MCP server</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">加入 PostgreSQL MCP server</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">{
+      <pre class="code-body"><code class="lang-text">{
   &quot;mcpServers&quot;: {
     &quot;postgres&quot;: {
       &quot;command&quot;: &quot;npx&quot;,
@@ -1305,7 +1292,7 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
                &quot;postgresql://localhost/mydb&quot;]
     }
   }
-}</div>
+}</code></pre>
     </div>
       </div>
     </div>
@@ -1370,19 +1357,18 @@ description: 當使用者要建立 commit 時觸發，分析變更並拆成多�
   <li>每個 worktree 獨立的 node_modules、dev server、AI 對話</li>
   <li>切換任務不需 stash，也不會弄髒當前進度</li>
 </ul>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">建立 worktree</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立 worktree</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git worktree add ../myapp-feature-x feature/x
+      <pre class="code-body"><code class="lang-text">git worktree add ../myapp-feature-x feature/x
 cd ../myapp-feature-x
 npm install
-claude</div>
+claude</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -1515,23 +1501,22 @@ claude</div>
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">正確的 debug 提問</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">正確的 debug 提問</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">這個錯誤的重現步驟：
+      <pre class="code-body"><code class="lang-text">這個錯誤的重現步驟：
 1. npm run dev
 2. 訪問 /users，點第一筆
 3. console 出現：TypeError: Cannot read properties of undefined (reading 'name')
    stack 指向 src/pages/UserDetail.tsx:42
 
 請列出至少 2 個可能原因，並各自設計一個最小驗證方法。
-不要直接改程式碼。</div>
+不要直接改程式碼。</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">bug 修不好的真正原因：上一個 bug 沒修對</div>
@@ -1838,27 +1823,25 @@ claude</div>
     </div>
   </div>
 
-  <div class="share-overlay" id="share-overlay">
-    <div class="share-modal">
-      <div class="share-modal-header">
-        <h3>分享此課程</h3>
-        <button class="share-modal-close" id="share-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <div class="share-modal-body">
-        <div class="share-qr-wrap">
-          <div class="share-qr-frame">
-            <div class="share-qr-img" id="share-qr-container"></div>
-          </div>
-          <span class="share-qr-label">掃描開啟</span>
+  <div class="share-widget" id="share-widget">
+    <div class="share-header" id="share-drag-handle">
+      <span class="share-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2V2zm2 2v5h5V4H4zm1 1h3v3H5V5zM13 2h9v9h-9V2zm2 2v5h5V4h-5zm1 1h3v3h-3V5zM2 13h9v9H2v-9zm2 2v5h5v-5H4zm1 1h3v3H5v-3zM13 13h3v3h-3v-3zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/></svg>分享此課程</span>
+      <button class="share-close" id="share-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="share-body">
+      <div class="share-qr-wrap">
+        <div class="share-qr-frame">
+          <div class="share-qr-img" id="share-qr-container"></div>
         </div>
-        <div class="share-right">
-          <div class="share-og-wrap">
-            <img class="share-og-img" id="share-og-img" src="" alt="">
-          </div>
-          <div class="share-url-row">
-            <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
-            <button class="share-copy-btn" id="share-copy-btn">複製</button>
-          </div>
+        <span class="share-qr-label">掃描開啟</span>
+      </div>
+      <div class="share-right">
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
         </div>
       </div>
     </div>
@@ -1877,8 +1860,8 @@ claude</div>
           <table class="shortcut-table">
             <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
             <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
             <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
             <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
           </table>
@@ -1892,10 +1875,20 @@ claude</div>
             <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">塗鴉筆</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">筆刷 / 聚光燈圓形縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">塗鴉筆模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>B</kbd></span></td><td class="shortcut-desc">切換橡皮擦</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">循環筆刷顏色</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">清空畫布</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Ctrl</kbd><span class="shortcut-sep">+</span><kbd>Z</kbd></span></td><td class="shortcut-desc">復原上一筆</td></tr>
           </table>
         </div>
         <div class="shortcut-col">

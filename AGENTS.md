@@ -166,8 +166,9 @@ agent-skill-lecture-builder/
 課程頁內建互動功能，由 `assets/course.js` 提供，完整使用說明見 `README.md`：
 
 - **計時器、抽籤器、投票 Widget、Quiz**：左下角設定面板開啟，或快捷鍵 `T` / `R` / `V`
+- **塗鴉筆**：按 `B` 開啟/關閉，`Shift+B` 切換橡皮擦，`c` 循環筆刷顏色，`Shift+C` 清空畫布，`[`/`]` 調整筆刷粗細，`Ctrl+Z`/`Cmd+Z` 復原
 - **章節進度追蹤**：捲動自動標記，`localStorage` 持久化
-- **鍵盤快捷鍵**：`P` 簡報模式、`B` 主題切換、`Q` QR Code、`F` 全螢幕、`C` 色票輪迴等
+- **鍵盤快捷鍵**：`P` 簡報模式、`C`（Shift+c）主題切換、`c` 色票輪迴、`Q` QR Code、`F` 全螢幕、`S` 聚光燈等
 - **投票後端**：需設定 `config/global.yaml` 的 `vote.gas_url`（Google Apps Script Web App URL），更新後執行 `build-vote.mjs` 注入學生端 `vote/index.html`
 
 ## 關鍵慣例

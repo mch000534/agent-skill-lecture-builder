@@ -334,23 +334,39 @@ if (targetRow) targetRow.appendChild(xxxBtn);
 
 ```css
 .xxx-settings-btn {
-  background: var(--bg-card);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-card-alt);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-dim);
   cursor: pointer;
-  padding: .35rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color .2s, border-color .2s;
+  transition: all .18s;
+  flex-shrink: 0;
+  padding: 0;
+  color: var(--text-dim);
 }
 
 .xxx-settings-btn:hover {
-  color: var(--text);
+  background: rgba(var(--accent-rgb), .12);
   border-color: var(--accent);
+  color: var(--accent);
+}
+
+.xxx-settings-btn.active {
+  background: rgba(var(--accent-rgb), .18);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 ```
+
+**圖示規範**：
+- SVG 尺寸：`width="15" height="15"`，`viewBox="0 0 24 24"`
+- 樣式：`fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`
+- 按鈕外觀：`32px` 圓形（`border-radius: 50%`），背景色 `var(--bg-card-alt)`，與所有 settings panel 按鈕一致
+- `.active` 狀態：當 widget 開啟時，按鈕顯示 accent 高亮（選配，由 JS 切換 `.active` class）
 
 ---
 
@@ -408,7 +424,8 @@ function __bringToTop(el) { el.style.zIndex = ++__widgetZ; }
 - [ ] `.xxx-title`：`font-size: .78rem; font-weight: 700; color: var(--text-dim);`
 - [ ] `.xxx-close`：`background: none; border: none; cursor: pointer; color: var(--text-dim);`
 - [ ] `.xxx-body`：`flex: 1; min-height: 0; padding: .85rem .9rem;`
-- [ ] Settings button 樣式 `.xxx-settings-btn`
+- [ ] Settings button 樣式 `.xxx-settings-btn`：`32px` 圓形、`var(--bg-card-alt)` 背景
+- [ ] Settings button SVG icon：`15x15`、`fill="none" stroke="currentColor"`
 - [ ] Light theme 覆寫（選擇性）
 
 ### JS（`assets/course.js`）
