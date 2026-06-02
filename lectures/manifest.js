@@ -24,6 +24,14 @@ window.__courses__ = [
     "category": "AI & 程式設計"
   },
   {
+    "title": "Claude Code 入門 101",
+    "badge": "AI 工具 · 入門課",
+    "subtitle": "完全小白也能上手的 Claude Code 入門課。學習 AI Agent 概念、安裝與啟動、cc-switch 切換模型，以及與 AI 高效協作的心法。",
+    "ogImage": "lectures/claude-code-101/assets/og-image.jpg",
+    "href": "lectures/claude-code-101/",
+    "category": "AI 工具"
+  },
+  {
     "title": "Claude Code 由入門到精通",
     "badge": "AI Coding",
     "subtitle": "從心智模型、核心工作流（Plan / Edit / Verify）、CLAUDE.md 規範、Skills、Subagents、Hooks、MCP，到團隊協作心法的 180 分鐘完整課程。",

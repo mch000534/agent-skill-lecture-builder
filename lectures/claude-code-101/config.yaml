@@ -1,0 +1,22 @@
+page:
+  title: "Claude Code 入門 101"
+  badge: "AI 工具 · 入門課"
+  hero_title: "Claude Code 入門 101<br>認識你的 AI 工作夥伴"
+  subtitle: "從零開始認識 AI Agent、安裝 Claude Code、學會切換模型，建立與 AI 協作的基本工作流。完全小白友善。"
+  category: "AI 工具"
+
+seo:
+  title: "Claude Code 入門 101 — 認識 AI Agent 的第一課"
+  description: "完全小白也能上手的 Claude Code 入門課。學習 AI Agent 概念、安裝與啟動、cc-switch 切換模型，以及與 AI 高效協作的心法。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/claude-code-101/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/claude-code-101/assets/og-image.jpg"
+
+quotes:
+  opening:
+    text: >
+      AI 不是用來取代你的，而是讓你能做以前一個人做不到的事。
+      Claude Code 是你第一個真正意義上的「AI 工作夥伴」。
+  closing:
+    text: >
+      你今天學到的不只是一個工具，而是一種新的工作方式。
+      從現在開始，你不再是一個人工作了。
