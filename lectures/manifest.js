@@ -24,6 +24,14 @@ window.__courses__ = [
     "category": "AI & 程式設計"
   },
   {
+    "title": "AI Vibe Coding 應用於網路爬蟲",
+    "badge": "Python · Gemini · Colab",
+    "subtitle": "學會用 Google Gemini + Colab 輔助開發取代查文件：如何貼 HTML 讓 AI 找選擇器、把錯誤丟給 Gemini 修正、一步步迭代到完整爬蟲。適合有 Python 與爬蟲基礎的學習者。",
+    "ogImage": "lectures/ai-vibe-scraping/assets/og-image.jpg",
+    "href": "lectures/ai-vibe-scraping/",
+    "category": "Python"
+  },
+  {
     "title": "Claude Code 入門 101",
     "badge": "AI 工具 · 入門課",
     "subtitle": "完全小白也能上手的 Claude Code 入門課。學習 AI Agent 概念、安裝與啟動、cc-switch 切換模型，以及與 AI 高效協作的心法。",
@@ -118,6 +126,22 @@ window.__courses__ = [
     "ogImage": "lectures/photopea-print-prep/assets/og-image.jpg",
     "href": "lectures/photopea-print-prep/",
     "category": "設計印刷"
+  },
+  {
+    "title": "Python 快速入門 — 零基礎也能學",
+    "badge": "Python · 零基礎入門",
+    "subtitle": "專為 Python 初學者設計的快速入門課程。用 Google Colab 學習變數、for 迴圈、函式、List 與 Dictionary，以及字串操作技巧，從零開始建立 Python 程式設計基礎。",
+    "ogImage": "lectures/python-quickstart/assets/og-image.jpg",
+    "href": "lectures/python-quickstart/",
+    "category": "Python"
+  },
+  {
+    "title": "Python 網路爬蟲入門 — 從 HTTP 到資料提取",
+    "badge": "Python · 網路爬蟲",
+    "subtitle": "從網路爬蟲基礎概念出發，涵蓋 robots.txt 禮儀、HTTP 協議、HTTPS、API 呼叫、Chrome DevTools 使用與 BeautifulSoup CSS 選擇器，適合已有 Python 基礎的學習者。",
+    "ogImage": "lectures/python-web-scraping/assets/og-image.jpg",
+    "href": "lectures/python-web-scraping/",
+    "category": "Python"
   },
   {
     "title": "老人AI科普",

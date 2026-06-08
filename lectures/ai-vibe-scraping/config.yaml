@@ -1,0 +1,16 @@
+page:
+  title: "AI Vibe Coding 應用於網路爬蟲"
+  badge: "Python · Gemini · Colab"
+  hero_title: "AI Vibe Coding<br>應用於網路爬蟲"
+  subtitle: "用自然語言驅動 AI 寫爬蟲——從描述需求到產出 CSV，學會和 AI 結對程式設計的完整工作流程。"
+  category: "Python"
+
+seo:
+  title: "AI Vibe Coding 應用於網路爬蟲｜Gemini、Colab、BeautifulSoup"
+  description: "學會用 Google Gemini + Colab 輔助開發取代查文件：如何貼 HTML 讓 AI 找選擇器、把錯誤丟給 Gemini 修正、一步步迭代到完整爬蟲。適合有 Python 與爬蟲基礎的學習者。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-vibe-scraping/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/ai-vibe-scraping/assets/og-image.jpg"
+
+quotes:
+  opening: "你的核心技能不再是記住 BeautifulSoup 的語法，而是能清楚描述你要什麼——讓 AI 替你找答案。"
+  closing: "下一步：打開 Claude Code，貼上一段真實網頁的 HTML，讓 AI 幫你寫第一個選擇器。"

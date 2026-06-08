@@ -1,0 +1,16 @@
+page:
+  title: "Python 快速入門 — 零基礎也能學"
+  badge: "Python · 零基礎入門"
+  hero_title: "Python 快速入門<br>零基礎也能學"
+  subtitle: "從 Google Colab 出發，掌握變數、迴圈、函式、List、Dictionary 與字串操作，打下紮實的 Python 基礎。完全不需要安裝任何軟體。"
+  category: "Python"
+
+seo:
+  title: "Python 快速入門｜零基礎 Google Colab 教學"
+  description: "專為 Python 初學者設計的快速入門課程。用 Google Colab 學習變數、for 迴圈、函式、List 與 Dictionary，以及字串操作技巧，從零開始建立 Python 程式設計基礎。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/python-quickstart/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/python-quickstart/assets/og-image.jpg"
+
+quotes:
+  opening: "寫程式不需要天賦，只需要從第一行 print() 開始。"
+  closing: "Python 基礎已到位，下一站：用 requests 和 BeautifulSoup 爬取你的第一個真實網站。"

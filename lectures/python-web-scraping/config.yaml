@@ -1,0 +1,16 @@
+page:
+  title: "Python 網路爬蟲入門 — 從 HTTP 到資料提取"
+  badge: "Python · 網路爬蟲"
+  hero_title: "Python 網路爬蟲入門<br>從 HTTP 到資料提取"
+  subtitle: "了解爬蟲原理、HTTP 協議、CSS 選擇器與開發者工具，為已有 Python 基礎的學習者建立完整的爬蟲技能基礎。"
+  category: "Python"
+
+seo:
+  title: "Python 網路爬蟲入門｜HTTP、BeautifulSoup、CSS 選擇器"
+  description: "從網路爬蟲基礎概念出發，涵蓋 robots.txt 禮儀、HTTP 協議、HTTPS、API 呼叫、Chrome DevTools 使用與 BeautifulSoup CSS 選擇器，適合已有 Python 基礎的學習者。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/python-web-scraping/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/python-web-scraping/assets/og-image.jpg"
+
+quotes:
+  opening: "爬蟲工程師的核心能力，不只是寫程式，更是理解網路如何運作。"
+  closing: "下一步：安裝 requests 與 BeautifulSoup，從 books.toscrape.com 開始你的第一個爬蟲練習。"
