@@ -56,7 +56,7 @@ Allow: /               # Google 可爬取全站
 - 大多數網站會偵測異常高頻請求並封鎖 IP
 - 加入延遲能模擬真人行為，降低被封鎖機率
 
-```prompt [label="Python：加入延遲的爬蟲"]
+```prompt py [label="Python：加入延遲的爬蟲"]
 import requests
 import time
 
@@ -110,7 +110,7 @@ Hint: 網站有權根據請求頻率封鎖 IP，遵守禮儀能讓爬蟲持續�
 - [purple] DELETE 刪除資料
 [/tags]
 
-```prompt [label="Python requests：不同方法示範"]
+```prompt py [label="Python requests：不同方法示範"]
 import requests
 
 # GET：取得網頁或資料
@@ -143,7 +143,7 @@ response = requests.get("https://example.com", headers=headers)
 - 500 | Server Error | 伺服器內部錯誤
 [/stats]
 
-```prompt [label="Python：讀取回應內容"]
+```prompt py [label="Python：讀取回應內容"]
 import requests
 
 response = requests.get("https://httpbin.org/json")
@@ -196,7 +196,7 @@ print(response.json())        # 自動解析 JSON 為 Python dict
 - BeautifulSoup 解析 | 直接 response.json()
 [/compare]
 
-```prompt [label="Python：呼叫公開 API"]
+```prompt py [label="Python：呼叫公開 API"]
 import requests
 
 # 呼叫 JSONPlaceholder 假 API（練習用）
@@ -264,7 +264,7 @@ Command + Option + I     # Mac
 
 ### HTML 基本文件結構
 
-```prompt [label="HTML 基本結構"]
+```prompt html [label="HTML 基本結構"]
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -313,7 +313,7 @@ Command + Option + I     # Mac
 - `div.card a`（組合選擇器） | `soup.select("div.card a")`
 [/compare]
 
-```prompt [label="BeautifulSoup：CSS 選擇器實戰"]
+```prompt py [label="BeautifulSoup：CSS 選擇器實戰"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -360,7 +360,7 @@ pip install requests
 
 ### 發送第一個請求
 
-```prompt [label="Python：requests 基本用法"]
+```prompt py [label="Python：requests 基本用法"]
 import requests
 
 # 最基本的 GET 請求
@@ -377,7 +377,7 @@ print(response.json())        # 解析 JSON → Python dict（若非 JSON 會拋
 
 ### 加入 Query Parameters
 
-```prompt [label="Python：URL 查詢參數"]
+```prompt py [label="Python：URL 查詢參數"]
 import requests
 
 # 方法一：直接寫在 URL（不推薦，難以維護）
@@ -395,7 +395,7 @@ print(response.url)
 
 ### 設定 Headers 模擬瀏覽器
 
-```prompt [label="Python：自訂 Headers"]
+```prompt py [label="Python：自訂 Headers"]
 import requests
 
 headers = {
@@ -413,7 +413,7 @@ print(response.json())
 
 ### Session：保持登入狀態與複用連線
 
-```prompt [label="Python：使用 Session 保持 Cookie"]
+```prompt py [label="Python：使用 Session 保持 Cookie"]
 import requests
 
 session = requests.Session()
@@ -443,7 +443,7 @@ session.close()  # 完成後關閉連線
 
 ### Timeout：避免請求卡住
 
-```prompt [label="Python：設定請求逾時"]
+```prompt py [label="Python：設定請求逾時"]
 import requests
 
 # 設定 timeout（秒）：connect timeout 與 read timeout
@@ -458,7 +458,7 @@ except requests.exceptions.ConnectionError:
 
 ### raise_for_status()：自動拋出 HTTP 錯誤
 
-```prompt [label="Python：優雅的錯誤處理"]
+```prompt py [label="Python：優雅的錯誤處理"]
 import requests
 
 def safe_get(url):
@@ -487,7 +487,7 @@ response.raise_for_status() — 4xx/5xx 自動拋錯
 
 ### 動手練習：完整爬蟲模板
 
-```prompt [label="Python：爬蟲最佳實踐模板"]
+```prompt py [label="Python：爬蟲最佳實踐模板"]
 import requests
 import time
 
@@ -536,7 +536,7 @@ for url in urls:
 pip install beautifulsoup4
 ```
 
-```prompt [label="Python：從 HTML 字串建立 Soup"]
+```prompt py [label="Python：從 HTML 字串建立 Soup"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -565,7 +565,7 @@ print(soup.title.text)   # All products | Books to Scrape...
 
 ### find：找第一個符合的元素
 
-```prompt [label="Python：find() 基本用法"]
+```prompt py [label="Python：find() 基本用法"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -586,7 +586,7 @@ print(first_link["href"])   # catalogue/a-light-in-the-attic_1000/index.html
 
 ### find_all：找所有符合的元素
 
-```prompt [label="Python：find_all() 批次提取"]
+```prompt py [label="Python：find_all() 批次提取"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -616,7 +616,7 @@ print(f"共找到 {len(prices)} 個價格")   # 20
 - 適合簡單搜尋 | 適合巢狀結構或組合條件
 [/compare]
 
-```prompt [label="Python：select() 實戰"]
+```prompt py [label="Python：select() 實戰"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -640,7 +640,7 @@ for book in books:
 
 ## 完整單頁爬蟲
 
-```prompt [label="Python：完整爬取一頁書籍資料"]
+```prompt py [label="Python：完整爬取一頁書籍資料"]
 from bs4 import BeautifulSoup
 import requests
 
@@ -683,7 +683,7 @@ for book in result[:3]:
 pip install pandas
 ```
 
-```prompt [label="Python：List of Dict → DataFrame"]
+```prompt py [label="Python：List of Dict → DataFrame"]
 import pandas as pd
 
 books = [
@@ -708,7 +708,7 @@ print(df.columns)  # Index(['title', 'price', 'rating'], dtype='object')
 
 ### 清理價格欄位為數字
 
-```prompt [label="Python：清理 price 欄位"]
+```prompt py [label="Python：清理 price 欄位"]
 import pandas as pd
 
 df = pd.DataFrame([
@@ -731,7 +731,7 @@ print(df["price"].min())     # 最低價：12.99
 
 ### 篩選與排序
 
-```prompt [label="Python：篩選與排序 DataFrame"]
+```prompt py [label="Python：篩選與排序 DataFrame"]
 import pandas as pd
 
 # 模擬爬完一頁的資料
@@ -764,7 +764,7 @@ print(result)
 
 ### 一行輸出 CSV
 
-```prompt [label="Python：輸出 CSV 與 Excel"]
+```prompt py [label="Python：輸出 CSV 與 Excel"]
 import pandas as pd
 
 df = pd.DataFrame([
@@ -787,7 +787,7 @@ print(df_check)
 
 ## 爬蟲 + BeautifulSoup + pandas 完整流程
 
-```prompt [label="Python：爬蟲到 CSV 完整範例"]
+```prompt py [label="Python：爬蟲到 CSV 完整範例"]
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -873,7 +873,7 @@ df.to_csv() 輸出檔案
 
 ### 用 DevTools 定位資料欄位
 
-```prompt [label="DevTools 觀察結果：每本書的 HTML 結構"]
+```prompt html [label="DevTools 觀察結果：每本書的 HTML 結構"]
 <article class="product_pod">
 
   <!-- 評星：class 第二個值就是評分文字 -->
@@ -921,7 +921,7 @@ df.to_csv() 輸出檔案
 - 換網站要大改 | 只需換 parse_page 的選擇器
 [/compare]
 
-```prompt [label="程式結構：三層分工"]
+```prompt py [label="程式結構：三層分工"]
 # 第一層：取得 HTML
 def fetch_page(session, url):
     """發送請求，返回 BeautifulSoup 物件；失敗返回 None"""
@@ -942,7 +942,7 @@ def scrape_all(total_pages):
 
 ### 實作 fetch_page
 
-```prompt [label="Python：fetch_page 函式"]
+```prompt py [label="Python：fetch_page 函式"]
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -972,7 +972,7 @@ print(soup.title.text)   # All products | Books to Scrape - Sandbox
 
 ### 實作 parse_page
 
-```prompt [label="Python：parse_page 函式"]
+```prompt py [label="Python：parse_page 函式"]
 # href 已包含 catalogue/，base 只需到網域根目錄
 BASE_URL = "https://books.toscrape.com/"
 
@@ -1017,7 +1017,7 @@ for b in books[:2]:
 
 ### 實作 scrape_all（翻頁主控）
 
-```prompt [label="Python：scrape_all 翻頁主控函式"]
+```prompt py [label="Python：scrape_all 翻頁主控函式"]
 import pandas as pd
 
 def scrape_all(total_pages=50):
@@ -1054,7 +1054,7 @@ def scrape_all(total_pages=50):
 
 ### 完整執行並分析結果
 
-```prompt [label="Python：執行爬蟲並分析資料"]
+```prompt py [label="Python：執行爬蟲並分析資料"]
 # 爬取全部 50 頁（1000 本書）
 all_books = scrape_all(total_pages=50)
 
@@ -1084,7 +1084,7 @@ print("\n已儲存 books_toscrape_full.csv")
 
 ### 完整程式碼彙整（可直接執行）
 
-```prompt [label="Python：完整爬蟲程式（複製可用）"]
+```prompt py [label="Python：完整爬蟲程式（複製可用）"]
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd

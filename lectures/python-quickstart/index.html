@@ -296,14 +296,14 @@
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：執行你的第一行程式碼</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">print(&quot;Hello, World!&quot;)
-print(&quot;我要學 Python 爬蟲！&quot;)</code></pre>
+      <pre class="code-body"><code class="lang-py"><span class="tok-fn">print</span>(<span class="tok-str">&quot;Hello, World!&quot;</span>)
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;我要學 Python 爬蟲！&quot;</span>)</code></pre>
     </div>
         <ul class="checklist">
       <li>前往 colab.research.google.com 開啟新 Notebook</li>
@@ -339,27 +339,27 @@ print(&quot;我要學 Python 爬蟲！&quot;)</code></pre>
 </ul>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：變數的基本用法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 字串（文字）
-name = &quot;Alice&quot;
-url = &quot;https://books.toscrape.com&quot;
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 字串（文字）</span>
+name = <span class="tok-str">&quot;Alice&quot;</span>
+url = <span class="tok-str">&quot;https://books.toscrape.com&quot;</span>
 
-# 整數
-age = 25
-page_number = 1
+<span class="tok-com"># 整數</span>
+age = <span class="tok-num">25</span>
+page_number = <span class="tok-num">1</span>
 
-# 浮點數（小數）
-price = 12.99
+<span class="tok-com"># 浮點數（小數）</span>
+price = <span class="tok-num">12.99</span>
 
-# 印出變數
-print(name)         # Alice
-print(url)          # https://books.toscrape.com
-print(page_number)  # 1</code></pre>
+<span class="tok-com"># 印出變數</span>
+<span class="tok-fn">print</span>(name)         <span class="tok-com"># Alice</span>
+<span class="tok-fn">print</span>(url)          <span class="tok-com"># https://books.toscrape.com</span>
+<span class="tok-fn">print</span>(page_number)  <span class="tok-com"># 1</span></code></pre>
     </div>
       </div>
     </div>
@@ -376,19 +376,19 @@ print(page_number)  # 1</code></pre>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：用 type() 查看資料型別</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">title = &quot;Python Crash Course&quot;
-page = 3
-rating = 4.5
+      <pre class="code-body"><code class="lang-py">title = <span class="tok-str">&quot;Python Crash Course&quot;</span>
+page = <span class="tok-num">3</span>
+rating = <span class="tok-num">4.5</span>
 
-print(type(title))   # &lt;class 'str'&gt;
-print(type(page))    # &lt;class 'int'&gt;
-print(type(rating))  # &lt;class 'float'&gt;</code></pre>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(title))   <span class="tok-com"># &lt;class 'str'&gt;</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(page))    <span class="tok-com"># &lt;class 'int'&gt;</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(rating))  <span class="tok-com"># &lt;class 'float'&gt;</span></code></pre>
     </div>
       </div>
     </div>
@@ -408,26 +408,26 @@ print(type(rating))  # &lt;class 'float'&gt;</code></pre>
 </ul>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：f-string 動態組合 URL</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">base_url = &quot;https://books.toscrape.com/catalogue/page-{}.html&quot;
-page = 1
+      <pre class="code-body"><code class="lang-py">base_url = <span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{}.html&quot;</span>
+page = <span class="tok-num">1</span>
 
-# 方法一：format()（舊寫法）
-url = base_url.format(page)
+<span class="tok-com"># 方法一：format()（舊寫法）</span>
+url = base_url.<span class="tok-fn">format</span>(page)
 
-# 方法二：f-string（推薦，Python 3.6+）
-url = f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
-print(url)  # https://books.toscrape.com/catalogue/page-1.html
+<span class="tok-com"># 方法二：f-string（推薦，Python 3.6+）</span>
+url = f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
+<span class="tok-fn">print</span>(url)  <span class="tok-com"># https://books.toscrape.com/catalogue/page-1.html</span>
 
-# 換頁只要改 page 的值
-page = 5
-url = f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
-print(url)  # https://books.toscrape.com/catalogue/page-5.html</code></pre>
+<span class="tok-com"># 換頁只要改 page 的值</span>
+page = <span class="tok-num">5</span>
+url = f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
+<span class="tok-fn">print</span>(url)  <span class="tok-com"># https://books.toscrape.com/catalogue/page-5.html</span></code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">f-string 是爬蟲組合 URL 的標準做法</div>
@@ -469,22 +469,22 @@ print(url)  # https://books.toscrape.com/catalogue/page-5.html</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：if 條件判斷</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">status_code = 200
+      <pre class="code-body"><code class="lang-py">status_code = <span class="tok-num">200</span>
 
-if status_code == 200:
-    print(&quot;請求成功，可以繼續解析&quot;)
-elif status_code == 404:
-    print(&quot;頁面不存在，跳過這個 URL&quot;)
-elif status_code == 429:
-    print(&quot;請求太頻繁，需要等待&quot;)
-else:
-    print(f&quot;未知狀態碼：{status_code}&quot;)</code></pre>
+<span class="tok-kw">if</span> status_code == <span class="tok-num">200</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;請求成功，可以繼續解析&quot;</span>)
+<span class="tok-kw">elif</span> status_code == <span class="tok-num">404</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;頁面不存在，跳過這個 URL&quot;</span>)
+<span class="tok-kw">elif</span> status_code == <span class="tok-num">429</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;請求太頻繁，需要等待&quot;</span>)
+<span class="tok-kw">else</span>:
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;未知狀態碼：{status_code}&quot;</span>)</code></pre>
     </div>
       </div>
     </div>
@@ -496,25 +496,25 @@ else:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：爬蟲常用的條件判斷</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">price_text = &quot;£12.99&quot;
-stock_text = &quot;In stock&quot;
+      <pre class="code-body"><code class="lang-py">price_text = <span class="tok-str">&quot;£12.99&quot;</span>
+stock_text = <span class="tok-str">&quot;In stock&quot;</span>
 
-# 判斷是否有庫存
-if &quot;In stock&quot; in stock_text:
-    print(&quot;有庫存，值得爬取&quot;)
+<span class="tok-com"># 判斷是否有庫存</span>
+<span class="tok-kw">if</span> <span class="tok-str">&quot;In stock&quot;</span> <span class="tok-kw">in</span> stock_text:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;有庫存，值得爬取&quot;</span>)
 
-# 判斷回應是否成功
-response_ok = True
-if response_ok:
-    print(&quot;解析資料&quot;)
-else:
-    print(&quot;略過，記錄錯誤&quot;)</code></pre>
+<span class="tok-com"># 判斷回應是否成功</span>
+response_ok = <span class="tok-kw">True</span>
+<span class="tok-kw">if</span> response_ok:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;解析資料&quot;</span>)
+<span class="tok-kw">else</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;略過，記錄錯誤&quot;</span>)</code></pre>
     </div>
       </div>
     </div>
@@ -530,22 +530,22 @@ else:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：for 迴圈基本用法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 逐一印出書名清單
-book_titles = [&quot;Book A&quot;, &quot;Book B&quot;, &quot;Book C&quot;, &quot;Book D&quot;]
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 逐一印出書名清單</span>
+book_titles = [<span class="tok-str">&quot;Book A&quot;</span>, <span class="tok-str">&quot;Book B&quot;</span>, <span class="tok-str">&quot;Book C&quot;</span>, <span class="tok-str">&quot;Book D&quot;</span>]
 
-for title in book_titles:
-    print(title)
+<span class="tok-kw">for</span> title <span class="tok-kw">in</span> book_titles:
+    <span class="tok-fn">print</span>(title)
 
-# 用 range() 產生數字序列（翻頁爬蟲）
-for page in range(1, 6):  # 1, 2, 3, 4, 5
-    url = f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
-    print(url)</code></pre>
+<span class="tok-com"># 用 range() 產生數字序列（翻頁爬蟲）</span>
+<span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, <span class="tok-num">6</span>):  <span class="tok-com"># 1, 2, 3, 4, 5</span>
+    url = f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
+    <span class="tok-fn">print</span>(url)</code></pre>
     </div>
       </div>
     </div>
@@ -557,23 +557,23 @@ for page in range(1, 6):  # 1, 2, 3, 4, 5
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：模擬翻頁爬蟲結構</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> time
 
-total_pages = 5
+total_pages = <span class="tok-num">5</span>
 
-for page in range(1, total_pages + 1):
-    url = f&quot;https://example.com/page/{page}&quot;
-    print(f&quot;正在爬取第 {page} 頁：{url}&quot;)
-    # （之後這裡會放 requests.get(url)）
-    time.sleep(1)  # 每頁間隔 1 秒
+<span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, total_pages + <span class="tok-num">1</span>):
+    url = f<span class="tok-str">&quot;https://example.com/page/{page}&quot;</span>
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;正在爬取第 {page} 頁：{url}&quot;</span>)
+    <span class="tok-com"># （之後這裡會放 requests.get(url)）</span>
+    time.<span class="tok-fn">sleep</span>(<span class="tok-num">1</span>)  <span class="tok-com"># 每頁間隔 1 秒</span>
 
-print(&quot;所有頁面爬取完畢&quot;)</code></pre>
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;所有頁面爬取完畢&quot;</span>)</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -656,23 +656,23 @@ print(&quot;所有頁面爬取完畢&quot;)</code></pre>
 </ul>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：定義與呼叫函式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 定義函式
-def greet(name):
-    message = f&quot;你好，{name}！歡迎學習 Python 爬蟲&quot;
-    return message
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 定義函式</span>
+<span class="tok-kw">def</span> <span class="tok-fn">greet</span>(name):
+    message = f<span class="tok-str">&quot;你好，{name}！歡迎學習 Python 爬蟲&quot;</span>
+    <span class="tok-kw">return</span> message
 
-# 呼叫函式
-result = greet(&quot;Alice&quot;)
-print(result)  # 你好，Alice！歡迎學習 Python 爬蟲
+<span class="tok-com"># 呼叫函式</span>
+result = <span class="tok-fn">greet</span>(<span class="tok-str">&quot;Alice&quot;</span>)
+<span class="tok-fn">print</span>(result)  <span class="tok-com"># 你好，Alice！歡迎學習 Python 爬蟲</span>
 
-result2 = greet(&quot;Bob&quot;)
-print(result2)  # 你好，Bob！歡迎學習 Python 爬蟲</code></pre>
+result2 = <span class="tok-fn">greet</span>(<span class="tok-str">&quot;Bob&quot;</span>)
+<span class="tok-fn">print</span>(result2)  <span class="tok-com"># 你好，Bob！歡迎學習 Python 爬蟲</span></code></pre>
     </div>
       </div>
     </div>
@@ -684,27 +684,27 @@ print(result2)  # 你好，Bob！歡迎學習 Python 爬蟲</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：爬蟲函式的骨架</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">def fetch_page(url):
-    &quot;&quot;&quot;取得網頁內容，失敗回傳 None&quot;&quot;&quot;
-    # 之後這裡會放 requests.get(url)
-    print(f&quot;正在取得：{url}&quot;)
-    return None  # 暫時先回傳 None
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">def</span> <span class="tok-fn">fetch_page</span>(url):
+    <span class="tok-str">&quot;&quot;&quot;取得網頁內容，失敗回傳 None&quot;&quot;&quot;</span>
+    <span class="tok-com"># 之後這裡會放 requests.get(url)</span>
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;正在取得：{url}&quot;</span>)
+    <span class="tok-kw">return</span> <span class="tok-kw">None</span>  <span class="tok-com"># 暫時先回傳 None</span>
 
-def build_url(base, page):
-    &quot;&quot;&quot;組合翻頁 URL&quot;&quot;&quot;
-    return f&quot;{base}/page-{page}.html&quot;
+<span class="tok-kw">def</span> <span class="tok-fn">build_url</span>(base, page):
+    <span class="tok-str">&quot;&quot;&quot;組合翻頁 URL&quot;&quot;&quot;</span>
+    <span class="tok-kw">return</span> f<span class="tok-str">&quot;{base}/page-{page}.html&quot;</span>
 
-# 使用函式
-base = &quot;https://books.toscrape.com/catalogue&quot;
-for page in range(1, 4):
-    url = build_url(base, page)
-    fetch_page(url)</code></pre>
+<span class="tok-com"># 使用函式</span>
+base = <span class="tok-str">&quot;https://books.toscrape.com/catalogue&quot;</span>
+<span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, <span class="tok-num">4</span>):
+    url = <span class="tok-fn">build_url</span>(base, page)
+    <span class="tok-fn">fetch_page</span>(url)</code></pre>
     </div>
       </div>
     </div>
@@ -720,24 +720,24 @@ for page in range(1, 4):
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：import 常用模組</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import time
-import random
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> time
+<span class="tok-kw">import</span> random
 
-# time.sleep()：暫停執行（爬蟲禮儀必備）
-print(&quot;開始等待...&quot;)
-time.sleep(2)
-print(&quot;等待結束&quot;)
+<span class="tok-com"># time.sleep()：暫停執行（爬蟲禮儀必備）</span>
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;開始等待...&quot;</span>)
+time.<span class="tok-fn">sleep</span>(<span class="tok-num">2</span>)
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;等待結束&quot;</span>)
 
-# random.uniform()：產生隨機浮點數（讓請求間隔不那麼規律）
-delay = random.uniform(1.0, 3.0)
-print(f&quot;這次等待 {delay:.2f} 秒&quot;)
-time.sleep(delay)</code></pre>
+<span class="tok-com"># random.uniform()：產生隨機浮點數（讓請求間隔不那麼規律）</span>
+delay = random.<span class="tok-fn">uniform</span>(<span class="tok-num">1.0</span>, <span class="tok-num">3.0</span>)
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;這次等待 {delay:.2f} 秒&quot;</span>)
+time.<span class="tok-fn">sleep</span>(delay)</code></pre>
     </div>
       </div>
     </div>
@@ -759,17 +759,17 @@ time.sleep(delay)</code></pre>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：匯入爬蟲套件</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-from bs4 import BeautifulSoup
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
 
-print(&quot;requests 版本：&quot;, requests.__version__)
-print(&quot;套件匯入成功，可以開始爬蟲了！&quot;)</code></pre>
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;requests 版本：&quot;</span>, requests.__version__)
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;套件匯入成功，可以開始爬蟲了！&quot;</span>)</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">Colab 已預裝 requests，通常不需要額外安裝</div>
@@ -798,25 +798,25 @@ print(&quot;套件匯入成功，可以開始爬蟲了！&quot;)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：List 基本操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 建立 List
-book_titles = [&quot;Book A&quot;, &quot;Book B&quot;, &quot;Book C&quot;]
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 建立 List</span>
+book_titles = [<span class="tok-str">&quot;Book A&quot;</span>, <span class="tok-str">&quot;Book B&quot;</span>, <span class="tok-str">&quot;Book C&quot;</span>]
 
-# 取得元素（索引從 0 開始）
-print(book_titles[0])   # Book A
-print(book_titles[-1])  # Book C（最後一個）
+<span class="tok-com"># 取得元素（索引從 0 開始）</span>
+<span class="tok-fn">print</span>(book_titles[<span class="tok-num">0</span>])   <span class="tok-com"># Book A</span>
+<span class="tok-fn">print</span>(book_titles[-<span class="tok-num">1</span>])  <span class="tok-com"># Book C（最後一個）</span>
 
-# 新增元素（爬蟲邊爬邊收集資料）
-book_titles.append(&quot;Book D&quot;)
-print(book_titles)  # ['Book A', 'Book B', 'Book C', 'Book D']
+<span class="tok-com"># 新增元素（爬蟲邊爬邊收集資料）</span>
+book_titles.<span class="tok-fn">append</span>(<span class="tok-str">&quot;Book D&quot;</span>)
+<span class="tok-fn">print</span>(book_titles)  <span class="tok-com"># ['Book A', 'Book B', 'Book C', 'Book D']</span>
 
-# 取得長度
-print(len(book_titles))  # 4</code></pre>
+<span class="tok-com"># 取得長度</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">len</span>(book_titles))  <span class="tok-com"># 4</span></code></pre>
     </div>
       </div>
     </div>
@@ -828,27 +828,27 @@ print(len(book_titles))  # 4</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：用 List 收集爬蟲結果</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 模擬從多頁收集書名
-all_books = []  # 空 List，準備收集資料
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 模擬從多頁收集書名</span>
+all_books = []  <span class="tok-com"># 空 List，準備收集資料</span>
 
-# 假設每頁爬到 3 本書
-page1_books = [&quot;Book A&quot;, &quot;Book B&quot;, &quot;Book C&quot;]
-page2_books = [&quot;Book D&quot;, &quot;Book E&quot;, &quot;Book F&quot;]
+<span class="tok-com"># 假設每頁爬到 3 本書</span>
+page1_books = [<span class="tok-str">&quot;Book A&quot;</span>, <span class="tok-str">&quot;Book B&quot;</span>, <span class="tok-str">&quot;Book C&quot;</span>]
+page2_books = [<span class="tok-str">&quot;Book D&quot;</span>, <span class="tok-str">&quot;Book E&quot;</span>, <span class="tok-str">&quot;Book F&quot;</span>]
 
-for book in page1_books:
-    all_books.append(book)
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> page1_books:
+    all_books.<span class="tok-fn">append</span>(book)
 
-for book in page2_books:
-    all_books.append(book)
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> page2_books:
+    all_books.<span class="tok-fn">append</span>(book)
 
-print(f&quot;共收集到 {len(all_books)} 本書&quot;)
-print(all_books)</code></pre>
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;共收集到 {len(all_books)} 本書&quot;</span>)
+<span class="tok-fn">print</span>(all_books)</code></pre>
     </div>
       </div>
     </div>
@@ -864,29 +864,29 @@ print(all_books)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：Dictionary 基本操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 建立 Dictionary（key: value 對）
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 建立 Dictionary（key: value 對）</span>
 book = {
-    &quot;title&quot;: &quot;Python Crash Course&quot;,
-    &quot;price&quot;: 12.99,
-    &quot;rating&quot;: 4,
-    &quot;in_stock&quot;: True
+    <span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Python Crash Course&quot;</span>,
+    <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">12.99</span>,
+    <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-num">4</span>,
+    <span class="tok-str">&quot;in_stock&quot;</span>: <span class="tok-kw">True</span>
 }
 
-# 取得值
-print(book[&quot;title&quot;])    # Python Crash Course
-print(book[&quot;price&quot;])    # 12.99
+<span class="tok-com"># 取得值</span>
+<span class="tok-fn">print</span>(book[<span class="tok-str">&quot;title&quot;</span>])    <span class="tok-com"># Python Crash Course</span>
+<span class="tok-fn">print</span>(book[<span class="tok-str">&quot;price&quot;</span>])    <span class="tok-com"># 12.99</span>
 
-# 新增或更新欄位
-book[&quot;url&quot;] = &quot;https://books.toscrape.com/...&quot;
-book[&quot;price&quot;] = 11.50   # 更新價格
+<span class="tok-com"># 新增或更新欄位</span>
+book[<span class="tok-str">&quot;url&quot;</span>] = <span class="tok-str">&quot;https://books.toscrape.com/...&quot;</span>
+book[<span class="tok-str">&quot;price&quot;</span>] = <span class="tok-num">11.50</span>   <span class="tok-com"># 更新價格</span>
 
-print(book)</code></pre>
+<span class="tok-fn">print</span>(book)</code></pre>
     </div>
       </div>
     </div>
@@ -898,33 +898,33 @@ print(book)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：用 List of Dict 儲存多筆資料</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 每本書用一個 dict 儲存，所有書放進 List
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 每本書用一個 dict 儲存，所有書放進 List</span>
 books = []
 
-# 模擬爬取三本書的資料
+<span class="tok-com"># 模擬爬取三本書的資料</span>
 raw_data = [
-    (&quot;Python Crash Course&quot;, &quot;£12.99&quot;, &quot;Five&quot;),
-    (&quot;Learning Python&quot;,     &quot;£39.99&quot;, &quot;Four&quot;),
-    (&quot;Automate the Boring&quot;, &quot;£17.50&quot;, &quot;Five&quot;),
+    (<span class="tok-str">&quot;Python Crash Course&quot;</span>, <span class="tok-str">&quot;£12.99&quot;</span>, <span class="tok-str">&quot;Five&quot;</span>),
+    (<span class="tok-str">&quot;Learning Python&quot;</span>,     <span class="tok-str">&quot;£39.99&quot;</span>, <span class="tok-str">&quot;Four&quot;</span>),
+    (<span class="tok-str">&quot;Automate the Boring&quot;</span>, <span class="tok-str">&quot;£17.50&quot;</span>, <span class="tok-str">&quot;Five&quot;</span>),
 ]
 
-for title, price, rating in raw_data:
+<span class="tok-kw">for</span> title, price, rating <span class="tok-kw">in</span> raw_data:
     book = {
-        &quot;title&quot;: title,
-        &quot;price&quot;: price,
-        &quot;rating&quot;: rating
+        <span class="tok-str">&quot;title&quot;</span>: title,
+        <span class="tok-str">&quot;price&quot;</span>: price,
+        <span class="tok-str">&quot;rating&quot;</span>: rating
     }
-    books.append(book)
+    books.<span class="tok-fn">append</span>(book)
 
-# 印出所有書
-for book in books:
-    print(f&quot;{book['title']} — {book['price']}&quot;)</code></pre>
+<span class="tok-com"># 印出所有書</span>
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> books:
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;{book['title']} — {book['price']}&quot;</span>)</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">List of Dictionaries 是爬蟲存放結果的標準格式</div>
@@ -963,33 +963,33 @@ for book in books:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：字串清理方法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 爬蟲常見的「髒」資料
-raw_price = &quot;  £12.99\n&quot;
-raw_title = &quot;  Python Crash Course  &quot;
-raw_rating = &quot;Five stars&quot;
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 爬蟲常見的「髒」資料</span>
+raw_price = <span class="tok-str">&quot;  £12.99\n&quot;</span>
+raw_title = <span class="tok-str">&quot;  Python Crash Course  &quot;</span>
+raw_rating = <span class="tok-str">&quot;Five stars&quot;</span>
 
-# strip()：去除首尾空白與換行符
-clean_price = raw_price.strip()
-print(clean_price)   # £12.99
+<span class="tok-com"># strip()：去除首尾空白與換行符</span>
+clean_price = raw_price.<span class="tok-fn">strip</span>()
+<span class="tok-fn">print</span>(clean_price)   <span class="tok-com"># £12.99</span>
 
-# replace()：替換字元
-price_number = clean_price.replace(&quot;£&quot;, &quot;&quot;)
-print(price_number)  # 12.99
+<span class="tok-com"># replace()：替換字元</span>
+price_number = clean_price.<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>)
+<span class="tok-fn">print</span>(price_number)  <span class="tok-com"># 12.99</span>
 
-# 轉為數字才能做計算
-price = float(price_number)
-print(price + 1)     # 13.99
+<span class="tok-com"># 轉為數字才能做計算</span>
+price = <span class="tok-fn">float</span>(price_number)
+<span class="tok-fn">print</span>(price + <span class="tok-num">1</span>)     <span class="tok-com"># 13.99</span>
 
-# split()：切割字串
-parts = raw_rating.split(&quot; &quot;)
-print(parts)         # ['Five', 'stars']
-print(parts[0])      # Five（取評分文字）</code></pre>
+<span class="tok-com"># split()：切割字串</span>
+parts = raw_rating.<span class="tok-fn">split</span>(<span class="tok-str">&quot; &quot;</span>)
+<span class="tok-fn">print</span>(parts)         <span class="tok-com"># ['Five', 'stars']</span>
+<span class="tok-fn">print</span>(parts[<span class="tok-num">0</span>])      <span class="tok-com"># Five（取評分文字）</span></code></pre>
     </div>
       </div>
     </div>
@@ -1016,27 +1016,27 @@ print(parts[0])      # Five（取評分文字）</code></pre>
   <div class="reveal">
     <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：字串判斷方法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">stock_text = &quot;In stock (22 available)&quot;
-title = &quot;  Python Web Scraping  &quot;
+      <pre class="code-body"><code class="lang-py">stock_text = <span class="tok-str">&quot;In stock (22 available)&quot;</span>
+title = <span class="tok-str">&quot;  Python Web Scraping  &quot;</span>
 
-# in：判斷是否包含某段文字
-if &quot;In stock&quot; in stock_text:
-    print(&quot;有庫存&quot;)
+<span class="tok-com"># in：判斷是否包含某段文字</span>
+<span class="tok-kw">if</span> <span class="tok-str">&quot;In stock&quot;</span> <span class="tok-kw">in</span> stock_text:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;有庫存&quot;</span>)
 
-# startswith / endswith
-url = &quot;https://books.toscrape.com&quot;
-if url.startswith(&quot;https&quot;):
-    print(&quot;安全連線&quot;)
+<span class="tok-com"># startswith / endswith</span>
+url = <span class="tok-str">&quot;https://books.toscrape.com&quot;</span>
+<span class="tok-kw">if</span> url.<span class="tok-fn">startswith</span>(<span class="tok-str">&quot;https&quot;</span>):
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;安全連線&quot;</span>)
 
-# strip() + lower() 組合處理
-clean = title.strip().lower()
-print(clean)  # python web scraping</code></pre>
+<span class="tok-com"># strip() + lower() 組合處理</span>
+clean = title.<span class="tok-fn">strip</span>().<span class="tok-fn">lower</span>()
+<span class="tok-fn">print</span>(clean)  <span class="tok-com"># python web scraping</span></code></pre>
     </div>
   </div>
 
@@ -1046,30 +1046,30 @@ print(clean)  # python web scraping</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Colab：模擬清理爬蟲原始資料</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 模擬從網頁抓到的原始資料（未處理）
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 模擬從網頁抓到的原始資料（未處理）</span>
 raw_books = [
-    {&quot;title&quot;: &quot;  Python Crash Course  &quot;, &quot;price&quot;: &quot;£12.99&quot;, &quot;rating&quot;: &quot;Five stars&quot;},
-    {&quot;title&quot;: &quot;\nLearning Python\n&quot;,     &quot;price&quot;: &quot;£39.99&quot;, &quot;rating&quot;: &quot;Four stars&quot;},
-    {&quot;title&quot;: &quot;Automate the Boring  &quot;,   &quot;price&quot;: &quot;£17.50&quot;, &quot;rating&quot;: &quot;Five stars&quot;},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;  Python Crash Course  &quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£12.99&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five stars&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;\nLearning Python\n&quot;</span>,     <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£39.99&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Four stars&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Automate the Boring  &quot;</span>,   <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£17.50&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five stars&quot;</span>},
 ]
 
 cleaned_books = []
-for book in raw_books:
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> raw_books:
     cleaned = {
-        &quot;title&quot;:  book[&quot;title&quot;].strip(),
-        &quot;price&quot;:  float(book[&quot;price&quot;].replace(&quot;£&quot;, &quot;&quot;)),
-        &quot;rating&quot;: book[&quot;rating&quot;].split(&quot; &quot;)[0]  # 只取 &quot;Five&quot;
+        <span class="tok-str">&quot;title&quot;</span>:  book[<span class="tok-str">&quot;title&quot;</span>].<span class="tok-fn">strip</span>(),
+        <span class="tok-str">&quot;price&quot;</span>:  <span class="tok-fn">float</span>(book[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>)),
+        <span class="tok-str">&quot;rating&quot;</span>: book[<span class="tok-str">&quot;rating&quot;</span>].<span class="tok-fn">split</span>(<span class="tok-str">&quot; &quot;</span>)[<span class="tok-num">0</span>]  <span class="tok-com"># 只取 &quot;Five&quot;</span>
     }
-    cleaned_books.append(cleaned)
+    cleaned_books.<span class="tok-fn">append</span>(cleaned)
 
-for book in cleaned_books:
-    print(f&quot;{book['title']:30} | £{book['price']:.2f} | {book['rating']}&quot;)</code></pre>
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> cleaned_books:
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;{book['title']:30} | £{book['price']:.2f} | {book['rating']}&quot;</span>)</code></pre>
     </div>
         <ul class="checklist">
       <li>在 Colab 執行上方程式碼，確認輸出格式整齊</li>
@@ -1129,7 +1129,7 @@ for book in cleaned_books:
 2. 學習 `BeautifulSoup`——解析 HTML、用 CSS 選擇器提取資料
 3. 第一個實戰目標：爬取 `books.toscrape.com`（專為練習設計的假書店）
 
-```prompt [label=&quot;第一個完整爬蟲（預覽）&quot;]
+```prompt py [label=&quot;第一個完整爬蟲（預覽）&quot;]
 import requests
 from bs4 import BeautifulSoup
 

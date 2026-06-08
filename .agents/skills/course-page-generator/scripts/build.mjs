@@ -543,7 +543,10 @@ function parseContent(md) {
       i++;
 
       if (lang === 'prompt') {
-        if (current) current.blocks.push({ type: 'code', label, body, lang: 'text' });
+        const inlineLang = line.match(/^`{3,}\w+\s+(\w+)(?:\s|\[|$)/);
+        const attrLang = line.match(/\[.*\blang="([^"]+)"/);
+        const codeLang = (attrLang?.[1] || (inlineLang?.[1] && inlineLang[1] !== 'label' ? inlineLang[1] : '') || 'text').toLowerCase();
+        if (current) current.blocks.push({ type: 'code', label, body, lang: HIGHLIGHT_LANGS.has(codeLang) ? codeLang : 'text' });
       } else if (lang === 'terminal') {
         if (current) current.blocks.push({ type: 'code', label, body, lang: 'bash' });
       } else if (lang === 'diff') {
@@ -1141,7 +1144,10 @@ function renderSimpleLines(lines) {
       }
       const body = codeLines.join('\n');
       if (lang === 'prompt') {
-        html += renderBlockBody({ type: 'code', label, body, lang: 'text' });
+        const inlineLang = trimmed.match(/^`{3,}\w+\s+(\w+)(?:\s|\[|$)/);
+        const attrLang = trimmed.match(/\[.*\blang="([^"]+)"/);
+        const codeLang = (attrLang?.[1] || (inlineLang?.[1] && inlineLang[1] !== 'label' ? inlineLang[1] : '') || 'text').toLowerCase();
+        html += renderBlockBody({ type: 'code', label, body, lang: HIGHLIGHT_LANGS.has(codeLang) ? codeLang : 'text' });
       } else if (lang === 'terminal') {
         html += renderBlockBody({ type: 'code', label, body, lang: 'bash' });
       } else if (lang === 'diff') {

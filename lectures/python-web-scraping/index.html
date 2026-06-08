@@ -352,25 +352,25 @@ Allow: /               # Google 可爬取全站</code></pre>
 </ul>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：加入延遲的爬蟲</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">import</span> time
 
 urls = [
-    &quot;https://example.com/page/1&quot;,
-    &quot;https://example.com/page/2&quot;,
-    &quot;https://example.com/page/3&quot;,
+    <span class="tok-str">&quot;https://example.com/page/1&quot;</span>,
+    <span class="tok-str">&quot;https://example.com/page/2&quot;</span>,
+    <span class="tok-str">&quot;https://example.com/page/3&quot;</span>,
 ]
 
-for url in urls:
-    response = requests.get(url)
-    print(response.status_code)
-    time.sleep(2)  # 每次請求後等待 2 秒</code></pre>
+<span class="tok-kw">for</span> url <span class="tok-kw">in</span> urls:
+    response = requests.<span class="tok-fn">get</span>(url)
+    <span class="tok-fn">print</span>(response.status_code)
+    time.<span class="tok-fn">sleep</span>(<span class="tok-num">2</span>)  <span class="tok-com"># 每次請求後等待 2 秒</span></code></pre>
     </div>
         <div class="flow">
     </div>
@@ -427,26 +427,26 @@ for url in urls:
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python requests：不同方法示範</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-# GET：取得網頁或資料
-response = requests.get(&quot;https://httpbin.org/get&quot;)
+<span class="tok-com"># GET：取得網頁或資料</span>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/get&quot;</span>)
 
-# POST：送出表單資料
-response = requests.post(
-    &quot;https://httpbin.org/post&quot;,
-    data={&quot;username&quot;: &quot;alice&quot;, &quot;password&quot;: &quot;1234&quot;}
+<span class="tok-com"># POST：送出表單資料</span>
+response = requests.<span class="tok-fn">post</span>(
+    <span class="tok-str">&quot;https://httpbin.org/post&quot;</span>,
+    data={<span class="tok-str">&quot;username&quot;</span>: <span class="tok-str">&quot;alice&quot;</span>, <span class="tok-str">&quot;password&quot;</span>: <span class="tok-str">&quot;1234&quot;</span>}
 )
 
-# 加上自訂 Headers（模擬瀏覽器）
-headers = {&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;}
-response = requests.get(&quot;https://example.com&quot;, headers=headers)</code></pre>
+<span class="tok-com"># 加上自訂 Headers（模擬瀏覽器）</span>
+headers = {<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>}
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://example.com&quot;</span>, headers=headers)</code></pre>
     </div>
       </div>
     </div>
@@ -497,20 +497,20 @@ response = requests.get(&quot;https://example.com&quot;, headers=headers)</code>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：讀取回應內容</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-response = requests.get(&quot;https://httpbin.org/json&quot;)
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/json&quot;</span>)
 
-print(response.status_code)   # 200
-print(response.headers)       # {'Content-Type': 'application/json', ...}
-print(response.text)          # 原始回應字串
-print(response.json())        # 自動解析 JSON 為 Python dict</code></pre>
+<span class="tok-fn">print</span>(response.status_code)   <span class="tok-com"># 200</span>
+<span class="tok-fn">print</span>(response.headers)       <span class="tok-com"># {'Content-Type': 'application/json', ...}</span>
+<span class="tok-fn">print</span>(response.text)          <span class="tok-com"># 原始回應字串</span>
+<span class="tok-fn">print</span>(response.<span class="tok-fn">json</span>())        <span class="tok-com"># 自動解析 JSON 為 Python dict</span></code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">狀態碼 4xx 是你的問題，5xx 是對方的問題</div>
@@ -613,21 +613,21 @@ print(response.json())        # 自動解析 JSON 為 Python dict</code></pre>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：呼叫公開 API</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-# 呼叫 JSONPlaceholder 假 API（練習用）
-response = requests.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;)
+<span class="tok-com"># 呼叫 JSONPlaceholder 假 API（練習用）</span>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://jsonplaceholder.typicode.com/todos/1&quot;</span>)
 
-if response.status_code == 200:
-    data = response.json()
-    print(data[&quot;title&quot;])      # 取得 todo 標題
-    print(data[&quot;completed&quot;])  # 是否完成</code></pre>
+<span class="tok-kw">if</span> response.status_code == <span class="tok-num">200</span>:
+    data = response.<span class="tok-fn">json</span>()
+    <span class="tok-fn">print</span>(data[<span class="tok-str">&quot;title&quot;</span>])      <span class="tok-com"># 取得 todo 標題</span>
+    <span class="tok-fn">print</span>(data[<span class="tok-str">&quot;completed&quot;</span>])  <span class="tok-com"># 是否完成</span></code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">能用 API 就不要硬爬 HTML</div>
@@ -737,23 +737,23 @@ Command + Option + I     <span class="tok-com"># Mac</span>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">html</span>
         <span class="code-label">HTML 基本結構</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;zh-TW&quot;&gt;
+      <pre class="code-body"><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="tok-str">&quot;zh-TW&quot;</span>&gt;
 &lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta charset=<span class="tok-str">&quot;UTF-8&quot;</span>&gt;
   &lt;title&gt;網頁標題&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;h1&gt;主標題&lt;/h1&gt;
   &lt;p&gt;段落文字&lt;/p&gt;
-  &lt;a href=&quot;https://example.com&quot;&gt;連結&lt;/a&gt;
-  &lt;img src=&quot;photo.jpg&quot; alt=&quot;圖片說明&quot;&gt;
+  &lt;a href=<span class="tok-str">&quot;https://example.com&quot;</span>&gt;連結&lt;/a&gt;
+  &lt;img src=<span class="tok-str">&quot;photo.jpg&quot;</span> alt=<span class="tok-str">&quot;圖片說明&quot;</span>&gt;
   &lt;ul&gt;
     &lt;li&gt;清單項目一&lt;/li&gt;
     &lt;li&gt;清單項目二&lt;/li&gt;
@@ -827,30 +827,30 @@ Command + Option + I     <span class="tok-com"># Mac</span>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">BeautifulSoup：CSS 選擇器實戰</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-html = requests.get(&quot;https://books.toscrape.com&quot;).text
-soup = BeautifulSoup(html, &quot;html.parser&quot;)
+html = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>).text
+soup = <span class="tok-fn">BeautifulSoup</span>(html, <span class="tok-str">&quot;html.parser&quot;</span>)
 
-# 標籤選擇器：取得所有書名
-titles = soup.find_all(&quot;h3&quot;)
+<span class="tok-com"># 標籤選擇器：取得所有書名</span>
+titles = soup.<span class="tok-fn">find_all</span>(<span class="tok-str">&quot;h3&quot;</span>)
 
-# class 選擇器：取得所有價格
-prices = soup.select(&quot;.price_color&quot;)
+<span class="tok-com"># class 選擇器：取得所有價格</span>
+prices = soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;.price_color&quot;</span>)
 
-# 組合選擇器：取得卡片內的連結
-links = soup.select(&quot;article.product_pod h3 a&quot;)
+<span class="tok-com"># 組合選擇器：取得卡片內的連結</span>
+links = soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod h3 a&quot;</span>)
 
-for link in links:
-    print(link.get(&quot;href&quot;))    # 取 href 屬性
-    print(link.get_text())     # 取文字內容</code></pre>
+<span class="tok-kw">for</span> link <span class="tok-kw">in</span> links:
+    <span class="tok-fn">print</span>(link.<span class="tok-fn">get</span>(<span class="tok-str">&quot;href&quot;</span>))    <span class="tok-com"># 取 href 屬性</span>
+    <span class="tok-fn">print</span>(link.<span class="tok-fn">get_text</span>())     <span class="tok-com"># 取文字內容</span></code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">select() 用 CSS 選擇器，find_all() 用標籤或屬性</div>
@@ -910,24 +910,24 @@ for link in links:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：requests 基本用法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-# 最基本的 GET 請求
-response = requests.get(&quot;https://httpbin.org/get&quot;)
+<span class="tok-com"># 最基本的 GET 請求</span>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/get&quot;</span>)
 
-# 回應物件的常用屬性
-print(response.status_code)   # 狀態碼：200
-print(response.url)           # 最終請求的 URL（含重定向後）
-print(response.headers)       # 回應 Headers（dict）
-print(response.text)          # 回應內容（字串）
-print(response.content)       # 回應內容（bytes，適合圖片等二進位）
-print(response.json())        # 解析 JSON → Python dict（若非 JSON 會拋錯）</code></pre>
+<span class="tok-com"># 回應物件的常用屬性</span>
+<span class="tok-fn">print</span>(response.status_code)   <span class="tok-com"># 狀態碼：200</span>
+<span class="tok-fn">print</span>(response.url)           <span class="tok-com"># 最終請求的 URL（含重定向後）</span>
+<span class="tok-fn">print</span>(response.headers)       <span class="tok-com"># 回應 Headers（dict）</span>
+<span class="tok-fn">print</span>(response.text)          <span class="tok-com"># 回應內容（字串）</span>
+<span class="tok-fn">print</span>(response.content)       <span class="tok-com"># 回應內容（bytes，適合圖片等二進位）</span>
+<span class="tok-fn">print</span>(response.<span class="tok-fn">json</span>())        <span class="tok-com"># 解析 JSON → Python dict（若非 JSON 會拋錯）</span></code></pre>
     </div>
       </div>
     </div>
@@ -939,23 +939,23 @@ print(response.json())        # 解析 JSON → Python dict（若非 JSON 會拋
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：URL 查詢參數</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-# 方法一：直接寫在 URL（不推薦，難以維護）
-response = requests.get(&quot;https://httpbin.org/get?page=2&amp;limit=10&quot;)
+<span class="tok-com"># 方法一：直接寫在 URL（不推薦，難以維護）</span>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/get?page=2&amp;limit=10&quot;</span>)
 
-# 方法二：用 params 參數（推薦，自動處理編碼）
-params = {&quot;page&quot;: 2, &quot;limit&quot;: 10, &quot;keyword&quot;: &quot;Python 爬蟲&quot;}
-response = requests.get(&quot;https://httpbin.org/get&quot;, params=params)
+<span class="tok-com"># 方法二：用 params 參數（推薦，自動處理編碼）</span>
+params = {<span class="tok-str">&quot;page&quot;</span>: <span class="tok-num">2</span>, <span class="tok-str">&quot;limit&quot;</span>: <span class="tok-num">10</span>, <span class="tok-str">&quot;keyword&quot;</span>: <span class="tok-str">&quot;Python 爬蟲&quot;</span>}
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/get&quot;</span>, params=params)
 
-print(response.url)
-# https://httpbin.org/get?page=2&amp;limit=10&amp;keyword=Python+%E7%88%AC%E8%9F%B2</code></pre>
+<span class="tok-fn">print</span>(response.url)
+<span class="tok-com"># https://httpbin.org/get?page=2&amp;limit=10&amp;keyword=Python+%E7%88%AC%E8%9F%B2</span></code></pre>
     </div>
       </div>
     </div>
@@ -971,22 +971,22 @@ print(response.url)
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：自訂 Headers</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
 headers = {
-    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&quot;,
-    &quot;Accept-Language&quot;: &quot;zh-TW,zh;q=0.9&quot;,
-    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml&quot;,
+    <span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&quot;</span>,
+    <span class="tok-str">&quot;Accept-Language&quot;</span>: <span class="tok-str">&quot;zh-TW,zh;q=0.9&quot;</span>,
+    <span class="tok-str">&quot;Accept&quot;</span>: <span class="tok-str">&quot;text/html,application/xhtml+xml&quot;</span>,
 }
 
-response = requests.get(&quot;https://httpbin.org/headers&quot;, headers=headers)
-print(response.json())</code></pre>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/headers&quot;</span>, headers=headers)
+<span class="tok-fn">print</span>(response.<span class="tok-fn">json</span>())</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">User-Agent 是爬蟲偽裝的第一步</div>
@@ -1002,28 +1002,28 @@ print(response.json())</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：使用 Session 保持 Cookie</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-session = requests.Session()
+session = requests.<span class="tok-fn">Session</span>()
 
-# Session 自動保存 Cookie，後續請求帶入相同 Cookie
-session.headers.update({&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;})
+<span class="tok-com"># Session 自動保存 Cookie，後續請求帶入相同 Cookie</span>
+session.headers.<span class="tok-fn">update</span>({<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>})
 
-# 第一次請求（例如登入）
-login_data = {&quot;username&quot;: &quot;alice&quot;, &quot;password&quot;: &quot;1234&quot;}
-session.post(&quot;https://httpbin.org/post&quot;, data=login_data)
+<span class="tok-com"># 第一次請求（例如登入）</span>
+login_data = {<span class="tok-str">&quot;username&quot;</span>: <span class="tok-str">&quot;alice&quot;</span>, <span class="tok-str">&quot;password&quot;</span>: <span class="tok-str">&quot;1234&quot;</span>}
+session.<span class="tok-fn">post</span>(<span class="tok-str">&quot;https://httpbin.org/post&quot;</span>, data=login_data)
 
-# 後續請求自動帶入登入後的 Cookie
-response = session.get(&quot;https://httpbin.org/cookies&quot;)
-print(response.json())
+<span class="tok-com"># 後續請求自動帶入登入後的 Cookie</span>
+response = session.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/cookies&quot;</span>)
+<span class="tok-fn">print</span>(response.<span class="tok-fn">json</span>())
 
-session.close()  # 完成後關閉連線</code></pre>
+session.<span class="tok-fn">close</span>()  <span class="tok-com"># 完成後關閉連線</span></code></pre>
     </div>
         <div class="compare">
       <div class="compare-header">
@@ -1063,22 +1063,22 @@ session.close()  # 完成後關閉連線</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：設定請求逾時</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-# 設定 timeout（秒）：connect timeout 與 read timeout
-try:
-    response = requests.get(&quot;https://httpbin.org/delay/3&quot;, timeout=5)
-    print(response.status_code)
-except requests.exceptions.Timeout:
-    print(&quot;請求逾時，伺服器回應太慢&quot;)
-except requests.exceptions.ConnectionError:
-    print(&quot;連線失敗，請確認網路或 URL&quot;)</code></pre>
+<span class="tok-com"># 設定 timeout（秒）：connect timeout 與 read timeout</span>
+<span class="tok-kw">try</span>:
+    response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://httpbin.org/delay/3&quot;</span>, timeout=<span class="tok-num">5</span>)
+    <span class="tok-fn">print</span>(response.status_code)
+<span class="tok-kw">except</span> requests.exceptions.Timeout:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;請求逾時，伺服器回應太慢&quot;</span>)
+<span class="tok-kw">except</span> requests.exceptions.ConnectionError:
+    <span class="tok-fn">print</span>(<span class="tok-str">&quot;連線失敗，請確認網路或 URL&quot;</span>)</code></pre>
     </div>
       </div>
     </div>
@@ -1090,28 +1090,28 @@ except requests.exceptions.ConnectionError:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：優雅的錯誤處理</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
 
-def safe_get(url):
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()  # 4xx / 5xx 自動拋出 HTTPError
-        return response
-    except requests.exceptions.HTTPError as e:
-        print(f&quot;HTTP 錯誤：{e.response.status_code}&quot;)
-    except requests.exceptions.ConnectionError:
-        print(&quot;無法連線，請確認 URL 或網路&quot;)
-    except requests.exceptions.Timeout:
-        print(&quot;請求逾時&quot;)
-    return None
+<span class="tok-kw">def</span> <span class="tok-fn">safe_get</span>(url):
+    <span class="tok-kw">try</span>:
+        response = requests.<span class="tok-fn">get</span>(url, timeout=<span class="tok-num">10</span>)
+        response.<span class="tok-fn">raise_for_status</span>()  <span class="tok-com"># 4xx / 5xx 自動拋出 HTTPError</span>
+        <span class="tok-kw">return</span> response
+    <span class="tok-kw">except</span> requests.exceptions.HTTPError <span class="tok-kw">as</span> e:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;HTTP 錯誤：{e.response.status_code}&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.ConnectionError:
+        <span class="tok-fn">print</span>(<span class="tok-str">&quot;無法連線，請確認 URL 或網路&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.Timeout:
+        <span class="tok-fn">print</span>(<span class="tok-str">&quot;請求逾時&quot;</span>)
+    <span class="tok-kw">return</span> <span class="tok-kw">None</span>
 
-result = safe_get(&quot;https://httpbin.org/status/404&quot;)</code></pre>
+result = <span class="tok-fn">safe_get</span>(<span class="tok-str">&quot;https://httpbin.org/status/404&quot;</span>)</code></pre>
     </div>
         <div class="flow">
     </div>
@@ -1125,40 +1125,40 @@ result = safe_get(&quot;https://httpbin.org/status/404&quot;)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：爬蟲最佳實踐模板</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">import</span> time
 
-session = requests.Session()
-session.headers.update({
-    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;
+session = requests.<span class="tok-fn">Session</span>()
+session.headers.<span class="tok-fn">update</span>({
+    <span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;</span>
 })
 
-def fetch(url, params=None):
-    try:
-        response = session.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        return response
-    except requests.exceptions.RequestException as e:
-        print(f&quot;請求失敗：{e}&quot;)
-        return None
+<span class="tok-kw">def</span> <span class="tok-fn">fetch</span>(url, params=<span class="tok-kw">None</span>):
+    <span class="tok-kw">try</span>:
+        response = session.<span class="tok-fn">get</span>(url, params=params, timeout=<span class="tok-num">10</span>)
+        response.<span class="tok-fn">raise_for_status</span>()
+        <span class="tok-kw">return</span> response
+    <span class="tok-kw">except</span> requests.exceptions.RequestException <span class="tok-kw">as</span> e:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;請求失敗：{e}&quot;</span>)
+        <span class="tok-kw">return</span> <span class="tok-kw">None</span>
 
 urls = [
-    &quot;https://jsonplaceholder.typicode.com/todos/1&quot;,
-    &quot;https://jsonplaceholder.typicode.com/todos/2&quot;,
-    &quot;https://jsonplaceholder.typicode.com/todos/3&quot;,
+    <span class="tok-str">&quot;https://jsonplaceholder.typicode.com/todos/1&quot;</span>,
+    <span class="tok-str">&quot;https://jsonplaceholder.typicode.com/todos/2&quot;</span>,
+    <span class="tok-str">&quot;https://jsonplaceholder.typicode.com/todos/3&quot;</span>,
 ]
 
-for url in urls:
-    result = fetch(url)
-    if result:
-        print(result.json()[&quot;title&quot;])
-    time.sleep(1)  # 遵守爬蟲禮儀</code></pre>
+<span class="tok-kw">for</span> url <span class="tok-kw">in</span> urls:
+    result = <span class="tok-fn">fetch</span>(url)
+    <span class="tok-kw">if</span> result:
+        <span class="tok-fn">print</span>(result.<span class="tok-fn">json</span>()[<span class="tok-str">&quot;title&quot;</span>])
+    time.<span class="tok-fn">sleep</span>(<span class="tok-num">1</span>)  <span class="tok-com"># 遵守爬蟲禮儀</span></code></pre>
     </div>
         <ul class="checklist">
       <li>安裝 requests：<code>pip install requests</code></li>
@@ -1199,25 +1199,25 @@ for url in urls:
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：從 HTML 字串建立 Soup</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-# 取得網頁
-response = requests.get(&quot;https://books.toscrape.com&quot;)
+<span class="tok-com"># 取得網頁</span>
+response = requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>)
 html = response.text
 
-# 建立 Soup 物件（html.parser 為 Python 內建解析器）
-soup = BeautifulSoup(html, &quot;html.parser&quot;)
+<span class="tok-com"># 建立 Soup 物件（html.parser 為 Python 內建解析器）</span>
+soup = <span class="tok-fn">BeautifulSoup</span>(html, <span class="tok-str">&quot;html.parser&quot;</span>)
 
-# 取得頁面標題
-print(soup.title)        # &lt;title&gt;All products | Books to Scrape...&lt;/title&gt;
-print(soup.title.text)   # All products | Books to Scrape...</code></pre>
+<span class="tok-com"># 取得頁面標題</span>
+<span class="tok-fn">print</span>(soup.title)        <span class="tok-com"># &lt;title&gt;All products | Books to Scrape...&lt;/title&gt;</span>
+<span class="tok-fn">print</span>(soup.title.text)   <span class="tok-com"># All products | Books to Scrape...</span></code></pre>
     </div>
       </div>
     </div>
@@ -1265,28 +1265,28 @@ print(soup.title.text)   # All products | Books to Scrape...</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：find() 基本用法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-soup = BeautifulSoup(requests.get(&quot;https://books.toscrape.com&quot;).text, &quot;html.parser&quot;)
+soup = <span class="tok-fn">BeautifulSoup</span>(requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>).text, <span class="tok-str">&quot;html.parser&quot;</span>)
 
-# 找第一個 h1
-h1 = soup.find(&quot;h1&quot;)
-print(h1.text)   # All products
+<span class="tok-com"># 找第一個 h1</span>
+h1 = soup.<span class="tok-fn">find</span>(<span class="tok-str">&quot;h1&quot;</span>)
+<span class="tok-fn">print</span>(h1.text)   <span class="tok-com"># All products</span>
 
-# 用 class 屬性篩選
-first_price = soup.find(&quot;p&quot;, class_=&quot;price_color&quot;)
-print(first_price.text)   # £51.77
+<span class="tok-com"># 用 class 屬性篩選</span>
+first_price = soup.<span class="tok-fn">find</span>(<span class="tok-str">&quot;p&quot;</span>, class_=<span class="tok-str">&quot;price_color&quot;</span>)
+<span class="tok-fn">print</span>(first_price.text)   <span class="tok-com"># £51.77</span>
 
-# 取得標籤的屬性值
-first_link = soup.find(&quot;a&quot;)
-print(first_link[&quot;href&quot;])   # catalogue/a-light-in-the-attic_1000/index.html</code></pre>
+<span class="tok-com"># 取得標籤的屬性值</span>
+first_link = soup.<span class="tok-fn">find</span>(<span class="tok-str">&quot;a&quot;</span>)
+<span class="tok-fn">print</span>(first_link[<span class="tok-str">&quot;href&quot;</span>])   <span class="tok-com"># catalogue/a-light-in-the-attic_1000/index.html</span></code></pre>
     </div>
       </div>
     </div>
@@ -1298,28 +1298,28 @@ print(first_link[&quot;href&quot;])   # catalogue/a-light-in-the-attic_1000/inde
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：find_all() 批次提取</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-soup = BeautifulSoup(requests.get(&quot;https://books.toscrape.com&quot;).text, &quot;html.parser&quot;)
+soup = <span class="tok-fn">BeautifulSoup</span>(requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>).text, <span class="tok-str">&quot;html.parser&quot;</span>)
 
-# 取得所有書名
-titles = soup.find_all(&quot;h3&quot;)
-for t in titles[:3]:             # 只印前三個
-    print(t.a[&quot;title&quot;])
+<span class="tok-com"># 取得所有書名</span>
+titles = soup.<span class="tok-fn">find_all</span>(<span class="tok-str">&quot;h3&quot;</span>)
+<span class="tok-kw">for</span> t <span class="tok-kw">in</span> titles[:<span class="tok-num">3</span>]:             <span class="tok-com"># 只印前三個</span>
+    <span class="tok-fn">print</span>(t.a[<span class="tok-str">&quot;title&quot;</span>])
 
-# 取得所有價格
-prices = soup.find_all(&quot;p&quot;, class_=&quot;price_color&quot;)
-for p in prices[:3]:
-    print(p.text.strip())
+<span class="tok-com"># 取得所有價格</span>
+prices = soup.<span class="tok-fn">find_all</span>(<span class="tok-str">&quot;p&quot;</span>, class_=<span class="tok-str">&quot;price_color&quot;</span>)
+<span class="tok-kw">for</span> p <span class="tok-kw">in</span> prices[:<span class="tok-num">3</span>]:
+    <span class="tok-fn">print</span>(p.text.<span class="tok-fn">strip</span>())
 
-print(f&quot;共找到 {len(prices)} 個價格&quot;)   # 20</code></pre>
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;共找到 {len(prices)} 個價格&quot;</span>)   <span class="tok-com"># 20</span></code></pre>
     </div>
       </div>
     </div>
@@ -1359,28 +1359,28 @@ print(f&quot;共找到 {len(prices)} 個價格&quot;)   # 20</code></pre>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：select() 實戰</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-soup = BeautifulSoup(requests.get(&quot;https://books.toscrape.com&quot;).text, &quot;html.parser&quot;)
+soup = <span class="tok-fn">BeautifulSoup</span>(requests.<span class="tok-fn">get</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>).text, <span class="tok-str">&quot;html.parser&quot;</span>)
 
-# 取得所有書籍卡片（article 標籤，class=product_pod）
-books = soup.select(&quot;article.product_pod&quot;)
-print(f&quot;本頁共 {len(books)} 本書&quot;)   # 20
+<span class="tok-com"># 取得所有書籍卡片（article 標籤，class=product_pod）</span>
+books = soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod&quot;</span>)
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;本頁共 {len(books)} 本書&quot;</span>)   <span class="tok-com"># 20</span>
 
-for book in books:
-    title  = book.h3.a[&quot;title&quot;]
-    price  = book.select_one(&quot;p.price_color&quot;).text.strip()
-    rating = book.p[&quot;class&quot;][1]          # 取 class 的第二個值：Five / Four...
-    stock  = book.select_one(&quot;p.availability&quot;).text.strip()
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> books:
+    title  = book.h3.a[<span class="tok-str">&quot;title&quot;</span>]
+    price  = book.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;p.price_color&quot;</span>).text.<span class="tok-fn">strip</span>()
+    rating = book.p[<span class="tok-str">&quot;class&quot;</span>][<span class="tok-num">1</span>]          <span class="tok-com"># 取 class 的第二個值：Five / Four...</span>
+    stock  = book.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;p.availability&quot;</span>).text.<span class="tok-fn">strip</span>()
 
-    print(f&quot;{title[:40]:40} | {price} | {rating} | {stock}&quot;)</code></pre>
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;{title[:40]:40} | {price} | {rating} | {stock}&quot;</span>)</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">select_one() 等同 find()，select() 等同 find_all()</div>
@@ -1397,34 +1397,34 @@ for book in books:
   <div class="reveal">
     <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：完整爬取一頁書籍資料</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">from bs4 import BeautifulSoup
-import requests
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> requests
 
-def scrape_page(url):
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, &quot;html.parser&quot;)
+<span class="tok-kw">def</span> <span class="tok-fn">scrape_page</span>(url):
+    response = requests.<span class="tok-fn">get</span>(url, timeout=<span class="tok-num">10</span>)
+    response.<span class="tok-fn">raise_for_status</span>()
+    soup = <span class="tok-fn">BeautifulSoup</span>(response.text, <span class="tok-str">&quot;html.parser&quot;</span>)
 
     books = []
-    for article in soup.select(&quot;article.product_pod&quot;):
-        books.append({
-            &quot;title&quot;:  article.h3.a[&quot;title&quot;],
-            &quot;price&quot;:  article.select_one(&quot;.price_color&quot;).text.strip(),
-            &quot;rating&quot;: article.p[&quot;class&quot;][1],
-            &quot;stock&quot;:  article.select_one(&quot;.availability&quot;).text.strip(),
+    <span class="tok-kw">for</span> article <span class="tok-kw">in</span> soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod&quot;</span>):
+        books.<span class="tok-fn">append</span>({
+            <span class="tok-str">&quot;title&quot;</span>:  article.h3.a[<span class="tok-str">&quot;title&quot;</span>],
+            <span class="tok-str">&quot;price&quot;</span>:  article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.price_color&quot;</span>).text.<span class="tok-fn">strip</span>(),
+            <span class="tok-str">&quot;rating&quot;</span>: article.p[<span class="tok-str">&quot;class&quot;</span>][<span class="tok-num">1</span>],
+            <span class="tok-str">&quot;stock&quot;</span>:  article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.availability&quot;</span>).text.<span class="tok-fn">strip</span>(),
         })
-    return books
+    <span class="tok-kw">return</span> books
 
-result = scrape_page(&quot;https://books.toscrape.com&quot;)
-print(f&quot;爬到 {len(result)} 本書&quot;)
-for book in result[:3]:
-    print(book)</code></pre>
+result = <span class="tok-fn">scrape_page</span>(<span class="tok-str">&quot;https://books.toscrape.com&quot;</span>)
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;爬到 {len(result)} 本書&quot;</span>)
+<span class="tok-kw">for</span> book <span class="tok-kw">in</span> result[:<span class="tok-num">3</span>]:
+    <span class="tok-fn">print</span>(book)</code></pre>
     </div>
   </div>
 
@@ -1466,30 +1466,30 @@ for book in result[:3]:
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：List of Dict → DataFrame</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import pandas as pd
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
 
 books = [
-    {&quot;title&quot;: &quot;Python Crash Course&quot;, &quot;price&quot;: &quot;£12.99&quot;, &quot;rating&quot;: &quot;Five&quot;},
-    {&quot;title&quot;: &quot;Learning Python&quot;,     &quot;price&quot;: &quot;£39.99&quot;, &quot;rating&quot;: &quot;Four&quot;},
-    {&quot;title&quot;: &quot;Automate the Boring&quot;, &quot;price&quot;: &quot;£17.50&quot;, &quot;rating&quot;: &quot;Five&quot;},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Python Crash Course&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£12.99&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Learning Python&quot;</span>,     <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£39.99&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Four&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Automate the Boring&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£17.50&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
 ]
 
-# 一行建立 DataFrame
-df = pd.DataFrame(books)
-print(df)
-#                  title   price rating
-# 0  Python Crash Course  £12.99   Five
-# 1       Learning Python  £39.99   Four
-# 2  Automate the Boring  £17.50   Five
+<span class="tok-com"># 一行建立 DataFrame</span>
+df = pd.<span class="tok-fn">DataFrame</span>(books)
+<span class="tok-fn">print</span>(df)
+<span class="tok-com">#                  title   price rating</span>
+<span class="tok-com"># 0  Python Crash Course  £12.99   Five</span>
+<span class="tok-com"># 1       Learning Python  £39.99   Four</span>
+<span class="tok-com"># 2  Automate the Boring  £17.50   Five</span>
 
-print(df.shape)    # (3, 3) — 3 列 3 欄
-print(df.columns)  # Index(['title', 'price', 'rating'], dtype='object')</code></pre>
+<span class="tok-fn">print</span>(df.shape)    <span class="tok-com"># (3, 3) — 3 列 3 欄</span>
+<span class="tok-fn">print</span>(df.columns)  <span class="tok-com"># Index(['title', 'price', 'rating'], dtype='object')</span></code></pre>
     </div>
       </div>
     </div>
@@ -1505,30 +1505,30 @@ print(df.columns)  # Index(['title', 'price', 'rating'], dtype='object')</code><
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：清理 price 欄位</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import pandas as pd
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
 
-df = pd.DataFrame([
-    {&quot;title&quot;: &quot;Python Crash Course&quot;, &quot;price&quot;: &quot;£12.99&quot;},
-    {&quot;title&quot;: &quot;Learning Python&quot;,     &quot;price&quot;: &quot;£39.99&quot;},
-    {&quot;title&quot;: &quot;Automate the Boring&quot;, &quot;price&quot;: &quot;£17.50&quot;},
+df = pd.<span class="tok-fn">DataFrame</span>([
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Python Crash Course&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£12.99&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Learning Python&quot;</span>,     <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£39.99&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Automate the Boring&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-str">&quot;£17.50&quot;</span>},
 ])
 
-# 去掉 £ 符號並轉為浮點數
-df[&quot;price&quot;] = df[&quot;price&quot;].str.replace(&quot;£&quot;, &quot;&quot;).astype(float)
+<span class="tok-com"># 去掉 £ 符號並轉為浮點數</span>
+df[<span class="tok-str">&quot;price&quot;</span>] = df[<span class="tok-str">&quot;price&quot;</span>].str.<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>).<span class="tok-fn">astype</span>(float)
 
-print(df.dtypes)
-# title     object
-# price    float64
+<span class="tok-fn">print</span>(df.dtypes)
+<span class="tok-com"># title     object</span>
+<span class="tok-com"># price    float64</span>
 
-print(df[&quot;price&quot;].mean())    # 平均價格：23.49
-print(df[&quot;price&quot;].max())     # 最高價：39.99
-print(df[&quot;price&quot;].min())     # 最低價：12.99</code></pre>
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">mean</span>())    <span class="tok-com"># 平均價格：23.49</span>
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">max</span>())     <span class="tok-com"># 最高價：39.99</span>
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">min</span>())     <span class="tok-com"># 最低價：12.99</span></code></pre>
     </div>
       </div>
     </div>
@@ -1540,35 +1540,35 @@ print(df[&quot;price&quot;].min())     # 最低價：12.99</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：篩選與排序 DataFrame</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import pandas as pd
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
 
-# 模擬爬完一頁的資料
+<span class="tok-com"># 模擬爬完一頁的資料</span>
 data = [
-    {&quot;title&quot;: &quot;Book A&quot;, &quot;price&quot;: 12.99, &quot;rating&quot;: &quot;Five&quot;},
-    {&quot;title&quot;: &quot;Book B&quot;, &quot;price&quot;: 39.99, &quot;rating&quot;: &quot;Four&quot;},
-    {&quot;title&quot;: &quot;Book C&quot;, &quot;price&quot;: 9.99,  &quot;rating&quot;: &quot;Five&quot;},
-    {&quot;title&quot;: &quot;Book D&quot;, &quot;price&quot;: 25.00, &quot;rating&quot;: &quot;Three&quot;},
-    {&quot;title&quot;: &quot;Book E&quot;, &quot;price&quot;: 17.50, &quot;rating&quot;: &quot;Five&quot;},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Book A&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">12.99</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Book B&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">39.99</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Four&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Book C&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">9.99</span>,  <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Book D&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">25.00</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Three&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Book E&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">17.50</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
 ]
-df = pd.DataFrame(data)
+df = pd.<span class="tok-fn">DataFrame</span>(data)
 
-# 篩選評分為 Five 的書
-five_star = df[df[&quot;rating&quot;] == &quot;Five&quot;]
-print(five_star)
+<span class="tok-com"># 篩選評分為 Five 的書</span>
+five_star = df[df[<span class="tok-str">&quot;rating&quot;</span>] == <span class="tok-str">&quot;Five&quot;</span>]
+<span class="tok-fn">print</span>(five_star)
 
-# 按價格升冪排列
-sorted_df = df.sort_values(&quot;price&quot;)
-print(sorted_df)
+<span class="tok-com"># 按價格升冪排列</span>
+sorted_df = df.<span class="tok-fn">sort_values</span>(<span class="tok-str">&quot;price&quot;</span>)
+<span class="tok-fn">print</span>(sorted_df)
 
-# 同時篩選 + 排序
-result = df[df[&quot;rating&quot;] == &quot;Five&quot;].sort_values(&quot;price&quot;)
-print(result)</code></pre>
+<span class="tok-com"># 同時篩選 + 排序</span>
+result = df[df[<span class="tok-str">&quot;rating&quot;</span>] == <span class="tok-str">&quot;Five&quot;</span>].<span class="tok-fn">sort_values</span>(<span class="tok-str">&quot;price&quot;</span>)
+<span class="tok-fn">print</span>(result)</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">DataFrame 的篩選語法像 Excel 的篩選功能</div>
@@ -1588,30 +1588,30 @@ print(result)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：輸出 CSV 與 Excel</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import pandas as pd
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
 
-df = pd.DataFrame([
-    {&quot;title&quot;: &quot;Python Crash Course&quot;, &quot;price&quot;: 12.99, &quot;rating&quot;: &quot;Five&quot;},
-    {&quot;title&quot;: &quot;Learning Python&quot;,     &quot;price&quot;: 39.99, &quot;rating&quot;: &quot;Four&quot;},
+df = pd.<span class="tok-fn">DataFrame</span>([
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Python Crash Course&quot;</span>, <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">12.99</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Five&quot;</span>},
+    {<span class="tok-str">&quot;title&quot;</span>: <span class="tok-str">&quot;Learning Python&quot;</span>,     <span class="tok-str">&quot;price&quot;</span>: <span class="tok-num">39.99</span>, <span class="tok-str">&quot;rating&quot;</span>: <span class="tok-str">&quot;Four&quot;</span>},
 ])
 
-# 輸出 CSV（index=False 不輸出列索引）
-df.to_csv(&quot;books.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
-# utf-8-sig 讓 Windows Excel 正確顯示中文
+<span class="tok-com"># 輸出 CSV（index=False 不輸出列索引）</span>
+df.<span class="tok-fn">to_csv</span>(<span class="tok-str">&quot;books.csv&quot;</span>, index=<span class="tok-kw">False</span>, encoding=<span class="tok-str">&quot;utf-8-sig&quot;</span>)
+<span class="tok-com"># utf-8-sig 讓 Windows Excel 正確顯示中文</span>
 
-# 輸出 Excel（需安裝 openpyxl）
-# pip install openpyxl
-df.to_excel(&quot;books.xlsx&quot;, index=False)
+<span class="tok-com"># 輸出 Excel（需安裝 openpyxl）</span>
+<span class="tok-com"># pip install openpyxl</span>
+df.<span class="tok-fn">to_excel</span>(<span class="tok-str">&quot;books.xlsx&quot;</span>, index=<span class="tok-kw">False</span>)
 
-# 重新讀入確認
-df_check = pd.read_csv(&quot;books.csv&quot;)
-print(df_check)</code></pre>
+<span class="tok-com"># 重新讀入確認</span>
+df_check = pd.<span class="tok-fn">read_csv</span>(<span class="tok-str">&quot;books.csv&quot;</span>)
+<span class="tok-fn">print</span>(df_check)</code></pre>
     </div>
       </div>
     </div>
@@ -1624,55 +1624,55 @@ print(df_check)</code></pre>
   <div class="reveal">
     <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：爬蟲到 CSV 完整範例</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-import pandas as pd
-from bs4 import BeautifulSoup
-import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+<span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> time
 
-def scrape_all_pages(total_pages=3):
+<span class="tok-kw">def</span> <span class="tok-fn">scrape_all_pages</span>(total_pages=<span class="tok-num">3</span>):
     all_books = []
-    session = requests.Session()
-    session.headers.update({&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;})
+    session = requests.<span class="tok-fn">Session</span>()
+    session.headers.<span class="tok-fn">update</span>({<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>})
 
-    for page in range(1, total_pages + 1):
-        url = f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
-        print(f&quot;爬取第 {page} 頁...&quot;)
+    <span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, total_pages + <span class="tok-num">1</span>):
+        url = f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;爬取第 {page} 頁...&quot;</span>)
 
-        try:
-            response = session.get(url, timeout=10)
-            response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            print(f&quot;第 {page} 頁失敗：{e}&quot;)
-            continue
+        <span class="tok-kw">try</span>:
+            response = session.<span class="tok-fn">get</span>(url, timeout=<span class="tok-num">10</span>)
+            response.<span class="tok-fn">raise_for_status</span>()
+        <span class="tok-kw">except</span> requests.exceptions.RequestException <span class="tok-kw">as</span> e:
+            <span class="tok-fn">print</span>(f<span class="tok-str">&quot;第 {page} 頁失敗：{e}&quot;</span>)
+            <span class="tok-kw">continue</span>
 
-        soup = BeautifulSoup(response.text, &quot;html.parser&quot;)
-        for article in soup.select(&quot;article.product_pod&quot;):
-            all_books.append({
-                &quot;title&quot;:  article.h3.a[&quot;title&quot;],
-                &quot;price&quot;:  float(article.select_one(&quot;.price_color&quot;).text.strip().replace(&quot;£&quot;, &quot;&quot;)),
-                &quot;rating&quot;: article.p[&quot;class&quot;][1],
-                &quot;stock&quot;:  article.select_one(&quot;.availability&quot;).text.strip(),
+        soup = <span class="tok-fn">BeautifulSoup</span>(response.text, <span class="tok-str">&quot;html.parser&quot;</span>)
+        <span class="tok-kw">for</span> article <span class="tok-kw">in</span> soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod&quot;</span>):
+            all_books.<span class="tok-fn">append</span>({
+                <span class="tok-str">&quot;title&quot;</span>:  article.h3.a[<span class="tok-str">&quot;title&quot;</span>],
+                <span class="tok-str">&quot;price&quot;</span>:  <span class="tok-fn">float</span>(article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.price_color&quot;</span>).text.<span class="tok-fn">strip</span>().<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>)),
+                <span class="tok-str">&quot;rating&quot;</span>: article.p[<span class="tok-str">&quot;class&quot;</span>][<span class="tok-num">1</span>],
+                <span class="tok-str">&quot;stock&quot;</span>:  article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.availability&quot;</span>).text.<span class="tok-fn">strip</span>(),
             })
 
-        time.sleep(1)
+        time.<span class="tok-fn">sleep</span>(<span class="tok-num">1</span>)
 
-    return all_books
+    <span class="tok-kw">return</span> all_books
 
-books = scrape_all_pages(total_pages=3)
-df = pd.DataFrame(books)
+books = <span class="tok-fn">scrape_all_pages</span>(total_pages=<span class="tok-num">3</span>)
+df = pd.<span class="tok-fn">DataFrame</span>(books)
 
-print(df.shape)                     # (60, 4) — 3 頁 × 20 本
-print(df[&quot;price&quot;].describe())       # 價格統計摘要
-print(df[&quot;rating&quot;].value_counts())  # 各評星數量
+<span class="tok-fn">print</span>(df.shape)                     <span class="tok-com"># (60, 4) — 3 頁 × 20 本</span>
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">describe</span>())       <span class="tok-com"># 價格統計摘要</span>
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;rating&quot;</span>].<span class="tok-fn">value_counts</span>())  <span class="tok-com"># 各評星數量</span>
 
-df.to_csv(&quot;books_toscrape.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
-print(&quot;已儲存 books_toscrape.csv&quot;)</code></pre>
+df.<span class="tok-fn">to_csv</span>(<span class="tok-str">&quot;books_toscrape.csv&quot;</span>, index=<span class="tok-kw">False</span>, encoding=<span class="tok-str">&quot;utf-8-sig&quot;</span>)
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;已儲存 books_toscrape.csv&quot;</span>)</code></pre>
     </div>
   </div>
 
@@ -1729,33 +1729,33 @@ print(&quot;已儲存 books_toscrape.csv&quot;)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">html</span>
         <span class="code-label">DevTools 觀察結果：每本書的 HTML 結構</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">&lt;article class=&quot;product_pod&quot;&gt;
+      <pre class="code-body"><code class="lang-html">&lt;article class=<span class="tok-str">&quot;product_pod&quot;</span>&gt;
 
-  &lt;!-- 評星：class 第二個值就是評分文字 --&gt;
-  &lt;p class=&quot;star-rating Five&quot;&gt;&lt;/p&gt;
+  <span class="tok-com">&lt;!-- 評星：class 第二個值就是評分文字 --&gt;</span>
+  &lt;p class=<span class="tok-str">&quot;star-rating Five&quot;</span>&gt;&lt;/p&gt;
 
-  &lt;!-- 封面圖與書名連結 --&gt;
-  &lt;div class=&quot;image_container&quot;&gt;
-    &lt;a href=&quot;catalogue/a-light-in-the-attic_1000/index.html&quot;&gt;
-      &lt;img src=&quot;...&quot; alt=&quot;A Light In The Attic&quot;&gt;
+  <span class="tok-com">&lt;!-- 封面圖與書名連結 --&gt;</span>
+  &lt;div class=<span class="tok-str">&quot;image_container&quot;</span>&gt;
+    &lt;a href=<span class="tok-str">&quot;catalogue/a-light-in-the-attic_1000/index.html&quot;</span>&gt;
+      &lt;img src=<span class="tok-str">&quot;...&quot;</span> alt=<span class="tok-str">&quot;A Light In The Attic&quot;</span>&gt;
     &lt;/a&gt;
   &lt;/div&gt;
 
-  &lt;!-- 書名：在 h3 &gt; a 的 title 屬性（非 a 的文字，文字會被截斷） --&gt;
+  <span class="tok-com">&lt;!-- 書名：在 h3 &gt; a 的 title 屬性（非 a 的文字，文字會被截斷） --&gt;</span>
   &lt;h3&gt;
-    &lt;a href=&quot;catalogue/...&quot; title=&quot;A Light In The Attic&quot;&gt;A Light In ...&lt;/a&gt;
+    &lt;a href=<span class="tok-str">&quot;catalogue/...&quot;</span> title=<span class="tok-str">&quot;A Light In The Attic&quot;</span>&gt;A Light In ...&lt;/a&gt;
   &lt;/h3&gt;
 
-  &lt;!-- 價格與庫存 --&gt;
-  &lt;div class=&quot;product_price&quot;&gt;
-    &lt;p class=&quot;price_color&quot;&gt;£51.77&lt;/p&gt;
-    &lt;p class=&quot;availability&quot;&gt;In stock&lt;/p&gt;
+  <span class="tok-com">&lt;!-- 價格與庫存 --&gt;</span>
+  &lt;div class=<span class="tok-str">&quot;product_price&quot;</span>&gt;
+    &lt;p class=<span class="tok-str">&quot;price_color&quot;</span>&gt;£<span class="tok-num">51.77</span>&lt;/p&gt;
+    &lt;p class=<span class="tok-str">&quot;availability&quot;</span>&gt;In stock&lt;/p&gt;
   &lt;/div&gt;
 
 &lt;/article&gt;</code></pre>
@@ -1813,23 +1813,23 @@ print(&quot;已儲存 books_toscrape.csv&quot;)</code></pre>
     </div>
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">程式結構：三層分工</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 第一層：取得 HTML
-def fetch_page(session, url):
-    &quot;&quot;&quot;發送請求，返回 BeautifulSoup 物件；失敗返回 None&quot;&quot;&quot;
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 第一層：取得 HTML</span>
+<span class="tok-kw">def</span> <span class="tok-fn">fetch_page</span>(session, url):
+    <span class="tok-str">&quot;&quot;&quot;發送請求，返回 BeautifulSoup 物件；失敗返回 None&quot;&quot;&quot;</span>
 
-# 第二層：解析單頁
-def parse_page(soup):
-    &quot;&quot;&quot;從 soup 提取書籍資料，返回 List of Dict&quot;&quot;&quot;
+<span class="tok-com"># 第二層：解析單頁</span>
+<span class="tok-kw">def</span> <span class="tok-fn">parse_page</span>(soup):
+    <span class="tok-str">&quot;&quot;&quot;從 soup 提取書籍資料，返回 List of Dict&quot;&quot;&quot;</span>
 
-# 第三層：整合翻頁 + 儲存
-def scrape_all(total_pages):
-    &quot;&quot;&quot;呼叫 fetch + parse，收集所有頁面，輸出 CSV&quot;&quot;&quot;</code></pre>
+<span class="tok-com"># 第三層：整合翻頁 + 儲存</span>
+<span class="tok-kw">def</span> <span class="tok-fn">scrape_all</span>(total_pages):
+    <span class="tok-str">&quot;&quot;&quot;呼叫 fetch + parse，收集所有頁面，輸出 CSV&quot;&quot;&quot;</span></code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">每個函式只做一件事（單一職責原則）</div>
@@ -1849,37 +1849,37 @@ def scrape_all(total_pages):
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：fetch_page 函式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-from bs4 import BeautifulSoup
-import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> time
 
-def fetch_page(session, url):
-    &quot;&quot;&quot;發送 GET 請求，返回解析好的 BeautifulSoup 物件&quot;&quot;&quot;
-    try:
-        response = session.get(url, timeout=10)
-        response.raise_for_status()
-        response.encoding = 'utf-8'   # 強制 UTF-8，避免 £ 變成 Â£
-        return BeautifulSoup(response.text, &quot;html.parser&quot;)
-    except requests.exceptions.HTTPError as e:
-        print(f&quot;  HTTP 錯誤 {e.response.status_code}：{url}&quot;)
-    except requests.exceptions.ConnectionError:
-        print(f&quot;  連線失敗：{url}&quot;)
-    except requests.exceptions.Timeout:
-        print(f&quot;  請求逾時：{url}&quot;)
-    return None
+<span class="tok-kw">def</span> <span class="tok-fn">fetch_page</span>(session, url):
+    <span class="tok-str">&quot;&quot;&quot;發送 GET 請求，返回解析好的 BeautifulSoup 物件&quot;&quot;&quot;</span>
+    <span class="tok-kw">try</span>:
+        response = session.<span class="tok-fn">get</span>(url, timeout=<span class="tok-num">10</span>)
+        response.<span class="tok-fn">raise_for_status</span>()
+        response.encoding = <span class="tok-str">'utf-8'</span>   <span class="tok-com"># 強制 UTF-8，避免 £ 變成 Â£</span>
+        <span class="tok-kw">return</span> <span class="tok-fn">BeautifulSoup</span>(response.text, <span class="tok-str">&quot;html.parser&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.HTTPError <span class="tok-kw">as</span> e:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;  HTTP 錯誤 {e.response.status_code}：{url}&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.ConnectionError:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;  連線失敗：{url}&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.Timeout:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;  請求逾時：{url}&quot;</span>)
+    <span class="tok-kw">return</span> <span class="tok-kw">None</span>
 
-# 測試 fetch_page
-session = requests.Session()
-session.headers.update({&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;})
+<span class="tok-com"># 測試 fetch_page</span>
+session = requests.<span class="tok-fn">Session</span>()
+session.headers.<span class="tok-fn">update</span>({<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>})
 
-soup = fetch_page(session, &quot;https://books.toscrape.com&quot;)
-print(soup.title.text)   # All products | Books to Scrape - Sandbox</code></pre>
+soup = <span class="tok-fn">fetch_page</span>(session, <span class="tok-str">&quot;https://books.toscrape.com&quot;</span>)
+<span class="tok-fn">print</span>(soup.title.text)   <span class="tok-com"># All products | Books to Scrape - Sandbox</span></code></pre>
     </div>
       </div>
     </div>
@@ -1891,52 +1891,52 @@ print(soup.title.text)   # All products | Books to Scrape - Sandbox</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：parse_page 函式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># href 已包含 catalogue/，base 只需到網域根目錄
-BASE_URL = &quot;https://books.toscrape.com/&quot;
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># href 已包含 catalogue/，base 只需到網域根目錄</span>
+BASE_URL = <span class="tok-str">&quot;https://books.toscrape.com/&quot;</span>
 
-def parse_page(soup):
-    &quot;&quot;&quot;從單頁 soup 提取所有書籍資料&quot;&quot;&quot;
+<span class="tok-kw">def</span> <span class="tok-fn">parse_page</span>(soup):
+    <span class="tok-str">&quot;&quot;&quot;從單頁 soup 提取所有書籍資料&quot;&quot;&quot;</span>
     books = []
-    for article in soup.select(&quot;article.product_pod&quot;):
+    <span class="tok-kw">for</span> article <span class="tok-kw">in</span> soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod&quot;</span>):
 
-        # 書名：取 title 屬性（a 的文字內容會被截斷）
-        title = article.h3.a[&quot;title&quot;]
+        <span class="tok-com"># 書名：取 title 屬性（a 的文字內容會被截斷）</span>
+        title = article.h3.a[<span class="tok-str">&quot;title&quot;</span>]
 
-        # 價格：去掉 £ 符號，轉為浮點數
-        price = float(
-            article.select_one(&quot;.price_color&quot;).text.strip().replace(&quot;£&quot;, &quot;&quot;)
+        <span class="tok-com"># 價格：去掉 £ 符號，轉為浮點數</span>
+        price = <span class="tok-fn">float</span>(
+            article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.price_color&quot;</span>).text.<span class="tok-fn">strip</span>().<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>)
         )
 
-        # 評星：p.star-rating 的 class 有兩個值，第二個是評分文字
-        rating = article.p[&quot;class&quot;][1]   # &quot;Five&quot; / &quot;Four&quot; / ...
+        <span class="tok-com"># 評星：p.star-rating 的 class 有兩個值，第二個是評分文字</span>
+        rating = article.p[<span class="tok-str">&quot;class&quot;</span>][<span class="tok-num">1</span>]   <span class="tok-com"># &quot;Five&quot; / &quot;Four&quot; / ...</span>
 
-        # 庫存：去除前後空白與換行
-        stock = article.select_one(&quot;.availability&quot;).text.strip()
+        <span class="tok-com"># 庫存：去除前後空白與換行</span>
+        stock = article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.availability&quot;</span>).text.<span class="tok-fn">strip</span>()
 
-        # 詳情頁 URL：href 格式為 catalogue/book-name/index.html
-        relative_href = article.h3.a[&quot;href&quot;]   # catalogue/a-light.../index.html
-        book_url = BASE_URL + relative_href.replace(&quot;../&quot;, &quot;&quot;)
+        <span class="tok-com"># 詳情頁 URL：href 格式為 catalogue/book-name/index.html</span>
+        relative_href = article.h3.a[<span class="tok-str">&quot;href&quot;</span>]   <span class="tok-com"># catalogue/a-light.../index.html</span>
+        book_url = BASE_URL + relative_href.<span class="tok-fn">replace</span>(<span class="tok-str">&quot;../&quot;</span>, <span class="tok-str">&quot;&quot;</span>)
 
-        books.append({
-            &quot;title&quot;:        title,
-            &quot;price&quot;:        price,
-            &quot;rating&quot;:       rating,
-            &quot;availability&quot;: stock,
-            &quot;url&quot;:          book_url,
+        books.<span class="tok-fn">append</span>({
+            <span class="tok-str">&quot;title&quot;</span>:        title,
+            <span class="tok-str">&quot;price&quot;</span>:        price,
+            <span class="tok-str">&quot;rating&quot;</span>:       rating,
+            <span class="tok-str">&quot;availability&quot;</span>: stock,
+            <span class="tok-str">&quot;url&quot;</span>:          book_url,
         })
-    return books
+    <span class="tok-kw">return</span> books
 
-# 測試 parse_page（接續上方的 soup）
-books = parse_page(soup)
-print(f&quot;本頁 {len(books)} 本書&quot;)
-for b in books[:2]:
-    print(b)</code></pre>
+<span class="tok-com"># 測試 parse_page（接續上方的 soup）</span>
+books = <span class="tok-fn">parse_page</span>(soup)
+<span class="tok-fn">print</span>(f<span class="tok-str">&quot;本頁 {len(books)} 本書&quot;</span>)
+<span class="tok-kw">for</span> b <span class="tok-kw">in</span> books[:<span class="tok-num">2</span>]:
+    <span class="tok-fn">print</span>(b)</code></pre>
     </div>
       </div>
     </div>
@@ -1948,42 +1948,42 @@ for b in books[:2]:
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：scrape_all 翻頁主控函式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import pandas as pd
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
 
-def scrape_all(total_pages=50):
-    &quot;&quot;&quot;爬取所有頁面，存成 CSV&quot;&quot;&quot;
-    session = requests.Session()
-    session.headers.update({&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;})
+<span class="tok-kw">def</span> <span class="tok-fn">scrape_all</span>(total_pages=<span class="tok-num">50</span>):
+    <span class="tok-str">&quot;&quot;&quot;爬取所有頁面，存成 CSV&quot;&quot;&quot;</span>
+    session = requests.<span class="tok-fn">Session</span>()
+    session.headers.<span class="tok-fn">update</span>({<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>})
 
     all_books = []
 
-    for page in range(1, total_pages + 1):
-        # 第一頁 URL 與後續頁不同
-        if page == 1:
-            url = &quot;https://books.toscrape.com&quot;
-        else:
-            url = f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
+    <span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, total_pages + <span class="tok-num">1</span>):
+        <span class="tok-com"># 第一頁 URL 與後續頁不同</span>
+        <span class="tok-kw">if</span> page == <span class="tok-num">1</span>:
+            url = <span class="tok-str">&quot;https://books.toscrape.com&quot;</span>
+        <span class="tok-kw">else</span>:
+            url = f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
 
-        print(f&quot;[{page:2d}/{total_pages}] 爬取：{url}&quot;)
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;[{page:2d}/{total_pages}] 爬取：{url}&quot;</span>)
 
-        soup = fetch_page(session, url)
-        if soup is None:
-            print(f&quot;  第 {page} 頁跳過&quot;)
-            continue
+        soup = <span class="tok-fn">fetch_page</span>(session, url)
+        <span class="tok-kw">if</span> soup <span class="tok-kw">is</span> <span class="tok-kw">None</span>:
+            <span class="tok-fn">print</span>(f<span class="tok-str">&quot;  第 {page} 頁跳過&quot;</span>)
+            <span class="tok-kw">continue</span>
 
-        books = parse_page(soup)
-        all_books.extend(books)
+        books = <span class="tok-fn">parse_page</span>(soup)
+        all_books.<span class="tok-fn">extend</span>(books)
 
-        time.sleep(1)   # 遵守爬蟲禮儀
+        time.<span class="tok-fn">sleep</span>(<span class="tok-num">1</span>)   <span class="tok-com"># 遵守爬蟲禮儀</span>
 
-    print(f&quot;\n共爬取 {len(all_books)} 本書&quot;)
-    return all_books</code></pre>
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;\n共爬取 {len(all_books)} 本書&quot;</span>)
+    <span class="tok-kw">return</span> all_books</code></pre>
     </div>
       </div>
     </div>
@@ -1999,37 +1999,37 @@ def scrape_all(total_pages=50):
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：執行爬蟲並分析資料</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text"># 爬取全部 50 頁（1000 本書）
-all_books = scrape_all(total_pages=50)
+      <pre class="code-body"><code class="lang-py"><span class="tok-com"># 爬取全部 50 頁（1000 本書）</span>
+all_books = <span class="tok-fn">scrape_all</span>(total_pages=<span class="tok-num">50</span>)
 
-# 建立 DataFrame
-df = pd.DataFrame(all_books)
+<span class="tok-com"># 建立 DataFrame</span>
+df = pd.<span class="tok-fn">DataFrame</span>(all_books)
 
-# 基本統計
-print(&quot;=== 資料概覽 ===&quot;)
-print(df.shape)                      # (1000, 5)
-print(df.dtypes)
-print(df.isnull().sum())             # 檢查是否有缺失值
+<span class="tok-com"># 基本統計</span>
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;=== 資料概覽 ===&quot;</span>)
+<span class="tok-fn">print</span>(df.shape)                      <span class="tok-com"># (1000, 5)</span>
+<span class="tok-fn">print</span>(df.dtypes)
+<span class="tok-fn">print</span>(df.<span class="tok-fn">isnull</span>().<span class="tok-fn">sum</span>())             <span class="tok-com"># 檢查是否有缺失值</span>
 
-print(&quot;\n=== 價格統計 ===&quot;)
-print(df[&quot;price&quot;].describe())        # count/mean/std/min/max
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;\n=== 價格統計 ===&quot;</span>)
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;price&quot;</span>].<span class="tok-fn">describe</span>())        <span class="tok-com"># count/mean/std/min/max</span>
 
-print(&quot;\n=== 各評星數量 ===&quot;)
-print(df[&quot;rating&quot;].value_counts())
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;\n=== 各評星數量 ===&quot;</span>)
+<span class="tok-fn">print</span>(df[<span class="tok-str">&quot;rating&quot;</span>].<span class="tok-fn">value_counts</span>())
 
-print(&quot;\n=== 最便宜的五星書 ===&quot;)
-top5 = df[df[&quot;rating&quot;] == &quot;Five&quot;].sort_values(&quot;price&quot;).head(5)
-print(top5[[&quot;title&quot;, &quot;price&quot;]].to_string(index=False))
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;\n=== 最便宜的五星書 ===&quot;</span>)
+top5 = df[df[<span class="tok-str">&quot;rating&quot;</span>] == <span class="tok-str">&quot;Five&quot;</span>].<span class="tok-fn">sort_values</span>(<span class="tok-str">&quot;price&quot;</span>).<span class="tok-fn">head</span>(<span class="tok-num">5</span>)
+<span class="tok-fn">print</span>(top5[[<span class="tok-str">&quot;title&quot;</span>, <span class="tok-str">&quot;price&quot;</span>]].<span class="tok-fn">to_string</span>(index=<span class="tok-kw">False</span>))
 
-# 輸出 CSV
-df.to_csv(&quot;books_toscrape_full.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
-print(&quot;\n已儲存 books_toscrape_full.csv&quot;)</code></pre>
+<span class="tok-com"># 輸出 CSV</span>
+df.<span class="tok-fn">to_csv</span>(<span class="tok-str">&quot;books_toscrape_full.csv&quot;</span>, index=<span class="tok-kw">False</span>, encoding=<span class="tok-str">&quot;utf-8-sig&quot;</span>)
+<span class="tok-fn">print</span>(<span class="tok-str">&quot;\n已儲存 books_toscrape_full.csv&quot;</span>)</code></pre>
     </div>
       </div>
     </div>
@@ -2041,65 +2041,65 @@ print(&quot;\n已儲存 books_toscrape_full.csv&quot;)</code></pre>
       <div class="group-body">
         <div class="code-block">
       <div class="code-header">
-        <span class="code-lang">text</span>
+        <span class="code-lang">py</span>
         <span class="code-label">Python：完整爬蟲程式（複製可用）</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <pre class="code-body"><code class="lang-text">import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-import time
+      <pre class="code-body"><code class="lang-py"><span class="tok-kw">import</span> requests
+<span class="tok-kw">from</span> bs4 <span class="tok-kw">import</span> BeautifulSoup
+<span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+<span class="tok-kw">import</span> time
 
-# href 已包含 catalogue/，base 只需到網域根目錄
-BASE_URL = &quot;https://books.toscrape.com/&quot;
+<span class="tok-com"># href 已包含 catalogue/，base 只需到網域根目錄</span>
+BASE_URL = <span class="tok-str">&quot;https://books.toscrape.com/&quot;</span>
 
-def fetch_page(session, url):
-    try:
-        r = session.get(url, timeout=10)
-        r.raise_for_status()
-        r.encoding = 'utf-8'   # 強制 UTF-8，避免 £ 變成 Â£
-        return BeautifulSoup(r.text, &quot;html.parser&quot;)
-    except requests.exceptions.RequestException as e:
-        print(f&quot;  請求失敗：{e}&quot;)
-        return None
+<span class="tok-kw">def</span> <span class="tok-fn">fetch_page</span>(session, url):
+    <span class="tok-kw">try</span>:
+        r = session.<span class="tok-fn">get</span>(url, timeout=<span class="tok-num">10</span>)
+        r.<span class="tok-fn">raise_for_status</span>()
+        r.encoding = <span class="tok-str">'utf-8'</span>   <span class="tok-com"># 強制 UTF-8，避免 £ 變成 Â£</span>
+        <span class="tok-kw">return</span> <span class="tok-fn">BeautifulSoup</span>(r.text, <span class="tok-str">&quot;html.parser&quot;</span>)
+    <span class="tok-kw">except</span> requests.exceptions.RequestException <span class="tok-kw">as</span> e:
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;  請求失敗：{e}&quot;</span>)
+        <span class="tok-kw">return</span> <span class="tok-kw">None</span>
 
-def parse_page(soup):
+<span class="tok-kw">def</span> <span class="tok-fn">parse_page</span>(soup):
     books = []
-    for article in soup.select(&quot;article.product_pod&quot;):
-        books.append({
-            &quot;title&quot;:        article.h3.a[&quot;title&quot;],
-            &quot;price&quot;:        float(article.select_one(&quot;.price_color&quot;).text.strip().replace(&quot;£&quot;, &quot;&quot;)),
-            &quot;rating&quot;:       article.p[&quot;class&quot;][1],
-            &quot;availability&quot;: article.select_one(&quot;.availability&quot;).text.strip(),
-            &quot;url&quot;:          BASE_URL + article.h3.a[&quot;href&quot;].replace(&quot;../&quot;, &quot;&quot;),
+    <span class="tok-kw">for</span> article <span class="tok-kw">in</span> soup.<span class="tok-fn">select</span>(<span class="tok-str">&quot;article.product_pod&quot;</span>):
+        books.<span class="tok-fn">append</span>({
+            <span class="tok-str">&quot;title&quot;</span>:        article.h3.a[<span class="tok-str">&quot;title&quot;</span>],
+            <span class="tok-str">&quot;price&quot;</span>:        <span class="tok-fn">float</span>(article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.price_color&quot;</span>).text.<span class="tok-fn">strip</span>().<span class="tok-fn">replace</span>(<span class="tok-str">&quot;£&quot;</span>, <span class="tok-str">&quot;&quot;</span>)),
+            <span class="tok-str">&quot;rating&quot;</span>:       article.p[<span class="tok-str">&quot;class&quot;</span>][<span class="tok-num">1</span>],
+            <span class="tok-str">&quot;availability&quot;</span>: article.<span class="tok-fn">select_one</span>(<span class="tok-str">&quot;.availability&quot;</span>).text.<span class="tok-fn">strip</span>(),
+            <span class="tok-str">&quot;url&quot;</span>:          BASE_URL + article.h3.a[<span class="tok-str">&quot;href&quot;</span>].<span class="tok-fn">replace</span>(<span class="tok-str">&quot;../&quot;</span>, <span class="tok-str">&quot;&quot;</span>),
         })
-    return books
+    <span class="tok-kw">return</span> books
 
-def scrape_all(total_pages=50):
-    session = requests.Session()
-    session.headers.update({&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;})
+<span class="tok-kw">def</span> <span class="tok-fn">scrape_all</span>(total_pages=<span class="tok-num">50</span>):
+    session = requests.<span class="tok-fn">Session</span>()
+    session.headers.<span class="tok-fn">update</span>({<span class="tok-str">&quot;User-Agent&quot;</span>: <span class="tok-str">&quot;Mozilla/5.0&quot;</span>})
     all_books = []
 
-    for page in range(1, total_pages + 1):
-        url = &quot;https://books.toscrape.com&quot; if page == 1 else \
-              f&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;
-        print(f&quot;[{page:2d}/{total_pages}] {url}&quot;)
+    <span class="tok-kw">for</span> page <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, total_pages + <span class="tok-num">1</span>):
+        url = <span class="tok-str">&quot;https://books.toscrape.com&quot;</span> <span class="tok-kw">if</span> page == <span class="tok-num">1</span> <span class="tok-kw">else</span> \
+              f<span class="tok-str">&quot;https://books.toscrape.com/catalogue/page-{page}.html&quot;</span>
+        <span class="tok-fn">print</span>(f<span class="tok-str">&quot;[{page:2d}/{total_pages}] {url}&quot;</span>)
 
-        soup = fetch_page(session, url)
-        if soup:
-            all_books.extend(parse_page(soup))
-        time.sleep(1)
+        soup = <span class="tok-fn">fetch_page</span>(session, url)
+        <span class="tok-kw">if</span> soup:
+            all_books.<span class="tok-fn">extend</span>(<span class="tok-fn">parse_page</span>(soup))
+        time.<span class="tok-fn">sleep</span>(<span class="tok-num">1</span>)
 
-    return all_books
+    <span class="tok-kw">return</span> all_books
 
-if __name__ == &quot;__main__&quot;:
-    books = scrape_all(total_pages=50)
-    df = pd.DataFrame(books)
-    df.to_csv(&quot;books_toscrape_full.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
-    print(f&quot;\n完成！共 {len(df)} 本書，已存為 books_toscrape_full.csv&quot;)
-    print(df[[&quot;title&quot;, &quot;price&quot;, &quot;rating&quot;]].head(10).to_string(index=False))</code></pre>
+<span class="tok-kw">if</span> __name__ == <span class="tok-str">&quot;__main__&quot;</span>:
+    books = <span class="tok-fn">scrape_all</span>(total_pages=<span class="tok-num">50</span>)
+    df = pd.<span class="tok-fn">DataFrame</span>(books)
+    df.<span class="tok-fn">to_csv</span>(<span class="tok-str">&quot;books_toscrape_full.csv&quot;</span>, index=<span class="tok-kw">False</span>, encoding=<span class="tok-str">&quot;utf-8-sig&quot;</span>)
+    <span class="tok-fn">print</span>(f<span class="tok-str">&quot;\n完成！共 {len(df)} 本書，已存為 books_toscrape_full.csv&quot;</span>)
+    <span class="tok-fn">print</span>(df[[<span class="tok-str">&quot;title&quot;</span>, <span class="tok-str">&quot;price&quot;</span>, <span class="tok-str">&quot;rating&quot;</span>]].<span class="tok-fn">head</span>(<span class="tok-num">10</span>).<span class="tok-fn">to_string</span>(index=<span class="tok-kw">False</span>))</code></pre>
     </div>
         <div class="flow">
     </div>

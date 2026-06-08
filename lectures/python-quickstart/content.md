@@ -39,7 +39,7 @@
 
 ### 你的第一行程式碼
 
-```prompt [label="Colab：執行你的第一行程式碼"]
+```prompt py [label="Colab：執行你的第一行程式碼"]
 print("Hello, World!")
 print("我要學 Python 爬蟲！")
 ```
@@ -61,7 +61,7 @@ print("我要學 Python 爬蟲！")
 - 用 `=` 把值放進盒子，之後用名字取出來用
 - Python 不需要先宣告型別，直接賦值即可
 
-```prompt [label="Colab：變數的基本用法"]
+```prompt py [label="Colab：變數的基本用法"]
 # 字串（文字）
 name = "Alice"
 url = "https://books.toscrape.com"
@@ -87,7 +87,7 @@ print(page_number)  # 1
 - [orange] float（浮點數）：價格（數字版）、評分
 [/tags]
 
-```prompt [label="Colab：用 type() 查看資料型別"]
+```prompt py [label="Colab：用 type() 查看資料型別"]
 title = "Python Crash Course"
 page = 3
 rating = 4.5
@@ -103,7 +103,7 @@ print(type(rating))  # <class 'float'>
 - 爬蟲常需要動態組合 URL，例如換頁時 `?page=2`、`?page=3`
 - f-string 讓你把變數直接嵌入字串，不需要用 `+` 拼接
 
-```prompt [label="Colab：f-string 動態組合 URL"]
+```prompt py [label="Colab：f-string 動態組合 URL"]
 base_url = "https://books.toscrape.com/catalogue/page-{}.html"
 page = 1
 
@@ -138,7 +138,7 @@ print(url)  # https://books.toscrape.com/catalogue/page-5.html
 
 ### if / elif / else 結構
 
-```prompt [label="Colab：if 條件判斷"]
+```prompt py [label="Colab：if 條件判斷"]
 status_code = 200
 
 if status_code == 200:
@@ -153,7 +153,7 @@ else:
 
 ### 爬蟲中常見的判斷場景
 
-```prompt [label="Colab：爬蟲常用的條件判斷"]
+```prompt py [label="Colab：爬蟲常用的條件判斷"]
 price_text = "£12.99"
 stock_text = "In stock"
 
@@ -173,7 +173,7 @@ else:
 
 ### 用 for 逐一處理清單
 
-```prompt [label="Colab：for 迴圈基本用法"]
+```prompt py [label="Colab：for 迴圈基本用法"]
 # 逐一印出書名清單
 book_titles = ["Book A", "Book B", "Book C", "Book D"]
 
@@ -188,7 +188,7 @@ for page in range(1, 6):  # 1, 2, 3, 4, 5
 
 ### 爬蟲翻頁模式
 
-```prompt [label="Colab：模擬翻頁爬蟲結構"]
+```prompt py [label="Colab：模擬翻頁爬蟲結構"]
 import time
 
 total_pages = 5
@@ -230,7 +230,7 @@ Hint: range(start, stop) 包含 start，但不包含 stop，所以要到第 10 �
 - 爬蟲有許多重複的動作：「發請求 → 確認狀態碼 → 解析 → 返回資料」
 - 把這個流程包成函式，每次只需呼叫一行
 
-```prompt [label="Colab：定義與呼叫函式"]
+```prompt py [label="Colab：定義與呼叫函式"]
 # 定義函式
 def greet(name):
     message = f"你好，{name}！歡迎學習 Python 爬蟲"
@@ -246,7 +246,7 @@ print(result2)  # 你好，Bob！歡迎學習 Python 爬蟲
 
 ### 爬蟲函式的基本模式
 
-```prompt [label="Colab：爬蟲函式的骨架"]
+```prompt py [label="Colab：爬蟲函式的骨架"]
 def fetch_page(url):
     """取得網頁內容，失敗回傳 None"""
     # 之後這裡會放 requests.get(url)
@@ -268,7 +268,7 @@ for page in range(1, 4):
 
 ### Python 標準函式庫
 
-```prompt [label="Colab：import 常用模組"]
+```prompt py [label="Colab：import 常用模組"]
 import time
 import random
 
@@ -289,7 +289,7 @@ time.sleep(delay)
 !pip install requests beautifulsoup4
 ```
 
-```prompt [label="Colab：匯入爬蟲套件"]
+```prompt py [label="Colab：匯入爬蟲套件"]
 import requests
 from bs4 import BeautifulSoup
 
@@ -309,7 +309,7 @@ print("套件匯入成功，可以開始爬蟲了！")
 
 ### List 基本操作
 
-```prompt [label="Colab：List 基本操作"]
+```prompt py [label="Colab：List 基本操作"]
 # 建立 List
 book_titles = ["Book A", "Book B", "Book C"]
 
@@ -327,7 +327,7 @@ print(len(book_titles))  # 4
 
 ### 爬蟲收集資料的標準模式
 
-```prompt [label="Colab：用 List 收集爬蟲結果"]
+```prompt py [label="Colab：用 List 收集爬蟲結果"]
 # 模擬從多頁收集書名
 all_books = []  # 空 List，準備收集資料
 
@@ -349,7 +349,7 @@ print(all_books)
 
 ### Dictionary 基本操作
 
-```prompt [label="Colab：Dictionary 基本操作"]
+```prompt py [label="Colab：Dictionary 基本操作"]
 # 建立 Dictionary（key: value 對）
 book = {
     "title": "Python Crash Course",
@@ -371,7 +371,7 @@ print(book)
 
 ### 一筆爬蟲資料 = 一個 Dictionary
 
-```prompt [label="Colab：用 List of Dict 儲存多筆資料"]
+```prompt py [label="Colab：用 List of Dict 儲存多筆資料"]
 # 每本書用一個 dict 儲存，所有書放進 List
 books = []
 
@@ -415,7 +415,7 @@ Hint: 用中括號加字串 key 取值是 dict 的語法，list 用數字索引�
 
 ### 爬蟲最常用的字串方法
 
-```prompt [label="Colab：字串清理方法"]
+```prompt py [label="Colab：字串清理方法"]
 # 爬蟲常見的「髒」資料
 raw_price = "  £12.99\n"
 raw_title = "  Python Crash Course  "
@@ -450,7 +450,7 @@ print(parts[0])      # Five（取評分文字）
 
 ## 判斷與搜尋字串
 
-```prompt [label="Colab：字串判斷方法"]
+```prompt py [label="Colab：字串判斷方法"]
 stock_text = "In stock (22 available)"
 title = "  Python Web Scraping  "
 
@@ -470,7 +470,7 @@ print(clean)  # python web scraping
 
 ### 完整資料清理練習
 
-```prompt [label="Colab：模擬清理爬蟲原始資料"]
+```prompt py [label="Colab：模擬清理爬蟲原始資料"]
 # 模擬從網頁抓到的原始資料（未處理）
 raw_books = [
     {"title": "  Python Crash Course  ", "price": "£12.99", "rating": "Five stars"},
@@ -517,7 +517,7 @@ for book in cleaned_books:
 2. 學習 `BeautifulSoup`——解析 HTML、用 CSS 選擇器提取資料
 3. 第一個實戰目標：爬取 `books.toscrape.com`（專為練習設計的假書店）
 
-```prompt [label="第一個完整爬蟲（預覽）"]
+```prompt py [label="第一個完整爬蟲（預覽）"]
 import requests
 from bs4 import BeautifulSoup
 
