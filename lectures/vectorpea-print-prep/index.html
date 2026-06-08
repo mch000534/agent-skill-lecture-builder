@@ -576,18 +576,17 @@
     <div class="group-block">
       <div class="group-header">提示詞範例</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label"></span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label"></span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">請生成一個 SVG 圖形：咖啡杯的簡單插圖，使用純色填充，
+      <pre class="code-body"><code class="lang-text">請生成一個 SVG 圖形：咖啡杯的簡單插圖，使用純色填充，
 不要漸層，大小 200x200px，適合用作 Logo。
-請直接輸出 SVG 代碼，不要解釋。</div>
+請直接輸出 SVG 代碼，不要解釋。</code></pre>
     </div>
       </div>
     </div>
@@ -1773,27 +1772,25 @@
     </div>
   </div>
 
-  <div class="share-overlay" id="share-overlay">
-    <div class="share-modal">
-      <div class="share-modal-header">
-        <h3>分享此課程</h3>
-        <button class="share-modal-close" id="share-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <div class="share-modal-body">
-        <div class="share-qr-wrap">
-          <div class="share-qr-frame">
-            <div class="share-qr-img" id="share-qr-container"></div>
-          </div>
-          <span class="share-qr-label">掃描開啟</span>
+  <div class="share-widget" id="share-widget">
+    <div class="share-header" id="share-drag-handle">
+      <span class="share-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2V2zm2 2v5h5V4H4zm1 1h3v3H5V5zM13 2h9v9h-9V2zm2 2v5h5V4h-5zm1 1h3v3h-3V5zM2 13h9v9H2v-9zm2 2v5h5v-5H4zm1 1h3v3H5v-3zM13 13h3v3h-3v-3zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/></svg>分享此課程</span>
+      <button class="share-close" id="share-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="share-body">
+      <div class="share-qr-wrap">
+        <div class="share-qr-frame">
+          <div class="share-qr-img" id="share-qr-container"></div>
         </div>
-        <div class="share-right">
-          <div class="share-og-wrap">
-            <img class="share-og-img" id="share-og-img" src="" alt="">
-          </div>
-          <div class="share-url-row">
-            <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
-            <button class="share-copy-btn" id="share-copy-btn">複製</button>
-          </div>
+        <span class="share-qr-label">掃描開啟</span>
+      </div>
+      <div class="share-right">
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
         </div>
       </div>
     </div>
@@ -1812,8 +1809,8 @@
           <table class="shortcut-table">
             <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
             <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
             <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
             <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
           </table>
@@ -1827,10 +1824,20 @@
             <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">塗鴉筆</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">筆刷 / 聚光燈圓形縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">塗鴉筆模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>B</kbd></span></td><td class="shortcut-desc">切換橡皮擦</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">循環筆刷顏色</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">清空畫布</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Ctrl</kbd><span class="shortcut-sep">+</span><kbd>Z</kbd></span></td><td class="shortcut-desc">復原上一筆</td></tr>
           </table>
         </div>
         <div class="shortcut-col">

@@ -473,16 +473,15 @@
     <div class="group-block">
       <div class="group-header">RGB 色彩空間</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">RGB 色彩模型的實際運作</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">RGB 色彩模型的實際運作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">每個像素有 R（紅）、G（綠）、B（藍）三個通道值
+      <pre class="code-body"><code class="lang-text">每個像素有 R（紅）、G（綠）、B（藍）三個通道值
 
 8-bit：  每通道 256 階（0-255），共 16.7 百萬色
 10-bit：每通道 1024 階，共 10.7 億色
@@ -493,7 +492,7 @@
   R=255, G=255, B=255 → 純白
   R=0,   G=0,   B=0   → 純黑
   R=255, G=0,   B=0   → 純紅
-  R=255, G=165, B=0   → 橙色</div>
+  R=255, G=165, B=0   → 橙色</code></pre>
     </div>
       </div>
     </div>
@@ -519,21 +518,20 @@
       <div class="group-header">Gamma 曲線與感知亮度</div>
       <div class="group-body">
         <p>人眼對亮度的感知是非線性的——對暗部變化更敏感，對亮部變化相對不敏感：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Gamma 曲線的本質</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Gamma 曲線的本質</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">線性光（Linear Light）：攝影機感光元件的真實反應，光量翻倍 = 數值翻倍
+      <pre class="code-body"><code class="lang-text">線性光（Linear Light）：攝影機感光元件的真實反應，光量翻倍 = 數值翻倍
 人眼感知（Perceptual）：非線性，暗部辨識力更高，需要更多 bit 保存暗部細節
 
 Gamma 2.2（sRGB）：電腦螢幕標準
 Gamma 2.4（Rec.709）：電視廣播標準
-LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
+LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</code></pre>
     </div>
       </div>
     </div>
@@ -635,16 +633,15 @@ LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
       <span class="tag green">Canon Log 2 / Log 3：Cinema EOS 系列，C70/C300 Mark III</span>
       <span class="tag purple">DJI D-Log / D-Log M：大疆無人機與運動相機，M 版保留更多亮部</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">在 DaVinci 正確處理 LOG 素材</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">在 DaVinci 正確處理 LOG 素材</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">方法一：Color Space Transform（CST）節點
+      <pre class="code-body"><code class="lang-text">方法一：Color Space Transform（CST）節點
 → 節點庫搜尋 CST → 設定輸入色彩空間（如 S-Gamut3.Cine / S-Log3）
 → 設定輸出色彩空間（Rec.709 / Gamma 2.4）
 → 此節點放在節點樹最前端
@@ -656,7 +653,7 @@ LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
 
 方法三：套用官方提供的技術 LUT
 → 各廠商提供 LOG → Rec.709 的 LUT 檔案（可官網免費下載）
-→ 在調色節點最前端套用此 LUT</div>
+→ 在調色節點最前端套用此 LUT</code></pre>
     </div>
         <div class="callout callout--info">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
@@ -737,23 +734,22 @@ LOG Gamma：高反差壓縮，保留最大動態範圍用於後製</div>
     <div class="group-block">
       <div class="group-header">必知鍵盤快捷鍵</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Color 頁面核心快捷鍵</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Color 頁面核心快捷鍵</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">Shift + H        ：高亮選取的示波器
+      <pre class="code-body"><code class="lang-text">Shift + H        ：高亮選取的示波器
 Alt + S          ：存取目前畫面的 Still（靜態截圖）用於比較
 Ctrl / Cmd + Z   ：復原
 Ctrl / Cmd + Home：重置目前節點所有調色
 D                ：暫時停用目前節點（快速 A/B 比較）
 Shift + D        ：停用整個節點樹（查看原始素材）
 Ctrl + 1~4       ：快速切換 Color Wheels / Curves / HSL / 主要工具頁
-Ctrl + 拖拉節點  ：複製節點</div>
+Ctrl + 拖拉節點  ：複製節點</code></pre>
     </div>
       </div>
     </div>
@@ -791,16 +787,15 @@ Ctrl + 拖拉節點  ：複製節點</div>
       <div class="group-header">Waveform（波形圖）</div>
       <div class="group-body">
         <p>波形圖是最基礎也最重要的示波器。橫軸對應畫面的左右位置，縱軸是亮度值（0-100%）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">波形圖解讀指南</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">波形圖解讀指南</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">讀取方式：把波形圖想成把畫面「側過來看」
+      <pre class="code-body"><code class="lang-text">讀取方式：把波形圖想成把畫面「側過來看」
 
 0%（底部）   = 畫面中最暗的區域（理論純黑）
 100%（頂部） = 畫面中最亮的區域（理論純白）
@@ -811,7 +806,7 @@ Ctrl + 拖拉節點  ：複製節點</div>
 常見問題：
   波形集中在底部 → 整體曝光不足，需要提亮
   波形超過 100%   → 過曝，高光細節丟失（無法救回）
-  波形只在 20-70% → 對比度不足，畫面「平」</div>
+  波形只在 20-70% → 對比度不足，畫面「平」</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">「死白」與「死黑」</div>
@@ -877,21 +872,20 @@ Ctrl + 拖拉節點  ：複製節點</div>
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">用 Parade 圖判斷色偏範例</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">用 Parade 圖判斷色偏範例</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">場景：在鎢絲燈光下拍攝的訪談
+      <pre class="code-body"><code class="lang-text">場景：在鎢絲燈光下拍攝的訪談
 
 看到 Parade 圖：R 通道比 G、B 高 10-15%
 → 整體偏暖橘色（鎢絲燈白平衡未校正）
 → 解法：在 Offset（全域）中往青藍方向微調
-→ 調整到 RGB 三條線等高，白色物體變中性白</div>
+→ 調整到 RGB 三條線等高，白色物體變中性白</code></pre>
     </div>
       </div>
     </div>
@@ -916,16 +910,15 @@ Ctrl + 拖拉節點  ：複製節點</div>
     <div class="group-block">
       <div class="group-header">Histogram（直方圖）與 CIE 色度圖</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Histogram 讀取要點</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Histogram 讀取要點</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">橫軸：亮度（0=黑，255 或 1023=白）
+      <pre class="code-body"><code class="lang-text">橫軸：亮度（0=黑，255 或 1023=白）
 縱軸：該亮度的像素數量
 
 理想人像畫面：
@@ -938,7 +931,7 @@ Ctrl + 拖拉節點  ：複製節點</div>
 
 CIE 色度圖（Chromaticity Diagram）：
   顯示色彩的絕對色度位置，用於判斷是否超出目標色域
-  在 HDR 與廣播工作中重要</div>
+  在 HDR 與廣播工作中重要</code></pre>
     </div>
       </div>
     </div>
@@ -991,16 +984,15 @@ CIE 色度圖（Chromaticity Diagram）：
     <p>剛從 Photoshop 或手機修圖 App 轉入 DaVinci 的調色師，最容易卡在「圖層思維」。記住：節點不是圖層，沒有「誰蓋誰」的問題。每個節點只負責「修改進入的影像，然後送出去」。把節點想成一條流水線，而不是一疊紙。</p>
   </div>
 </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">節點的基本結構</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">節點的基本結構</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">每個節點有：
+      <pre class="code-body"><code class="lang-text">每個節點有：
   輸入端（左側三角）：接收上個節點的影像資訊
   輸出端（右側三角）：傳遞處理後的影像到下個節點
   Key 輸入（左下角小三角）：接收 Alpha 遮罩資訊
@@ -1009,7 +1001,7 @@ CIE 色度圖（Chromaticity Diagram）：
 顏色編碼：
   藍色邊框 = 目前選取的節點
   橘色標籤 = 節點有調色資訊（有做調整）
-  灰色標籤 = 節點為空（尚未調整）</div>
+  灰色標籤 = 節點為空（尚未調整）</code></pre>
     </div>
       </div>
     </div>
@@ -1105,16 +1097,15 @@ CIE 色度圖（Chromaticity Diagram）：
       <div class="group-header">並行節點（Parallel Node）</div>
       <div class="group-body">
         <p>並行節點同時處理同一個輸入，結果自動混合（平均）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">並行節點應用場景</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">並行節點應用場景</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">應用一：分開處理高光與陰影
+      <pre class="code-body"><code class="lang-text">應用一：分開處理高光與陰影
   並行路徑 A：用 Power Window 遮罩只調暗部
   並行路徑 B：用 Power Window 遮罩只調高光
   → 自動混合，兩種調整互不影響
@@ -1127,7 +1118,7 @@ CIE 色度圖（Chromaticity Diagram）：
 操作方式：
   右鍵節點 → 「在後方加入並行混合」
   → 出現並行節點輸入器（Parallel Mixer）
-  → 將新節點連接到並行輸入器</div>
+  → 將新節點連接到並行輸入器</code></pre>
     </div>
       </div>
     </div>
@@ -1153,16 +1144,15 @@ CIE 色度圖（Chromaticity Diagram）：
       <div class="group-header">外部節點（Outside Node）</div>
       <div class="group-body">
         <p>外部節點的作用是：讓遮罩（Qualifier/Power Window）選到的區域走一條路，沒選到的區域走另一條路：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">外部節點實際運用</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">外部節點實際運用</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">場景：要讓天空偏藍，但不影響地面
+      <pre class="code-body"><code class="lang-text">場景：要讓天空偏藍，但不影響地面
 
 節點 A：Qualifier 選取天空（藍色範圍）
          ↓ 調整天空：飽和度 +30、偏藍
@@ -1173,7 +1163,7 @@ CIE 色度圖（Chromaticity Diagram）：
 操作：
   右鍵節點 A → 「加入外部節點」
   → 自動建立外部節點，Key 輸出連接到外部節點的 Key 輸入
-  → 外部節點只影響未被遮罩選取的區域</div>
+  → 外部節點只影響未被遮罩選取的區域</code></pre>
     </div>
       </div>
     </div>
@@ -1187,16 +1177,15 @@ CIE 色度圖（Chromaticity Diagram）：
     <div class="group-block">
       <div class="group-header">標準商業調色節點樹</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">推薦的專業節點樹架構</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">推薦的專業節點樹架構</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">[節點 01] LOG 轉換
+      <pre class="code-body"><code class="lang-text">[節點 01] LOG 轉換
   ← 放技術 LUT 或 CST，只做格式轉換不做風格
   ← 此節點通常設為「Group Pre-Clip」
 
@@ -1225,7 +1214,7 @@ CIE 色度圖（Chromaticity Diagram）：
 
 [節點 08] 輸出保護
   ← Curves 限制最亮不超過 100%、最暗不低於 2%
-  ← 廣播輸出必須</div>
+  ← 廣播輸出必須</code></pre>
     </div>
       </div>
     </div>
@@ -1235,16 +1224,15 @@ CIE 色度圖（Chromaticity Diagram）：
     <div class="group-block">
       <div class="group-header">節點標籤與顏色管理</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">節點命名最佳實踐</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">節點命名最佳實踐</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">選取節點 → 右鍵 → 「節點標籤」→ 輸入名稱
+      <pre class="code-body"><code class="lang-text">選取節點 → 右鍵 → 「節點標籤」→ 輸入名稱
 
 建議命名：
   01 LOG &gt; Rec709
@@ -1261,7 +1249,7 @@ CIE 色度圖（Chromaticity Diagram）：
   藍色 = 一級校正
   綠色 = 二級調整
   橙色 = 創意風格
-  灰色 = 輸出處理</div>
+  灰色 = 輸出處理</code></pre>
     </div>
       </div>
     </div>
@@ -1343,16 +1331,15 @@ CIE 色度圖（Chromaticity Diagram）：
       <span class="tag green">Gain（高光）：影響 50-100% 亮度範圍，控制最亮區域的色彩與亮度</span>
       <span class="tag purple">Offset（全域偏移）：均等地影響所有亮度範圍，最適合快速修正整體色偏</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Color Wheels 精確操作技巧</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Color Wheels 精確操作技巧</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">控制方式：
+      <pre class="code-body"><code class="lang-text">控制方式：
   拖曳色輪中心點 → 改變色相偏向（往哪個顏色偏移）
   旋轉色輪下方圓圈 → 改變亮度值（往上提亮 / 往下壓暗）
 
@@ -1364,7 +1351,7 @@ CIE 色度圖（Chromaticity Diagram）：
 Log Wheels（對數控制輪）：
   和 Color Wheels 類似，但每個控制點影響的範圍更精確
   Shadow（陰影）/ Midtone（中間調）/ Highlight（高光）
-  比 Lift/Gamma/Gain 更適合精細處理 LOG 素材</div>
+  比 Lift/Gamma/Gain 更適合精細處理 LOG 素材</code></pre>
     </div>
       </div>
     </div>
@@ -1374,16 +1361,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">白平衡精確校正技巧</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">三種白平衡校正方法</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">三種白平衡校正方法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">方法一：自動白平衡（快速但不精確）
+      <pre class="code-body"><code class="lang-text">方法一：自動白平衡（快速但不精確）
   Color Wheels 右下角 → 點擊白平衡吸管圖示
   → 在監視器點擊應為中性白的區域
   → DaVinci 自動計算 Temp / Tint 補正
@@ -1398,7 +1384,7 @@ Log Wheels（對數控制輪）：
   一般工具 → Temperature（色溫）/ Tint（色調）
   Temperature 往左 = 偏藍冷 / 往右 = 偏橙暖
   Tint 往左 = 偏綠 / 往右 = 偏洋紅
-  適合知道目標色溫（日光 5500K、陰天 6500K、鎢絲燈 3200K）時快速設定</div>
+  適合知道目標色溫（日光 5500K、陰天 6500K、鎢絲燈 3200K）時快速設定</code></pre>
     </div>
         <div class="compare">
       <div class="compare-header">
@@ -1474,16 +1460,15 @@ Log Wheels（對數控制輪）：
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">精確對比度控制的四種方法</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">精確對比度控制的四種方法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">方法一：Contrast + Pivot 滑桿
+      <pre class="code-body"><code class="lang-text">方法一：Contrast + Pivot 滑桿
   Contrast：整體對比倍率
   Pivot：對比變化的中心點（設為 0.5 = 以中間灰為基準）
 
@@ -1497,7 +1482,7 @@ Log Wheels（對數控制輪）：
 
 方法四：Shadow / Highlight 恢復
   高光恢復：Log Wheels 的 Highlight → 往下拉
-  暗部恢復：Log Wheels 的 Shadow → 往上推</div>
+  暗部恢復：Log Wheels 的 Shadow → 往上推</code></pre>
     </div>
       </div>
     </div>
@@ -1507,16 +1492,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">亮度範圍的廣播安全</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">廣播安全亮度範圍設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">廣播安全亮度範圍設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">一般螢幕輸出（YouTube / Instagram）：
+      <pre class="code-body"><code class="lang-text">一般螢幕輸出（YouTube / Instagram）：
   亮度：0% - 100%
   允許超黑（Super Black）：否
   允許超白（Super White）：否
@@ -1527,7 +1511,7 @@ Log Wheels（對數控制輪）：
 
 設定 DaVinci 安全保護：
   Display → Safe Color Warning（顯示超出安全範圍的紅色提示）
-  在輸出節點使用 Curves 將最暗限制在 2%，最亮限制在 98%</div>
+  在輸出節點使用 Curves 將最暗限制在 2%，最亮限制在 98%</code></pre>
     </div>
       </div>
     </div>
@@ -1635,16 +1619,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">S 形曲線的電影感應用</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">電影感 S 形曲線具體操作</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">電影感 S 形曲線具體操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">步驟 1：在暗部（約 25% 位置）加一個控制點，往下拉 5-8%
+      <pre class="code-body"><code class="lang-text">步驟 1：在暗部（約 25% 位置）加一個控制點，往下拉 5-8%
          → 讓陰影更有深度感
 
 步驟 2：在高光（約 75% 位置）加一個控制點，往上拉 3-5%
@@ -1658,7 +1641,7 @@ Log Wheels（對數控制輪）：
 
 注意事項：
   控制點不超過 4-5 個，太多控制點曲線會震盪
-  使用「平滑（Smooth）」選項讓曲線過渡更自然</div>
+  使用「平滑（Smooth）」選項讓曲線過渡更自然</code></pre>
     </div>
         <div class="callout callout--info">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
@@ -1681,16 +1664,15 @@ Log Wheels（對數控制輪）：
       <span class="tag green">G 通道：往上提亮綠色 / 往下壓暗洋紅</span>
       <span class="tag purple">B 通道：往上提亮藍色 / 往下壓暗橙色（金黃色）</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">分通道曲線的創意應用</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">分通道曲線的創意應用</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">創造暖色高光 + 冷色陰影（電影常見手法）：
+      <pre class="code-body"><code class="lang-text">創造暖色高光 + 冷色陰影（電影常見手法）：
   R 通道：在高光位置（75%）微微往上，在暗部（25%）微微往下
   B 通道：在暗部（25%）微微往上，在高光（75%）微微往下
   → 結果：高光偏暖橙，陰影偏冷藍（即 Orange &amp; Teal 的基礎）
@@ -1702,7 +1684,7 @@ Log Wheels（對數控制輪）：
 創造夕陽感高光：
   R 通道：高光（80%+）大幅往上
   B 通道：高光（80%+）往下壓
-  → 高光呈現橙紅色，像夕陽光照效果</div>
+  → 高光呈現橙紅色，像夕陽光照效果</code></pre>
     </div>
       </div>
     </div>
@@ -1721,16 +1703,15 @@ Log Wheels（對數控制輪）：
       <div class="group-header">Hue vs. Hue（色相轉移）</div>
       <div class="group-body">
         <p>輸入色相→輸出色相的轉換，可以把某個顏色「推向」另一個方向：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Hue vs. Hue 實際應用</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Hue vs. Hue 實際應用</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">場景：秋天拍攝，希望樹葉更偏金黃（原本偏綠黃）
+      <pre class="code-body"><code class="lang-text">場景：秋天拍攝，希望樹葉更偏金黃（原本偏綠黃）
 
 步驟：
 1. 在 Hue vs. Hue 曲線找到黃綠色的位置
@@ -1740,7 +1721,7 @@ Log Wheels（對數控制輪）：
 常見應用：
   天空偏青 → 往藍色方向推（更乾淨的天空藍）
   草地偏黃 → 往綠色方向推（更鮮活的草綠）
-  膚色偏橙 → 微微往黃方向拉（更自然的東方膚色）</div>
+  膚色偏橙 → 微微往黃方向拉（更自然的東方膚色）</code></pre>
     </div>
       </div>
     </div>
@@ -1751,16 +1732,15 @@ Log Wheels（對數控制輪）：
       <div class="group-header">Hue vs. Saturation（選色飽和度）</div>
       <div class="group-body">
         <p>針對特定色相的飽和度控制，不影響其他顏色：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Hue vs. Saturation 常見用法</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Hue vs. Saturation 常見用法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">降低整體飽和度但保留膚色：
+      <pre class="code-body"><code class="lang-text">降低整體飽和度但保留膚色：
   1. 整體：Saturation 滑桿降至 70-80%（整體去飽和）
   2. Hue vs. Sat：找到膚色（橙黃）位置，把控制點往上拉
   → 結果：背景色彩淡雅，但主體膚色仍然飽滿
@@ -1771,7 +1751,7 @@ Log Wheels（對數控制輪）：
 
 消除背景的雜色：
   找到問題顏色（如偏洋紅的牆壁）→ 往下拉至 0
-  → 背景顏色更乾淨，視覺焦點更突出</div>
+  → 背景顏色更乾淨，視覺焦點更突出</code></pre>
     </div>
       </div>
     </div>
@@ -1797,21 +1777,20 @@ Log Wheels（對數控制輪）：
       <div class="group-header">Luminance vs. Saturation（亮度與飽和度）</div>
       <div class="group-body">
         <p>控制不同亮度區域的飽和度——例如：讓高光的顏色淡化，讓陰影不要過度飽和：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Luminance vs. Saturation 電影感設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Luminance vs. Saturation 電影感設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">電影感常用設定：
+      <pre class="code-body"><code class="lang-text">電影感常用設定：
   高光端（右側）：把飽和度往下拉 15-25%
   → 模擬膠片高光失飽和的特性，讓高光看起來更「柔和」
 
   暗部端（左側）：把飽和度往下拉 10-20%
-  → 讓陰影不要有過分強烈的顏色，增加深沉感</div>
+  → 讓陰影不要有過分強烈的顏色，增加深沉感</code></pre>
     </div>
       </div>
     </div>
@@ -1865,16 +1844,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">HSL 限定器精確操作</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">HSL 限定器完整操作流程</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">HSL 限定器完整操作流程</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">步驟 1：啟用限定器
+      <pre class="code-body"><code class="lang-text">步驟 1：啟用限定器
   在 Color 頁面點擊「限定器（Qualifier）」圖示
   工具列切換到 HSL 模式
 
@@ -1895,7 +1873,7 @@ Log Wheels（對數控制輪）：
 
 步驟 5：開始二級調整
   確認 Highlight 模式關閉（Shift + H 切換）
-  現在所有 Color Wheels / Curves 操作都只影響被遮罩選取的區域</div>
+  現在所有 Color Wheels / Curves 操作都只影響被遮罩選取的區域</code></pre>
     </div>
       </div>
     </div>
@@ -1905,16 +1883,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">限定器常見問題排除</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">限定器問題排解方案</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">限定器問題排解方案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">問題：邊緣選取不乾淨，漏選了不該選的部分
+      <pre class="code-body"><code class="lang-text">問題：邊緣選取不乾淨，漏選了不該選的部分
 解法：
   1. 用 Shrink 縮小遮罩範圍
   2. 增加 Denoise 降噪強度
@@ -1928,7 +1905,7 @@ Log Wheels（對數控制輪）：
 
 問題：人物移動後，之前選取的區域不再準確
 解法：
-  → 需要使用動態追蹤（見下方「追蹤」章節）</div>
+  → 需要使用動態追蹤（見下方「追蹤」章節）</code></pre>
     </div>
       </div>
     </div>
@@ -1948,16 +1925,15 @@ Log Wheels（對數控制輪）：
       <span class="tag green">多邊形（Polygon）：不規則形狀的精確遮罩繪製</span>
       <span class="tag purple">曲線（Curve）：使用貝茲曲線繪製最複雜的形狀</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Power Window 精確操作技巧</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Power Window 精確操作技巧</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">基本操作：
+      <pre class="code-body"><code class="lang-text">基本操作：
   點擊 Power Window 圖示 → 選擇形狀 → 在畫面拖拉建立遮罩
   
   外圓（硬邊）= 遮罩生效的實際邊界
@@ -1977,7 +1953,7 @@ Log Wheels（對數控制輪）：
   羽化（Softness）細節控制：
     H/V Soft：水平/垂直方向的羽化程度
     O/I Soft：外部/內部的羽化程度
-    → 精細控制遮罩各個方向的柔化程度</div>
+    → 精細控制遮罩各個方向的柔化程度</code></pre>
     </div>
       </div>
     </div>
@@ -1987,16 +1963,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">Power Window 進階應用</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Power Window 電影感光影塑造</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Power Window 電影感光影塑造</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">技巧一：中心亮邊緣暗（暈影 Vignette）
+      <pre class="code-body"><code class="lang-text">技巧一：中心亮邊緣暗（暈影 Vignette）
   建立圓形 Power Window → 設定大軟邊 → 反轉
   → 外部節點降低亮度/飽和度
   → 視線自然聚焦畫面中心
@@ -2009,7 +1984,7 @@ Log Wheels（對數控制輪）：
 技巧三：天空漸層（Natural Gradient）
   建立矩形 Power Window → 只覆蓋上半部天空
   → 設定大軟邊在天空與地平線交界處
-  → 單獨調整天空飽和度、藍色成分、壓制高光</div>
+  → 單獨調整天空飽和度、藍色成分、壓制高光</code></pre>
     </div>
       </div>
     </div>
@@ -2046,16 +2021,15 @@ Log Wheels（對數控制輪）：
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Power Window 追蹤完整步驟</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Power Window 追蹤完整步驟</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">場景：人物在走路，需要 Power Window 跟著臉部移動
+      <pre class="code-body"><code class="lang-text">場景：人物在走路，需要 Power Window 跟著臉部移動
 
 步驟 1：建立 Power Window
   建立一個圓形 Power Window，調整到剛好覆蓋臉部
@@ -2071,7 +2045,7 @@ Log Wheels（對數控制輪）：
 步驟 4：修正追蹤問題
   若某幀追蹤失敗（遮罩偏移）：
     移動到問題幀 → 手動調整 Power Window 到正確位置
-    → 右鍵追蹤面板 → 「從這一幀重新追蹤」</div>
+    → 右鍵追蹤面板 → 「從這一幀重新追蹤」</code></pre>
     </div>
       </div>
     </div>
@@ -2133,16 +2107,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">向量圖與膚色線</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">用向量圖判斷膚色品質</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">用向量圖判斷膚色品質</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">膚色線（Skin Tone Line）：
+      <pre class="code-body"><code class="lang-text">膚色線（Skin Tone Line）：
   從向量圖圓心，延伸到 11 點鐘方向（約 10-12 點方向）的一條參考線
   所有健康的人類膚色（無論深淺）都應該落在這條線附近
 
@@ -2155,7 +2128,7 @@ Log Wheels（對數控制輪）：
 判斷步驟：
 1. 在監視器框選人臉區域（設定 ROI）
 2. 看向量圖中點群的分布位置
-3. 判斷需要往哪個方向調整</div>
+3. 判斷需要往哪個方向調整</code></pre>
     </div>
       </div>
     </div>
@@ -2169,16 +2142,15 @@ Log Wheels（對數控制輪）：
     <div class="group-block">
       <div class="group-header">用 Qualifier 精確選取膚色</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">膚色選取的最佳實踐</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">膚色選取的最佳實踐</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">挑戰：膚色選取容易「誤傷」
+      <pre class="code-body"><code class="lang-text">挑戰：膚色選取容易「誤傷」
   → 皮膚顏色與木頭、沙子、部分磚牆相近
   → 選取膚色時常常連背景也一起選到
 
@@ -2191,7 +2163,7 @@ Log Wheels（對數控制輪）：
 HSL 限定器膚色範圍建議：
   H（色相）：橙色範圍，約 15°-45°
   S（飽和度）：避免選到白牆（低飽和），設在 15-80%
-  L（亮度）：避免選到陰影死黑，設在 15-85%</div>
+  L（亮度）：避免選到陰影死黑，設在 15-85%</code></pre>
     </div>
       </div>
     </div>
@@ -2201,16 +2173,15 @@ HSL 限定器膚色範圍建議：
     <div class="group-block">
       <div class="group-header">不同膚色的調整策略</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">膚色調整的方向性建議</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">膚色調整的方向性建議</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">淺膚色（歐美白人）：
+      <pre class="code-body"><code class="lang-text">淺膚色（歐美白人）：
   常見問題：在特定光線下顯得過粉或過紅
   調整方向：Hue vs. Hue 把偏紅的膚色往橙黃方向微推 5-10°
   飽和度：Hue vs. Sat 降低膚色飽和度 10-15%，防止「紅臉」感
@@ -2228,7 +2199,7 @@ HSL 限定器膚色範圍建議：
 所有膚色的通用規則：
   Vectorscope 向量圖確認膚色點群落在膚色線上
   波形圖確認臉部亮度在 50-75%（特寫訪談的標準亮度）
-  不要為了「讓膚色好看」而破壞整體場景的色彩一致性</div>
+  不要為了「讓膚色好看」而破壞整體場景的色彩一致性</code></pre>
     </div>
         <div class="callout callout--info">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
@@ -2314,16 +2285,15 @@ HSL 限定器膚色範圍建議：
         </div>
       </div>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">電影感基礎設定參數</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">電影感基礎設定參數</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">一、Lifted Blacks：
+      <pre class="code-body"><code class="lang-text">一、Lifted Blacks：
   Custom Curves → 在底部（0%）打一個點往上提 3-5%
   → 讓最暗的純黑變成深灰
 
@@ -2342,7 +2312,7 @@ HSL 限定器膚色範圍建議：
 五、膠片顆粒：
   ResolveFX 效果庫 → Film Grain
   → ISO 選擇 400-800（電影常見感光度）
-  → Strength：0.3-0.5（不要太強，要看不出來）</div>
+  → Strength：0.3-0.5（不要太強，要看不出來）</code></pre>
     </div>
       </div>
     </div>
@@ -2357,16 +2327,15 @@ HSL 限定器膚色範圍建議：
       <div class="group-header">Orange & Teal（橙青對比）</div>
       <div class="group-body">
         <p>好萊塢動作片最常見的調色方案，利用膚色橙色與補色青色的對比：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Orange &amp; Teal 系統性操作</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Orange &amp; Teal 系統性操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">原理：人類膚色偏橙，青色（Teal）是橙色的補色
+      <pre class="code-body"><code class="lang-text">原理：人類膚色偏橙，青色（Teal）是橙色的補色
 兩者同時存在時，對比最強，視覺衝擊最大
 
 步驟 1：整體暖色基礎
@@ -2387,7 +2356,7 @@ HSL 限定器膚色範圍建議：
 
 步驟 5：建立 LUT
   Color 頁面頂部選單 → 「產生 LUT」→ 存成 .cube 格式
-  → 下次可以直接套用這個風格</div>
+  → 下次可以直接套用這個風格</code></pre>
     </div>
       </div>
     </div>
@@ -2397,16 +2366,15 @@ HSL 限定器膚色範圍建議：
     <div class="group-block">
       <div class="group-header">日系清新風格</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">日系清新調色操作</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">日系清新調色操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">特徵：高亮、低對比、柔和、暖白感
+      <pre class="code-body"><code class="lang-text">特徵：高亮、低對比、柔和、暖白感
 
 步驟 1：整體提亮
   Custom Curves → 中間調（50%）往上拉約 15-20%
@@ -2427,7 +2395,7 @@ HSL 限定器膚色範圍建議：
 
 步驟 5：薄霧感（選用）
   效果庫 → Mist / Glow
-  → Strength 0.1-0.2，Threshold 高一點（只讓高光泛光）</div>
+  → Strength 0.1-0.2，Threshold 高一點（只讓高光泛光）</code></pre>
     </div>
       </div>
     </div>
@@ -2437,16 +2405,15 @@ HSL 限定器膚色範圍建議：
     <div class="group-block">
       <div class="group-header">復古膠片風格（1970s Film Emulation）</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">復古膠片調色操作</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">復古膠片調色操作</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">特徵：橙棕色調、褪色、粒狀、低飽和
+      <pre class="code-body"><code class="lang-text">特徵：橙棕色調、褪色、粒狀、低飽和
 
 步驟 1：整體橙褐色偏移
   Offset 整體往橙褐色方向
@@ -2472,7 +2439,7 @@ HSL 限定器膚色範圍建議：
 
 步驟 6：Hue vs. Hue 色相偏移
   藍色往青色方向推（讓天空偏舊照片的青藍）
-  綠色往黃色方向推（草地偏黃褐色）</div>
+  綠色往黃色方向推（草地偏黃褐色）</code></pre>
     </div>
       </div>
     </div>
@@ -2542,16 +2509,15 @@ HSL 限定器膚色範圍建議：
     <div class="group-block">
       <div class="group-header">LUT 的製作流程</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">從調色到 LUT：完整製作流程</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">從調色到 LUT：完整製作流程</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">Step 1：建立一個「標準測試鏡頭」節點樹
+      <pre class="code-body"><code class="lang-text">Step 1：建立一個「標準測試鏡頭」節點樹
   確保測試鏡頭包含：膚色、中性灰、高光、陰影、飽和色塊
 
 Step 2：完成你的風格調色
@@ -2573,7 +2539,7 @@ Step 5：調整 LUT 強度
 
 注意事項：
   LUT 是在一級校正後套用，不是替代一級校正
-  每次使用 LUT 後仍需做局部微調（膚色、問題高光等）</div>
+  每次使用 LUT 後仍需做局部微調（膚色、問題高光等）</code></pre>
     </div>
       </div>
     </div>
@@ -2601,16 +2567,15 @@ Step 5：調整 LUT 強度
       <span class="tag orange">DaVinci YRGB Color Managed：DaVinci 自動處理輸入輸出色彩空間轉換，推薦一般工作流</span>
       <span class="tag green">ACES（Academy Color Encoding System）：電影院級別的科學色彩管理，適合高端製作</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">DaVinci Color Managed 設定步驟</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">DaVinci Color Managed 設定步驟</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">Step 1：專案設定 → 色彩管理
+      <pre class="code-body"><code class="lang-text">Step 1：專案設定 → 色彩管理
   色彩科學：DaVinci YRGB Color Managed
 
 Step 2：設定輸入色彩空間
@@ -2629,7 +2594,7 @@ Step 4：設定輸出色彩空間
 效果：
   所有 LOG 素材自動轉換到可工作的色彩空間
   輸出時自動轉換到目標格式
-  你只需要專注在創意調色，不需要手動做技術轉換</div>
+  你只需要專注在創意調色，不需要手動做技術轉換</code></pre>
     </div>
       </div>
     </div>
@@ -2696,16 +2661,15 @@ Step 4：設定輸出色彩空間
       <div class="group-header">分鏡色彩一致性</div>
       <div class="group-body">
         <p>實際工作中，同一場景的不同鏡頭可能是在不同時間、不同光線條件下拍攝的，調色師需要讓它們看起來像在同一時間：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">場景色彩匹配工作流程</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">場景色彩匹配工作流程</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">方法一：參考靜態畫面（Stills）比對
+      <pre class="code-body"><code class="lang-text">方法一：參考靜態畫面（Stills）比對
   Step 1：選取「基準鏡頭」（光線最好的那一顆）完成調色
   Step 2：右鍵 → 「截取靜態畫面（Grab Still）」
   Step 3：其他鏡頭調色時，把基準鏡頭的 Still 拉到比較視窗
@@ -2720,7 +2684,7 @@ Step 4：設定輸出色彩空間
 方法三：使用相同 PowerGrade（調色預設）
   把基準鏡頭的節點樹存成 PowerGrade（右鍵 Gallery → 新增 PowerGrade）
   其他鏡頭右鍵 → 套用 PowerGrade
-  → 節點結構完全複製，再做針對性微調</div>
+  → 節點結構完全複製，再做針對性微調</code></pre>
     </div>
       </div>
     </div>
@@ -2734,16 +2698,15 @@ Step 4：設定輸出色彩空間
     <div class="group-block">
       <div class="group-header">跨鏡頭效率工具</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">批次調色操作方法</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">批次調色操作方法</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">方法一：Group 節點（群組前/後節點）
+      <pre class="code-body"><code class="lang-text">方法一：Group 節點（群組前/後節點）
   在 Clip 縮略圖右鍵 → 「加入到群組」→ 選取多個鏡頭加入同一群組
   Group Pre-Clip：在個別調色前加入的共用節點（如 LOG 轉換）
   Group Post-Clip：在個別調色後加入的共用節點（如輸出保護、整體風格）
@@ -2757,7 +2720,7 @@ Step 4：設定輸出色彩空間
 方法三：PowerGrade 庫管理
   把常用的節點樹存為 PowerGrade
   命名規範：[風格]-[適用素材]-[版本]
-  例如：FilmLook-Sony-v2、SkinCorrect-Asian-A7IV</div>
+  例如：FilmLook-Sony-v2、SkinCorrect-Asian-A7IV</code></pre>
     </div>
       </div>
     </div>
@@ -2771,16 +2734,15 @@ Step 4：設定輸出色彩空間
     <div class="group-block">
       <div class="group-header">輸出前的最終確認清單</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">調色完成前的品質確認</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">調色完成前的品質確認</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">技術面：
+      <pre class="code-body"><code class="lang-text">技術面：
   □ 所有鏡頭的波形圖在廣播安全範圍（0-100%）
   □ Parade 圖確認中性物體（白牆、灰卡）白平衡正確
   □ 沒有任何鏡頭有未修正的嚴重色偏
@@ -2795,7 +2757,7 @@ Step 4：設定輸出色彩空間
 輸出面：
   □ 確認輸出色彩空間（YouTube 用 Rec.709 / 電影用 DCI-P3）
   □ 確認是否需要輸出 LUT 檔案給客戶
-  □ 交付 Still 庫（客戶要求修改時的參考基準）</div>
+  □ 交付 Still 庫（客戶要求修改時的參考基準）</code></pre>
     </div>
       </div>
     </div>
@@ -3099,27 +3061,25 @@ Step 4：設定輸出色彩空間
     </div>
   </div>
 
-  <div class="share-overlay" id="share-overlay">
-    <div class="share-modal">
-      <div class="share-modal-header">
-        <h3>分享此課程</h3>
-        <button class="share-modal-close" id="share-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <div class="share-modal-body">
-        <div class="share-qr-wrap">
-          <div class="share-qr-frame">
-            <div class="share-qr-img" id="share-qr-container"></div>
-          </div>
-          <span class="share-qr-label">掃描開啟</span>
+  <div class="share-widget" id="share-widget">
+    <div class="share-header" id="share-drag-handle">
+      <span class="share-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2V2zm2 2v5h5V4H4zm1 1h3v3H5V5zM13 2h9v9h-9V2zm2 2v5h5V4h-5zm1 1h3v3h-3V5zM2 13h9v9H2v-9zm2 2v5h5v-5H4zm1 1h3v3H5v-3zM13 13h3v3h-3v-3zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/></svg>分享此課程</span>
+      <button class="share-close" id="share-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="share-body">
+      <div class="share-qr-wrap">
+        <div class="share-qr-frame">
+          <div class="share-qr-img" id="share-qr-container"></div>
         </div>
-        <div class="share-right">
-          <div class="share-og-wrap">
-            <img class="share-og-img" id="share-og-img" src="" alt="">
-          </div>
-          <div class="share-url-row">
-            <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
-            <button class="share-copy-btn" id="share-copy-btn">複製</button>
-          </div>
+        <span class="share-qr-label">掃描開啟</span>
+      </div>
+      <div class="share-right">
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
         </div>
       </div>
     </div>
@@ -3138,8 +3098,8 @@ Step 4：設定輸出色彩空間
           <table class="shortcut-table">
             <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
             <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
             <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
             <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
           </table>
@@ -3153,10 +3113,20 @@ Step 4：設定輸出色彩空間
             <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">塗鴉筆</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">筆刷 / 聚光燈圓形縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">塗鴉筆模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>B</kbd></span></td><td class="shortcut-desc">切換橡皮擦</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">循環筆刷顏色</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">清空畫布</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Ctrl</kbd><span class="shortcut-sep">+</span><kbd>Z</kbd></span></td><td class="shortcut-desc">復原上一筆</td></tr>
           </table>
         </div>
         <div class="shortcut-col">

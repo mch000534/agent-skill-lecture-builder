@@ -645,29 +645,27 @@
       <div class="group-header">macOS 安裝方式</div>
       <div class="group-body">
         <p>macOS 通常已內建 Git。打開 Terminal（按 Command+空白鍵，輸入「terminal」），輸入以下指令確認：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">確認 Git 版本</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">確認 Git 版本</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git --version</div>
+      <pre class="code-body"><code class="lang-text">git --version</code></pre>
     </div>
         <p class="loose-text">若看到類似 <code>git version 2.39.3</code> 的輸出，代表已安裝完成。</p>
         <p class="loose-text">若尚未安裝，系統會提示你安裝 Xcode Command Line Tools，按照指示操作即可。或使用 Homebrew：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">macOS 透過 Homebrew 安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">macOS 透過 Homebrew 安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">brew install git</div>
+      <pre class="code-body"><code class="lang-text">brew install git</code></pre>
     </div>
       </div>
     </div>
@@ -683,16 +681,15 @@
   <li>其他選項保留預設即可</li>
 </ul>
         <p class="loose-text">安裝後，使用「Git Bash」作為你的命令列工具。</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Windows 確認安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Windows 確認安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git --version</div>
+      <pre class="code-body"><code class="lang-text">git --version</code></pre>
     </div>
       </div>
     </div>
@@ -726,42 +723,39 @@
       <div class="group-header">為什麼要設定身份？</div>
       <div class="group-body">
         <p>每次 commit 都會記錄「是誰做的這個改動」。如果沒有設定，Git 不知道要填什麼名字。這個設定只需要做一次。</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">設定使用者名稱與 Email</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">設定使用者名稱與 Email</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git config --global user.name &quot;你的名字&quot;
-git config --global user.email &quot;your@email.com&quot;</div>
+      <pre class="code-body"><code class="lang-text">git config --global user.name &quot;你的名字&quot;
+git config --global user.email &quot;your@email.com&quot;</code></pre>
     </div>
         <p class="loose-text">將 <code>"你的名字"</code> 換成你的真實姓名（或暱稱），<code>"your@email.com"</code> 換成你的 Email。</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">確認設定是否正確</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">確認設定是否正確</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git config --global --list</div>
+      <pre class="code-body"><code class="lang-text">git config --global --list</code></pre>
     </div>
         <p class="loose-text">預期輸出：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">user.name=你的名字
-user.email=your@email.com</div>
+      <pre class="code-body"><code class="lang-text">user.name=你的名字
+user.email=your@email.com</code></pre>
     </div>
         <div class="callout callout--warning">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -779,16 +773,15 @@ user.email=your@email.com</div>
       <div class="group-header">設定預設分支名稱（建議執行）</div>
       <div class="group-body">
         <p>GitHub 預設使用 <code>main</code> 作為主分支名稱，建議讓本地 Git 也統一：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">設定預設分支為 main</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">設定預設分支為 main</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git config --global init.defaultBranch main</div>
+      <pre class="code-body"><code class="lang-text">git config --global init.defaultBranch main</code></pre>
     </div>
       </div>
     </div>
@@ -798,28 +791,26 @@ user.email=your@email.com</div>
     <div class="group-block">
       <div class="group-header">設定換行符號（Windows 用戶必做）</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Windows 使用者執行</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Windows 使用者執行</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git config --global core.autocrlf true</div>
+      <pre class="code-body"><code class="lang-text">git config --global core.autocrlf true</code></pre>
     </div>
         <p class="loose-text">macOS / Linux 用戶執行：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">macOS / Linux 使用者執行</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">macOS / Linux 使用者執行</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git config --global core.autocrlf input</div>
+      <pre class="code-body"><code class="lang-text">git config --global core.autocrlf input</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">為什麼要設定換行符號？</div>
@@ -851,17 +842,16 @@ user.email=your@email.com</div>
       <div class="group-header">建立專案資料夾</div>
       <div class="group-body">
         <p>打開 Terminal，依序輸入：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">建立並進入專案目錄</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立並進入專案目錄</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">mkdir my-first-repo
-cd my-first-repo</div>
+      <pre class="code-body"><code class="lang-text">mkdir my-first-repo
+cd my-first-repo</code></pre>
     </div>
         <p class="loose-text"><code>mkdir</code> 是建立資料夾，<code>cd</code> 是進入資料夾。現在你在一個全新的空資料夾裡。</p>
       </div>
@@ -872,28 +862,26 @@ cd my-first-repo</div>
     <div class="group-block">
       <div class="group-header">git init：把資料夾變成 Git 倉庫</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">初始化 Git 倉庫</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">初始化 Git 倉庫</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git init</div>
+      <pre class="code-body"><code class="lang-text">git init</code></pre>
     </div>
         <p class="loose-text">預期輸出：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">Initialized empty Git repository in /Users/你的名字/my-first-repo/.git/</div>
+      <pre class="code-body"><code class="lang-text">Initialized empty Git repository in /Users/你的名字/my-first-repo/.git/</code></pre>
     </div>
         <p class="loose-text">這個指令在你的資料夾裡建立了一個隱藏的 <code>.git</code> 目錄，Git 所有的歷史紀錄都存在裡面。</p>
       </div>
@@ -904,16 +892,15 @@ cd my-first-repo</div>
     <div class="group-block">
       <div class="group-header">建立你的第一個檔案</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">建立 README 檔案</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立 README 檔案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">echo &quot;# 我的第一個 Git 專案&quot; &gt; README.md</div>
+      <pre class="code-body"><code class="lang-text">echo &quot;# 我的第一個 Git 專案&quot; &gt; README.md</code></pre>
     </div>
       </div>
     </div>
@@ -924,16 +911,15 @@ cd my-first-repo</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看目前狀態</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看目前狀態</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git status</div>
+      <pre class="code-body"><code class="lang-text">git status</code></pre>
     </div>
   </div>
 
@@ -942,16 +928,15 @@ cd my-first-repo</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">On branch main
+      <pre class="code-body"><code class="lang-text">On branch main
 
 No commits yet
 
@@ -959,7 +944,7 @@ Untracked files:
   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
         README.md
 
-nothing added to commit but untracked files present (use &quot;git add&quot; to track)</div>
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
     </div>
   </div>
 
@@ -1003,58 +988,54 @@ nothing added to commit but untracked files present (use &quot;git add&quot; to 
       <div class="group-header">比喻：打包行李</div>
       <div class="group-body">
         <p>把 <code>git add</code> 想像成「把要帶走的東西放進行李箱」。你可以選擇放哪些東西（不是全部都要帶），等確認好了再 <code>git commit</code>（拉上拉鍊，確認打包完成）。</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">加入單一檔案</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">加入單一檔案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git add README.md</div>
+      <pre class="code-body"><code class="lang-text">git add README.md</code></pre>
     </div>
         <p class="loose-text">或者加入所有有改動的檔案：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">加入所有變更</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">加入所有變更</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git add .</div>
+      <pre class="code-body"><code class="lang-text">git add .</code></pre>
     </div>
         <p class="loose-text">加入後再次執行 <code>git status</code> 確認：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">確認 add 結果</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">確認 add 結果</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git status</div>
+      <pre class="code-body"><code class="lang-text">git status</code></pre>
     </div>
         <p class="loose-text">預期輸出：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">On branch main
+      <pre class="code-body"><code class="lang-text">On branch main
 
 No commits yet
 
 Changes to be committed:
   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
-        new file:   README.md</div>
+        new file:   README.md</code></pre>
     </div>
       </div>
     </div>
@@ -1065,16 +1046,15 @@ Changes to be committed:
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">建立第一個 commit</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立第一個 commit</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git commit -m &quot;feat: 新增 README 初始說明&quot;</div>
+      <pre class="code-body"><code class="lang-text">git commit -m &quot;feat: 新增 README 初始說明&quot;</code></pre>
     </div>
   </div>
 
@@ -1087,18 +1067,17 @@ Changes to be committed:
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">[main (root-commit) a1b2c3d] feat: 新增 README 初始說明
+      <pre class="code-body"><code class="lang-text">[main (root-commit) a1b2c3d] feat: 新增 README 初始說明
  1 file changed, 1 insertion(+)
- create mode 100644 README.md</div>
+ create mode 100644 README.md</code></pre>
     </div>
   </div>
 
@@ -1154,18 +1133,17 @@ Changes to be committed:
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">新增第二個 commit</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">新增第二個 commit</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">echo &quot;print('Hello, Git!')&quot; &gt; hello.py
+      <pre class="code-body"><code class="lang-text">echo &quot;print('Hello, Git!')&quot; &gt; hello.py
 git add hello.py
-git commit -m &quot;feat: 新增 hello.py 程式&quot;</div>
+git commit -m &quot;feat: 新增 hello.py 程式&quot;</code></pre>
     </div>
   </div>
 
@@ -1174,16 +1152,15 @@ git commit -m &quot;feat: 新增 hello.py 程式&quot;</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看完整歷史</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看完整歷史</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git log</div>
+      <pre class="code-body"><code class="lang-text">git log</code></pre>
     </div>
   </div>
 
@@ -1192,16 +1169,15 @@ git commit -m &quot;feat: 新增 hello.py 程式&quot;</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">commit b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3 (HEAD -&gt; main)
+      <pre class="code-body"><code class="lang-text">commit b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3 (HEAD -&gt; main)
 Author: 你的名字 &lt;your@email.com&gt;
 Date:   Mon May 18 10:30:00 2026 +0800
 
@@ -1211,7 +1187,7 @@ commit a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0
 Author: 你的名字 &lt;your@email.com&gt;
 Date:   Mon May 18 10:00:00 2026 +0800
 
-    feat: 新增 README 初始說明</div>
+    feat: 新增 README 初始說明</code></pre>
     </div>
   </div>
 
@@ -1219,29 +1195,27 @@ Date:   Mon May 18 10:00:00 2026 +0800
     <div class="group-block">
       <div class="group-header">更簡潔的歷史檢視</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">精簡的單行格式</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">精簡的單行格式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git log --oneline</div>
+      <pre class="code-body"><code class="lang-text">git log --oneline</code></pre>
     </div>
         <p class="loose-text">預期輸出：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">b4c5d6e (HEAD -&gt; main) feat: 新增 hello.py 程式
-a1b2c3d feat: 新增 README 初始說明</div>
+      <pre class="code-body"><code class="lang-text">b4c5d6e (HEAD -&gt; main) feat: 新增 hello.py 程式
+a1b2c3d feat: 新增 README 初始說明</code></pre>
     </div>
         <p class="loose-text">每行開頭的短代碼（如 <code>b4c5d6e</code>）是 commit ID，之後還原操作會用到。</p>
       </div>
@@ -1257,16 +1231,15 @@ a1b2c3d feat: 新增 README 初始說明</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">修改 hello.py</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">修改 hello.py</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">echo &quot;print('Hello, GitHub!')&quot; &gt; hello.py</div>
+      <pre class="code-body"><code class="lang-text">echo &quot;print('Hello, GitHub!')&quot; &gt; hello.py</code></pre>
     </div>
   </div>
 
@@ -1275,16 +1248,15 @@ a1b2c3d feat: 新增 README 初始說明</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看未 commit 的改動</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看未 commit 的改動</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git diff</div>
+      <pre class="code-body"><code class="lang-text">git diff</code></pre>
     </div>
   </div>
 
@@ -1293,22 +1265,21 @@ a1b2c3d feat: 新增 README 初始說明</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">diff --git a/hello.py b/hello.py
+      <pre class="code-body"><code class="lang-text">diff --git a/hello.py b/hello.py
 index ...
 --- a/hello.py
 +++ b/hello.py
 @@ -1 +1 @@
 -print('Hello, Git!')
-+print('Hello, GitHub!')</div>
++print('Hello, GitHub!')</code></pre>
     </div>
   </div>
 
@@ -1325,29 +1296,27 @@ index ...
       <div class="group-header">查看某個 commit 的檔案狀態</div>
       <div class="group-body">
         <p>用 <code>git log --oneline</code> 找到要回去的 commit ID，然後：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">切換到指定 commit</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">切換到指定 commit</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout a1b2c3d</div>
+      <pre class="code-body"><code class="lang-text">git checkout a1b2c3d</code></pre>
     </div>
         <p class="loose-text">這時候你進入了「分離頭部」（detached HEAD）狀態——你可以看到過去的檔案，但不要在這裡做修改。</p>
         <p class="loose-text">要回到最新版本：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">回到最新版本</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">回到最新版本</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout main</div>
+      <pre class="code-body"><code class="lang-text">git checkout main</code></pre>
     </div>
       </div>
     </div>
@@ -1358,28 +1327,26 @@ index ...
       <div class="group-header">還原單一檔案</div>
       <div class="group-body">
         <p>如果只想把某個檔案還原到最後一次 commit 的狀態（放棄目前的修改）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">還原單一檔案</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">還原單一檔案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout -- hello.py</div>
+      <pre class="code-body"><code class="lang-text">git checkout -- hello.py</code></pre>
     </div>
         <p class="loose-text">或使用更現代的語法：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">還原單一檔案（推薦語法）</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">還原單一檔案（推薦語法）</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git restore hello.py</div>
+      <pre class="code-body"><code class="lang-text">git restore hello.py</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">注意：這個操作無法復原</div>
@@ -1394,16 +1361,15 @@ index ...
       <div class="group-header">還原到某個 commit（危險操作，先了解即可）</div>
       <div class="group-body">
         <p>如果想把整個分支退回到某個舊版本：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">退回到指定 commit（危險）</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">退回到指定 commit（危險）</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git reset --hard a1b2c3d</div>
+      <pre class="code-body"><code class="lang-text">git reset --hard a1b2c3d</code></pre>
     </div>
         <p class="loose-text">這個指令會丟棄該 commit 之後的所有改動，謹慎使用。</p>
         <div class="callout callout--warning">
@@ -1498,16 +1464,15 @@ index ...
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">連接遠端倉庫</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">連接遠端倉庫</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git remote add origin https://github.com/你的帳號/my-first-repo.git</div>
+      <pre class="code-body"><code class="lang-text">git remote add origin https://github.com/你的帳號/my-first-repo.git</code></pre>
     </div>
   </div>
 
@@ -1520,16 +1485,15 @@ index ...
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看遠端設定</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看遠端設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git remote -v</div>
+      <pre class="code-body"><code class="lang-text">git remote -v</code></pre>
     </div>
   </div>
 
@@ -1538,17 +1502,16 @@ index ...
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">origin  https://github.com/你的帳號/my-first-repo.git (fetch)
-origin  https://github.com/你的帳號/my-first-repo.git (push)</div>
+      <pre class="code-body"><code class="lang-text">origin  https://github.com/你的帳號/my-first-repo.git (fetch)
+origin  https://github.com/你的帳號/my-first-repo.git (push)</code></pre>
     </div>
   </div>
 
@@ -1557,16 +1520,15 @@ origin  https://github.com/你的帳號/my-first-repo.git (push)</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">第一次推送</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">第一次推送</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git push -u origin main</div>
+      <pre class="code-body"><code class="lang-text">git push -u origin main</code></pre>
     </div>
   </div>
 
@@ -1586,16 +1548,15 @@ origin  https://github.com/你的帳號/my-first-repo.git (push)</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">之後每次推送只需要</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">之後每次推送只需要</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git push</div>
+      <pre class="code-body"><code class="lang-text">git push</code></pre>
     </div>
   </div>
 
@@ -1608,16 +1569,15 @@ origin  https://github.com/你的帳號/my-first-repo.git (push)</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">拉取最新改動</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">拉取最新改動</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git pull</div>
+      <pre class="code-body"><code class="lang-text">git pull</code></pre>
     </div>
   </div>
 
@@ -1681,19 +1641,18 @@ origin  https://github.com/你的帳號/my-first-repo.git (push)</div>
     <div class="group-block">
       <div class="group-header">常見錯誤：推送被拒絕</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">推送被拒絕的錯誤訊息</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">推送被拒絕的錯誤訊息</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">! [rejected]        main -&gt; main (fetch first)
+      <pre class="code-body"><code class="lang-text">! [rejected]        main -&gt; main (fetch first)
 error: failed to push some refs to 'origin'
 hint: Updates were rejected because the remote contains work that you do
-hint: not have locally.</div>
+hint: not have locally.</code></pre>
     </div>
         <p class="loose-text">這代表遠端有別人新增的 commit 你還沒拉取。解法：先執行 <code>git pull</code>，再執行 <code>git push</code>。</p>
         <div class="callout callout--warning">
@@ -1750,28 +1709,26 @@ hint: not have locally.</div>
     <div class="group-block">
       <div class="group-header">查看所有分支</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看分支清單</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看分支清單</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git branch</div>
+      <pre class="code-body"><code class="lang-text">git branch</code></pre>
     </div>
         <p class="loose-text">預期輸出（星號代表目前所在分支）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">* main</div>
+      <pre class="code-body"><code class="lang-text">* main</code></pre>
     </div>
       </div>
     </div>
@@ -1781,16 +1738,15 @@ hint: not have locally.</div>
     <div class="group-block">
       <div class="group-header">建立新分支</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">建立 feature 分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立 feature 分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git branch feature/add-greeting</div>
+      <pre class="code-body"><code class="lang-text">git branch feature/add-greeting</code></pre>
     </div>
         <p class="loose-text">命名慣例：<code>feature/功能名稱</code>、<code>fix/修正內容</code>、<code>docs/文件說明</code></p>
       </div>
@@ -1801,53 +1757,49 @@ hint: not have locally.</div>
     <div class="group-block">
       <div class="group-header">切換到新分支</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">切換到新分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">切換到新分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout feature/add-greeting</div>
+      <pre class="code-body"><code class="lang-text">git checkout feature/add-greeting</code></pre>
     </div>
         <p class="loose-text">或用更現代的語法（建立並切換，一步完成）：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">建立並立即切換（推薦）</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立並立即切換（推薦）</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout -b feature/add-greeting</div>
+      <pre class="code-body"><code class="lang-text">git checkout -b feature/add-greeting</code></pre>
     </div>
         <p class="loose-text">確認目前在哪個分支：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">確認目前分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">確認目前分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git branch</div>
+      <pre class="code-body"><code class="lang-text">git branch</code></pre>
     </div>
         <p class="loose-text">預期輸出：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">* feature/add-greeting
-  main</div>
+      <pre class="code-body"><code class="lang-text">* feature/add-greeting
+  main</code></pre>
     </div>
       </div>
     </div>
@@ -1862,18 +1814,17 @@ hint: not have locally.</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">修改 hello.py</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">修改 hello.py</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">echo &quot;print('Hello, World! Welcome to Git!')&quot; &gt; hello.py
+      <pre class="code-body"><code class="lang-text">echo &quot;print('Hello, World! Welcome to Git!')&quot; &gt; hello.py
 git add hello.py
-git commit -m &quot;feat: 更新歡迎訊息&quot;</div>
+git commit -m &quot;feat: 更新歡迎訊息&quot;</code></pre>
     </div>
   </div>
 
@@ -1886,17 +1837,16 @@ git commit -m &quot;feat: 更新歡迎訊息&quot;</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">切回 main 並查看檔案</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">切回 main 並查看檔案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout main
-cat hello.py</div>
+      <pre class="code-body"><code class="lang-text">git checkout main
+cat hello.py</code></pre>
     </div>
   </div>
 
@@ -1905,16 +1855,15 @@ cat hello.py</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">print('Hello, GitHub!')</div>
+      <pre class="code-body"><code class="lang-text">print('Hello, GitHub!')</code></pre>
     </div>
   </div>
 
@@ -1927,17 +1876,16 @@ cat hello.py</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">合併 feature 分支到 main</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">合併 feature 分支到 main</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout main
-git merge feature/add-greeting</div>
+      <pre class="code-body"><code class="lang-text">git checkout main
+git merge feature/add-greeting</code></pre>
     </div>
   </div>
 
@@ -1946,19 +1894,18 @@ git merge feature/add-greeting</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">Updating b4c5d6e..f0a1b2c
+      <pre class="code-body"><code class="lang-text">Updating b4c5d6e..f0a1b2c
 Fast-forward
  hello.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)</div>
+ 1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
     </div>
   </div>
 
@@ -1975,20 +1922,19 @@ Fast-forward
       <div class="group-header">什麼情況下會發生？</div>
       <div class="group-body">
         <p>當兩個分支都修改了同一個檔案的同一行，Git 不知道要保留誰的版本，就會發生衝突：</p>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">衝突標記的樣子</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">衝突標記的樣子</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+      <pre class="code-body"><code class="lang-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 print('Hello, GitHub!')
 =======
 print('Hello, World!')
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/add-greeting</div>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/add-greeting</code></pre>
     </div>
       </div>
     </div>
@@ -2054,16 +2000,15 @@ print('Hello, World!')
     <div class="group-block">
       <div class="group-header">完成後刪除已合併的分支</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">刪除已合併的分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">刪除已合併的分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git branch -d feature/add-greeting</div>
+      <pre class="code-body"><code class="lang-text">git branch -d feature/add-greeting</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">本節學會了什麼</div>
@@ -2143,17 +2088,16 @@ print('Hello, World!')
     <div class="group-block">
       <div class="group-header">Clone 你 Fork 的版本到本地</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">Clone Fork 到本地</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Clone Fork 到本地</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git clone https://github.com/你的帳號/原專案名稱.git
-cd 原專案名稱</div>
+      <pre class="code-body"><code class="lang-text">git clone https://github.com/你的帳號/原專案名稱.git
+cd 原專案名稱</code></pre>
     </div>
         <p class="loose-text">Clone 會把整個倉庫（包含所有歷史）下載到本地。</p>
       </div>
@@ -2169,16 +2113,15 @@ cd 原專案名稱</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">建立並切換到新分支</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立並切換到新分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout -b fix/typo-in-readme</div>
+      <pre class="code-body"><code class="lang-text">git checkout -b fix/typo-in-readme</code></pre>
     </div>
   </div>
 
@@ -2187,17 +2130,16 @@ cd 原專案名稱</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">commit 你的修改</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">commit 你的修改</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git add README.md
-git commit -m &quot;fix: 修正 README 中的錯字&quot;</div>
+      <pre class="code-body"><code class="lang-text">git add README.md
+git commit -m &quot;fix: 修正 README 中的錯字&quot;</code></pre>
     </div>
   </div>
 
@@ -2209,16 +2151,15 @@ git commit -m &quot;fix: 修正 README 中的錯字&quot;</div>
     <div class="group-block">
       <div class="group-header">推送分支到你的 Fork</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">推送到你的 GitHub Fork</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">推送到你的 GitHub Fork</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git push origin fix/typo-in-readme</div>
+      <pre class="code-body"><code class="lang-text">git push origin fix/typo-in-readme</code></pre>
     </div>
       </div>
     </div>
@@ -2383,21 +2324,20 @@ git commit -m &quot;fix: 修正 README 中的錯字&quot;</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">建立團隊專案</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">建立團隊專案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">mkdir team-website
+      <pre class="code-body"><code class="lang-text">mkdir team-website
 cd team-website
 git init
 echo &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;我們的團隊網站&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot; &gt; index.html
 git add index.html
-git commit -m &quot;feat: 初始化專案，建立首頁框架&quot;</div>
+git commit -m &quot;feat: 初始化專案，建立首頁框架&quot;</code></pre>
     </div>
   </div>
 
@@ -2406,17 +2346,16 @@ git commit -m &quot;feat: 初始化專案，建立首頁框架&quot;</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">連接遠端並推送</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">連接遠端並推送</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git remote add origin https://github.com/你的帳號/team-website.git
-git push -u origin main</div>
+      <pre class="code-body"><code class="lang-text">git remote add origin https://github.com/你的帳號/team-website.git
+git push -u origin main</code></pre>
     </div>
   </div>
 
@@ -2429,17 +2368,16 @@ git push -u origin main</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">成員 Clone 專案</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">成員 Clone 專案</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git clone https://github.com/你的帳號/team-website.git
-cd team-website</div>
+      <pre class="code-body"><code class="lang-text">git clone https://github.com/你的帳號/team-website.git
+cd team-website</code></pre>
     </div>
   </div>
 
@@ -2451,20 +2389,19 @@ cd team-website</div>
     <div class="group-block">
       <div class="group-header">你負責「新增關於我們」頁面</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">你建立自己的分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">你建立自己的分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout -b feature/about-page
+      <pre class="code-body"><code class="lang-text">git checkout -b feature/about-page
 echo &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;關於我們&lt;/h1&gt;&lt;p&gt;這是一個學習 Git 的團隊&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot; &gt; about.html
 git add about.html
 git commit -m &quot;feat: 新增關於我們頁面&quot;
-git push origin feature/about-page</div>
+git push origin feature/about-page</code></pre>
     </div>
       </div>
     </div>
@@ -2474,20 +2411,19 @@ git push origin feature/about-page</div>
     <div class="group-block">
       <div class="group-header">同學 A 負責「新增聯絡方式」</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">同學 A 建立自己的分支</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">同學 A 建立自己的分支</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout -b feature/contact-page
+      <pre class="code-body"><code class="lang-text">git checkout -b feature/contact-page
 echo &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;聯絡我們&lt;/h1&gt;&lt;p&gt;Email: team@example.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot; &gt; contact.html
 git add contact.html
 git commit -m &quot;feat: 新增聯絡方式頁面&quot;
-git push origin feature/contact-page</div>
+git push origin feature/contact-page</code></pre>
     </div>
       </div>
     </div>
@@ -2553,17 +2489,16 @@ git push origin feature/contact-page</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">同步最新的 main</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">同步最新的 main</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git checkout main
-git pull</div>
+      <pre class="code-body"><code class="lang-text">git checkout main
+git pull</code></pre>
     </div>
   </div>
 
@@ -2572,16 +2507,15 @@ git pull</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">查看完整歷史</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">查看完整歷史</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git log --oneline</div>
+      <pre class="code-body"><code class="lang-text">git log --oneline</code></pre>
     </div>
   </div>
 
@@ -2590,18 +2524,17 @@ git pull</div>
   </div>
 
   <div class="reveal">
-    <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">預期輸出</span>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">預期輸出</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">g5h6i7j (HEAD -&gt; main, origin/main) feat: 新增聯絡方式頁面
+      <pre class="code-body"><code class="lang-text">g5h6i7j (HEAD -&gt; main, origin/main) feat: 新增聯絡方式頁面
 f3d4e5f feat: 新增關於我們頁面
-a1b2c3d feat: 初始化專案，建立首頁框架</div>
+a1b2c3d feat: 初始化專案，建立首頁框架</code></pre>
     </div>
   </div>
 
@@ -2712,16 +2645,15 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
       </details>
       <details class="acc-item">
         <summary>commit 後發現訊息寫錯，可以修改嗎？</summary>
-        <div class="acc-body"><p>可以。使用以下指令修改最後一個 commit 的訊息：</p><div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">修改最新 commit 訊息</span>
+        <div class="acc-body"><p>可以。使用以下指令修改最後一個 commit 的訊息：</p><div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">修改最新 commit 訊息</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">git commit --amend -m &quot;新的正確訊息&quot;</div>
+      <pre class="code-body"><code class="lang-text">git commit --amend -m &quot;新的正確訊息&quot;</code></pre>
     </div><p>注意：這只會修改<strong>最後一個</strong> commit。如果要修改更早的，需要使用 <code>git rebase -i</code>（進階操作）。</p></div>
       </details>
       <details class="acc-item">
@@ -2909,27 +2841,25 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
     </div>
   </div>
 
-  <div class="share-overlay" id="share-overlay">
-    <div class="share-modal">
-      <div class="share-modal-header">
-        <h3>分享此課程</h3>
-        <button class="share-modal-close" id="share-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <div class="share-modal-body">
-        <div class="share-qr-wrap">
-          <div class="share-qr-frame">
-            <div class="share-qr-img" id="share-qr-container"></div>
-          </div>
-          <span class="share-qr-label">掃描開啟</span>
+  <div class="share-widget" id="share-widget">
+    <div class="share-header" id="share-drag-handle">
+      <span class="share-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2V2zm2 2v5h5V4H4zm1 1h3v3H5V5zM13 2h9v9h-9V2zm2 2v5h5V4h-5zm1 1h3v3h-3V5zM2 13h9v9H2v-9zm2 2v5h5v-5H4zm1 1h3v3H5v-3zM13 13h3v3h-3v-3zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/></svg>分享此課程</span>
+      <button class="share-close" id="share-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="share-body">
+      <div class="share-qr-wrap">
+        <div class="share-qr-frame">
+          <div class="share-qr-img" id="share-qr-container"></div>
         </div>
-        <div class="share-right">
-          <div class="share-og-wrap">
-            <img class="share-og-img" id="share-og-img" src="" alt="">
-          </div>
-          <div class="share-url-row">
-            <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
-            <button class="share-copy-btn" id="share-copy-btn">複製</button>
-          </div>
+        <span class="share-qr-label">掃描開啟</span>
+      </div>
+      <div class="share-right">
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
         </div>
       </div>
     </div>
@@ -2948,8 +2878,8 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
           <table class="shortcut-table">
             <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
             <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
             <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
             <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
           </table>
@@ -2963,10 +2893,20 @@ a1b2c3d feat: 初始化專案，建立首頁框架</div>
             <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">塗鴉筆</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">筆刷 / 聚光燈圓形縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">塗鴉筆模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>B</kbd></span></td><td class="shortcut-desc">切換橡皮擦</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">循環筆刷顏色</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">清空畫布</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Ctrl</kbd><span class="shortcut-sep">+</span><kbd>Z</kbd></span></td><td class="shortcut-desc">復原上一筆</td></tr>
           </table>
         </div>
         <div class="shortcut-col">

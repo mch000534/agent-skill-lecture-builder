@@ -23,11 +23,11 @@
 ### 操作步驟
 
 [flow]
-前往 colab.research.google.com（需登入 Google 帳號）
-點擊「新建筆記本」
-看到空白的 Notebook，點擊第一個儲存格
-輸入程式碼後，按 Shift + Enter 執行
-觀察儲存格下方出現輸出結果
+1. 前往 colab.research.google.com — 需登入 Google 帳號
+2. 點擊「新建筆記本」
+3. 點擊第一個儲存格 — 看到空白的 Notebook
+4. 輸入程式碼 — 按 Shift + Enter 執行
+5. 觀察輸出結果 — 儲存格下方會出現輸出
 [/flow]
 
 ### Colab 的兩種儲存格
@@ -203,12 +203,12 @@ print("所有頁面爬取完畢")
 ```
 
 [flow]
-page = 1，組合 URL
-requests.get(url) 取得頁面
-解析頁面，提取資料
-time.sleep(1) 暫停一秒
-page += 1，進入下一輪迴圈
-重複直到 page > total_pages
+1. page = 1 — 組合 URL
+2. requests.get(url) — 取得頁面
+3. 解析頁面 — 提取資料
+4. time.sleep(1) — 暫停一秒
+5. page += 1 — 進入下一輪迴圈
+6. 重複直到 page > total_pages
 [/flow]
 
 [quiz type="single"]

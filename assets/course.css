@@ -5722,7 +5722,14 @@
 }
 :root[data-theme="light"] .code-body,
 [data-theme="light"] .code-body { color: #1f2328; }
-.code-body code { font-family: inherit; }
+.code-body code {
+  font-family: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: inherit;
+}
 
 /* token 顏色 — Dark theme（GitHub-inspired） */
 .tok-com { color: #8b949e; font-style: italic; }

@@ -382,27 +382,25 @@
     <ul><li>支援 macOS / Linux / Windows（WSL）</li><li>需要 Python 3.10 以上版本</li><li>建議預留至少 500MB 磁碟空間（虛擬環境 + 依賴套件）</li></ul>
   </div>
 </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Terminal
-        <span class="label">一鍵安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">一鍵安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</div>
+      <pre class="code-body"><code class="lang-text">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</code></pre>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">驗證安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">驗證安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes --version</div>
+      <pre class="code-body"><code class="lang-text">hermes --version</code></pre>
     </div>
         <ul class="loose-list">
       <li>安裝腳本會自動建立虛擬環境、安裝依賴、設定 shell completions</li>
@@ -416,16 +414,15 @@
     <div class="group-block">
       <div class="group-header">互動式設定精靈</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">啟動設定精靈</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">啟動設定精靈</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes setup</div>
+      <pre class="code-body"><code class="lang-text">hermes setup</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -521,16 +518,15 @@
     <div class="group-block">
       <div class="group-header">常用設定指令</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">設定相關 CLI</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">設定相關 CLI</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 查看目前設定
+      <pre class="code-body"><code class="lang-text"># 查看目前設定
 hermes config
 
 # 編輯設定檔
@@ -543,7 +539,7 @@ hermes config set model.default anthropic/claude-sonnet-4
 hermes doctor
 
 # 查看設定檔路徑
-hermes config path</div>
+hermes config path</code></pre>
     </div>
       </div>
     </div>
@@ -562,16 +558,15 @@ hermes config path</div>
       <span class="tag blue">xAI / Grok — 另一個推理選項</span>
       <span class="tag purple">本地模型 — 透過 llama.cpp 等工具，完全離線運行</span>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">切換模型</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">切換模型</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes model</div>
+      <pre class="code-body"><code class="lang-text">hermes model</code></pre>
     </div>
         <ul class="loose-list">
       <li>互動式選單，列出所有可用的 Provider 與模型</li>
@@ -589,27 +584,25 @@ hermes config path</div>
     <div class="group-block">
       <div class="group-header">啟動互動式聊天</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">開始對話</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">開始對話</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes</div>
+      <pre class="code-body"><code class="lang-text">hermes</code></pre>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">單次查詢模式</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">單次查詢模式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes chat -q &quot;解釋什麼是 AI Agent&quot;</div>
+      <pre class="code-body"><code class="lang-text">hermes chat -q &quot;解釋什麼是 AI Agent&quot;</code></pre>
     </div>
         <ul class="loose-list">
       <li>預設進入互動式聊天，輸入文字後按 Enter 送出</li>
@@ -656,16 +649,15 @@ hermes config path</div>
     <div class="group-block">
       <div class="group-header">常用啟動參數</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">常用啟動方式</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">常用啟動方式</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 預設互動式聊天
+      <pre class="code-body"><code class="lang-text"># 預設互動式聊天
 hermes
 
 # 指定模型
@@ -681,7 +673,7 @@ hermes -p work
 hermes --continue
 
 # 恢復特定 Session
-hermes --resume SESSION_ID</div>
+hermes --resume SESSION_ID</code></pre>
     </div>
         <div class="tags">
       <span class="tag blue">--continue, -c — 恢復最近的對話</span>
@@ -710,22 +702,21 @@ hermes --resume SESSION_ID</div>
     <div class="group-block">
       <div class="group-header">對話控制</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">對話內指令</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">對話內指令</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">/new              # 開新對話
+      <pre class="code-body"><code class="lang-text">/new              # 開新對話
 /clear            # 清空畫面 + 新對話
 /retry            # 重新送出上一則訊息
 /undo             # 移除上一輪對話
 /title 名稱       # 命名當前對話
 /compress         # 手動壓縮上下文
-/stop             # 停止背景任務</div>
+/stop             # 停止背景任務</code></pre>
     </div>
         <div class="insight">
       <div class="insight-title">Slash Commands 在啟動時載入</div>
@@ -739,21 +730,20 @@ hermes --resume SESSION_ID</div>
     <div class="group-block">
       <div class="group-header">模型與設定調整</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">即時調整</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">即時調整</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">/model                    # 查看或切換模型
+      <pre class="code-body"><code class="lang-text">/model                    # 查看或切換模型
 /personality friendly     # 切換人格
 /reasoning high           # 調整推理深度
 /verbose                  # 循環切換：關閉 → 新增 → 全部 → 詳細
 /voice on                 # 開啟語音模式
-/yolo                     # 切換指令確認模式</div>
+/yolo                     # 切換指令確認模式</code></pre>
     </div>
       </div>
     </div>
@@ -763,20 +753,19 @@ hermes --resume SESSION_ID</div>
     <div class="group-block">
       <div class="group-header">工具與技能管理</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">工具管理</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">工具管理</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">/tools               # 管理工具（互動式）
+      <pre class="code-body"><code class="lang-text">/tools               # 管理工具（互動式）
 /toolsets            # 列出工具集
 /skills              # 搜尋與安裝技能
 /skill name          # 載入指定技能到當前對話
-/reload-skills       # 重新掃描技能目錄</div>
+/reload-skills       # 重新掃描技能目錄</code></pre>
     </div>
       </div>
     </div>
@@ -790,20 +779,19 @@ hermes --resume SESSION_ID</div>
     <div class="group-block">
       <div class="group-header">查看與管理歷史對話</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Session 指令</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Session 指令</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes sessions list        # 列出近期對話
+      <pre class="code-body"><code class="lang-text">hermes sessions list        # 列出近期對話
 hermes sessions browse      # 互動式選擇器
 hermes sessions rename ID T # 重新命名
 hermes sessions delete ID   # 刪除對話
-hermes sessions prune       # 清理舊對話（--older-than N 天）</div>
+hermes sessions prune       # 清理舊對話（--older-than N 天）</code></pre>
     </div>
         <ul class="loose-list">
       <li>Session 資料存放在 <code>~/.hermes/state.db</code>（SQLite + FTS5 全文搜尋）</li>
@@ -871,33 +859,31 @@ hermes sessions prune       # 清理舊對話（--older-than N 天）</div>
     <div class="group-block">
       <div class="group-header">技能的瀏覽與安裝</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">技能管理 CLI</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">技能管理 CLI</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes skills list          # 列出已安裝技能
+      <pre class="code-body"><code class="lang-text">hermes skills list          # 列出已安裝技能
 hermes skills browse        # 瀏覽技能目錄
 hermes skills search QUERY  # 搜尋技能
 hermes skills install ID    # 安裝技能
 hermes skills inspect ID    # 預覽但不安裝
 hermes skills update        # 更新過期技能
-hermes skills uninstall N   # 移除技能</div>
+hermes skills uninstall N   # 移除技能</code></pre>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">直接從 URL 安裝</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">直接從 URL 安裝</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes skills install https://example.com/skills/my-skill/SKILL.md</div>
+      <pre class="code-body"><code class="lang-text">hermes skills install https://example.com/skills/my-skill/SKILL.md</code></pre>
     </div>
         <div class="callout callout--tip">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
@@ -925,16 +911,15 @@ hermes skills uninstall N   # 移除技能</div>
     <div class="group-block">
       <div class="group-header">Skill 的基本結構</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">SKILL.md 最小範例</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">SKILL.md 最小範例</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">---
+      <pre class="code-body"><code class="lang-text">---
 name: git-smart-commit
 description: 當使用者要 commit 時，分析變更並拆成多個語意清晰的 commit
 ---
@@ -947,7 +932,7 @@ description: 當使用者要 commit 時，分析變更並拆成多個語意清�
 2. 依「邏輯關聯」分組：相同功能的改動放一起
 3. 為每組產生 commit message
 4. 依組逐一 git add 與 git commit
-5. 所有變更處理完才回報結果</div>
+5. 所有變更處理完才回報結果</code></pre>
     </div>
       </div>
     </div>
@@ -1051,18 +1036,17 @@ description: 當使用者要 commit 時，分析變更並拆成多個語意清�
     <div class="group-block">
       <div class="group-header">記憶管理</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">記憶設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">記憶設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes memory status    # 查看記憶狀態
+      <pre class="code-body"><code class="lang-text">hermes memory status    # 查看記憶狀態
 hermes memory setup     # 設定記憶 Provider
-hermes memory off       # 關閉記憶</div>
+hermes memory off       # 關閉記憶</code></pre>
     </div>
         <ul class="loose-list">
       <li>內建 Provider 為 SQLite 本地儲存</li>
@@ -1126,16 +1110,15 @@ hermes memory off       # 關閉記憶</div>
     <div class="group-block">
       <div class="group-header">安裝與啟動</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Gateway 設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Gateway 設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 互動式設定各平台
+      <pre class="code-body"><code class="lang-text"># 互動式設定各平台
 hermes gateway setup
 
 # 前景執行（適合測試）
@@ -1146,7 +1129,7 @@ hermes gateway install
 hermes gateway start
 
 # 查看狀態
-hermes gateway status</div>
+hermes gateway status</code></pre>
     </div>
         <div class="flow">
       <div class="flow-step">
@@ -1186,20 +1169,19 @@ hermes gateway status</div>
     <div class="group-block">
       <div class="group-header">Gateway 內的 Slash Commands</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Gateway 專用指令</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Gateway 專用指令</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">/approve          # 核准待確認的危險指令
+      <pre class="code-body"><code class="lang-text">/approve          # 核准待確認的危險指令
 /deny             # 拒絕待確認的指令
 /restart          # 重啟 Gateway
 /sethome          # 設定當前聊天室為主頻道
-/platforms        # 查看平台連接狀態</div>
+/platforms        # 查看平台連接狀態</code></pre>
     </div>
         <div class="callout callout--warning">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -1224,17 +1206,16 @@ hermes gateway status</div>
   <li>語音訊息自動轉錄，支援多種 Provider</li>
   <li>優先順序：本地 faster-whisper（免費） > Groq Whisper（免費額度） > OpenAI Whisper（付費）</li>
 </ul>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">STT 設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">STT 設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes config set stt.enabled true
-hermes config set stt.provider local</div>
+      <pre class="code-body"><code class="lang-text">hermes config set stt.enabled true
+hermes config set stt.provider local</code></pre>
     </div>
       </div>
     </div>
@@ -1244,19 +1225,18 @@ hermes config set stt.provider local</div>
     <div class="group-block">
       <div class="group-header">TTS（文字轉語音）</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">TTS 設定</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">TTS 設定</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 在對話中切換語音模式
+      <pre class="code-body"><code class="lang-text"># 在對話中切換語音模式
 /voice on         # 語音對話模式
 /voice tts        # 所有回覆都轉語音
-/voice off        # 關閉語音</div>
+/voice off        # 關閉語音</code></pre>
     </div>
         <ul class="loose-list">
       <li>預設使用 Edge TTS（免費），也支援 ElevenLabs、OpenAI、MiniMax 等</li>
@@ -1333,34 +1313,32 @@ hermes config set stt.provider local</div>
     <div class="group-block">
       <div class="group-header">delegate_task 操作範例</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">單一任務委派</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">單一任務委派</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 在對話中要求 Agent 委派子任務
+      <pre class="code-body"><code class="lang-text"># 在對話中要求 Agent 委派子任務
 請派一個 subagent 去分析 src/ 目錄下的所有 Python 檔案，
-回報每個檔案的行數、函式數量、以及是否有型別標註。</div>
+回報每個檔案的行數、函式數量、以及是否有型別標註。</code></pre>
     </div>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">批次平行委派</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">批次平行委派</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body"># 同時派發多個獨立任務
+      <pre class="code-body"><code class="lang-text"># 同時派發多個獨立任務
 請同時執行以下三個分析：
 1. 分析 backend/ 的 API 端點數量與認證方式
 2. 分析 frontend/ 的元件數量與狀態管理策略
 3. 分析 tests/ 的測試覆蓋率
-完成後把三份報告合併成一份總結。</div>
+完成後把三份報告合併成一份總結。</code></pre>
     </div>
       </div>
     </div>
@@ -1388,23 +1366,22 @@ hermes config set stt.provider local</div>
     <div class="group-block">
       <div class="group-header">建立與管理 Cron Job</div>
       <div class="group-body">
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Cron 管理 CLI</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Cron 管理 CLI</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes cron list               # 列出排程
+      <pre class="code-body"><code class="lang-text">hermes cron list               # 列出排程
 hermes cron create &quot;0 9 * * *&quot; # 每天 9 點
 hermes cron create &quot;30m&quot;       # 每 30 分鐘
 hermes cron edit ID            # 編輯排程
 hermes cron pause ID           # 暫停
 hermes cron resume ID          # 恢復
 hermes cron run ID             # 手動觸發
-hermes cron remove ID          # 刪除</div>
+hermes cron remove ID          # 刪除</code></pre>
     </div>
         <div class="callout callout--warning">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -1430,20 +1407,19 @@ hermes cron remove ID          # 刪除</div>
   <li>多個專案各自擁有獨立的 Agent 環境</li>
   <li>不同團隊成員共享同一台機器但各自隔離</li>
 </ul>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">Profile 管理</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">Profile 管理</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes profile list              # 列出所有 Profile
+      <pre class="code-body"><code class="lang-text">hermes profile list              # 列出所有 Profile
 hermes profile create work       # 建立名為 work 的 Profile
 hermes profile use work          # 設為預設
 hermes profile show work         # 查看詳情
-hermes -p work                   # 臨時使用特定 Profile</div>
+hermes -p work                   # 臨時使用特定 Profile</code></pre>
     </div>
         <ul class="loose-list">
       <li>每個 Profile 擁有獨立的 <code>config.yaml</code>、<code>.env</code>、<code>skills/</code>、<code>sessions/</code></li>
@@ -1467,20 +1443,19 @@ hermes -p work                   # 臨時使用特定 Profile</div>
   <li>可直接查詢資料庫、操作 Notion、呼叫 Linear API</li>
   <li>不需要自己寫工具，生態系有大量現成的 MCP Server</li>
 </ul>
-        <div class="prompt-block">
-      <div class="prompt-header">
-        <div class="dots"><span></span><span></span><span></span></div>
-        Prompt
-        <span class="label">MCP 管理</span>
+        <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">text</span>
+        <span class="code-label">MCP 管理</span>
         <button class="copy-btn" aria-label="複製" onclick="copyPrompt(this)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
-      <div class="prompt-body">hermes mcp list              # 列出已設定的 Server
+      <pre class="code-body"><code class="lang-text">hermes mcp list              # 列出已設定的 Server
 hermes mcp add NAME          # 新增 Server（--url 或 --command）
 hermes mcp remove NAME       # 移除 Server
 hermes mcp test NAME         # 測試連線
-hermes mcp configure NAME    # 選擇啟用的工具</div>
+hermes mcp configure NAME    # 選擇啟用的工具</code></pre>
     </div>
         <div class="callout callout--tip">
   <div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75c.57.39 1 1 1 1.68V17h6v-.57c0-.68.43-1.29 1-1.68A7 7 0 0 0 12 2Z"/></svg></div>
@@ -1727,27 +1702,25 @@ hermes mcp configure NAME    # 選擇啟用的工具</div>
     </div>
   </div>
 
-  <div class="share-overlay" id="share-overlay">
-    <div class="share-modal">
-      <div class="share-modal-header">
-        <h3>分享此課程</h3>
-        <button class="share-modal-close" id="share-modal-close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <div class="share-modal-body">
-        <div class="share-qr-wrap">
-          <div class="share-qr-frame">
-            <div class="share-qr-img" id="share-qr-container"></div>
-          </div>
-          <span class="share-qr-label">掃描開啟</span>
+  <div class="share-widget" id="share-widget">
+    <div class="share-header" id="share-drag-handle">
+      <span class="share-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2V2zm2 2v5h5V4H4zm1 1h3v3H5V5zM13 2h9v9h-9V2zm2 2v5h5V4h-5zm1 1h3v3h-3V5zM2 13h9v9H2v-9zm2 2v5h5v-5H4zm1 1h3v3H5v-3zM13 13h3v3h-3v-3zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/></svg>分享此課程</span>
+      <button class="share-close" id="share-widget-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="share-body">
+      <div class="share-qr-wrap">
+        <div class="share-qr-frame">
+          <div class="share-qr-img" id="share-qr-container"></div>
         </div>
-        <div class="share-right">
-          <div class="share-og-wrap">
-            <img class="share-og-img" id="share-og-img" src="" alt="">
-          </div>
-          <div class="share-url-row">
-            <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
-            <button class="share-copy-btn" id="share-copy-btn">複製</button>
-          </div>
+        <span class="share-qr-label">掃描開啟</span>
+      </div>
+      <div class="share-right">
+        <div class="share-og-wrap">
+          <img class="share-og-img" id="share-og-img" src="" alt="">
+        </div>
+        <div class="share-url-row">
+          <a class="share-url-link" id="share-url-link" href="" target="_blank"></a>
+          <button class="share-copy-btn" id="share-copy-btn">複製</button>
         </div>
       </div>
     </div>
@@ -1766,8 +1739,8 @@ hermes mcp configure NAME    # 選擇啟用的工具</div>
           <table class="shortcut-table">
             <tr><td><span class="shortcut-key"><kbd>A</kbd></span></td><td class="shortcut-desc">收合 / 展開側邊欄</td></tr>
             <tr><td><span class="shortcut-key"><kbd>F</kbd></span></td><td class="shortcut-desc">全螢幕</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>C</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">切換深 / 淺色模式</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">切換顏色主題</td></tr>
             <tr><td><span class="shortcut-key"><kbd>=</kbd><span class="shortcut-sep">/</span><kbd>+</kbd></span></td><td class="shortcut-desc">放大字型</td></tr>
             <tr><td><span class="shortcut-key"><kbd>-</kbd><span class="shortcut-sep">/</span><kbd>_</kbd></span></td><td class="shortcut-desc">縮小字型</td></tr>
           </table>
@@ -1781,10 +1754,20 @@ hermes mcp configure NAME    # 選擇啟用的工具</div>
             <tr><td><span class="shortcut-key"><kbd>R</kbd></span></td><td class="shortcut-desc">抽籤器</td></tr>
             <tr><td><span class="shortcut-key"><kbd>V</kbd></span></td><td class="shortcut-desc">投票</td></tr>
             <tr><td><span class="shortcut-key"><kbd>S</kbd></span></td><td class="shortcut-desc">聚光燈模式</td></tr>
-            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">聚光燈圓形縮小 / 放大</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>B</kbd></span></td><td class="shortcut-desc">塗鴉筆</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>[</kbd><span class="shortcut-sep">/</span><kbd>]</kbd></span></td><td class="shortcut-desc">筆刷 / 聚光燈圓形縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>{</kbd><span class="shortcut-sep">/</span><kbd>}</kbd></span></td><td class="shortcut-desc">放大鏡倍率縮小 / 放大</td></tr>
             <tr><td><span class="shortcut-key"><kbd>X</kbd></span></td><td class="shortcut-desc">關閉所有浮動工具</td></tr>
             <tr><td><span class="shortcut-key"><kbd>Esc</kbd></span></td><td class="shortcut-desc">關閉 modal / 設定面板</td></tr>
+          </table>
+        </div>
+        <div class="shortcut-col">
+          <div class="shortcut-section-title">塗鴉筆模式</div>
+          <table class="shortcut-table">
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>B</kbd></span></td><td class="shortcut-desc">切換橡皮擦</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>c</kbd></span></td><td class="shortcut-desc">循環筆刷顏色</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Shift</kbd><span class="shortcut-sep">+</span><kbd>C</kbd></span></td><td class="shortcut-desc">清空畫布</td></tr>
+            <tr><td><span class="shortcut-key"><kbd>Ctrl</kbd><span class="shortcut-sep">+</span><kbd>Z</kbd></span></td><td class="shortcut-desc">復原上一筆</td></tr>
           </table>
         </div>
         <div class="shortcut-col">

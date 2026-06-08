@@ -238,6 +238,41 @@
       <div class="group-header">操作步驟</div>
       <div class="group-body">
         <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">前往 colab.research.google.com</div>
+          <div class="step-desc">需登入 Google 帳號</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">點擊「新建筆記本」</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">點擊第一個儲存格</div>
+          <div class="step-desc">看到空白的 Notebook</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">輸入程式碼</div>
+          <div class="step-desc">按 Shift + Enter 執行</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">觀察輸出結果</div>
+          <div class="step-desc">儲存格下方會出現輸出</div>
+        </div>
+      </div>
     </div>
       </div>
     </div>
@@ -541,6 +576,48 @@ for page in range(1, total_pages + 1):
 print(&quot;所有頁面爬取完畢&quot;)</code></pre>
     </div>
         <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">page = 1</div>
+          <div class="step-desc">組合 URL</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">requests.get(url)</div>
+          <div class="step-desc">取得頁面</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">解析頁面</div>
+          <div class="step-desc">提取資料</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">time.sleep(1)</div>
+          <div class="step-desc">暫停一秒</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">page += 1</div>
+          <div class="step-desc">進入下一輪迴圈</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">重複直到 page > total_pages</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
     </div>
         <div class="quiz-block" data-quiz-id="q-要爬取第1到第10頁range應該怎麼寫" data-quiz-answer="0">
       <div class="quiz-q">要爬取第 1 到第 10 頁，range() 應該怎麼寫？</div>
