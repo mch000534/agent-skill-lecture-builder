@@ -3788,9 +3788,11 @@
       font-size: .95rem;
     }
 
-    .pres-content .content-image img {
-      max-height: 55vh;
+    .pres-slide .content-image img {
+      max-height: 40vh;
       width: auto;
+      max-width: 100%;
+      object-fit: contain;
     }
 
     .pres-content .youtube-embed {

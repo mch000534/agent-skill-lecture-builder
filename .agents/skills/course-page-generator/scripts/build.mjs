@@ -1768,8 +1768,6 @@ function build(courseDir) {
     html = html.replace(pattern, val);
   }
 
-  html = embedLocalImages(html, courseDir);
-
   writeFileSync(outputPath, html, 'utf-8');
   console.log(`✅ Generated: ${outputPath}`);
   console.log(`   Sections: ${sections.length}, Sub-sections: ${sections.reduce((a, s) => a + s.subs.length, 0)}`);

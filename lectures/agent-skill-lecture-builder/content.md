@@ -1,6 +1,8 @@
 # 快速開始：安裝與第一次使用
 > 只需三個步驟，五分鐘內就能生成你的第一份課程頁面
 
+![開發者坐在電腦前準備建立第一個課程](assets/images/ch1-getting-started.png)
+
 ## 前置需求
 
 ### 你需要準備
@@ -92,6 +94,8 @@ Hint: npm install 只需執行一次，安裝 Puppeteer 後即可反覆 build。
 # 專案架構：了解每個部分的角色
 > 整個系統只有一個 HTML 模板，所有課程共用同一套設計語言
 
+![專案架構鳥瞰圖，展示各模組間的關聯](assets/images/ch2-project-architecture.png)
+
 ## 目錄總覽
 
 > **核心概念**
@@ -143,6 +147,8 @@ agent-skill-lecture-builder/
 
 # 新增課程：從零到上線完整流程
 > 四個步驟，從建立目錄到部署至 GitHub Pages
+
+![從空目錄到上線的四階段旅程](assets/images/ch3-new-course-flow.png)
 
 ## 步驟一：建立課程目錄
 
@@ -253,6 +259,8 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 
 # Markdown 語法：課程內容的積木
 > 所有元件都是純 Markdown 語法，AI 可以直接生成，你也可以手寫
+
+![各種 Markdown 語法如同積木元件般可組合](assets/images/ch4-markdown-blocks.png)
 
 ## Agent Skill 技術演進
 ```markdown [label="語法"]
@@ -779,6 +787,8 @@ Hint: `[reveal]` 渲染為 `<details>` 元素，點擊才會展開內容。
 # OG Image：讓分享連結更專業
 > 每次 build 後都應該執行一次，它是課程頁面在社群平台的「第一印象」
 
+![社群分享預覽卡片與純文字連結的對比](assets/images/ch5-og-image.png)
+
 ## 什麼是 OG Image？
 
 OG 是 Open Graph 的縮寫，是 Facebook 在 2010 年提出、現已成為網路標準的 HTML meta 標籤協定。當你把課程連結分享到 LINE、Facebook、Twitter、Slack 或任何通訊軟體時，平台會讀取頁面的 OG meta 標籤，自動展開成含有縮圖、標題、描述的預覽卡片。
@@ -838,6 +848,8 @@ seo:
 
 # 課堂互動工具：快捷鍵與小工具
 > 所有工具都內建在 assets/course.js，不需安裝任何插件
+
+![鍵盤快捷鍵與互動工具環繞的操作介面](assets/images/ch6-interactive-tools.png)
 
 ## 設定面板
 
@@ -940,6 +952,8 @@ vote:
 # 擴展小工具：新增自訂互動功能
 > 所有互動工具都在 assets/course.js，遵循相同模式就能自己加入新功能
 
+![HTML、CSS、JS 三層架構堆疊](assets/images/ch7-widget-architecture.png)
+
 ## 小工具的共用架構
 
 每個小工具都遵循以下三層結構：
@@ -1031,6 +1045,8 @@ case 'M':  // 選擇一個未使用的按鍵
 
 # Agent Skill 工作流：封裝你的開發流程
 > 把重複的生成步驟封裝成可觸發的 Skill，任何人都能一鍵使用
+
+![可組合的技能模組拼圖，象徵工作流封裝](assets/images/ch8-skill-workflow.png)
 
 ## 什麼是 Agent Skill？
 
