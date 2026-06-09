@@ -66,10 +66,11 @@
 
 | 類別 | 重點 | 詳見 |
 |------|------|------|
-| AI 工作流 | 五個 Agent Skills（生成 / 起草 / 審閱 / 全流程 / widget 規範） | [Agent Skills](#agent-skills) |
+| AI 工作流 | 六個 Agent Skills（生成 / 起草 / 審閱 / 全流程 / 配圖 / widget 規範） | [Agent Skills](#agent-skills) |
 | 多課程管理 | `lectures/` 統一擺放，`build-index.mjs` 自動掃描產生目錄首頁 | [課程目錄索引頁](#課程目錄索引頁) |
 | 教學元件 | 30+ 種 Markdown 自訂語法（對比、分頁、callout、quiz、timeline 等） | [Markdown 語法](#markdown-語法) |
 | 課堂互動 | 計時器、抽籤、投票、測驗、塗鴉筆、聚光燈 / 放大鏡 | [課堂互動工具](#課堂互動工具) |
+| AI 配圖 | 透過 DMXAPI GPT Image 2 批次生成課程配圖，支援模型與風格選擇 | [image-generator-dmxapi-gptimage2](#image-generator-dmxapi-gptimage2) |
 | 開發工具 | `new-lecture.mjs` / `validate.mjs` / `dev.mjs` / `build-vote.mjs` | [新增一門課程](#新增一門課程)、[npm scripts](#npm-scripts) |
 
 ---
@@ -91,7 +92,7 @@ npm install
 扮演一位擅長用實際案例解說的資安專家，設計"生成式 AI 資訊安全"的講義並生成網頁，完成後直接啟動
 ```
 
-AI 會依序：生成 `content.md` + `config.yaml` → build `index.html` → 產生 OG 縮圖 → 啟動本地預覽
+AI 會依序：生成 `content.md` + `config.yaml` → 批次生成課程配圖（可選）→ build `index.html` → 產生 OG 縮圖 → 啟動本地預覽
 
 ### 情境二：給講稿，輔助轉換
 
@@ -101,11 +102,11 @@ AI 會依序：生成 `content.md` + `config.yaml` → build `index.html` → �
 幫我把這份講稿轉成課程頁面（貼上講稿內容，或指定檔案路徑）
 ```
 
-AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml` → build `index.html` → 產生 OG 縮圖
+AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml` → 批次生成課程配圖（可選）→ build `index.html` → 產生 OG 縮圖
 
 ## Agent Skills
 
-五個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
+六個 AI 工作流，全部定義在 `.agents/skills/` 目錄下，在 Claude Code 對話中用自然語言觸發：
 
 ### course-page-generator
 
@@ -139,6 +140,21 @@ AI 依時長推算章節數（90 分鐘 → 4–5 個主章節），依受眾調
 
 把上述三個 Skill 串成一條完整工作流：Phase 1 用 `content-drafting` 起草 → Phase 2 用 `content-review` 診斷 → Phase 3 用 `course-page-generator` build 成頁面。每個 Phase 結束會暫停詢問，使用者可手動修改 `content.md` 後說「繼續 Phase N」恢復。詳見 [SKILL.md](.agents/skills/topic-to-page/SKILL.md)。
 
+### image-generator-dmxapi-gptimage2
+
+**觸發詞**：「生成教材圖片」「幫課程加圖」「跑 image generator」
+
+透過 DMXAPI GPT Image 2 為教材自動生成配圖。四個 Phase：
+
+| Phase | 說明 |
+|-------|------|
+| Phase 1 | 掃描 content.md，找出 `[image-here]` 佔位符與 AI 判斷的加圖位置 |
+| Phase 2 | 互動確認：選模型（gpt-image-2-03 / gpt-image-2 / gpt-image-2-ssvip）、選全域風格、確認圖片計畫表 |
+| Phase 3 | 批次呼叫 API 生成圖片，存入 `assets/images/` |
+| Phase 4 | 回寫 content.md，使用 `[image-text]` 或獨立圖片語法嵌入 |
+
+API Key 存放在 `.env` 檔案（已 gitignore，不上 GitHub）。首次使用時複製 `.env.example` 為 `.env` 並填入 Key。模型可選清單參考：https://www.dmxapi.cn/rmb 。詳見 [SKILL.md](.agents/skills/image-generator-dmxapi-gptimage2/SKILL.md)。
+
 ### widget-builder
 
 **觸發詞**：「新增 widget」「建立浮動面板」「加一個 widget」
@@ -147,7 +163,7 @@ AI 依時長推算章節數（90 分鐘 → 4–5 個主章節），依受眾調
 
 ---
 
-前四個工序 Skill 可獨立使用，也可改用 `topic-to-page` 一次串完整流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。`widget-builder` 為純參考規範，供新增 widget 時查閱。
+前四個工序 Skill 可獨立使用，也可改用 `topic-to-page` 一次串完整流程：`content-drafting` 生成草稿 → `content-review` 診斷節奏 → `course-page-generator` build 成頁面。`image-generator-dmxapi-gptimage2` 可在工作流任意階段插入，為課程批次生成配圖。`widget-builder` 為純參考規範，供新增 widget 時查閱。
 
 ## 專案結構
 
@@ -172,6 +188,10 @@ agent-skill-lecture-builder/
 │       │   └── SKILL.md
 │       ├── topic-to-page/           # 串接三階段的完整工作流
 │       │   └── SKILL.md
+│       ├── image-generator-dmxapi-gptimage2/  # AI 配圖生成（DMXAPI）
+│       │   ├── SKILL.md
+│       │   ├── .env                # API Key（gitignore）
+│       │   └── scripts/generate.mjs
 │       └── widget-builder/          # 浮動 widget 建置規範（HTML/CSS/JS/z-index）
 │           └── SKILL.md
 ├── assets/
@@ -455,6 +475,7 @@ quotes:
 ```
 - `alt` 文字自動成為圖片說明（figcaption）
 - 行內使用時（段落或列表中）會以 inline 方式渲染
+- 配圖使用相對路徑引用，build 時不轉 base64，保持 HTML 輕量並支援瀏覽器 lazy loading
 
 **圖文並排：**
 ```markdown

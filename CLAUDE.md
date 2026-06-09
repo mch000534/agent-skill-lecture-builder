@@ -54,6 +54,10 @@ agent-skill-lecture-builder/
 │   ├── content-drafting/SKILL.md   # 主題+受眾+時長 → content.md 草稿
 │   ├── content-review/SKILL.md     # 分析教學節奏，輸出改善建議
 │   ├── topic-to-page/SKILL.md      # 完整工作流（drafting → review → build）
+│   ├── image-generator-dmxapi-gptimage2/  # AI 配圖生成（DMXAPI GPT Image 2）
+│   │   ├── SKILL.md                # 工作流定義（模型選擇、風格、批次生成）
+│   │   ├── .env                    # API Key（gitignore）
+│   │   └── scripts/generate.mjs    # API 呼叫與存檔
 │   └── widget-builder/SKILL.md     # 浮動 widget 建置規範（HTML/CSS/JS/z-index）
 ├── assets/
 │   ├── course.css                  # 所有課程共用 CSS（外部引用，改動免 rebuild）
@@ -93,7 +97,7 @@ agent-skill-lecture-builder/
   - **不支援行內 `#` 註解**：`key: value # comment` 的 `# comment` 會被當成值的一部分。註解必須獨立成行。
   - 複雜巢狀陣列（多層縮排）可能解析錯誤，請保持結構扁平。
 - **`validate.mjs` 退出碼**：`0` = 可繼續 build（含 warnings）；`1` = 有 errors，應先修正。**只檢查 `content.md` 與 `seo.url` / `seo.image` 格式**，不檢查 `config.yaml` 語法。
-- **本地圖片自動 base64 嵌入**：`content.md` 中引用的本機圖片會被嵌入 `index.html`，build 後不再依賴相對路徑。
+- **本地圖片使用相對路徑**：`content.md` 中引用的本機圖片保持相對路徑引用，build 後由瀏覽器按需載入，不嵌入 base64，保持 HTML 輕量。
 - **GitHub Pages URL 自動偵測**：從 `git remote get-url origin` 取得，失敗時 `seo.url` / `seo.image` 留空（不阻擋 build）。
 
 ### Config 合併規則
@@ -175,6 +179,19 @@ agent-skill-lecture-builder/
 從主題到課程頁面的完整工作流，依序串聯 content-drafting → content-review → course-page-generator 三個階段。每個 Phase 結束後暫停確認，使用者可插入修改後說「繼續 Phase N」恢復。工作流程定義在 `.agents/skills/topic-to-page/SKILL.md`。
 
 當使用者說「從主題到頁面」「完整流程」「一鍵生成課程」「幫我完整做一個課程」時，請讀取該檔案並執行。
+
+### image-generator-dmxapi-gptimage2
+
+透過 DMXAPI GPT Image 2 為教材自動生成配圖。工作流程定義在 `.agents/skills/image-generator-dmxapi-gptimage2/SKILL.md`。
+
+當使用者說「生成教材圖片」「幫課程加圖」「跑 image generator」或類似指令時，請讀取該檔案並執行 Phase 1-4：
+
+- Phase 1：掃描 content.md，找出 `[image-here]` 佔位符與 AI 判斷的加圖位置，跳過已有圖片的段落
+- Phase 2：互動確認 — 選模型（gpt-image-2-03 / gpt-image-2 / gpt-image-2-ssvip）、選全域風格、確認圖片計畫表
+- Phase 3：批次呼叫 `scripts/generate.mjs` 生成圖片，存入 `assets/images/`
+- Phase 4：回寫 content.md，使用 `[image-text]` 或獨立圖片語法嵌入
+
+API Key 存放在 `.agents/skills/image-generator-dmxapi-gptimage2/.env`（已 gitignore）。首次使用時複製 `.env.example` 為 `.env` 並填入 Key。
 
 ### widget-builder
 

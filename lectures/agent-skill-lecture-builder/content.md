@@ -19,6 +19,7 @@
 - 修改樣式要逐頁調整 | 改 base.html / course.css 一次，全部套用
 - 產 OG 圖需要設計軟體 | Puppeteer 自動截取 Hero 區，零設計成本
 - 版本差異難以審查 | git diff 清晰可讀，只看內容變化
+- 配圖需手動找圖或設計 | AI 自動生成課程配圖，風格統一、批次處理
 [/compare]
 
 ### 取得專案
@@ -50,9 +51,10 @@ AI 會依序完成所有步驟，完全不需要手動干預：
 
 [flow]
 1. 生成結構化 content.md + config.yaml
-2. 執行 build.mjs 產出 index.html
-3. 執行 generate-og.mjs 產出 OG 縮圖
-4. 啟動本機預覽伺服器（port 3000）
+2. 批次生成課程配圖（可選）
+3. 執行 build.mjs 產出 index.html
+4. 執行 generate-og.mjs 產出 OG 縮圖
+5. 啟動本機預覽伺服器（port 3000）
 [/flow]
 
 ### 方式二：給講稿，AI 輔助轉換
@@ -217,6 +219,7 @@ quotes:
 - [done] 環境設定 | 確認 Node.js、Git、Claude Code 已安裝
 - [done] 建立課程目錄 | mkdir -p lectures/my-course/assets
 - [doing] 撰寫 content.md + config.yaml | 用 AI 生成或手動編寫
+- [todo] 生成課程配圖（可選）| 說「幫課程加圖」觸發 image-generator Skill
 - [todo] 執行 build + generate-og | 產出 index.html 和 OG 縮圖
 - [todo] 更新索引 + commit + push | build-index.mjs 後部署到 GitHub Pages
 [/steps-status]
@@ -240,6 +243,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course
 > **哪些檔案需要 commit？**
 > - lectures/my-course/index.html（build 產出）
 > - lectures/my-course/assets/og-image.jpg（OG 縮圖）
+> - lectures/my-course/assets/images/（課程配圖）
 > - lectures/manifest.js（課程索引）
 
 [callout type="warning" title="注意"]
@@ -385,6 +389,8 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 ![og-image](assets/og-image.jpg)
 
 alt 文字自動成為圖片下方的 figcaption 說明。
+
+配圖使用相對路徑引用（如 `assets/images/ch1-cover.png`），build 時不轉 base64，保持 HTML 輕量並支援瀏覽器 lazy loading。
 
 ### 圖文並排
 
@@ -1064,8 +1070,9 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 1. 偵測意圖 — 比對 SKILL.md 中的觸發條件
 2. 讀取參考資料 — 載入 base.html、components.md、config-example.yaml
 3. 生成內容 — 依據你的主題產出 content.md + config.yaml
-4. 執行建置 — 自動呼叫 build.mjs、generate-og.mjs
-5. 啟動預覽 — 開啟本機伺服器讓你即時確認
+4. 生成配圖（可選）— 透過 image-generator Skill 批次產生並嵌入
+5. 執行建置 — 自動呼叫 build.mjs、generate-og.mjs
+6. 啟動預覽 — 開啟本機伺服器讓你即時確認
 [/flow]
 
 ## Skill 檔案結構
@@ -1078,6 +1085,12 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
     ├── base.html      # HTML 模板（不可修改外部相依）
     ├── components.md  # Markdown 語法對照表
     └── content-example.md
+
+.agents/skills/image-generator-dmxapi-gptimage2/
+├── SKILL.md           # Skill 定義（模型選擇、風格、批次生成流程）
+├── .env               # API Key（不上 GitHub）
+└── scripts/
+    └── generate.mjs   # 呼叫 DMXAPI 生成圖片並存檔
 ```
 
 ## 自訂與擴展
@@ -1097,7 +1110,7 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 最低限度：Skill 的描述和觸發時機。建議包含：工作流程步驟、參考檔案路徑、輸出格式範例。越詳細，AI 執行越準確。
 [/item]
 [item title="可以一個 Skill 呼叫另一個 Skill 嗎？"]
-可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 就是串聯三個 Skill 的範例。
+可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 串聯 content-drafting、content-review、course-page-generator 三個 Skill，而 image-generator-dmxapi-gptimage2 可作為額外步驟加入任何工作流。
 [/item]
 [item title="怎麼知道目前有哪些 Skill 被啟用了？"]
 在 Claude Code 中輸入 `/skills` 或類似指令（取決於版本），可以列出所有已偵測到的 Skill。也可以在 `~/.claude/` 或專案的 `.agents/skills/` 目錄下直接查看資料夾。
@@ -1127,6 +1140,8 @@ Agent Skill 是 Claude Code 的可觸發工作流單元——你只需描述你�
 [summary]
 - 課程內容寫在 content.md，使用結構化 Markdown 語法
 - 頁面設定寫在 config.yaml，只需覆寫需要的欄位
+- 配圖使用相對路徑引用，不再嵌入 base64，提升頁面載入效能
+- image-generator Skill 支援模型選擇、全域風格、批次生成並自動嵌入 content.md
 - 執行 build.mjs 產出 index.html，generate-og.mjs 產出 OG 圖
 - 透過 Claude Code 說自然語言就能觸發完整工作流
 - GitHub Pages 自動部署，commit 後即上線

@@ -265,6 +265,10 @@
           <div class="compare-cell compare-cell--old">版本差異難以審查</div>
           <div class="compare-cell compare-cell--new">git diff 清晰可讀，只看內容變化</div>
         </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--old">配圖需手動找圖或設計</div>
+          <div class="compare-cell compare-cell--new">AI 自動生成課程配圖，風格統一、批次處理</div>
+        </div>
       </div>
     </div>
       </div>
@@ -331,19 +335,26 @@ npm install</code></pre>
       <div class="flow-step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">執行 build.mjs 產出 index.html</div>
+          <div class="step-title">批次生成課程配圖（可選）</div>
           <div class="step-desc"></div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">執行 generate-og.mjs 產出 OG 縮圖</div>
+          <div class="step-title">執行 build.mjs 產出 index.html</div>
           <div class="step-desc"></div>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">執行 generate-og.mjs 產出 OG 縮圖</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
         <div class="step-content">
           <div class="step-title">啟動本機預覽伺服器（port 3000）</div>
           <div class="step-desc"></div>
@@ -658,6 +669,13 @@ quotes:
       <li class="is-todo">
         <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
         <div>
+          <div class="ss-title">生成課程配圖（可選）</div>
+          <div class="ss-desc">說「幫課程加圖」觸發 image-generator Skill</div>
+        </div>
+      </li>
+      <li class="is-todo">
+        <div class="ss-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div>
           <div class="ss-title">執行 build + generate-og</div>
           <div class="ss-desc">產出 index.html 和 OG 縮圖</div>
         </div>
@@ -705,6 +723,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</co
       <ul>
         <li>lectures/my-course/index.html（build 產出）</li>
         <li>lectures/my-course/assets/og-image.jpg（OG 縮圖）</li>
+        <li>lectures/my-course/assets/images/（課程配圖）</li>
         <li>lectures/manifest.js（課程索引）</li>
       </ul>
     </div>
@@ -1027,6 +1046,7 @@ node .agents/skills/course-page-generator/scripts/dev.mjs lectures/my-course</co
       <figcaption>og-image</figcaption>
     </figure>
         <p class="loose-text">alt 文字自動成為圖片下方的 figcaption 說明。</p>
+        <p class="loose-text">配圖使用相對路徑引用（如 <code>assets/images/ch1-cover.png</code>），build 時不轉 base64，保持 HTML 輕量並支援瀏覽器 lazy loading。</p>
       </div>
     </div>
   </div>
@@ -2498,12 +2518,19 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
       <div class="flow-step">
         <div class="step-num">4</div>
         <div class="step-content">
+          <div class="step-title">生成配圖（可選）— 透過 image-generator Skill 批次產生並嵌入</div>
+          <div class="step-desc"></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
           <div class="step-title">執行建置</div>
           <div class="step-desc">自動呼叫 build.mjs、generate-og.mjs</div>
         </div>
       </div>
       <div class="flow-step">
-        <div class="step-num">5</div>
+        <div class="step-num">6</div>
         <div class="step-content">
           <div class="step-title">啟動預覽</div>
           <div class="step-desc">開啟本機伺服器讓你即時確認</div>
@@ -2531,7 +2558,13 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
 └── reference/         # AI 生成內容的參考規範
     ├── base.html      # HTML 模板（不可修改外部相依）
     ├── components.md  # Markdown 語法對照表
-    └── content-example.md</code></pre>
+    └── content-example.md
+
+.agents/skills/image-generator-dmxapi-gptimage2/
+├── SKILL.md           # Skill 定義（模型選擇、風格、批次生成流程）
+├── .env               # API Key（不上 GitHub）
+└── scripts/
+    └── generate.mjs   # 呼叫 DMXAPI 生成圖片並存檔</code></pre>
     </div>
   </div>
 
@@ -2558,7 +2591,7 @@ console.<span class="tok-fn">log</span>(<span class="tok-str">`5! = ${result}`</
       </details>
       <details class="acc-item">
         <summary>可以一個 Skill 呼叫另一個 Skill 嗎？</summary>
-        <div class="acc-body"><p>可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 就是串聯三個 Skill 的範例。</p></div>
+        <div class="acc-body"><p>可以。Skill 的參考檔案中可以提及其它 Skill 名稱，AI 會依序載入並執行。適合建立「超級工作流」——例如 topic-to-page 串聯 content-drafting、content-review、course-page-generator 三個 Skill，而 image-generator-dmxapi-gptimage2 可作為額外步驟加入任何工作流。</p></div>
       </details>
       <details class="acc-item">
         <summary>怎麼知道目前有哪些 Skill 被啟用了？</summary>
