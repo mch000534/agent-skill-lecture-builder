@@ -394,8 +394,11 @@ function parseContent(md) {
       currentSub = null;
       sections.push(current);
 
-      if (i + 1 < lines.length && /^> /.test(lines[i + 1]) && !/^> \*\*/.test(lines[i + 1])) {
-        i++;
+      // Skip optional blank lines between # heading and > lead (standard Markdown convention)
+      let leadPeek = i + 1;
+      while (leadPeek < lines.length && lines[leadPeek].trim() === '') leadPeek++;
+      if (leadPeek < lines.length && /^> /.test(lines[leadPeek]) && !/^> \*\*/.test(lines[leadPeek])) {
+        i = leadPeek;
         let lead = lines[i].replace(/^> /, '');
         while (i + 1 < lines.length && /^> /.test(lines[i + 1]) && !/^> \*\*/.test(lines[i + 1])) {
           i++;
@@ -1554,20 +1557,40 @@ function buildContentSections(sections) {
   let html = '';
 
   for (const sec of sections) {
+    // Detect chapter opener: section has lead AND first block is an image
+    const grouped = groupBlocks(sec.blocks);
+    const firstImgIdx = grouped.findIndex(b => b.type === 'image');
+    const hasChapterHero = !!sec.lead && firstImgIdx === 0;
+
+    let heroOpen = '';
+    let heroClose = '';
+    let imgSrc = '';
+    let imgAlt = '';
+    if (hasChapterHero) {
+      imgSrc = esc(grouped[0].src);
+      imgAlt = esc(grouped[0].alt || '');
+      heroOpen = `\n  <div class="chapter-hero" data-bg="${imgSrc}">
+    <img class="chapter-hero__img" src="${imgSrc}" alt="${imgAlt}" loading="eager">
+    <div class="chapter-hero__overlay"></div>
+    <div class="chapter-hero__content">`;
+      heroClose = `</div>\n  </div>`;
+    }
+
     html += `\n<hr class="divider">
-<section class="section">
-  <div class="reveal">
-    <span class="section-label" id="${sec.id}"><span class="num">${sec.label === '總結' ? '★' : sec.num}</span> ${esc(sec.label.replace(/[：:].*/, '').trim())}</span>
+<section class="section${hasChapterHero ? ' section--has-hero' : ''}">
+  <div class="reveal${hasChapterHero ? ' chapter-hero__header' : ''}">
+${heroOpen}    <span class="section-label" id="${sec.id}"><span class="num">${sec.label === '總結' ? '★' : sec.num}</span> ${esc(sec.label.replace(/[：:].*/, '').trim())}</span>
     <h2>${esc(sec.h2)}</h2>
     ${sec.lead ? `<p class="lead">${inlineFormatWithBreaks(sec.lead)}</p>` : ''}
-  </div>\n`;
+${heroClose}  </div>\n`;
 
-    for (const block of groupBlocks(sec.blocks)) {
+    grouped.forEach((block, i) => {
+      if (hasChapterHero && i === 0) return; // skip image, used as bg
       const inner = renderBlockBody(block);
-      if (!inner) continue;
+      if (!inner) return;
       const extraClass = block.type === 'bonus' ? ' bonus-btn-wrap' : '';
       html += `\n  <div class="reveal${extraClass}">\n    ${inner}\n  </div>\n`;
-    }
+    });
 
     html += `</section>\n`;
   }

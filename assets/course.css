@@ -278,6 +278,124 @@
       border-left: 3px solid var(--accent);
     }
 
+    /* ===== CHAPTER HERO (lead + first image → background image) ===== */
+    .chapter-hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding: 5rem 8vw;
+      isolation: isolate;
+    }
+
+    .chapter-hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      transition: transform 1.4s cubic-bezier(.2,.7,.2,1), filter .6s ease;
+      will-change: transform;
+    }
+
+    .chapter-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgb(0 0 0 / .45) 0%, rgb(0 0 0 / .75) 100%),
+        linear-gradient(180deg, rgb(0 0 0 / .55) 0%, rgb(0 0 0 / .75) 100%);
+      z-index: -1;
+      transition: background .6s ease, opacity .6s ease;
+    }
+
+    .chapter-hero__content {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .chapter-hero .section-label,
+    .chapter-hero h2 {
+      color: #fff !important;
+      -webkit-text-fill-color: #fff;
+      background: none;
+      text-shadow: 0 2px 16px rgb(0 0 0 / .6), 0 1px 3px rgb(0 0 0 / .8);
+    }
+
+    .chapter-hero .section-label .num {
+      background: rgb(255 255 255 / .18);
+      color: #fff;
+      border: 1px solid rgb(255 255 255 / .35);
+      backdrop-filter: blur(6px);
+    }
+
+    .chapter-hero h2 {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      line-height: 1.25;
+      margin-bottom: 1.2rem;
+    }
+
+    .chapter-hero .lead {
+      color: rgb(255 255 255 / .92) !important;
+      border-left-color: #fff;
+      text-align: left;
+      font-size: 1.15rem;
+      text-shadow: 0 1px 6px rgb(0 0 0 / .6);
+      max-width: 720px;
+      margin: 0 auto 1rem;
+    }
+
+    /* hover interactions: Ken Burns zoom + overlay lift + text rise */
+    .chapter-hero:hover .chapter-hero__img {
+      transform: scale(1.06);
+      filter: saturate(1.1) brightness(1.05);
+    }
+
+    .chapter-hero:hover .chapter-hero__overlay {
+      background:
+        radial-gradient(ellipse at center, rgb(0 0 0 / .3) 0%, rgb(0 0 0 / .6) 100%),
+        linear-gradient(180deg, rgb(0 0 0 / .4) 0%, rgb(0 0 0 / .6) 100%);
+    }
+
+    .chapter-hero:hover .chapter-hero__content {
+      transform: translateY(-6px);
+    }
+
+    /* reveal container hosting chapter-hero needs to escape max-width */
+    .reveal.chapter-hero__header {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section--has-hero {
+      padding-top: 0;
+    }
+
+    .divider + .section--has-hero .chapter-hero {
+      margin-top: -1px;
+    }
+
+    @media (max-width: 720px) {
+      .chapter-hero {
+        min-height: 55vh;
+        padding: 3.5rem 1.25rem;
+      }
+      .chapter-hero h2 {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+      }
+      .chapter-hero .lead {
+        font-size: 1rem;
+      }
+    }
+
     .divider {
       max-width: min(1200px, 92%);
       margin: 0 auto;
@@ -3657,6 +3775,84 @@
       color: var(--text-dim);
       max-width: 100%;
       line-height: 1.9;
+    }
+
+    /* ── Chapter hero inside title slide (P mode): use as full-slide background ── */
+    .pres-slide--title > .reveal.chapter-hero__header {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      width: auto;
+      max-width: none;
+      z-index: 0;
+      text-align: center;
+      pointer-events: none;
+      /* ensure reveal entrance animation doesn't move the background */
+      transform: none !important;
+      opacity: 1 !important;
+    }
+
+    .pres-slide--title > .reveal.chapter-hero__header > .chapter-hero {
+      position: absolute;
+      inset: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pres-slide--title > .reveal.chapter-hero__header > .chapter-hero > .chapter-hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .pres-slide--title > .reveal.chapter-hero__header > .chapter-hero > .chapter-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgb(0 0 0 / .5) 0%, rgb(0 0 0 / .8) 100%),
+        linear-gradient(180deg, rgb(0 0 0 / .6) 0%, rgb(0 0 0 / .8) 100%);
+      z-index: -1;
+    }
+
+    /* Hide duplicate text inside chapter-hero (title text lives in pres-title-inner) */
+    .pres-slide--title > .reveal.chapter-hero__header .chapter-hero__content {
+      display: none;
+    }
+
+    /* When a chapter-hero is present, make the foreground title content readable on top */
+    .pres-slide--has-hero .pres-title-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      padding: 4rem 6vw;
+    }
+
+    .pres-slide--has-hero .pres-section-num {
+      color: #fff;
+      border-color: rgb(255 255 255 / .6);
+      background: rgb(255 255 255 / .1);
+      backdrop-filter: blur(6px);
+    }
+
+    .pres-slide--has-hero h2 {
+      color: #fff;
+      -webkit-text-fill-color: #fff;
+      background: none;
+      text-shadow: 0 2px 12px rgb(0 0 0 / .6);
+    }
+
+    .pres-slide--has-hero .pres-lead {
+      color: rgb(255 255 255 / .92);
+      text-shadow: 0 1px 6px rgb(0 0 0 / .6);
+      border-left: 3px solid #fff;
+      padding-left: 1rem;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     /* ── Hero slide ── */

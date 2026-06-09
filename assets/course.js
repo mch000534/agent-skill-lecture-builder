@@ -1598,7 +1598,7 @@
           var foundSubOrGroup = false;
           Array.from(section.children).forEach(function (child) {
             if (child.nodeType !== 1 || !child.classList.contains('reveal')) return;
-            if (child.querySelector('.section-label')) return;
+            if (child.querySelector(':scope > .section-label')) return;
             if (!foundSubOrGroup) {
               if (child.querySelector(':scope > .sub-title') || child.querySelector(':scope > .group-block')) {
                 foundSubOrGroup = true;
@@ -1615,12 +1615,23 @@
           // Title slide — merge pre-blocks into it
           var ts = mkSlide('pres-slide--title');
           ts.dataset.sourceId = srcId;
+
+          // Chapter-hero reveal must be a direct child of the slide for CSS background positioning
+          var hasHero = allReveals.length > 0 && allReveals[0].classList.contains('chapter-hero__header');
+          if (hasHero) {
+            var heroClone = allReveals[0].cloneNode(true);
+            heroClone.classList.add('visible');
+            ts.appendChild(heroClone);
+            ts.classList.add('pres-slide--has-hero');
+          }
+
           var titleInner = document.createElement('div');
           titleInner.className = 'pres-title-inner';
           titleInner.innerHTML = '<div class="pres-section-num">' + presEsc(sectionNum) + '</div>'
             + '<h2>' + presEsc(sectionTitle) + '</h2>'
             + (sectionLead ? '<p class="pres-lead">' + sectionLead + '</p>' : '');
-          for (var pi = 0; pi < preBlockCount; pi++) {
+          var preStart = hasHero ? 1 : 0;
+          for (var pi = preStart; pi < preBlockCount; pi++) {
             var clone = allReveals[pi].cloneNode(true);
             clone.classList.add('visible');
             titleInner.appendChild(clone);
