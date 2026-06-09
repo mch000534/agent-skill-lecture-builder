@@ -305,11 +305,30 @@ node .agents/skills/course-page-generator/scripts/validate.mjs <course-dir>
 
 退出碼為 0 即可繼續 build；若回報錯誤則先修正 content.md。警告（如半形冒號）可忽略。
 
+**完整檢查清單：**
+
+| Check | 項目 | 嚴重度 | 說明 |
+| ----- | ---- | ------ | ---- |
+| 1 | 未閉合區塊標籤 | error | `[flow]`、`[tags]`、`[summary]`、`[bonus]`、`[compare]`、`[compare-table]`、`[vote]`、`[quiz]`、`[image-text]`、`[tabs]`、`[callout]`、`[accordion]`、`[reveal]`、`[timeline]`、`[steps-status]`、`[stats]`、`[dl]` |
+| 2 | `[youtube]` 多行形式未閉合 | error | 單行 `[youtube id=... title=...]` 不需關閉；多行 `[youtube]...[/youtube]` 必須成對 |
+| 3 | 未閉合 ` ```prompt ` / ` ```terminal ` 區塊 | error | 結尾的 ` ``` ` 漏寫 |
+| 4 | `seo.url` / `seo.image` 非絕對 URL 或缺 `lectures/` | error/warning | config.yaml 層級 |
+| 5 | 殘留 `[image-here]` 佔位符 | warning | 執行 image-generator Skill 或替換為 `![alt](path)` |
+| 6 | `![](...)` 空 alt 或泛用 alt（image / img / picture / 圖片 / 照片 / 截圖） | warning | 會產生空白或無意義的 figcaption；自動跳過 fenced code block（含巢狀 ` ```` ` / ` ``` `） |
+| 7 | Chapter hero 超過 4 張 | warning | 依 `build.mjs` 邏輯：`#` 標題後跳過空行與 `>` lead，下一個非空行若是獨立圖片即視為 hero。建議挑選 2–4 個最具視覺錨點的章節保留 |
+
+**圖片警告的處理建議：**
+
+- **Check 5（`[image-here]` 殘留）**：通常是舊版草稿留下的佔位符。若課程尚未配圖，可改為 `<!-- TODO: 建議加圖 — {用途} -->`，再執行 image-generator Skill 批次生成。
+- **Check 6（空 / 泛用 alt）**：補上描述性文字，因為 alt 會自動成為 `<figcaption>` 顯示在圖片下方。避免使用 `image`、`img`、`圖片` 等無意義文字。
+- **Check 7（hero 過多）**：每門課程建議 2–4 張 hero。超出時挑選最具視覺錨點的章節保留，其他改為 standalone 內文圖片（段落間獨立一行 `![alt](path)`）。
+
 何時建議執行：
 
 - 使用者提供的舊講稿、外部來源 Markdown，或轉換結果不確定時
 - 使用者在生成後手動編輯過 content.md
 - 連續多次 build 失敗，懷疑 content.md 語法問題
+- 執行 image-generator 回寫 content.md 後，驗證圖片語法是否正確
 
 AI 自己剛生成的 content.md 通常可跳過此步驟。
 

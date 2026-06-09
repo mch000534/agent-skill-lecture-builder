@@ -96,7 +96,17 @@ agent-skill-lecture-builder/
 - **自寫 YAML 解析器**：`build.mjs` 不用外部 YAML lib，已知限制：
   - **不支援行內 `#` 註解**：`key: value # comment` 的 `# comment` 會被當成值的一部分。註解必須獨立成行。
   - 複雜巢狀陣列（多層縮排）可能解析錯誤，請保持結構扁平。
-- **`validate.mjs` 退出碼**：`0` = 可繼續 build（含 warnings）；`1` = 有 errors，應先修正。**只檢查 `content.md` 與 `seo.url` / `seo.image` 格式**，不檢查 `config.yaml` 語法。
+- **`validate.mjs` 退出碼**：`0` = 可繼續 build（含 warnings）；`1` = 有 errors，應先修正。**只檢查 `content.md` 與 `seo.url` / `seo.image` 格式**，不檢查 `config.yaml` 語法。完整檢查清單：
+
+  | Check | 項目 | 嚴重度 | 說明 |
+  | ----- | ---- | ------ | ---- |
+  | 1 | 未閉合區塊標籤 | error | `[flow]`、`[tags]`、`[summary]`、`[bonus]`、`[compare]`、`[compare-table]`、`[vote]`、`[quiz]`、`[image-text]`、`[tabs]`、`[callout]`、`[accordion]`、`[reveal]`、`[timeline]`、`[steps-status]`、`[stats]`、`[dl]` |
+  | 2 | `[youtube]` 多行形式未閉合 | error | 單行 `[youtube id=... title=...]` 不需關閉；多行 `[youtube]...[/youtube]` 必須成對 |
+  | 3 | 未閉合 ` ```prompt ` / ` ```terminal ` 區塊 | error | 結尾的 ` ``` ` 漏寫 |
+  | 4 | `seo.url` / `seo.image` 非絕對 URL 或缺 `lectures/` | error/warning | config.yaml 層級 |
+  | 5 | 殘留 `[image-here]` 佔位符 | warning | 應替換為 `![alt](path)` 或執行 image-generator |
+  | 6 | `![](...)` 空 alt 或泛用 alt（image/img/picture/圖片/照片/截圖） | warning | 會產生空白或無意義的 figcaption；**自動跳過 fenced code block（含巢狀 ` ```` ` / ` ``` `）** |
+  | 7 | Chapter hero 超過 4 張 | warning | 依 `build.mjs` 邏輯：`#` 標題後跳過空行與 `>` lead，下一個非空行若是獨立圖片即視為 hero |
 - **本地圖片使用相對路徑**：`content.md` 中引用的本機圖片保持相對路徑引用，build 後由瀏覽器按需載入，不嵌入 base64，保持 HTML 輕量。
 - **GitHub Pages URL 自動偵測**：從 `git remote get-url origin` 取得，失敗時 `seo.url` / `seo.image` 留空（不阻擋 build）。
 
