@@ -59,6 +59,8 @@ openspec init
 4. task.md — 任務清單，完成自動打勾
 [/flow]
 
+![OpenSpec 四階段規格生成流程：從 proposal 到 task.md](images/openspec-flow.png)
+
 ```prompt [label="開始實作"]
 開始實作
 ```
@@ -151,6 +153,12 @@ with details about my project, tech stack, and conventions
 - 讀取 commit 訊息與變更檔案
 - 參考 `pr-template` 生成 Title 與 Description
 
+[image-text position="right" width="40"]
+![PR 自動生成後的 GitHub 介面預覽](images/pr-preview.png)
+
+AI 依據 commit 歷史與 spec 變更，自動填入 PR 標題與描述欄位，並依慣例附上影響範圍與測試建議。
+[/image-text]
+
 ```prompt [label="生成 PR"]
 撰寫 PR
 ```
@@ -161,6 +169,11 @@ with details about my project, tech stack, and conventions
 - 不同功能使用不同 feature branch，搭配 Git Worktree 建立獨立工作區
 - 每個 Worktree 可同時跑不同 dev server，讓多個 AI Agent 並行開發
 - 設計 `git-worktree-design` Skill：一個指令拆分任務、建立 Worktree、安裝套件、新增 SPEC
+
+> **圖片語法速記**
+> - **獨立圖片**（置中 + caption）：段落間獨立一行 `![描述](images/xxx.png)`。若放在 `#` 標題與 `>` 引言之間，會成為 chapter hero。
+> - **圖文並排**：`[image-text]...[/image-text]` 包裹圖片與文字。
+> - **行內圖片**：在句子中直接寫 `![描述](images/xxx.png)`，例如「點一下 ![設定 icon](images/icon-settings.png) 即可開啟」。
 
 ```prompt [label="Worktree 並行開發"]
 採用 Worktree，新增通知中心彈窗、資料匯出 CSV 功能、常見 QA 問答區

@@ -95,14 +95,23 @@ description: 根據「主題 + 目標受眾 + 時長」三個參數，AI 自動�
 | 課堂互動確認點 | Vote | `[vote id="v1" title="問題"]` + `- 選項` |
 | 章節末知識檢核 | Quiz | `[quiz type="single"]` + `Q:` + `- [x] 正確` + `- [ ] 錯誤` + `Hint:` |
 | 已完成/已驗證的清單 | Checklist | `- [x] 項目`（獨立行） |
-| 架構圖、截圖說明 | Image-Text | `[image-text position="left" width="40"]`（無圖時留 `<!-- TODO: 建議加圖 -->`） |
+| 架構圖、截圖說明（與文字並排） | Image-Text | `[image-text position="left" width="40"]` + `![alt](path)` + 文字 + `[/image-text]` |
+| 章節封面 / 概念主角圖（全寬置中） | 獨立圖片 | 獨立一行 `![圖片說明](images/filename.png)`（放在 `#` 下方會成為 chapter hero） |
+| 段落內輔助示意（不需 caption） | 行內圖片 | 在句子中直接寫 `![alt](path)`，渲染為 inline-image |
 | 章節總結、學習成果 | Summary Grid | `[summary]` + `- **標題** \| 描述` |
 | 補充知識、進階延伸 | Bonus | `[bonus title="..."]...[/bonus]` |
 
+**圖片使用時機（不只是章節英雄）**：
+
+- **章節英雄（chapter hero）**：每個主章節（`#`）可有一張，緊接在標題後、引言 `>` 之前，獨立一行 `![alt](path)`。不是每個章節都必須有，只在需要強烈視覺錨點時使用。
+- **內文獨立圖片**：在 `##` 或 `###` 段落間插入，用於展示架構圖、截圖、示意圖、操作結果。獨立一行 `![alt](path)`，build 會自動渲染為置中的 `<figure>` + caption。
+- **圖文並排 `[image-text]`**：當圖片是某段文字的輔助（例如 UI 截圖 + 欄位說明），使用 image-text 元件讓兩者並列，避免上下堆疊造成視線斷裂。
+- **行內圖片**：僅在圖片很小、屬於語句一部分時使用（例如 icon、小型示意）。多數教學場景應改用獨立圖片或 image-text。
+
 **元件使用節奏**（一個主章節的建議組合）：
-- 說明層：卡片（`###`）+ Insight Box
-- 範例層：Prompt Block 或 Flow Steps；若有兩種做法對比 → Compare
-- 實作層：Flow Steps 或 Checklist；互動課程可加 Vote 或 Quiz
+- 說明層：卡片（`###`）+ Insight Box；概念性主題可加一張**獨立圖片**或 **image-text** 輔助理解
+- 範例層：Prompt Block 或 Flow Steps；若有兩種做法對比 → Compare；有 UI 或輸出結果 → **image-text** 圖文並排
+- 實作層：Flow Steps 或 Checklist；互動課程可加 Vote 或 Quiz；操作練習可搭配**獨立圖片**顯示預期結果
 
 **使用時機**（互動元件）：
 - `[compare]`：兩種方案有結構化的逐點對比（非泛泛而談）
@@ -127,6 +136,11 @@ description: 根據「主題 + 目標受眾 + 時長」三個參數，AI 自動�
 4. **最後一個章節固定為總結**，使用 `[summary]` 歸納各章節的學習成果
 5. 每張卡片的條列重點應為**真實內容**，而非 `<!-- TODO -->` 佔位符
 6. Prompt block 的程式碼應為**真實可用的指令或範例**，不使用虛構語法
+7. **圖片規則**：
+   - **章節英雄**：若想為某主章節加上 chapter hero，將獨立一行的 `![alt](images/xxx.png)` 放在 `#` 標題與 `>` 引言之間（中間空一行）。每門課程 2–4 張 hero 為宜，不要每章都加。
+   - **內文獨立圖片**：在段落之間獨立成行，前後各空一行。`alt` 必填且為有意義的描述（會自動成為 figcaption）。路徑使用**相對路徑**：`images/xxx.png`（對應課程目錄下的 `assets/images/xxx.png`，build 會自動解析）。
+   - **圖文並排**：使用 `[image-text position="left|right" width="N"]...[/image-text]`，圖片與文字都要有實際內容。
+   - **無圖時佔位**：若該位置未來應加圖但目前無圖，保留 `<!-- TODO: 建議加圖 — 說明用途 -->` 供 `image-generator` Skill 或後續作者定位。
 
 ---
 

@@ -156,8 +156,10 @@ npm install -g @fission-ai/openspec@latest
 ```markdown
 ![架構示意圖](images/architecture.png)
 ```
-- 獨立一行 → 置中顯示，alt 文字自動成為圖說
-- 在段落或列表中使用 → 行內圖片
+- 獨立一行 → 置中顯示，alt 文字自動成為 `<figcaption>` 圖說
+- 在段落或列表中使用 → 行內圖片（`<img class="inline-image">`）
+- **章節英雄（chapter hero）**：若 `![alt](path)` 緊接在 `#` 主章節標題與 `>` 引言之間，會被 build 渲染成全寬 chapter hero，作為該章節的視覺封面。建議每門課程 2–4 張 hero，不宜每章都有。
+- **內文獨立圖片**：放在 `##` / `###` 段落間，前後各空一行，自動以 `<figure class="content-image">` 置中呈現。路徑建議使用相對路徑 `images/xxx.png`，build 會自動解析為課程的 `assets/images/xxx.png`。
 
 **圖文並排（Image-Text）：**
 ```markdown
@@ -388,10 +390,18 @@ node .agents/skills/course-page-generator/scripts/generate-og.mjs course/cake
 5. **提煉深度觀點** — 將講稿中的核心洞察、反思或重要結論，轉為 `> **Title**` Insight Box 點出。
 6. **產生總結** — 最後一個段落請直接用 `[summary]...[/summary]` 歸納本次課程精華。
 7. **確認開場與結尾引言** — 檢查課程 `config.yaml`（或 `global.yaml`）是否已設定 `quotes.opening` 和 `quotes.closing`。若尚未設定，根據講稿的核心精神各撰寫一段引言，寫入 `config.yaml`。開場引言出現在講師介紹之後、第一個章節之前；結尾引言出現在所有章節之後、頁尾之前，用於收束整場課程的訊息。
-9. **搜尋並插入圖片** — 當內容適合搭配圖片時（架構圖、截圖、流程圖等），主動用 Glob 工具搜尋 `<course-dir>/assets/` 資料夾中的圖片檔（`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.svg`, `*.webp`）。
-   - **找到匹配圖片**：根據檔名判斷最適合的圖片，插入對應的 `![alt](assets/filename)` 或 `[image-text]` 區塊。
-   - **找不到圖片**：在該處插入 HTML 註解標記，格式為 `<!-- TODO: 建議在此加入圖片：{圖片描述}，請將圖片放到 assets/ 資料夾 -->`，同時在回覆中彙整所有缺圖位置，提醒使用者補充。
-   - **assets 資料夾不存在**：提醒使用者建立 `<course-dir>/assets/` 並放入相關圖片。
+9. **搜尋並插入圖片** — 當內容適合搭配圖片時（架構圖、截圖、流程圖、概念主角圖等），主動用 Glob 工具搜尋 `<course-dir>/assets/` 資料夾中的圖片檔（`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.svg`, `*.webp`），並依圖片用途選擇嵌入方式：
+
+   | 用途 | 語法 | 頻率 |
+   |------|------|------|
+   | **章節英雄**（`#` 主章節開頭，與引言共同構成封面） | 在 `# LABEL：TITLE` 與 `>` 引言之間獨立一行 `![alt](assets/images/xxx.png)` | 每門課 2–4 張，不宜每章都有 |
+   | **內文獨立圖片**（段落間的架構圖、截圖、示意圖） | 在 `##` / `###` 段落間獨立一行，前後各空一行 `![alt](assets/images/xxx.png)` | 每個主章節平均 1–3 張 |
+   | **圖文並排**（UI 截圖 + 欄位說明等） | `[image-text position="left\|right" width="N"]` + 圖片 + 文字 + `[/image-text]` | 視內容需要 |
+   | **行內圖片**（icon、小型示意） | 句子中直接 `![alt](path)` | 少用 |
+
+   - **找到匹配圖片**：根據檔名判斷最適合的圖片，選擇上述類型之一嵌入。
+   - **找不到圖片**：在該處插入 HTML 註解標記，格式為 `<!-- TODO: 建議加圖 — {圖片用途描述} -->`，同時在回覆中彙整所有缺圖位置，提醒使用者補充或改用 `image-generator` Skill 批次生成。
+   - **assets 資料夾不存在**：提醒使用者建立 `<course-dir>/assets/images/` 並放入相關圖片。
 10. **驗證格式** — 對照 [components.md](reference/components.md) 確認語法正確。
 
 ## Reference Files

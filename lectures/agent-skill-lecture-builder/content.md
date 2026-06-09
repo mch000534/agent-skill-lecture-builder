@@ -22,6 +22,8 @@
 - 配圖需手動找圖或設計 | AI 自動生成課程配圖，風格統一、批次處理
 [/compare]
 
+![傳統人工流程與 Agent Skill 自動化流程的左右對比](assets/images/ch1-compare-workflow.png)
+
 ### 取得專案
 
 ```Terminal [label="Terminal"]
@@ -126,6 +128,8 @@ agent-skill-lecture-builder/
 │   └── course.js              # 計時器、抽籤器、投票等工具
 └── index.html                 # 課程目錄索引頁
 ```
+
+![Markdown、YAML、Puppeteer 三個核心模組與課程頁面的關係](assets/images/ch2-modules-map.png)
 
 ## 兩層設定合併
 
@@ -267,6 +271,9 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 ![各種 Markdown 語法如同積木元件般可組合](assets/images/ch4-markdown-blocks.png)
 
 ## Agent Skill 技術演進
+
+![2023 到 2026 五個里程碑的技術演進時間軸](assets/images/ch4-skill-timeline.png)
+
 ```markdown [label="語法"]
 [timeline]
 - 2023 | ChatGPT Plugins | AI 首次能呼叫外部 API，但依賴單一平台
@@ -289,6 +296,8 @@ Hint: build-index.mjs 會掃描 lectures/ 目錄產生 manifest.js，索引頁�
 > 過去我們用自然語言跟 AI 對話，每次結果都不同。Skill 把成功的工作流封裝起來，讓任何人都能重現一致的產出——這才是可規模化的教學工具。
 
 ## 結構元件
+
+![主章節、引言、卡片、流程、標籤等元件的層次堆疊關係](assets/images/ch4-component-stack.png)
 
 ### 內容輸入方式比較
 
@@ -813,6 +822,8 @@ OG 是 Open Graph 的縮寫，是 Facebook 在 2010 年提出、現已成為網�
 4. 截圖並儲存為 assets/og-image.jpg
 [/flow]
 
+![從瀏覽器 Hero 區截圖到社群分享卡片的三階段流程](assets/images/ch5-og-flow.png)
+
 完全不需要設計軟體——課程頁面的 Hero 區就是 OG 圖的設計稿。
 
 [callout type="tip" title="為什麼用 Puppeteer 而不是手動做圖？"]
@@ -876,6 +887,8 @@ seo:
 面板中段的色票可即時切換課程主題配色（共八種），下方還可開啟「快捷鍵說明」Modal 速查所有按鍵。
 
 ## 鍵盤快捷鍵
+
+![鍵盤快捷鍵分為模式、工具、顯示三個群組](assets/images/ch6-shortcuts.png)
 
 在課程頁面任意位置按下快捷鍵即可觸發（輸入框中不觸發）：
 
@@ -969,6 +982,8 @@ vote:
 2. CSS 樣式 — 統一寫在 assets/course.css，使用 CSS 變數保持一致性
 3. JS 邏輯 — 在 assets/course.js 新增初始化函式與事件監聽
 [/flow]
+
+![HTML 結構、CSS 樣式、JS 邏輯三層由上往下堆疊的架構](assets/images/ch7-three-layers.png)
 
 > **修改 course.css / course.js 不需重新 build**
 > 這兩個檔案是外部引用，瀏覽器每次載入頁面都會讀取最新版本。但修改 base.html 模板後，所有課程都需要重新 build。

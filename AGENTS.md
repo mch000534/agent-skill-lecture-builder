@@ -131,6 +131,8 @@ agent-skill-lecture-builder/
 | `[summary]...[/summary]` | 總結卡片 |
 | `[bonus title="..."]...[/bonus]` | 按鈕 + Modal 彈窗（延伸補充） |
 | `[image-text position="left\|right" width="N"]...[/image-text]` | 圖文並排 |
+| `![alt](path)`（獨立一行） | 獨立圖片（置中 + caption）；置於 `#` 與 `>` 間會成為 chapter hero |
+| `![alt](path)`（嵌在句中） | 行內圖片（`inline-image`） |
 | `[youtube id="..." title="..."]` | YouTube 嵌入（16:9 響應式） |
 | `---` | 章節分隔線 |
 
@@ -175,10 +177,10 @@ agent-skill-lecture-builder/
 
 當使用者說「生成教材圖片」「幫課程加圖」「跑 image generator」或類似指令時，請讀取該檔案並執行 Phase 1-4：
 
-- Phase 1：掃描 content.md，找出 `[image-here]` 佔位符與 AI 判斷的加圖位置，跳過已有圖片的段落
-- Phase 2：互動確認 — 選模型（gpt-image-2-03 / gpt-image-2 / gpt-image-2-ssvip）、選全域風格、確認圖片計畫表
+- Phase 1：掃描 content.md，找出 `[image-here]` 佔位符、`<!-- TODO: 建議加圖 -->` 註解，並由 AI 主動判斷四類可加圖位置：**chapter hero**（`#` 下全寬封面）、**standalone**（內文段落間獨立圖片）、**image-text**（圖文並排）、**inline**（行內小圖，少用）。跳過已有圖片的段落
+- Phase 2：互動確認 — 選模型（gpt-image-2-03 / gpt-image-2 / gpt-image-2-ssvip）、選全域風格、確認圖片計畫表（含「類型」欄位）
 - Phase 3：批次呼叫 `scripts/generate.mjs` 生成圖片，存入 `assets/images/`
-- Phase 4：回寫 content.md，使用 `[image-text]` 或獨立圖片語法嵌入
+- Phase 4：依圖片類型回寫 content.md：hero 置於 `#` 與 `>` 之間；standalone 獨立一行在段落間；image-text 使用元件包裹；inline 嵌在句子中。同時替換對應的 `[image-here]` 與 `<!-- TODO -->`
 
 API Key 存放在 `.agents/skills/image-generator-dmxapi-gptimage2/.env`（已 gitignore）。首次使用時複製 `.env.example` 為 `.env` 並填入 Key。
 

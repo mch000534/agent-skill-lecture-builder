@@ -22,13 +22,21 @@ description: 透過 DMXAPI GPT Image 2 為教材自動生成配圖，支援 AI �
 ### Phase 1：掃描與分析
 
 1. 讀取指定課程目錄的 `content.md`。
-2. 找出所有 `[image-here]` 佔位符（使用者手動標記），標記為優先處理。
-3. AI 分析每個章節，判斷哪些位置適合加圖：
-   - 主章節開頭（章節封面圖）
-   - `[flow]`、`[compare]`、`[bonus]` 等元件旁（輔助說明圖）
-   - 純文字密集的段落（緩解閱讀疲勞）
-4. **跳過**已有 `![alt](src)` 或 `[image-text]` 的段落。
-5. 統計各主章節編號，供後續圖片命名使用。
+2. 找出所有 `[image-here]` 佔位符（使用者手動標記），標記為**優先處理**。
+3. 找出所有 `<!-- TODO: 建議加圖 ... -->` 註解（content-drafting Skill 留下的佔位），標記為**次要處理**，註解內的說明文字作為 prompt 依據。
+4. AI 分析每個章節，主動判斷可加圖的四類位置：
+
+   | 類型 | 判斷條件 | 渲染結果 |
+   |------|---------|---------|
+   | **chapter hero** | `#` 標題下方、`>` 引言之前，且目前無圖 | `<div class="chapter-hero">` 全寬封面 |
+   | **獨立圖片** | 在 `##` / `###` 段落間，用於展示架構、截圖、示意圖 | `<figure class="content-image">` 置中 + caption |
+   | **image-text 圖文並排** | 緊貼某段文字，作為該段落的輔助（UI 截圖 + 說明） | `<div class="image-text">` 左右並排 |
+   | **行內圖片** | 嵌在句子中，通常是 icon 或小型示意 | `<img class="inline-image">` |
+
+   **預設優先使用「獨立圖片」與「image-text」**。chapter hero 每門課建議 2–4 張（只在需要強烈視覺錨點的主章節使用）；行內圖片僅在圖片是語句一部分時使用。
+
+5. **跳過**已有 `![alt](src)` 或 `[image-text]` 的段落，不重複建議。
+6. 統計各主章節編號，供後續圖片命名使用。
 
 ### Phase 2：互動確認
 
@@ -70,17 +78,25 @@ description: 透過 DMXAPI GPT Image 2 為教材自動生成配圖，支援 AI �
 模型：gpt-image-2-ssvip
 全域風格：扁平插圖
 
-| # | 位置 | 圖片用途 | 建議尺寸 | Prompt |
-|---|------|---------|---------|--------|
-| 1 | # 章節一：開場 | 章節封面 | 1536x1024 | Flat design illustration of... |
-| 2 | ## 什麼是爬蟲 | 概念輔助 | 1024x1024 | A diagram showing... |
-| 3 | [image-here] @ L45 | 使用者標記 | 1536x1024 | ... |
+| # | 類型 | 位置 | 圖片用途 | 建議尺寸 | Prompt |
+|---|------|------|---------|---------|--------|
+| 1 | hero | # 章節一：開場 | 章節封面 | 1536x1024 | Flat design illustration of... |
+| 2 | standalone | ## 什麼是爬蟲 | 概念圖 | 1024x1024 | A diagram showing... |
+| 3 | image-text | ### 環境設定 | UI 截圖 | 1024x1024 | Screenshot-style of... |
+| 4 | standalone | [image-here] @ L45 | 使用者標記 | 1536x1024 | ... |
+
+類型說明：
+- hero        → chapter hero（`#` 標題下方全寬封面）
+- standalone  → 內文獨立圖片（段落間置中 + caption）
+- image-text  → 圖文並排（搭配文字左右排列）
+- inline      → 行內圖片（嵌在句子中，少用）
 
 可執行操作：
 - 修改 prompt（「第 2 張改成 ...」）
 - 修改尺寸（「第 1 張改成 1024x1024」）
+- 修改類型（「第 3 張改成 standalone」）
 - 刪除項目（「刪除第 3 張」）
-- 新增項目（「在 ## XXX 下面加一張 ...」）
+- 新增項目（「在 ## XXX 下面加一張 standalone ...」）
 確認後開始生成？(Y/n)
 ```
 
@@ -125,19 +141,9 @@ node .agents/skills/image-generator-dmxapi-gptimage2/scripts/generate.mjs \
 
 ### Phase 4：回寫 content.md
 
-1. **替換 `[image-here]` 佔位符**：
+依圖片計畫表中的「類型」欄位，使用對應的嵌入語法：
 
-將 `[image-here]` 替換為：
-
-```markdown
-![圖片描述](assets/images/ch1-intro-cover.png)
-```
-
-2. **插入 AI 建議的圖片**：
-
-根據圖片用途選擇合適的嵌入方式：
-
-- **章節封面**：在 `# LABEL：TITLE` 下方的引言 `>` 之前插入獨立圖片：
+1. **`hero`（章節英雄）**：在 `# LABEL：TITLE` 標題與 `>` 引言之間插入獨立圖片（前後各空一行）：
 
 ```markdown
 # 章節一：開場
@@ -147,19 +153,44 @@ node .agents/skills/image-generator-dmxapi-gptimage2/scripts/generate.mjs \
 > 章節引言文字...
 ```
 
-- **輔助說明圖**：使用 `[image-text]` 元件與文字並排：
+2. **`standalone`（內文獨立圖片）**：在 `##` / `###` 段落之間獨立成行，前後各空一行：
+
+```markdown
+### 爬蟲的運作原理
+
+- 發送請求
+- 解析回應
+- 擷取資料
+
+![爬蟲三階段流程示意](assets/images/ch2-crawler-flow.png)
+
+> **重點**：每一步都應該加上延遲，避免對目標伺服器造成負擔。
+```
+
+3. **`image-text`（圖文並排）**：以 `[image-text]` 元件包裹圖片與文字：
 
 ```markdown
 [image-text position="right" width="40"]
-![說明圖描述](assets/images/ch2-crawler-concept.png)
-說明文字內容...
+![環境設定介面截圖](assets/images/ch3-env-setup.png)
+
+設定面板包含三個主要欄位：API Key、Region、Model Name，各欄位說明如下...
 [/image-text]
 ```
 
-- **純輔助圖**（不需文字並排）：直接在段落間插入獨立圖片。
+4. **`inline`（行內圖片）**：直接嵌在句子中，前後以空白與文字分隔：
 
-3. 不更動既有的 `![alt](src)` 或 `[image-text]` 區塊。
-4. 輸出最終統計：生成 N 張圖片，已嵌入 content.md。
+```markdown
+點擊左側工具列的 ![設定 icon](assets/images/icon-settings.png) 圖示即可開啟。
+```
+
+5. **替換佔位符**：
+   - 所有 `[image-here]` 必須被替換為對應語法，不能殘留。
+   - 所有 `<!-- TODO: 建議加圖 ... -->` 若對應本次生成的圖片，必須一併替換為對應語法（避免 build 後仍可見）。
+   - 未對應到生成圖片的 TODO 保留原樣，以便後續批次處理。
+
+6. **不更動既有圖片**：既有 `![alt](src)` 與 `[image-text]` 區塊保持原樣，不重複嵌入。
+
+7. 輸出最終統計：生成 N 張圖片（hero / standalone / image-text / inline 各幾張），已嵌入 content.md。
 
 ## 錯誤處理
 
