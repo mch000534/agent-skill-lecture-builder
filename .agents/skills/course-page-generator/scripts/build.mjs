@@ -14,13 +14,41 @@
  * Output: <course-dir>/index.html
  */
 
-import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, statSync, openSync, readSync, closeSync } from 'fs';
 import { resolve, dirname, join, relative } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BASE_HTML = resolve(__dirname, '../reference/base.html');
+
+// Set by build() so renderBlockBody can resolve image paths for dimension reading
+let __courseDir = '';
+
+// ─── Read PNG width/height from IHDR chunk (bytes 16-23) to reserve layout space ───
+// Returns { width, height } or null on failure. JPG/WebP not supported — those return null.
+function readPngDimensions(absPath) {
+  try {
+    if (!existsSync(absPath)) return null;
+    const ext = absPath.split('.').pop().toLowerCase();
+    if (ext !== 'png') return null;
+    const fd = openSync(absPath, 'r');
+    const buf = Buffer.alloc(24);
+    readSync(fd, buf, 0, 24, 0);
+    closeSync(fd);
+    // PNG signature (8 bytes) + IHDR chunk length (4 bytes) + 'IHDR' (4 bytes) + width (4) + height (4)
+    if (buf.slice(0, 8).toString('hex') !== '89504e470d0a1a0a') return null;
+    const width = buf.readUInt32BE(16);
+    const height = buf.readUInt32BE(20);
+    if (width > 0 && height > 0 && width < 20000 && height < 20000) return { width, height };
+    return null;
+  } catch (e) { return null; }
+}
+
+function dimsAttr(absPath) {
+  const d = readPngDimensions(absPath);
+  return d ? ` width="${d.width}" height="${d.height}"` : '';
+}
 
 // ─── Detect GitHub Pages base URL from git remote ───
 
@@ -1517,11 +1545,14 @@ ${childrenHtml}
       ${block.caption ? `<p class="youtube-caption">${inlineFormat(block.caption)}</p>` : ''}
     </div>`;
 
-    case 'image':
+    case 'image': {
+      const imgAbs = __courseDir && !/^https?:\/\//.test(block.src) ? resolve(__courseDir, block.src) : null;
+      const dims = imgAbs ? dimsAttr(imgAbs) : '';
       return `<figure class="content-image">
-      <img src="${esc(block.src)}" alt="${esc(block.alt)}" loading="lazy">
+      <img src="${esc(block.src)}" alt="${esc(block.alt)}" loading="lazy"${dims}>
       ${block.alt ? `<figcaption>${esc(block.alt)}</figcaption>` : ''}
     </figure>`;
+    }
 
     case 'image-text': {
       const imgPos = block.position === 'right' ? 'image-text--img-right' : '';
@@ -1535,9 +1566,11 @@ ${childrenHtml}
         }
       }
       bodyHtml = bodyHtml.replace(/((?:<li>.*<\/li>\n)+)/g, '<ul>\n$1</ul>\n');
+      const itAbs = __courseDir && block.imgSrc && !/^https?:\/\//.test(block.imgSrc) ? resolve(__courseDir, block.imgSrc) : null;
+      const itDims = itAbs ? dimsAttr(itAbs) : '';
       return `<div class="image-text ${imgPos}"${widthStyle}>
       <div class="image-text__img">
-        <img src="${esc(block.imgSrc)}" alt="${esc(block.imgAlt)}" loading="lazy">
+        <img src="${esc(block.imgSrc)}" alt="${esc(block.imgAlt)}" loading="lazy"${itDims}>
       </div>
       <div class="image-text__body">
         ${bodyHtml.trim()}
@@ -1566,11 +1599,14 @@ function buildContentSections(sections) {
     let heroClose = '';
     let imgSrc = '';
     let imgAlt = '';
+    let imgDims = '';
     if (hasChapterHero) {
       imgSrc = esc(grouped[0].src);
       imgAlt = esc(grouped[0].alt || '');
+      const heroAbs = __courseDir && !/^https?:\/\//.test(grouped[0].src) ? resolve(__courseDir, grouped[0].src) : null;
+      imgDims = heroAbs ? dimsAttr(heroAbs) : '';
       heroOpen = `\n  <div class="chapter-hero" data-bg="${imgSrc}">
-    <img class="chapter-hero__img" src="${imgSrc}" alt="${imgAlt}" loading="eager">
+    <img class="chapter-hero__img" src="${imgSrc}" alt="${imgAlt}" loading="eager"${imgDims}>
     <div class="chapter-hero__overlay"></div>
     <div class="chapter-hero__content">`;
       heroClose = `</div>\n  </div>`;
@@ -1673,6 +1709,7 @@ function embedLocalImages(html, courseDir) {
 // ─── Main build ───
 
 function build(courseDir) {
+  __courseDir = courseDir;
   const contentPath = join(courseDir, 'content.md');
   const outputPath = join(courseDir, 'index.html');
 

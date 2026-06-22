@@ -102,7 +102,12 @@
       var el = document.getElementById(id);
       if (!el) return;
       var top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 20);
-      window.scrollTo({ top: top, behavior: behavior || 'auto' });
+      var wantSmooth = behavior === 'smooth';
+      if (wantSmooth) {
+        document.documentElement.classList.add('js-smooth-scroll');
+        setTimeout(function () { document.documentElement.classList.remove('js-smooth-scroll'); }, 800);
+      }
+      window.scrollTo({ top: top, behavior: 'auto' });
     }
     function scheduleHashScrollFix(delay, behavior) {
       if (!window.location.hash) return;

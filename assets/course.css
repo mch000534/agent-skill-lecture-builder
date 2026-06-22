@@ -44,8 +44,12 @@
     }
 
     html {
-      scroll-behavior: smooth;
       font-size: 16px
+    }
+
+    /* 只對 JS 主動呼叫的 scrollTo 使用平滑捲動；html 不設 scroll-behavior，避免 layout shift 被動畫化放大跳動 */
+    html.js-smooth-scroll {
+      scroll-behavior: smooth
     }
 
     [id] {

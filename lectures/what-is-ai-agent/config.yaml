@@ -1,0 +1,17 @@
+page:
+  title: "傳統 AI vs AI Agent — 什麼是 AI Agent？"
+  badge: "AI 素養 · 概念入門"
+  hero_title: "從 ChatGPT 到 AI Agent<br>看懂四大核心元件"
+  subtitle: "一堂課搞懂 AI Agent 的大腦、規劃、記憶、工具，建立與傳統 AI 的清楚分野。適合剛接觸 AI 的初學者。"
+
+quotes:
+  opening:
+    text: "會回答問題，不等於有智慧。<br>AI Agent 的出現，是讓 AI 從『回答問題』升級成『完成任務』。"
+  closing:
+    text: "這不是 AI 的終點，<br>而是 AI 真正開始工作的起點。"
+
+seo:
+  title: "傳統 AI vs AI Agent｜四大核心元件一次看懂"
+  description: "什麼是 AI Agent？跟 ChatGPT 有什麼不同？本課程拆解 Brain、Planning、Memory、Tools 四大元件，用生活案例帶初學者看懂 AI Agent 的本質。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/what-is-ai-agent/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/what-is-ai-agent/assets/og-image.jpg"
