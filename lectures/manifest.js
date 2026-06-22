@@ -158,5 +158,13 @@ window.__courses__ = [
     "ogImage": "lectures/vectorpea-print-prep/assets/og-image.jpg",
     "href": "lectures/vectorpea-print-prep/",
     "category": "設計印刷"
+  },
+  {
+    "title": "傳統 AI vs AI Agent — 什麼是 AI Agent？",
+    "badge": "AI 素養 · 概念入門",
+    "subtitle": "什麼是 AI Agent？跟 ChatGPT 有什麼不同？本課程拆解 Brain、Planning、Memory、Tools 四大元件，用生活案例帶初學者看懂 AI Agent 的本質。",
+    "ogImage": "lectures/what-is-ai-agent/assets/og-image.jpg",
+    "href": "lectures/what-is-ai-agent/",
+    "category": "AI 素養"
   }
 ];
