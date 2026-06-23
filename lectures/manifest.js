@@ -120,6 +120,13 @@ window.__courses__ = [
     "category": "素養與科普"
   },
   {
+    "title": "OpenCode 從入門到個人助理",
+    "badge": "AI 工具 · 實作指南",
+    "subtitle": "完整教學 OpenCode 的安裝、供應商設定、模型設計與辦公室應用場景，帶你從零開始打造專屬 AI 個人助理。",
+    "ogImage": "lectures/opencode-guide/assets/og-image.jpg",
+    "href": "lectures/opencode-guide/"
+  },
+  {
     "title": "Photopea 印刷前處理",
     "badge": "Photopea · AI 圖片後處理 · 印刷輸出",
     "subtitle": "完整的 Photopea 課程，聚焦 AI 生成圖片的印刷前處理：瑕疵修復、300dpi 解析度調整、RGB 到 CMYK 轉換、出血設定與 PDF 匯出。",

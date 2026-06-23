@@ -1,0 +1,19 @@
+page:
+  title: "OpenCode 從入門到個人助理"
+  badge: "AI 工具 · 實作指南"
+  hero_title: "OpenCode 從入門到個人助理<br>打造你的專屬 AI 助手"
+  subtitle: "從安裝、供應商設定到模型設計，掌握 OpenCode 的完整工作流程，讓 AI 成為你的辦公室個人助理。"
+
+seo:
+  title: "OpenCode 從入門到個人助理｜AI 工具實作指南"
+  description: "完整教學 OpenCode 的安裝、供應商設定、模型設計與辦公室應用場景，帶你從零開始打造專屬 AI 個人助理。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/opencode-guide/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/opencode-guide/assets/og-image.jpg"
+
+quotes:
+  opening:
+    text: "AI 不是來取代你的工作，而是來放大你的能力。"
+  closing:
+    text: >
+      工具只是起點，真正的價值在於你如何將它融入日常。<br>
+      願 OpenCode 成為你工作效率的槓桿，而非另一個需要管理的負擔。
