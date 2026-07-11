@@ -159,6 +159,14 @@ window.__courses__ = [
     "category": "素養與科普"
   },
   {
+    "title": "SQQQ Short Call 完全教學",
+    "badge": "金融教育 · 期權風控 · 歷史案例",
+    "subtitle": "以 2022 年 SQQQ Short Call 教學資料為基礎，整理 SQQQ 結構損耗、深度價外 Short Call、Volatility Skew、按金管理、對沖工具與風險聲明。",
+    "ogImage": "lectures/sqqq-short-call/assets/og-image.jpg",
+    "href": "lectures/sqqq-short-call/",
+    "category": "金融教育"
+  },
+  {
     "title": "Vectorpea AI 向量設計",
     "badge": "Vectorpea · AI 生成 SVG · 排版 · 印刷輸出",
     "subtitle": "完整的 Vectorpea 課程：AI 生成 SVG 圖形的三種方法、路徑節點編輯、文字排版與轉外框、填色筆畫設定，以及 PDF 印刷輸出。",

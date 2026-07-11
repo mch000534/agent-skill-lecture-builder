@@ -1,0 +1,16 @@
+page:
+  title: "SQQQ Short Call 完全教學"
+  badge: "金融教育 · 期權風控 · 歷史案例"
+  hero_title: "SQQQ Short Call<br>完全教學"
+  subtitle: "從 SQQQ 結構損耗、Volatility Skew、開倉規則到對沖與按金管理，整理一套以風險控制為核心的期權教學路徑。"
+  category: "金融教育"
+
+seo:
+  title: "SQQQ Short Call 完全教學｜結構損耗、開倉規則與風險管理"
+  description: "以 2022 年 SQQQ Short Call 教學資料為基礎，整理 SQQQ 結構損耗、深度價外 Short Call、Volatility Skew、按金管理、對沖工具與風險聲明。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/sqqq-short-call/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/sqqq-short-call/assets/og-image.jpg"
+
+quotes:
+  opening: "這不是一套預測市場方向的課，而是一套理解結構、控制注碼、在壓力下仍能按規則行動的風險管理練習。"
+  closing: "任何期權策略的核心都不是一條公式，而是你能否在市場最吵、帳面最難看的時候，仍然守住事前寫下的界線。"
