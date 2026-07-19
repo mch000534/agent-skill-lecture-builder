@@ -1,0 +1,21 @@
+page:
+  title: "設計入門：從視覺基礎到 UX/UI"
+  badge: "設計基礎 · 視覺設計 · UX/UI"
+  category: "設計印刷"
+  published: true
+  hero_title: "看得懂、用得順<br>從設計原則到跨媒介實作"
+  subtitle: "為零基礎學員與職場人士設計的 6 小時完整課程，從使用者與目標出發，練習海報、PPT、Web、App 與設計系統。"
+
+seo:
+  title: "設計入門：從視覺基礎到 UX/UI｜6 小時完整課程"
+  description: "零基礎設計入門課程，涵蓋設計思維、色彩、字體、版面、UX、UI、設計系統，以及海報、PPT、Web、App 實作。"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/design-fundamentals/assets/og-image.jpg"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/design-fundamentals/"
+
+quotes:
+  opening:
+    text: "設計不是把東西變漂亮，<br>而是讓正確的人更容易理解、選擇與行動。"
+  closing:
+    text: >
+      好設計不是一次完成的答案，<br>
+      而是理解問題、提出方案、接受回饋並持續修正的過程。
