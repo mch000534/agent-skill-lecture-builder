@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="迷你設計系統的色彩字級間距與元件規則">
+  <rect width="1200" height="700" fill="#f7f4ee"/>
+  <text x="70" y="66" fill="#18243d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">迷你設計系統：把決定變成可重用規則</text>
+
+  <rect x="70" y="103" width="325" height="242" rx="20" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+  <text x="96" y="142" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="800">Color tokens</text>
+  <g font-family="system-ui, sans-serif" font-size="17" fill="#18243d">
+    <rect x="96" y="168" width="56" height="56" rx="12" fill="#18243d"/>
+    <text x="168" y="191" font-weight="700">Ink</text><text x="168" y="215">#18243d</text>
+    <rect x="240" y="168" width="56" height="56" rx="12" fill="#356df3"/>
+    <text x="312" y="191" font-weight="700">Primary</text><text x="312" y="215">#356df3</text>
+    <rect x="96" y="246" width="56" height="56" rx="12" fill="#ff7657"/>
+    <text x="168" y="269" font-weight="700">Accent</text><text x="168" y="293">#ff7657</text>
+    <rect x="240" y="246" width="56" height="56" rx="12" fill="#29a36a"/>
+    <text x="312" y="269" font-weight="700">Success</text><text x="312" y="293">#29a36a</text>
+  </g>
+
+  <rect x="420" y="103" width="345" height="242" rx="20" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+  <text x="446" y="142" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="800">字級階梯</text>
+  <g font-family="system-ui, sans-serif" fill="#18243d">
+    <text x="446" y="196" font-size="42" font-weight="800">標題 42</text>
+    <text x="446" y="241" font-size="28" font-weight="750">小標題 28</text>
+    <text x="446" y="280" font-size="20" font-weight="650">內文重點 20</text>
+    <text x="446" y="314" font-size="16">一般內文 16</text>
+  </g>
+  <line x1="720" y1="169" x2="720" y2="314" stroke="#ff7657" stroke-width="4"/>
+  <circle cx="720" cy="181" r="8" fill="#ff7657"/>
+  <circle cx="720" cy="226" r="8" fill="#ff7657"/>
+  <circle cx="720" cy="269" r="8" fill="#ff7657"/>
+  <circle cx="720" cy="307" r="8" fill="#ff7657"/>
+
+  <rect x="790" y="103" width="340" height="242" rx="20" fill="#18243d"/>
+  <text x="816" y="142" fill="#ffffff" font-family="system-ui, sans-serif" font-size="23" font-weight="800">8pt 間距系統</text>
+  <g font-family="system-ui, sans-serif" font-size="17" fill="#ffffff">
+    <rect x="816" y="173" width="32" height="24" rx="4" fill="#356df3"/>
+    <text x="864" y="192">8</text>
+    <rect x="816" y="211" width="64" height="24" rx="4" fill="#356df3"/>
+    <text x="896" y="230">16</text>
+    <rect x="816" y="249" width="96" height="24" rx="4" fill="#356df3"/>
+    <text x="928" y="268">24</text>
+    <rect x="816" y="287" width="128" height="24" rx="4" fill="#356df3"/>
+    <text x="960" y="306">32</text>
+  </g>
+  <text x="1020" y="205" fill="#c9d6f5" font-family="system-ui, sans-serif" font-size="17">只用固定倍數</text>
+  <text x="1020" y="233" fill="#c9d6f5" font-family="system-ui, sans-serif" font-size="17">版面更一致</text>
+
+  <rect x="70" y="370" width="1060" height="260" rx="20" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+  <text x="96" y="412" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="800">可重用元件</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="96" y="458" fill="#6d7480" font-size="16" font-weight="700">按鈕</text>
+    <rect x="96" y="477" width="150" height="50" rx="10" fill="#356df3"/>
+    <text x="171" y="509" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="750">主要行動</text>
+    <rect x="96" y="543" width="150" height="50" rx="10" fill="#ffffff" stroke="#356df3" stroke-width="2"/>
+    <text x="171" y="575" text-anchor="middle" fill="#356df3" font-size="18" font-weight="750">次要行動</text>
+
+    <text x="300" y="458" fill="#6d7480" font-size="16" font-weight="700">輸入框</text>
+    <text x="300" y="492" fill="#18243d" font-size="16" font-weight="700">電子郵件</text>
+    <rect x="300" y="505" width="270" height="50" rx="9" fill="#ffffff" stroke="#356df3" stroke-width="2"/>
+    <text x="316" y="536" fill="#6d7480" font-size="17">name@example.com</text>
+    <text x="300" y="584" fill="#29a36a" font-size="15" font-weight="700">格式正確，可以繼續</text>
+
+    <text x="624" y="458" fill="#6d7480" font-size="16" font-weight="700">卡片</text>
+    <rect x="624" y="477" width="466" height="116" rx="14" fill="#f7f4ee" stroke="#d8d4cc" stroke-width="2"/>
+    <rect x="646" y="499" width="76" height="72" rx="12" fill="#ff7657"/>
+    <text x="746" y="515" fill="#18243d" font-size="20" font-weight="800">設計入門工作坊</text>
+    <text x="746" y="547" fill="#6d7480" font-size="17">週六 14:00｜文化中心</text>
+    <rect x="947" y="555" width="119" height="27" rx="13" fill="#d9f2e6"/>
+    <text x="1007" y="574" text-anchor="middle" fill="#17633f" font-size="14" font-weight="800">尚有名額</text>
+  </g>
+  <text x="600" y="672" text-anchor="middle" fill="#18243d" font-family="system-ui, sans-serif" font-size="21" font-weight="700">Token 定義規則，元件套用規則，畫面因此保持一致</text>
+</svg>
