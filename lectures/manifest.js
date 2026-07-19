@@ -80,6 +80,14 @@ window.__courses__ = [
     "category": "影音製作"
   },
   {
+    "title": "設計入門：從視覺基礎到 UX/UI",
+    "badge": "設計基礎 · 視覺設計 · UX/UI",
+    "subtitle": "零基礎設計入門課程，涵蓋設計思維、色彩、字體、版面、UX、UI、設計系統，以及海報、PPT、Web、App 實作。",
+    "ogImage": "lectures/design-fundamentals/assets/og-image.jpg",
+    "href": "lectures/design-fundamentals/",
+    "category": "設計印刷"
+  },
+  {
     "title": "生成式 AI 資訊安全",
     "badge": "資安實戰 · 生成式 AI · 企業防護",
     "subtitle": "以真實攻擊案例解析生成式 AI 的資安風險，涵蓋 Prompt Injection、RAG 資料外洩、供應鏈攻擊、LLM 濫用防護，協助企業建立 AI 治理框架。",
