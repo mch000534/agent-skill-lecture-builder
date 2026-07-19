@@ -5,7 +5,7 @@
   <rect x="70" y="105" width="500" height="420" rx="18" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
   <rect x="70" y="105" width="500" height="52" rx="18" fill="#ff7657"/>
   <rect x="70" y="135" width="500" height="22" fill="#ff7657"/>
-  <text x="95" y="139" fill="#ffffff" font-family="system-ui, sans-serif" font-size="23" font-weight="700">改版前：內容很多，結論不見了</text>
+  <text x="95" y="139" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="700">改版前：內容很多，結論不見了</text>
   <text x="98" y="197" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="700">第三季專案成果報告</text>
   <g fill="#6d7480">
     <rect x="98" y="220" width="424" height="8" rx="4"/>
@@ -32,8 +32,8 @@
   </g>
 
   <rect x="630" y="105" width="500" height="420" rx="18" fill="#18243d"/>
-  <rect x="630" y="105" width="500" height="52" rx="18" fill="#29a36a"/>
-  <rect x="630" y="135" width="500" height="22" fill="#29a36a"/>
+  <rect x="630" y="105" width="500" height="52" rx="18" fill="#17633f"/>
+  <rect x="630" y="135" width="500" height="22" fill="#17633f"/>
   <text x="655" y="139" fill="#ffffff" font-family="system-ui, sans-serif" font-size="23" font-weight="700">改版後：先說結論，再給證據</text>
   <text x="670" y="209" fill="#ffffff" font-family="system-ui, sans-serif" font-size="32" font-weight="750">簡化報名流程後，</text>
   <text x="670" y="250" fill="#ffffff" font-family="system-ui, sans-serif" font-size="32" font-weight="750">完成率明顯提升</text>
@@ -52,13 +52,13 @@
   <line x1="165" y1="583" x2="1034" y2="583" stroke="#c9c4ba" stroke-width="4"/>
   <polygon points="1034,583 1010,569 1010,597" fill="#356df3"/>
   <g font-family="system-ui, sans-serif" text-anchor="middle">
-    <circle cx="190" cy="583" r="34" fill="#ff7657"/>
+    <circle cx="190" cy="583" r="34" fill="#8d3521"/>
     <text x="190" y="591" fill="#ffffff" font-size="23" font-weight="800">1</text>
     <text x="190" y="642" fill="#18243d" font-size="20" font-weight="700">刪除雜訊</text>
     <circle cx="500" cy="583" r="34" fill="#356df3"/>
     <text x="500" y="591" fill="#ffffff" font-size="23" font-weight="800">2</text>
     <text x="500" y="642" fill="#18243d" font-size="20" font-weight="700">放大結論</text>
-    <circle cx="810" cy="583" r="34" fill="#29a36a"/>
+    <circle cx="810" cy="583" r="34" fill="#17633f"/>
     <text x="810" y="591" fill="#ffffff" font-size="23" font-weight="800">3</text>
     <text x="810" y="642" fill="#18243d" font-size="20" font-weight="700">保留三個證據</text>
   </g>

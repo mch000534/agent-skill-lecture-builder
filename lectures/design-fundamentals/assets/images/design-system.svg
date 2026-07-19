@@ -57,13 +57,13 @@
     <text x="300" y="492" fill="#18243d" font-size="16" font-weight="700">電子郵件</text>
     <rect x="300" y="505" width="270" height="50" rx="9" fill="#ffffff" stroke="#356df3" stroke-width="2"/>
     <text x="316" y="536" fill="#6d7480" font-size="17">name@example.com</text>
-    <text x="300" y="584" fill="#29a36a" font-size="15" font-weight="700">格式正確，可以繼續</text>
+    <text x="300" y="584" fill="#17633f" font-size="15" font-weight="700">格式正確，可以繼續</text>
 
     <text x="624" y="458" fill="#6d7480" font-size="16" font-weight="700">卡片</text>
     <rect x="624" y="477" width="466" height="116" rx="14" fill="#f7f4ee" stroke="#d8d4cc" stroke-width="2"/>
     <rect x="646" y="499" width="76" height="72" rx="12" fill="#ff7657"/>
     <text x="746" y="515" fill="#18243d" font-size="20" font-weight="800">設計入門工作坊</text>
-    <text x="746" y="547" fill="#6d7480" font-size="17">週六 14:00｜文化中心</text>
+    <text x="746" y="547" fill="#18243d" font-size="17">週六 14:00｜文化中心</text>
     <rect x="947" y="555" width="119" height="27" rx="13" fill="#d9f2e6"/>
     <text x="1007" y="574" text-anchor="middle" fill="#17633f" font-size="14" font-weight="800">尚有名額</text>
   </g>

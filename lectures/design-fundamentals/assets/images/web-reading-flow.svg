@@ -11,19 +11,19 @@
   <rect x="212" y="117" width="400" height="20" rx="10" fill="#31405f"/>
 
   <rect x="127" y="171" width="706" height="112" rx="14" fill="#e8eefc"/>
-  <text x="157" y="206" fill="#356df3" font-family="system-ui, sans-serif" font-size="18" font-weight="700">HERO</text>
+  <text x="157" y="206" fill="#18243d" font-family="system-ui, sans-serif" font-size="18" font-weight="700">HERO</text>
   <text x="157" y="240" fill="#18243d" font-family="system-ui, sans-serif" font-size="27" font-weight="800">城市創意節，讓好點子被看見</text>
   <rect x="157" y="254" width="116" height="18" rx="9" fill="#ff7657"/>
   <rect x="622" y="192" width="176" height="66" rx="12" fill="#356df3"/>
 
   <rect x="127" y="299" width="706" height="72" rx="14" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
-  <text x="157" y="329" fill="#29a36a" font-family="system-ui, sans-serif" font-size="18" font-weight="700">價值</text>
+  <text x="157" y="329" fill="#17633f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">價值</text>
   <rect x="157" y="343" width="180" height="10" rx="5" fill="#18243d"/>
   <rect x="369" y="343" width="180" height="10" rx="5" fill="#18243d"/>
   <rect x="581" y="343" width="180" height="10" rx="5" fill="#18243d"/>
 
   <rect x="127" y="387" width="706" height="82" rx="14" fill="#fff1ed"/>
-  <text x="157" y="417" fill="#ff7657" font-family="system-ui, sans-serif" font-size="18" font-weight="700">流程</text>
+  <text x="157" y="417" fill="#8d3521" font-family="system-ui, sans-serif" font-size="18" font-weight="700">流程</text>
   <circle cx="232" cy="445" r="13" fill="#ff7657"/>
   <line x1="245" y1="445" x2="405" y2="445" stroke="#ff7657" stroke-width="4"/>
   <circle cx="420" cy="445" r="13" fill="#ff7657"/>
@@ -46,7 +46,7 @@
     <circle cx="931" cy="204" r="24" fill="#356df3"/>
     <text x="931" y="212" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="800">1</text>
     <text x="977" y="211" fill="#18243d" font-size="22" font-weight="700">這是什麼？</text>
-    <circle cx="931" cy="321" r="24" fill="#29a36a"/>
+    <circle cx="931" cy="321" r="24" fill="#17633f"/>
     <text x="931" y="329" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="800">2</text>
     <text x="977" y="328" fill="#18243d" font-size="22" font-weight="700">對我有何價值？</text>
     <circle cx="931" cy="423" r="24" fill="#ff7657"/>

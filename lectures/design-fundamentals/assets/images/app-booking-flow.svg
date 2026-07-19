@@ -13,7 +13,7 @@
     <circle cx="550" cy="126" r="28" fill="#356df3"/>
     <text x="550" y="134" fill="#ffffff" font-size="20" font-weight="800">3</text>
     <text x="550" y="174" fill="#18243d" font-size="18" font-weight="700">填資料</text>
-    <circle cx="750" cy="126" r="28" fill="#29a36a"/>
+    <circle cx="750" cy="126" r="28" fill="#17633f"/>
     <text x="750" y="134" fill="#ffffff" font-size="20" font-weight="800">4</text>
     <text x="750" y="174" fill="#18243d" font-size="18" font-weight="700">確認</text>
   </g>
@@ -52,8 +52,8 @@
     <rect x="514" y="321" width="142" height="40" rx="8" fill="#ffffff" stroke="#356df3" stroke-width="2"/>
     <text x="526" y="347" fill="#18243d" font-size="16">陳同學</text>
     <text x="514" y="391" fill="#6d7480" font-size="15">電子郵件</text>
-    <rect x="514" y="402" width="142" height="40" rx="8" fill="#ffffff" stroke="#ff7657" stroke-width="2"/>
-    <text x="526" y="428" fill="#9a9fa8" font-size="15">name@example</text>
+    <rect x="514" y="402" width="142" height="40" rx="8" fill="#ffffff" stroke="#8d3521" stroke-width="2"/>
+    <text x="526" y="428" fill="#6d7480" font-size="15">name@example</text>
     <text x="514" y="466" fill="#a43820" font-size="14" font-weight="700">請輸入完整郵件地址</text>
     <rect x="514" y="490" width="142" height="42" rx="10" fill="#356df3"/>
     <text x="585" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">下一步</text>
@@ -62,22 +62,22 @@
     <rect x="758" y="225" width="74" height="7" rx="4" fill="#18243d"/>
     <text x="724" y="273" fill="#18243d" font-size="21" font-weight="800">確認預約</text>
     <rect x="724" y="306" width="142" height="132" rx="12" fill="#e8eefc"/>
-    <text x="740" y="338" fill="#356df3" font-size="15" font-weight="700">場地 A</text>
+    <text x="740" y="338" fill="#18243d" font-size="15" font-weight="700">場地 A</text>
     <text x="740" y="371" fill="#18243d" font-size="17">10 月 14 日</text>
     <text x="740" y="401" fill="#18243d" font-size="17">10:30–11:30</text>
-    <rect x="724" y="463" width="142" height="50" rx="10" fill="#29a36a"/>
+    <rect x="724" y="463" width="142" height="50" rx="10" fill="#17633f"/>
     <text x="795" y="495" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">確認預約</text>
   </g>
 
   <g font-family="system-ui, sans-serif">
-    <rect x="925" y="210" width="220" height="150" rx="18" fill="#e1f4eb" stroke="#29a36a" stroke-width="3"/>
-    <circle cx="960" cy="252" r="18" fill="#29a36a"/>
+    <rect x="925" y="210" width="220" height="150" rx="18" fill="#e1f4eb" stroke="#17633f" stroke-width="3"/>
+    <circle cx="960" cy="252" r="18" fill="#17633f"/>
     <path d="M951 252l7 7 13-16" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="990" y="260" fill="#17633f" font-size="22" font-weight="800">預約成功</text>
     <text x="950" y="306" fill="#18243d" font-size="17">已寄出確認通知</text>
     <text x="950" y="333" fill="#18243d" font-size="17">可在「我的預約」查看</text>
-    <rect x="925" y="392" width="220" height="168" rx="18" fill="#fff1ed" stroke="#ff7657" stroke-width="3"/>
-    <circle cx="960" cy="434" r="18" fill="#ff7657"/>
+    <rect x="925" y="392" width="220" height="168" rx="18" fill="#fff1ed" stroke="#8d3521" stroke-width="3"/>
+    <circle cx="960" cy="434" r="18" fill="#8d3521"/>
     <path d="M960 424v15m0 8v1" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
     <text x="990" y="442" fill="#8d3521" font-size="22" font-weight="800">無法送出</text>
     <text x="950" y="486" fill="#18243d" font-size="17">郵件地址格式不完整</text>
