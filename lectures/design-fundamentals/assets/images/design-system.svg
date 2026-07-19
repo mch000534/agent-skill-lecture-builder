@@ -4,15 +4,15 @@
 
   <rect x="70" y="103" width="325" height="242" rx="20" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
   <text x="96" y="142" fill="#18243d" font-family="system-ui, sans-serif" font-size="23" font-weight="800">Color tokens</text>
-  <g font-family="system-ui, sans-serif" font-size="17" fill="#18243d">
-    <rect x="96" y="168" width="56" height="56" rx="12" fill="#18243d"/>
-    <text x="168" y="191" font-weight="700">Ink</text><text x="168" y="215">#18243d</text>
-    <rect x="240" y="168" width="56" height="56" rx="12" fill="#356df3"/>
-    <text x="312" y="191" font-weight="700">Primary</text><text x="312" y="215">#356df3</text>
-    <rect x="96" y="246" width="56" height="56" rx="12" fill="#ff7657"/>
-    <text x="168" y="269" font-weight="700">Accent</text><text x="168" y="293">#ff7657</text>
-    <rect x="240" y="246" width="56" height="56" rx="12" fill="#29a36a"/>
-    <text x="312" y="269" font-weight="700">Success</text><text x="312" y="293">#29a36a</text>
+  <g font-family="system-ui, sans-serif" fill="#18243d">
+    <rect x="96" y="160" width="32" height="32" rx="8" fill="#18243d"/>
+    <text x="140" y="181" font-size="15" font-weight="700">color-text-primary</text><text x="314" y="181" font-size="14">#18243d</text>
+    <rect x="96" y="204" width="32" height="32" rx="8" fill="#f7f4ee" stroke="#6d7480" stroke-width="2"/>
+    <text x="140" y="225" font-size="15" font-weight="700">color-surface</text><text x="314" y="225" font-size="14">#f7f4ee</text>
+    <rect x="96" y="248" width="32" height="32" rx="8" fill="#356df3"/>
+    <text x="140" y="269" font-size="15" font-weight="700">color-action</text><text x="314" y="269" font-size="14">#356df3</text>
+    <rect x="96" y="292" width="32" height="32" rx="8" fill="#8d3521"/>
+    <text x="140" y="313" font-size="15" font-weight="700">color-error</text><text x="314" y="313" font-size="14">#8d3521</text>
   </g>
 
   <rect x="420" y="103" width="345" height="242" rx="20" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>

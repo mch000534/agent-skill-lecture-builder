@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="App 場地預約四步流程與成功錯誤狀態">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="App 場地預約四步流程與名額保留及可恢復錯誤狀態">
   <rect width="1200" height="700" fill="#f7f4ee"/>
   <text x="70" y="66" fill="#18243d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">App 預約流程：每一步只做一件事</text>
 
@@ -23,27 +23,27 @@
     <rect x="128" y="225" width="74" height="7" rx="4" fill="#18243d"/>
     <text x="94" y="273" fill="#18243d" font-size="21" font-weight="800">選擇日期</text>
     <text x="94" y="307" fill="#6d7480" font-size="16">2026 年 10 月</text>
-    <g font-size="15" text-anchor="middle" fill="#18243d">
-      <text x="105" y="350">一</text><text x="145" y="350">二</text><text x="185" y="350">三</text><text x="225" y="350">四</text>
-      <text x="105" y="390">12</text><text x="145" y="390">13</text><text x="185" y="390">14</text><text x="225" y="390">15</text>
-      <text x="105" y="430">19</text><text x="145" y="430">20</text><text x="185" y="430">21</text><text x="225" y="430">22</text>
-    </g>
-    <circle cx="185" cy="383" r="22" fill="#356df3"/>
-    <text x="185" y="390" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">14</text>
+    <rect x="94" y="325" width="142" height="40" rx="9" fill="#356df3"/>
+    <text x="165" y="351" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">10/17　六</text>
+    <rect x="94" y="377" width="142" height="40" rx="9" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+    <text x="165" y="403" text-anchor="middle" fill="#18243d" font-size="16">10/18　日</text>
+    <rect x="94" y="429" width="142" height="40" rx="9" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+    <text x="165" y="455" text-anchor="middle" fill="#18243d" font-size="16">10/24　六</text>
     <rect x="94" y="490" width="142" height="42" rx="10" fill="#356df3"/>
-    <text x="165" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">下一步</text>
+    <text x="165" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">選擇時段</text>
 
     <rect x="280" y="210" width="190" height="350" rx="26" fill="#ffffff" stroke="#18243d" stroke-width="3"/>
     <rect x="338" y="225" width="74" height="7" rx="4" fill="#18243d"/>
     <text x="304" y="273" fill="#18243d" font-size="21" font-weight="800">選擇時段</text>
-    <rect x="304" y="310" width="142" height="44" rx="10" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
-    <text x="375" y="339" text-anchor="middle" fill="#18243d" font-size="17">09:00–10:00</text>
-    <rect x="304" y="370" width="142" height="44" rx="10" fill="#356df3"/>
-    <text x="375" y="399" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">10:30–11:30</text>
-    <rect x="304" y="430" width="142" height="44" rx="10" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
-    <text x="375" y="459" text-anchor="middle" fill="#18243d" font-size="17">14:00–15:00</text>
+    <rect x="304" y="304" width="142" height="48" rx="10" fill="#ffffff" stroke="#d8d4cc" stroke-width="2"/>
+    <text x="375" y="334" text-anchor="middle" fill="#18243d" font-size="16">09:00–11:00</text>
+    <rect x="304" y="364" width="142" height="54" rx="10" fill="#f7f4ee" stroke="#8d3521" stroke-width="2"/>
+    <text x="375" y="386" text-anchor="middle" fill="#18243d" font-size="15">11:30–13:30</text>
+    <text x="375" y="407" text-anchor="middle" fill="#8d3521" font-size="14" font-weight="700">已額滿</text>
+    <rect x="304" y="430" width="142" height="44" rx="10" fill="#356df3"/>
+    <text x="375" y="459" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">14:00–16:00</text>
     <rect x="304" y="490" width="142" height="42" rx="10" fill="#356df3"/>
-    <text x="375" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">下一步</text>
+    <text x="375" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">填寫資料</text>
 
     <rect x="490" y="210" width="190" height="350" rx="26" fill="#ffffff" stroke="#18243d" stroke-width="3"/>
     <rect x="548" y="225" width="74" height="7" rx="4" fill="#18243d"/>
@@ -56,33 +56,35 @@
     <text x="526" y="428" fill="#6d7480" font-size="15">name@example</text>
     <text x="514" y="466" fill="#a43820" font-size="14" font-weight="700">請輸入完整郵件地址</text>
     <rect x="514" y="490" width="142" height="42" rx="10" fill="#356df3"/>
-    <text x="585" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">下一步</text>
+    <text x="585" y="518" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">檢查預約</text>
 
     <rect x="700" y="210" width="190" height="350" rx="26" fill="#ffffff" stroke="#18243d" stroke-width="3"/>
     <rect x="758" y="225" width="74" height="7" rx="4" fill="#18243d"/>
     <text x="724" y="273" fill="#18243d" font-size="21" font-weight="800">確認預約</text>
     <rect x="724" y="306" width="142" height="132" rx="12" fill="#e8eefc"/>
-    <text x="740" y="338" fill="#18243d" font-size="15" font-weight="700">場地 A</text>
-    <text x="740" y="371" fill="#18243d" font-size="17">10 月 14 日</text>
-    <text x="740" y="401" fill="#18243d" font-size="17">10:30–11:30</text>
+    <text x="740" y="334" fill="#18243d" font-size="15" font-weight="700">多功能室 A</text>
+    <text x="740" y="364" fill="#18243d" font-size="16">10 月 17 日</text>
+    <text x="740" y="394" fill="#18243d" font-size="16">14:00–16:00</text>
+    <text x="740" y="424" fill="#18243d" font-size="16" font-weight="700">300 元</text>
     <rect x="724" y="463" width="142" height="50" rx="10" fill="#17633f"/>
-    <text x="795" y="495" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">確認預約</text>
+    <text x="795" y="495" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">保留名額</text>
   </g>
 
   <g font-family="system-ui, sans-serif">
     <rect x="925" y="210" width="220" height="150" rx="18" fill="#e1f4eb" stroke="#17633f" stroke-width="3"/>
     <circle cx="960" cy="252" r="18" fill="#17633f"/>
     <path d="M951 252l7 7 13-16" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="990" y="260" fill="#17633f" font-size="22" font-weight="800">預約成功</text>
-    <text x="950" y="306" fill="#18243d" font-size="17">已寄出確認通知</text>
-    <text x="950" y="333" fill="#18243d" font-size="17">可在「我的預約」查看</text>
+    <text x="990" y="260" fill="#17633f" font-size="22" font-weight="800">名額已保留</text>
+    <text x="950" y="303" fill="#18243d" font-size="17">請於 14:40 前付款</text>
+    <rect x="950" y="317" width="170" height="28" rx="8" fill="#17633f"/>
+    <text x="1035" y="337" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="800">前往付款</text>
     <rect x="925" y="392" width="220" height="168" rx="18" fill="#fff1ed" stroke="#8d3521" stroke-width="3"/>
     <circle cx="960" cy="434" r="18" fill="#8d3521"/>
     <path d="M960 424v15m0 8v1" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-    <text x="990" y="442" fill="#8d3521" font-size="22" font-weight="800">無法送出</text>
-    <text x="950" y="486" fill="#18243d" font-size="17">郵件地址格式不完整</text>
+    <text x="990" y="442" fill="#8d3521" font-size="22" font-weight="800">時段剛額滿</text>
+    <text x="950" y="486" fill="#18243d" font-size="17">請重新選擇可用時段</text>
     <rect x="950" y="511" width="170" height="30" rx="8" fill="#ff7657"/>
-    <text x="1035" y="532" text-anchor="middle" fill="#18243d" font-size="15" font-weight="800">返回修正資料</text>
+    <text x="1035" y="532" text-anchor="middle" fill="#18243d" font-size="15" font-weight="800">返回選時段</text>
   </g>
-  <text x="600" y="634" text-anchor="middle" fill="#18243d" font-family="system-ui, sans-serif" font-size="21" font-weight="700">清楚進度、即時驗證、成功與錯誤都有下一步</text>
+  <text x="600" y="634" text-anchor="middle" fill="#18243d" font-family="system-ui, sans-serif" font-size="21" font-weight="700">清楚進度、即時驗證、名額保留與錯誤都有下一步</text>
 </svg>
