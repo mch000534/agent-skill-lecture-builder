@@ -32,6 +32,14 @@ window.__courses__ = [
     "category": "Python"
   },
   {
+    "title": "網絡世界的福爾摩斯 2.0",
+    "badge": "親職教育 · 防騙實戰",
+    "subtitle": "為澳門中小學生家長設計的 90 分鐘防騙課。五宗案件拆解心理騙術、假冒官員、假綁架、孩子分齡陷阱與 AI 深偽，附 S-L-O-W 心法、通關密語與求助管道。",
+    "ogImage": "lectures/anti-scam-detective/assets/og-image.jpg",
+    "href": "lectures/anti-scam-detective/",
+    "category": "素養與科普"
+  },
+  {
     "title": "Claude Code 入門 101",
     "badge": "AI 工具 · 入門課",
     "subtitle": "完全小白也能上手的 Claude Code 入門課。學習 AI Agent 概念、安裝與啟動、cc-switch 切換模型，以及與 AI 高效協作的心法。",

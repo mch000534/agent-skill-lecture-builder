@@ -1,0 +1,22 @@
+page:
+  title: "網絡世界的福爾摩斯 2.0"
+  badge: "親職教育 · 防騙實戰"
+  category: "素養與科普"
+  published: true
+  hero_title: "AI 深偽魔王來襲<br>家長防騙實戰課"
+  subtitle: "90 分鐘偵探式家長防騙課。從心理騙術、電信詐騙、孩子高發陷阱到 AI 換臉換聲，用 S-L-O-W 心法與三把家庭鎖，今晚就能替全家上鎖。"
+
+seo:
+  title: "網絡世界的福爾摩斯 2.0｜AI 深偽魔王來襲：家長防騙實戰課"
+  description: "為澳門中小學生家長設計的 90 分鐘防騙課。五宗案件拆解心理騙術、假冒官員、假綁架、孩子分齡陷阱與 AI 深偽，附 S-L-O-W 心法、通關密語與求助管道。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/anti-scam-detective/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/anti-scam-detective/assets/og-image.jpg"
+
+quotes:
+  opening:
+    text: "今日的目標不是禁止，而是裝備。<br>你與騙徒之間的差距，從來不是聰明，而是資訊。"
+  closing:
+    text: >
+      保持懷疑，保持溝通。<br>
+      懷疑，是你最後一道防線；溝通，是你家最強一道防線。<br><br>
+      你已經不只是家長，而是家裡的首席防騙官。
