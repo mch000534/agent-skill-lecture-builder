@@ -191,6 +191,14 @@ window.__courses__ = [
     "category": "設計印刷"
   },
   {
+    "title": "Vibe Coding：從想法到安全交付",
+    "badge": "OpenCode · AI Agent · 安全開發",
+    "subtitle": "六小時 Vibe Coding 實作工作坊，使用 OpenCode 完成需求、規格、任務拆解、測試、安全加固與 Release Gate。",
+    "ogImage": "lectures/vibe-coding-workshop/assets/og-image.jpg",
+    "href": "lectures/vibe-coding-workshop/",
+    "category": "AI & 程式設計"
+  },
+  {
     "title": "傳統 AI vs AI Agent — 什麼是 AI Agent？",
     "badge": "AI 素養 · 概念入門",
     "subtitle": "什麼是 AI Agent？跟 ChatGPT 有什麼不同？本課程拆解 Brain、Planning、Memory、Tools 四大元件，用生活案例帶初學者看懂 AI Agent 的本質。",

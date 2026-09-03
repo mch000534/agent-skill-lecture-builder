@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="todo-title todo-desc">
+  <title id="todo-title">待辦清單資料流</title>
+  <desc id="todo-desc">待辦輸入依序經過驗證、邏輯、儲存與讀取，最後以安全 DOM 輸出，並處理三種失敗情境。</desc>
+  <rect x="0" y="0" width="1200" height="700" fill="#f7f4ed"/>
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#14213d">待辦清單資料流</text>
+  <text x="600" y="100" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#2f6690">每個邊界都驗證輸入、處理失敗，最後只輸出文字</text>
+
+  <rect x="25" y="145" width="170" height="140" rx="17" fill="#2f6690"/>
+  <text x="110" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="25" font-weight="700" fill="#f7f4ed">使用者輸入</text>
+  <text x="110" y="242" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">待辦標題</text>
+
+  <rect x="220" y="145" width="170" height="140" rx="17" fill="#6650a4"/>
+  <text x="305" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">validateTitle</text>
+  <text x="305" y="242" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">正規化與限制</text>
+
+  <rect x="415" y="145" width="170" height="140" rx="17" fill="#6650a4"/>
+  <text x="500" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">Todo logic</text>
+  <text x="500" y="230" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">新增、切換</text>
+  <text x="500" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">刪除</text>
+
+  <rect x="610" y="145" width="170" height="140" rx="17" fill="#f7f4ed" stroke="#e9a23b" stroke-width="6"/>
+  <text x="695" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">saveTodos</text>
+  <text x="695" y="242" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">序列化快照</text>
+
+  <rect x="805" y="145" width="170" height="140" rx="17" fill="#14213d"/>
+  <text x="890" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">localStorage</text>
+  <text x="890" y="242" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">持久化資料</text>
+
+  <rect x="1000" y="145" width="170" height="140" rx="17" fill="#2f6690"/>
+  <text x="1085" y="194" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="25" font-weight="700" fill="#f7f4ed">安全 DOM</text>
+  <text x="1085" y="242" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">textContent</text>
+
+  <line x1="195" y1="215" x2="220" y2="215" stroke="#14213d" stroke-width="5"/>
+  <polygon points="220,215 201,204 201,226" fill="#14213d"/>
+  <line x1="390" y1="215" x2="415" y2="215" stroke="#14213d" stroke-width="5"/>
+  <polygon points="415,215 396,204 396,226" fill="#14213d"/>
+  <line x1="585" y1="215" x2="610" y2="215" stroke="#14213d" stroke-width="5"/>
+  <polygon points="610,215 591,204 591,226" fill="#14213d"/>
+  <line x1="780" y1="215" x2="805" y2="215" stroke="#14213d" stroke-width="5"/>
+  <polygon points="805,215 786,204 786,226" fill="#14213d"/>
+  <line x1="975" y1="215" x2="1000" y2="215" stroke="#14213d" stroke-width="5"/>
+  <polygon points="1000,215 981,204 981,226" fill="#14213d"/>
+
+  <text x="600" y="340" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">失敗分支：保留可用狀態，回傳可理解訊息</text>
+
+  <line x1="305" y1="285" x2="220" y2="400" stroke="#c8553d" stroke-width="5" stroke-dasharray="10 8"/>
+  <polygon points="220,400 223,374 244,390" fill="#c8553d"/>
+  <rect x="45" y="400" width="340" height="180" rx="20" fill="#f7f4ed" stroke="#c8553d" stroke-width="5"/>
+  <text x="75" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">無效輸入</text>
+  <text x="75" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">拒絕空白或過長標題</text>
+  <text x="75" y="536" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">不建立待辦，提示修正</text>
+
+  <line x1="695" y1="285" x2="880" y2="300" stroke="#c8553d" stroke-width="5" stroke-dasharray="10 8"/>
+  <line x1="880" y1="300" x2="880" y2="360" stroke="#c8553d" stroke-width="5" stroke-dasharray="10 8"/>
+  <line x1="880" y1="360" x2="600" y2="400" stroke="#c8553d" stroke-width="5" stroke-dasharray="10 8"/>
+  <polygon points="600,400 605,374 625,391" fill="#c8553d"/>
+  <rect x="430" y="400" width="340" height="180" rx="20" fill="#f7f4ed" stroke="#c8553d" stroke-width="5"/>
+  <text x="460" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">寫入失敗</text>
+  <text x="460" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">捕捉儲存例外</text>
+  <text x="460" y="536" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">保留狀態並告知使用者</text>
+
+  <line x1="890" y1="285" x2="980" y2="400" stroke="#c8553d" stroke-width="5" stroke-dasharray="10 8"/>
+  <polygon points="980,400 955,390 975,374" fill="#c8553d"/>
+  <rect x="815" y="400" width="340" height="180" rx="20" fill="#f7f4ed" stroke="#c8553d" stroke-width="5"/>
+  <text x="845" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">損壞資料</text>
+  <text x="845" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">解析失敗時使用空清單</text>
+  <text x="845" y="536" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">避免壞資料中斷畫面</text>
+
+  <rect x="220" y="620" width="760" height="58" rx="29" fill="#14213d"/>
+  <text x="600" y="657" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">資料可信度逐站提升；輸出端仍以純文字呈現</text>
+</svg>

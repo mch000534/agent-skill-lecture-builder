@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>待辦清單工作坊</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-card" aria-labelledby="page-title">
+    <header>
+      <p class="eyebrow">Vibe Coding 工作坊</p>
+      <h1 id="page-title">待辦清單</h1>
+      <p>先完成需求與規格，再開始加入功能。</p>
+    </header>
+
+    <form id="todo-form" novalidate>
+      <label for="todo-title">待辦事項</label>
+      <div class="form-row">
+        <input id="todo-title" name="title" type="text" maxlength="120" autocomplete="off">
+        <button type="submit">新增</button>
+      </div>
+      <p id="form-error" class="message error" aria-live="polite"></p>
+    </form>
+
+    <nav class="filters" aria-label="篩選待辦事項">
+      <button type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" data-filter="active" aria-pressed="false">未完成</button>
+      <button type="button" data-filter="completed" aria-pressed="false">已完成</button>
+    </nav>
+
+    <p id="storage-warning" class="message warning" aria-live="polite"></p>
+    <section aria-labelledby="list-title">
+      <h2 id="list-title">事項</h2>
+      <ul id="todo-list"></ul>
+      <p id="empty-state">目前沒有待辦事項。</p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

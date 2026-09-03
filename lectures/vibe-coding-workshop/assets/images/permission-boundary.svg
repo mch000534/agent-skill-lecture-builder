@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="permission-title permission-desc">
+  <title id="permission-title">權限邊界</title>
+  <desc id="permission-desc">plan 階段保持唯讀，build 階段僅允許受控寫入，探針檔案在寫入前即遭拒絕。</desc>
+  <rect x="0" y="0" width="1200" height="700" fill="#f7f4ed"/>
+  <text x="600" y="58" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#14213d">權限邊界</text>
+  <text x="600" y="96" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#2f6690">先驗證能力，再讓工作進入可寫入階段</text>
+
+  <rect x="55" y="125" width="510" height="370" rx="24" fill="#2f6690"/>
+  <rect x="635" y="125" width="510" height="370" rx="24" fill="#6650a4"/>
+  <line x1="600" y1="112" x2="600" y2="510" stroke="#c8553d" stroke-width="5" stroke-dasharray="14 11"/>
+  <rect x="500" y="279" width="200" height="64" rx="32" fill="#f7f4ed" stroke="#c8553d" stroke-width="4"/>
+  <text x="600" y="319" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">權限邊界</text>
+
+  <text x="310" y="177" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#f7f4ed">plan / 唯讀</text>
+  <text x="310" y="215" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">可以檢查與規劃，不得改動檔案</text>
+  <rect x="90" y="242" width="440" height="142" rx="16" fill="#f7f4ed"/>
+  <text x="310" y="284" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">permission-probe-plan.txt</text>
+  <line x1="135" y1="307" x2="485" y2="307" stroke="#2f6690" stroke-width="4"/>
+  <rect x="174" y="327" width="272" height="42" rx="21" fill="#f7f4ed" stroke="#c8553d" stroke-width="4"/>
+  <text x="310" y="356" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">寫入前拒絕</text>
+  <text x="310" y="425" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">結果：沒有建立測試檔</text>
+  <text x="310" y="463" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">權限符合最小化原則</text>
+
+  <text x="890" y="177" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#f7f4ed">build / 受控寫入</text>
+  <text x="890" y="215" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">只在核准範圍內建立與修改</text>
+  <rect x="670" y="242" width="440" height="142" rx="16" fill="#f7f4ed"/>
+  <text x="890" y="284" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">permission-probe-build.txt</text>
+  <line x1="715" y1="307" x2="1065" y2="307" stroke="#6650a4" stroke-width="4"/>
+  <rect x="754" y="327" width="272" height="42" rx="21" fill="#f7f4ed" stroke="#c8553d" stroke-width="4"/>
+  <text x="890" y="356" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">寫入前拒絕</text>
+  <text x="890" y="425" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">探針不是核准交付項目</text>
+  <text x="890" y="463" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">build 並非全面唯讀</text>
+
+  <rect x="55" y="520" width="1090" height="160" rx="20" fill="#14213d"/>
+  <text x="85" y="557" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">交付前檢查三種狀態</text>
+  <text x="85" y="594" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">未追蹤：git status --short --untracked-files=all</text>
+  <text x="85" y="631" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">未暫存：git diff</text>
+  <text x="85" y="668" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">已暫存：git diff --cached</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="injection-title injection-desc">
+  <title id="injection-title">DOM 輸出安全對照</title>
+  <desc id="injection-desc">比較 innerHTML 與 textContent 處理同一段未信任文字時的差異。</desc>
+  <rect x="0" y="0" width="1200" height="700" fill="#f7f4ed"/>
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#14213d">DOM 輸出安全對照</text>
+  <text x="600" y="100" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#2f6690">同一份不可信輸入，輸出 API 決定它是結構還是文字</text>
+
+  <rect x="55" y="125" width="515" height="505" rx="24" fill="#f7f4ed" stroke="#c8553d" stroke-width="6"/>
+  <rect x="55" y="125" width="515" height="88" rx="24" fill="#14213d"/>
+  <rect x="55" y="185" width="515" height="28" fill="#14213d"/>
+  <line x1="55" y1="213" x2="570" y2="213" stroke="#c8553d" stroke-width="6"/>
+  <text x="312" y="178" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="30" font-weight="700" fill="#f7f4ed">左：不安全 / innerHTML</text>
+
+  <text x="90" y="254" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">未信任 payload</text>
+  <rect x="90" y="272" width="445" height="76" rx="12" fill="#14213d"/>
+  <text x="312" y="319" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">&lt;strong&gt;未授權標記&lt;/strong&gt;</text>
+
+  <line x1="312" y1="348" x2="312" y2="386" stroke="#c8553d" stroke-width="5"/>
+  <polygon points="312,386 298,360 326,360" fill="#c8553d"/>
+  <rect x="90" y="387" width="445" height="112" rx="16" fill="#f7f4ed" stroke="#c8553d" stroke-width="5"/>
+  <text x="312" y="430" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">瀏覽器把文字當成標記解析</text>
+  <text x="312" y="474" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">未授權 DOM 結構出現</text>
+
+  <rect x="90" y="525" width="445" height="76" rx="14" fill="#14213d"/>
+  <text x="312" y="555" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">風險：輸入取得結構能力</text>
+  <text x="312" y="586" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">資料與介面結構混在一起</text>
+
+  <rect x="630" y="125" width="515" height="505" rx="24" fill="#f7f4ed" stroke="#2a9d8f" stroke-width="6"/>
+  <rect x="630" y="125" width="515" height="88" rx="24" fill="#2f6690"/>
+  <rect x="630" y="185" width="515" height="28" fill="#2f6690"/>
+  <line x1="630" y1="213" x2="1145" y2="213" stroke="#2a9d8f" stroke-width="6"/>
+  <text x="887" y="178" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="30" font-weight="700" fill="#f7f4ed">右：安全 / textContent</text>
+
+  <text x="665" y="254" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">相同 payload</text>
+  <rect x="665" y="272" width="445" height="76" rx="12" fill="#14213d"/>
+  <text x="887" y="319" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">&lt;strong&gt;未授權標記&lt;/strong&gt;</text>
+
+  <line x1="887" y1="348" x2="887" y2="386" stroke="#2a9d8f" stroke-width="5"/>
+  <polygon points="887,386 873,360 901,360" fill="#2a9d8f"/>
+  <rect x="665" y="387" width="445" height="112" rx="16" fill="#f7f4ed" stroke="#2a9d8f" stroke-width="5"/>
+  <text x="887" y="430" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">瀏覽器只建立文字節點</text>
+  <text x="887" y="474" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="700" fill="#14213d">&lt;strong&gt;未授權標記&lt;/strong&gt;</text>
+
+  <rect x="665" y="525" width="445" height="76" rx="14" fill="#2f6690"/>
+  <text x="887" y="555" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">安全：輸入維持資料身分</text>
+  <text x="887" y="586" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">只顯示文字，不建立額外結構</text>
+
+  <rect x="430" y="645" width="340" height="46" rx="23" fill="#14213d"/>
+  <text x="600" y="678" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">預設選擇 textContent</text>
+</svg>

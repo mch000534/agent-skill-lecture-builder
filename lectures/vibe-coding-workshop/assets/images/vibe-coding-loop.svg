@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="loop-title loop-desc">
+  <title id="loop-title">Vibe Coding 人機協作迴圈</title>
+  <desc id="loop-desc">人類提出意圖並核准計畫，Agent 執行後提出證據，再由人類判斷是否進入下一輪。</desc>
+  <rect x="0" y="0" width="1200" height="700" fill="#f7f4ed"/>
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#14213d">Vibe Coding 人機協作迴圈</text>
+  <text x="70" y="118" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#2f6690">人類責任：定義意圖、核准、判斷</text>
+  <text x="70" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#6650a4">Agent 責任：規劃、執行、提出證據</text>
+
+  <line x1="55" y1="350" x2="1145" y2="350" stroke="#c8553d" stroke-width="5" stroke-dasharray="14 11"/>
+  <rect x="420" y="318" width="360" height="64" rx="32" fill="#f7f4ed" stroke="#c8553d" stroke-width="4"/>
+  <text x="600" y="358" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">責任邊界：判斷與執行分離</text>
+
+  <rect x="50" y="150" width="230" height="135" rx="18" fill="#2f6690"/>
+  <circle cx="82" cy="182" r="22" fill="#f7f4ed"/>
+  <text x="82" y="190" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#2f6690">1</text>
+  <text x="165" y="209" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">人類意圖</text>
+  <text x="165" y="254" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">說清楚目標與限制</text>
+
+  <rect x="245" y="425" width="230" height="135" rx="18" fill="#6650a4"/>
+  <circle cx="277" cy="457" r="22" fill="#f7f4ed"/>
+  <text x="277" y="465" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#6650a4">2</text>
+  <text x="360" y="484" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">Agent 計畫</text>
+  <text x="360" y="529" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">拆解步驟與風險</text>
+
+  <rect x="435" y="150" width="230" height="135" rx="18" fill="#2f6690"/>
+  <circle cx="467" cy="182" r="22" fill="#f7f4ed"/>
+  <text x="467" y="190" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#2f6690">3</text>
+  <text x="550" y="209" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">人工核准</text>
+  <text x="550" y="254" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">確認範圍再放行</text>
+
+  <rect x="630" y="425" width="230" height="135" rx="18" fill="#6650a4"/>
+  <circle cx="662" cy="457" r="22" fill="#f7f4ed"/>
+  <text x="662" y="465" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#6650a4">4</text>
+  <text x="745" y="484" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">Agent 執行</text>
+  <text x="745" y="529" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">依核准內容變更</text>
+
+  <rect x="920" y="425" width="230" height="135" rx="18" fill="#f7f4ed" stroke="#e9a23b" stroke-width="6"/>
+  <circle cx="952" cy="457" r="22" fill="#e9a23b"/>
+  <text x="952" y="465" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">5</text>
+  <text x="1035" y="484" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">證據</text>
+  <text x="1035" y="529" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">diff、測試、驗證</text>
+
+  <rect x="920" y="150" width="230" height="135" rx="18" fill="#2f6690"/>
+  <circle cx="952" cy="182" r="22" fill="#f7f4ed"/>
+  <text x="952" y="190" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#2f6690">6</text>
+  <text x="1035" y="209" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">人類判斷</text>
+  <text x="1035" y="254" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">接受、修正或停止</text>
+
+  <line x1="280" y1="245" x2="245" y2="450" stroke="#14213d" stroke-width="5"/>
+  <polygon points="245,450 238,424 263,432" fill="#14213d"/>
+  <line x1="360" y1="425" x2="400" y2="395" stroke="#14213d" stroke-width="5"/>
+  <line x1="400" y1="395" x2="400" y2="305" stroke="#14213d" stroke-width="5"/>
+  <line x1="400" y1="305" x2="435" y2="285" stroke="#14213d" stroke-width="5"/>
+  <polygon points="435,285 421,310 407,286" fill="#14213d"/>
+  <line x1="665" y1="245" x2="800" y2="305" stroke="#14213d" stroke-width="5"/>
+  <line x1="800" y1="305" x2="800" y2="395" stroke="#14213d" stroke-width="5"/>
+  <line x1="800" y1="395" x2="800" y2="425" stroke="#14213d" stroke-width="5"/>
+  <polygon points="800,425 786,399 814,399" fill="#14213d"/>
+  <line x1="860" y1="492" x2="920" y2="492" stroke="#14213d" stroke-width="5"/>
+  <polygon points="920,492 895,478 895,506" fill="#14213d"/>
+  <line x1="1035" y1="425" x2="1035" y2="285" stroke="#14213d" stroke-width="5"/>
+  <polygon points="1035,285 1021,311 1049,311" fill="#14213d"/>
+  <path d="M920 185 C760 92 420 92 280 185" fill="none" stroke="#2f6690" stroke-width="5" stroke-dasharray="12 9"/>
+  <polygon points="280,185 307,178 298,204" fill="#2f6690"/>
+  <text x="600" y="104" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#2f6690">回饋形成下一輪</text>
+
+  <rect x="190" y="610" width="820" height="58" rx="29" fill="#14213d"/>
+  <text x="600" y="647" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">Agent 負責執行；人類保留目標、核准與最終判斷權</text>
+</svg>

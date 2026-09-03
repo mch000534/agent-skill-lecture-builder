@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="release-title release-desc">
+  <title id="release-title">Vibe Coding Release Gate</title>
+  <desc id="release-desc">交付前依序通過需求、規格、實作、測試、安全與交付六道關卡。</desc>
+  <rect x="0" y="0" width="1200" height="700" fill="#f7f4ed"/>
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#14213d">Vibe Coding Release Gate</text>
+  <text x="600" y="100" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#2f6690">每一關都要留下可重現的交付證據</text>
+
+  <rect x="45" y="135" width="330" height="130" rx="22" fill="#2f6690"/>
+  <text x="210" y="181" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">第一關｜需求</text>
+  <text x="210" y="228" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">證據：使用者故事</text>
+
+  <line x1="375" y1="200" x2="435" y2="200" stroke="#14213d" stroke-width="6"/>
+  <polygon points="435,200 409,186 409,214" fill="#14213d"/>
+
+  <rect x="435" y="135" width="330" height="130" rx="22" fill="#6650a4"/>
+  <text x="600" y="181" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">第二關｜規格</text>
+  <text x="600" y="228" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#f7f4ed">證據：資料契約</text>
+
+  <line x1="765" y1="200" x2="825" y2="200" stroke="#14213d" stroke-width="6"/>
+  <polygon points="825,200 799,186 799,214" fill="#14213d"/>
+
+  <rect x="825" y="135" width="330" height="130" rx="22" fill="#f7f4ed" stroke="#e9a23b" stroke-width="6"/>
+  <text x="990" y="181" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">第三關｜實作</text>
+  <text x="990" y="228" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#14213d">證據：Git diff</text>
+
+  <line x1="990" y1="265" x2="990" y2="335" stroke="#14213d" stroke-width="6"/>
+  <polygon points="990,335 976,309 1004,309" fill="#14213d"/>
+
+  <rect x="825" y="335" width="330" height="130" rx="22" fill="#2f6690"/>
+  <text x="990" y="381" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">第四關｜測試</text>
+  <text x="990" y="428" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">證據：node --test</text>
+
+  <line x1="825" y1="400" x2="765" y2="400" stroke="#14213d" stroke-width="6"/>
+  <polygon points="765,400 791,386 791,414" fill="#14213d"/>
+
+  <rect x="435" y="335" width="330" height="130" rx="22" fill="#f7f4ed" stroke="#c8553d" stroke-width="6"/>
+  <text x="600" y="381" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#14213d">第五關｜安全</text>
+  <text x="600" y="428" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" fill="#14213d">證據：HTML 只顯示文字</text>
+
+  <line x1="435" y1="400" x2="375" y2="400" stroke="#14213d" stroke-width="6"/>
+  <polygon points="375,400 401,386 401,414" fill="#14213d"/>
+
+  <rect x="45" y="335" width="330" height="130" rx="22" fill="#6650a4"/>
+  <text x="210" y="381" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#f7f4ed">第六關｜交付</text>
+  <text x="210" y="428" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#f7f4ed">證據：validator</text>
+
+  <path d="M210 465 L210 505 L350 505 L350 545" fill="none" stroke="#14213d" stroke-width="6"/>
+  <polygon points="350,545 336,519 364,519" fill="#14213d"/>
+
+  <rect x="350" y="545" width="500" height="92" rx="30" fill="#14213d"/>
+  <text x="600" y="582" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#f7f4ed">六關證據齊全</text>
+  <text x="600" y="620" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#f7f4ed">可交付</text>
+
+  <text x="600" y="680" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#14213d">沒有證據就不放行；任一關失敗就回到對應階段修正</text>
+</svg>

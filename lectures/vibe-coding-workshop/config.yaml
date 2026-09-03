@@ -1,0 +1,21 @@
+page:
+  title: "Vibe Coding：從想法到安全交付"
+  badge: "OpenCode · AI Agent · 安全開發"
+  category: "AI & 程式設計"
+  published: true
+  hero_title: "Vibe Coding 工作坊<br>從需求到安全交付"
+  subtitle: "六小時全班同步實作：用 OpenCode 把模糊想法轉成可驗收需求、可測試程式與可交付的安全待辦清單。"
+
+seo:
+  title: "Vibe Coding 工作坊｜OpenCode、安全開發與實作流程"
+  description: "六小時 Vibe Coding 實作工作坊，使用 OpenCode 完成需求、規格、任務拆解、測試、安全加固與 Release Gate。"
+  url: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/vibe-coding-workshop/"
+  image: "https://mch000534.github.io/agent-skill-lecture-builder/lectures/vibe-coding-workshop/assets/og-image.jpg"
+
+quotes:
+  opening:
+    text: "Vibe Coding 不是把判斷交給 AI，<br>而是讓 AI 加速一套由人類控制與驗證的工程流程。"
+  closing:
+    text: >
+      快速生成只是起點。<br>
+      能說明需求、限制權限、驗證結果並安全交付，才是完整的 Vibe Coding。
