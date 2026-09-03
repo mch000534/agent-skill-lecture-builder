@@ -572,6 +572,18 @@
       font-family: 'JetBrains Mono', monospace
     }
 
+    /* 行內 code 內的長 token（檔案路徑、檔名等）在窄容器放不下時允許斷行，避免頁面水平溢出。
+       `:not(pre) > code` 只影響行內 code，`pre` 內的程式碼區塊維持不換行 + 水平捲動。 */
+    :not(pre) > code {
+      overflow-wrap: anywhere;
+    }
+
+    /* 章節內文（段落與清單）的長 token（英文術語、路徑等）放不下時允許斷行；放得下則不換行 */
+    .section p,
+    .section li {
+      overflow-wrap: anywhere;
+    }
+
     /* ===== LOOSE TEXT & LIST ===== */
     .loose-text {
       color: var(--text-dim);
@@ -1564,7 +1576,8 @@
       border-bottom: 2px solid var(--accent);
       display: flex;
       align-items: center;
-      gap: .75rem
+      gap: .75rem;
+      overflow-wrap: anywhere
     }
 
     .sub-title .bar {
