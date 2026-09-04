@@ -7,7 +7,8 @@
       "WebFetch(*)",
       "Bash(ls /Users/barry/agent-skill-lecture-builder/lectures/ 2>/dev/null && ls /Users/barry/agent-skill-lecture-builder/.agents/skills/course-page-generator/reference/ 2>/dev/null)",
       "Bash(ls /Users/barry/agent-skill-lecture-builder/lectures/ && git remote get-url origin)",
-      "Bash(cd /Users/barry/agent-skill-lecture-builder && grep -o 'category: \"[^\"]*\"' lectures/*/config.yaml | sort -u)"
+      "Bash(cd /Users/barry/agent-skill-lecture-builder && grep -o 'category: \"[^\"]*\"' lectures/*/config.yaml | sort -u)",
+      "Bash(mkdir -p /tmp/pptx-extract && cd /tmp/pptx-extract && unzip -o -q \"/Users/barry/Downloads/社區AI巡講課程-網絡識別與應用.pptx\" && ls ppt/slides/ | sort -V)"
     ]
   }
 }
